@@ -19,37 +19,6 @@ span {
   max-width: 1024px;
 }
 
-nav {
-  background: #4267B2;
-  padding: 10px 0px;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  max-width: 1024px;
-}
-
-nav ul {
-  list-style-type: none;
-  text-align: center;
-  font-weight: bold;
-}
-
-nav ul li {
-  display: inline;
-  margin: 0px 5px;
-}
-
-nav ul li a {
-  border-radius: 10px;
-  padding: 5px 10px;
-  text-decoration: none;
-  color: white;
-}
-
-nav ul li a:hover {
-  background: #385898;
-}
-
 header {
   text-align: center;
   padding: 50px;
@@ -232,54 +201,77 @@ footer p span a {
     width: calc(100% - 100px);
     margin: 0 auto;
   }
+}
+
+@media screen and (max-width: 1200px) {
   #social {
     display: none;
   }
 }
 
-#under-construction {
-  padding: 0px;
-  border: 0px;
-  width: 100%;
-  text-align: center;
-  text-transform: uppercase;
-  color: #444340;
-  font-size: 200%;
-}
-
-#under-construction h2 {
-  font-size: 30px;
-  margin-bottom: 80px;
-}
-
-#under-construction p {
-  margin: 100px 0px 0px;
-  padding: 0;
-  font-size: 20px;
-}
-
-#under-construction .uc img {
-  height: 50px;
-  width: 50px;
-}
-
-.progress {
-  width: 100%;
-  height: 50px;
-  margin: 0 auto;
-}
-
-.progress-wrap {
-  background: #385898;
-  margin: 20px 0;
-  overflow: hidden;
-  position: relative;
-}
-
-.progress-wrap .progress-bar {
-  background: #ddd;
-  left: 0;
-  position: absolute;
+nav {
+  background: #4267B2;
+  padding: 10px 0px;
+  position: fixed;
   top: 0;
+  width: 100%;
+  max-width: 1024px;
+}
+
+nav ul {
+  list-style-type: none;
+  text-align: center;
+  font-weight: bold;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0px 5px;
+}
+
+nav ul li a {
+  border-radius: 10px;
+  padding: 5px 10px;
+  text-decoration: none;
+  color: white;
+}
+
+nav ul li a:hover {
+  background: #385898;
+}
+
+nav .menu-toggle {
+  padding: 0px 10px;
+  float: right;
+  display: none;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+@media screen and (max-width: 600px) {
+  nav ul li {
+    display: block;
+  }
+  nav ul li a {
+    display: block;
+    background-color: #385898;
+    margin: 5px 10px;
+    padding: 10px;
+  }
+  nav .menu-toggle {
+    display: inline-block;
+  }
+  nav .icon-bar {
+    background: #243C6D;
+    display: block;
+    width: 22px;
+    height: 3px;
+    -webkit-box-shadow: 0.2px 0.2px #000;
+            box-shadow: 0.2px 0.2px #000;
+    border-radius: 1px;
+  }
+  nav .icon-bar + .icon-bar {
+    margin-top: 4px;
+  }
 }
 /*# sourceMappingURL=style.css.map */
