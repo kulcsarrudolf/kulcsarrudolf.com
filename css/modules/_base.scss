@@ -58,9 +58,7 @@ section{
 
     background-repeat: no-repeat;
     background-size: 100%;
-
     padding-top: 200px;
-
     border-top: 5px solid $main-color;
 
 
@@ -216,6 +214,22 @@ footer{
     background-color:$secondary-color;
     opacity:1;filter:"alpha(opacity=100)";
     -ms-filter:"alpha(opacity=100)";
+}
+@media screen and (max-width: 500px){
+    section{
+        padding-top: 0px;
+        background-color: white;
+    }
+}
+
+@media screen and (max-width: 700px){
+    section{
+        padding-top: 150px;
+    }
+
+    #scroll {
+        bottom:60px;
+    }
 }
 
 @media screen and (max-width: 850px) {
