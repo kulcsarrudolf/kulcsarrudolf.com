@@ -12,6 +12,7 @@ var listOfQuotes =  [
     new Quote("Slowing down is sometimes the best way to speed up.", "Mike Vance"),
     new Quote("Focus on one thing, make it your priority, and stick with it no matter what!", "Tyler Perry"),
     new Quote("Perseverance is not a long race; it is many short races one after the other.", "Walter Elliot"),
+    new Quote("Therer are two kinds of decisions - the right decision and a lesson learned.", "Simon Sinek"),
     new Quote("If you can't fly then run, if you can't run then walk, if you can't walk then crawl, but whatever you do you have to kepp moving forward.", "Martin Luther King Jr.")
 ]
 
