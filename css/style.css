@@ -16,7 +16,7 @@ span {
 
 #wrapper {
   margin: 30px auto 0px;
-  max-width: 1024px;
+  max-width: 1200px;
 }
 
 header {
@@ -195,7 +195,7 @@ nav {
   position: fixed;
   top: 0;
   width: 100%;
-  max-width: 1024px;
+  max-width: 1200px;
 }
 
 nav ul {

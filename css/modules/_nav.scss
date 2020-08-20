@@ -4,7 +4,7 @@ nav{
     position: fixed;
     top:0;
     width: 100%;
-    max-width: 1024px;
+    max-width: 1200px;
 
     ul{
         list-style-type:none;
@@ -55,7 +55,7 @@ nav .menu-toggle {
     }
 
 
-      
+
       nav .menu-toggle {
     	display: inline-block;
 	}
@@ -70,7 +70,7 @@ nav .menu-toggle {
         -moz-border-radius: 1px;
         border-radius: 1px;
       }
-      
+
       nav .icon-bar + .icon-bar {
         margin-top: 4px;
       }
