@@ -53,7 +53,7 @@ header{
 
 section{
 
-    min-height: 500px;
+    // min-height: 500px;
 
 
     background-repeat: no-repeat;
@@ -72,6 +72,7 @@ section{
     }
 
     .section-content{
+        min-height: 400px;
         padding: 50px;
         background: #ffffff;
         width: calc(100% - 400px);
@@ -94,51 +95,16 @@ section{
 
 #contact-me{
     background-image: url("../img/contact-me.png");
+    text-align: center;
 
-    form{
-        text-align: center;
-
-        label{
-            display: block;
-            margin: 10px;
-            color: $main-color;
-            font-weight: bold;
-            
-        }
-
-        input{
-            margin: 0 auto;
-            display: block;
-
-            width: 100%;
-            max-width: 400px;
-            font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-            padding: 10px;
-
-            border: 2px solid $main-color;
-        }
-
-        input[type=submit]{
-            width: 200px;
-            height: 40px;
-            padding: 10px;
-            background: $main-color;
-            color: #ffffff;
-            font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-        }
-
-        textarea{
-            width: 100%;
-            max-width: 400px;
-            min-height: 100px;
-            margin-bottom: 20px;
-            resize: vertical;
-            font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-            padding: 10px;
-            border: 2px solid $main-color;
-        }
-    }
+    // .section-content {
+    //     // display: flex;
+    //     // justify-content: center;
+    //     // align-items: center;
+    // }
 }
+
+
 
 footer{
     color: #ffffff;
@@ -155,17 +121,18 @@ footer{
     }
 }
 
+
 #social, #social-footer{
     border-radius: 15px;
     // width: 42;
 
 
-
     a{
+        text-decoration: none;
         img{
-            margin-top: 20px;
+            margin: 20px 5px;
             // margin-bottom: 5px;
-            width: 30px;
+            width: 40px;
         }
     }
 }
@@ -221,7 +188,7 @@ footer{
         background-color: white;
     }
 
-    
+
 }
 
 @media screen and (max-width: 700px){
