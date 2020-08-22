@@ -28,23 +28,27 @@
 <body>
     <div id="wrapper">
         <nav>
-            <div class="menu-toggle">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+            <input type="checkbox" id="menu-toggle" name="menu-toggle" />
+            <div class="mobile">
+              <div class="nav-logo">
+                <img src="img/me.png" alt="me">
+                <h1>Kulcsár Rudolf</h1>
+              </div>
+              <label for="menu-toggle">
+                <div class="nav-menu-btn">
+                  <div class="menu-btn_burger"></div>
+                </div>
+              </label>
             </div>
-            <div style="clear: both;"></div>
-            <ul>
+            <ul class="nav-menu">
                 <li><a href="#introduction">Introduction</a></li>
                 <li><a href="#about-me">About Me</a></li>
-                <!-- <li><a href="hobby.html">Hobby</a></li> -->
-                <!-- <li><a href="#">Projects</a></li> -->
                 <li><a href="#contact-me">Contact</a></li>
             </ul>
-        </nav>
+          </nav>
         <header>
-            <h1>Kulcsár Rudolf</h1>
-            <h2>Software developer</h2>
+            <!-- <h1>Kulcsár Rudolf</h1>
+            <h2>Software developer</h2> -->
             <div id="quote">
                 <p><script>getRandomQuote();</script><span><script>getRandomQuote("author");</script></span></p>
             </div>

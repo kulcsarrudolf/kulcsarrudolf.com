@@ -15,7 +15,7 @@ span {
 }
 
 #wrapper {
-  margin: 30px auto 0px;
+  margin: 60px auto 0px;
   max-width: 1200px;
 }
 
@@ -189,69 +189,181 @@ footer p span a {
   }
 }
 
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
 nav {
-  background: #4267B2;
-  padding: 10px 0px;
   position: fixed;
   top: 0;
   width: 100%;
+  background-color: #4267b2;
+  min-width: 300px;
   max-width: 1200px;
+  margin: 0 auto;
 }
 
-nav ul {
-  list-style-type: none;
-  text-align: center;
-  font-weight: bold;
+.nav-logo img {
+  width: 40px;
+  margin: 0px 10px 0 20px;
+  border-radius: 50%;
 }
 
-nav ul li {
-  display: inline;
-  margin: 0px 5px;
-}
-
-nav ul li a {
-  border-radius: 10px;
-  padding: 5px 10px;
-  text-decoration: none;
+.nav-logo h1 {
   color: white;
 }
 
-nav ul li a:hover {
-  background: #385898;
+.nav-menu {
+  list-style-type: none;
+  background-color: #4267b2;
 }
 
-nav .menu-toggle {
-  padding: 0px 10px;
-  float: right;
+.nav-menu a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.mobile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+#menu-toggle {
   display: none;
-  cursor: pointer;
-  margin-right: 10px;
 }
 
-@media screen and (max-width: 600px) {
-  nav ul li {
-    display: block;
+@media screen and (max-width: 799px) {
+  nav {
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
-  nav ul li a {
-    display: block;
-    background-color: #385898;
-    margin: 5px 10px;
-    padding: 10px;
+  .nav-logo {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
   }
-  nav .menu-toggle {
+  .nav-logo img {
     display: inline-block;
   }
-  nav .icon-bar {
-    background: #243C6D;
-    display: block;
-    width: 22px;
-    height: 3px;
-    -webkit-box-shadow: 0.2px 0.2px #000;
-            box-shadow: 0.2px 0.2px #000;
-    border-radius: 1px;
+  .nav-logo h1 {
+    display: inline;
   }
-  nav .icon-bar + .icon-bar {
-    margin-top: 4px;
+  .nav-menu {
+    list-style-type: none;
+    margin-top: 20px;
+    display: none;
+  }
+  .nav-menu a {
+    padding: 10px 20px;
+    text-decoration: none;
+    display: block;
+  }
+  .nav-menu a:hover {
+    background-color: #385898;
+  }
+  .nav-menu-btn {
+    display: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    -webkit-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    margin-right: 10px;
+  }
+  .menu-btn_burger,
+  .menu-btn_burger::before,
+  .menu-btn_burger::after {
+    width: 30px;
+    height: 4px;
+    background: #fff;
+    border-radius: 3px;
+  }
+  .menu-btn_burger::before,
+  .menu-btn_burger::after {
+    content: "";
+    position: absolute;
+  }
+  .menu-btn_burger::before {
+    -webkit-transform: translateY(-10px);
+            transform: translateY(-10px);
+  }
+  .menu-btn_burger::after {
+    -webkit-transform: translateY(10px);
+            transform: translateY(10px);
+  }
+  #menu-toggle ~ .nav-menu {
+    display: none;
+  }
+  #menu-toggle:checked ~ .nav-menu {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+  nav .nav-logo,
+  nav .nav-menu {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  nav .nav-menu {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+    margin-right: 20px;
+  }
+  nav .nav-menu li {
+    margin-left: 10px;
+  }
+  nav .nav-menu a:hover {
+    font-weight: bold;
+  }
+  nav .nav-menu-btn {
+    display: none;
   }
 }
 
@@ -267,11 +379,11 @@ nav .menu-toggle {
 }
 
 #hobby h3 {
-  color: #4267B2;
+  color: #4267b2;
 }
 
 #hobby p {
-  border-bottom: 2px solid #4267B2;
+  border-bottom: 2px solid #4267b2;
   margin-bottom: 10px;
   padding-bottom: 10px;
 }
