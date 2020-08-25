@@ -26,7 +26,8 @@ function getRandomQuote(sel){
         return document.write((item.qoute));
     }
 }
-
-function getQuotes(){
-    return listOfQuotes;
+window.onload = function loadQoute() {
+    const randomQoute = "<p>" + getRandomQuote() + "<span>" + getRandomQuote("author") +"</span>" + "</p>";
+    document.getElementById("qoute-content").innerHTML = "There are two kinds of decisions - the right decision and a lesson learned.<span>Simon Sinek</span>";
+    // document.getElementById("qoute-content").innerHTML = randomQoute;
 }
