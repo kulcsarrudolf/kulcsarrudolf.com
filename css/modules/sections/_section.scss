@@ -2,30 +2,33 @@
 @import "about";
 @import "contact";
 
-
-section{
-
-    // min-height: 500px;
-
-
+section {
     background-repeat: no-repeat;
     background-size: 100%;
     padding-top: 150px;
     border-top: 5px solid $main-color;
 
+    a {
+        text-decoration: none;
+        color: $main-color;
+    }
 
-    h2{
+    a:hover {
+        text-decoration: underline;
+    }
+
+    h2 {
         color: $main-color;
         font-size: 30px;
     }
 
-    p{
+    p {
         margin-top: 20px;
         color: $text-color;
         font-size: 20px;
     }
 
-    .section-content{
+    .section-content {
         min-height: 400px;
         padding: 50px;
         background: #ffffff;
@@ -37,7 +40,6 @@ section{
     section {
         padding-top: 200px;
     }
-
 }
 
 @media screen and (min-width: 850px) {

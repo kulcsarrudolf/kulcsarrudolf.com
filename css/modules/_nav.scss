@@ -26,6 +26,10 @@ nav {
 }
 
 .nav-logo {
+    a {
+        text-decoration: none;
+        display: inline;
+    }
     img {
         width: 40px;
         margin: 0px 10px 0 20px;

@@ -28,6 +28,11 @@ nav {
   margin: 0 auto;
 }
 
+.nav-logo a {
+  text-decoration: none;
+  display: inline;
+}
+
 .nav-logo img {
   width: 40px;
   margin: 0px 10px 0 20px;
@@ -247,6 +252,15 @@ section {
   background-size: 100%;
   padding-top: 150px;
   border-top: 5px solid #4267B2;
+}
+
+section a {
+  text-decoration: none;
+  color: #4267B2;
+}
+
+section a:hover {
+  text-decoration: underline;
 }
 
 section h2 {
