@@ -1,0 +1,20 @@
+#contact-me {
+    background-image: url("../img/section/about-me.png");
+    .section-content {
+        //TODO: to improve this
+        // display: flex;
+        // align-items: center;
+        // justify-content: center;
+    }
+}
+
+#social-footer {
+    margin: 10px auto;
+
+    a {
+        text-decoration: none;
+    }
+    img {
+        width: 20px;
+    }
+}

@@ -1,0 +1,47 @@
+@import "introduction";
+@import "about";
+@import "contact";
+
+
+section{
+
+    // min-height: 500px;
+
+
+    background-repeat: no-repeat;
+    background-size: 100%;
+    padding-top: 150px;
+    border-top: 5px solid $main-color;
+
+
+    h2{
+        color: $main-color;
+        font-size: 30px;
+    }
+
+    p{
+        margin-top: 20px;
+        color: $text-color;
+        font-size: 20px;
+    }
+
+    .section-content{
+        min-height: 400px;
+        padding: 50px;
+        background: #ffffff;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (min-width: 575px) {
+    section {
+        padding-top: 200px;
+    }
+
+}
+
+@media screen and (min-width: 850px) {
+    .section-content {
+        width: calc(100% - 400px);
+    }
+}
