@@ -229,15 +229,17 @@ nav {
 }
 
 #social-footer {
-  margin: 10px auto;
+  margin: 20px auto;
+  text-align: center;
 }
 
 #social-footer a {
   text-decoration: none;
+  margin: 5px;
 }
 
 #social-footer img {
-  width: 20px;
+  width: 40px;
 }
 
 section {
