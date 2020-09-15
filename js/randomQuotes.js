@@ -31,6 +31,10 @@ var listOfQuotes = [
         qoute: "If you can't fly then run, if you can't run then walk, if you can't walk then crawl, but whatever you do you have to kepp moving forward.",
         author: "Martin Luther King Jr.",
     },
+    {
+        qoute: "Done is better than perfect.",
+        author: "Sheryl Sandberg",
+    },
 ]
 
 var randomNumber = Math.floor(Math.random() * listOfQuotes.length);
