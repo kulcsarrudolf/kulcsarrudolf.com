@@ -7,6 +7,10 @@ var listOfQuotes = [{
     author: "Donald Knuth",
   },
   {
+    qoute: "Everyday life is like programming, I guess. If you love something you can put beauty into it.",
+    author: "Donald Knuth",
+  },
+  {
     qoute: "Slowing down is sometimes the best way to speed up.",
     author: "Mike Vance",
   },
@@ -31,12 +35,15 @@ var listOfQuotes = [{
     author: "Sheryl Sandberg",
   },
   {
-    qoute: "Focus is about saying, no. And the result of that focus is going to be some really great products where the total is much greater than the sum of the parts.",
+    qoute: "Focus is about saying, no.",
     author: "Steve Jobs",
   },
   {
     qoute: "Examine your values and live by them - the more your actions reflect your beliefs, the better you feel.",
     author: "American Heart Association",
+  }, {
+    qoute: "The best time to plant a tree was 20 years ago. The second best time is now.",
+    author: "Chinese proverb",
   },
 ];
 
