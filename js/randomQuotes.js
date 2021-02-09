@@ -41,9 +41,14 @@ var listOfQuotes = [{
   {
     qoute: "Examine your values and live by them - the more your actions reflect your beliefs, the better you feel.",
     author: "American Heart Association",
-  }, {
+  },
+  {
     qoute: "The best time to plant a tree was 20 years ago. The second best time is now.",
     author: "Chinese proverb",
+  },
+  {
+    qoute: "Continuous improvement is better then delayed perfection.",
+    author: "Mark Twain",
   },
 ];
 
