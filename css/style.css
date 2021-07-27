@@ -247,6 +247,10 @@ nav {
   width: 40px;
 }
 
+#blogpost {
+  background-image: url("../img/section/coding-blogpost.png");
+}
+
 section {
   background-repeat: no-repeat;
   background-size: 100%;
