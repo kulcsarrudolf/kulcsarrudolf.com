@@ -1,0 +1,5 @@
+*.test.js
+build
+node_modules
+public
+index.jsx
