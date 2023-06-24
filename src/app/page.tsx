@@ -31,7 +31,7 @@ export default function Home() {
         any suggestions, please share them with me, thank you in advance.
       </Paragraph>
       <hr className="my-4" />
-      <BlogPostList title="Latest Blogs" noOfElements={3} />
+      <BlogPostList title="Latest Blogs" noOfElements={3} compact />
     </div>
   );
 }

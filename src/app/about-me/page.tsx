@@ -1,8 +1,9 @@
-import Paragraph from "@/components/general/typography/Paragraph";
+import { Title, Paragraph } from "@/components/general/typography";
 
 const AboutMe = () => {
   return (
     <>
+      <Title>About Me</Title>
       <Paragraph>
         I am a 28 year-old software developer living in Cluj-Napoca. Since I
         remember of my first experience, I have been a big fan of technology,

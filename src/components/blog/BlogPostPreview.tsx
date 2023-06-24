@@ -1,10 +1,29 @@
 import Link from "next/link";
 
-const BlogPostPreview = ({ post }: any) => {
+type BlogPostPreviewProps = {
+  post: any;
+  compact?: boolean;
+};
+const BlogPostPreview = ({ post, compact = false }: BlogPostPreviewProps) => {
+  if (compact) {
+    return (
+      <div key={post.title} className="mb-2">
+        <Link href={`/posts/${post.slug}`}>
+          <p>➡️{post.title}</p>
+        </Link>
+      </div>
+    );
+  }
+
   return (
     <div key={post.title} className="mb-2">
-      <Link href={`/posts/${post.slug}`}>
-        <p>➡️{post.title}</p>
+      <Link href={`/posts/${post.slug}`} className="group">
+        <p className="font-bold group-hover:text-blue-500">{post.title}</p>
+        <p>{post.subtitle}</p>
+        <p className="text-sm text-slate-400">
+          Posted On: <span className="italic">{post.date}</span> | Author:{" "}
+          <span className="italic">{post.author}</span>
+        </p>
       </Link>
     </div>
   );

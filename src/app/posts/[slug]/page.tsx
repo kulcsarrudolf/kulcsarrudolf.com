@@ -1,6 +1,10 @@
 import fs from "fs";
+
 import Markdown from "markdown-to-jsx";
 import matter from "gray-matter";
+
+import { Title, Subtitle } from "@/components/general/typography";
+
 import { getPostMetadata } from "@/utils/getPostMetadata";
 
 const getPostContent = (slug: string) => {
@@ -26,7 +30,8 @@ const PostPage = (props: any) => {
 
   return (
     <div>
-      <h1>{post.data.title}</h1>
+      <Title>{post.data.title}</Title>
+      <Subtitle>{post.data.subtitle}</Subtitle>
       <Markdown>{post.content}</Markdown>
     </div>
   );

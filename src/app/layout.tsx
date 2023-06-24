@@ -1,8 +1,5 @@
 import Navbar from "@/components/navbar/Navbar";
 import "./globals.css";
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Kulcsar Rudolf - Software Developer",
@@ -27,11 +24,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="p-2">
-      <body className={inter.className}>
+    <html
+      lang="en"
+      className="p-2"
+      style={{
+        backgroundColor: "#E9EBEE",
+      }}
+    >
+      <body>
         <div className="mx-auto max-w-5xl">
           <Navbar />
-          <div className="border border-black-500 p-4 rounded-xl">
+          <div className="border border-black-500 p-4 rounded-xl shadow-md">
             {children}
           </div>
         </div>

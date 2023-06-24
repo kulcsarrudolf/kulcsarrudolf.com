@@ -15,6 +15,7 @@ export const getPostMetadata = () => {
       title: matterResult.data.title,
       date: matterResult.data.date,
       subtitle: matterResult.data.subtitle,
+      author: matterResult.data.author,
       slug: fileName.replace(".md", ""),
     };
   });

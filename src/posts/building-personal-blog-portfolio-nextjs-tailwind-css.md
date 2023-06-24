@@ -1,6 +1,7 @@
 ---
 title: "Crafting an Inspiring Web Presence: My Journey with Next.js and Tailwind CSS"
 subtitle: "Exploring the Power of Modern Frontend Technologies"
+author: "Kulcsar Rudolf"
 date: "2023-06-24"
 ---
 

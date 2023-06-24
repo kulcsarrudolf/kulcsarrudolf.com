@@ -1,7 +1,7 @@
-const Title = ({ children }: any) => {
+const Subtitle = ({ children }: any) => {
   return (
     <h1
-      className="text-2xl font-bold mb-2"
+      className="text-xl mb-2"
       style={{
         color: "#4267b2",
       }}
@@ -11,4 +11,4 @@ const Title = ({ children }: any) => {
   );
 };
 
-export default Title;
+export default Subtitle;

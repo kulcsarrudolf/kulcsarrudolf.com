@@ -1,6 +1,7 @@
 ---
 title: "Title of the Blog Post"
 subtitle: "Subtitle of the Blog Post"
+author: "Author Name"
 date: "YYYY-MM-DD"
 ---
 

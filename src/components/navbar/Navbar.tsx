@@ -22,15 +22,16 @@ const NAVBAR_ELEMENTS = [
 const Navbar = () => {
   return (
     <div
-      className="border border-black-500 px-4 py-2 rounded-2xl mb-2 flex flex-row"
+      className="border border-black-500 px-4 py-2 rounded-2xl mb-2 flex flex-row items-center shadow-md"
       style={{
+        minHeight: "3.5rem",
         backgroundColor: "#4267b2",
         color: "#FFFFFF",
       }}
     >
       {NAVBAR_ELEMENTS.map((element) => (
         <Link key={element.title} href={element.href} className="ml-2">
-          <p>{element.title}</p>
+          <p className="hover:font-bold">{element.title}</p>
         </Link>
       ))}
     </div>

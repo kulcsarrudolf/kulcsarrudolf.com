@@ -5,10 +5,12 @@ import Title from "../general/typography/Title";
 type BlogPostListProps = {
   title?: string;
   noOfElements?: number;
+  compact?: boolean;
 };
 const BlogPostList = ({
   title = "Articles",
   noOfElements = 0,
+  compact = false,
 }: BlogPostListProps) => {
   const posts = getPostMetadata();
 
@@ -18,7 +20,7 @@ const BlogPostList = ({
       {posts
         .slice(0, noOfElements ? noOfElements : posts.length)
         .map((post) => (
-          <BlogPostPreview key={post.slug} post={post} />
+          <BlogPostPreview key={post.slug} post={post} compact={compact} />
         ))}
     </div>
   );
