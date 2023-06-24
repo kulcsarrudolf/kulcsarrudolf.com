@@ -1,4 +1,4 @@
-import Paragraph from "@/components/general/Paragraph";
+import Paragraph from "@/components/general/typography/Paragraph";
 
 const AboutMe = () => {
   return (

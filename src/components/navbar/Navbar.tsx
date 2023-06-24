@@ -21,7 +21,13 @@ const NAVBAR_ELEMENTS = [
 
 const Navbar = () => {
   return (
-    <div className="border border-black-500 px-4 py-2 rounded-xl mb-2 flex flex-row">
+    <div
+      className="border border-black-500 px-4 py-2 rounded-2xl mb-2 flex flex-row"
+      style={{
+        backgroundColor: "#4267b2",
+        color: "#FFFFFF",
+      }}
+    >
       {NAVBAR_ELEMENTS.map((element) => (
         <Link key={element.title} href={element.href} className="ml-2">
           <p>{element.title}</p>

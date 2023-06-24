@@ -1,5 +1,6 @@
 import { getPostMetadata } from "@/utils/getPostMetadata";
 import BlogPostPreview from "./BlogPostPreview";
+import Title from "../general/typography/Title";
 
 type BlogPostListProps = {
   title?: string;
@@ -13,7 +14,7 @@ const BlogPostList = ({
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">{title}</h1>
+      <Title>{title}</Title>
       {posts
         .slice(0, noOfElements ? noOfElements : posts.length)
         .map((post) => (

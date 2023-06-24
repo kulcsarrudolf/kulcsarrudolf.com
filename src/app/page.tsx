@@ -1,10 +1,11 @@
 import BlogPostList from "@/components/blog/BlogPostList";
-import Paragraph from "@/components/general/Paragraph";
+import Paragraph from "@/components/general/typography/Paragraph";
+import Title from "@/components/general/typography/Title";
 
 export default function Home() {
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">Introduction</h1>
+      <Title>Introduction</Title>
       <Paragraph>
         Welcome to my website. Please feel free to browse it through, I really
         hope you will find something useful.
