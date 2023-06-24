@@ -18,7 +18,7 @@ To get started with the project, follow these steps:
 
 ## Writing Blog Posts
 
-Blog posts in this project are written in Markdown format and stored in the `src/posts/` directory. To add a new blog post, create a new Markdown file following the naming convention `post-title.md` and include the necessary content. The posts will be dynamically rendered on the website.
+Blog posts in this project are written in Markdown format and stored in the `src/posts/` directory. To add a new blog post, create a new Markdown file following the naming convention `post-title.md` and include the necessary content. The posts will be dynamically rendered on the website. To maintain consistency in writing blog posts for this project, we have a template available. You can find the template [here](./src/posts/tempate/template-post.md). It provides a structured format for creating informative and engaging blog posts.
 
 ## Contributing
 
