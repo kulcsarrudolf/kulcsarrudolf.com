@@ -32,7 +32,9 @@ const PostPage = (props: any) => {
     <div>
       <Title>{post.data.title}</Title>
       <Subtitle>{post.data.subtitle}</Subtitle>
-      <Markdown>{post.content}</Markdown>
+      <article className="prose container mx-auto max-w-none">
+        <Markdown>{post.content}</Markdown>
+      </article>
     </div>
   );
 };

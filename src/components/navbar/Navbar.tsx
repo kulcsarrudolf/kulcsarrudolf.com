@@ -30,7 +30,7 @@ const Navbar = () => {
       }}
     >
       {NAVBAR_ELEMENTS.map((element) => (
-        <Link key={element.title} href={element.href} className="ml-2">
+        <Link key={element.title} href={element.href} className="ml-4">
           <p className="hover:font-bold">{element.title}</p>
         </Link>
       ))}

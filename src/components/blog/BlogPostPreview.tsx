@@ -9,7 +9,7 @@ const BlogPostPreview = ({ post, compact = false }: BlogPostPreviewProps) => {
     return (
       <div key={post.title} className="mb-2">
         <Link href={`/posts/${post.slug}`}>
-          <p>➡️{post.title}</p>
+          <p className="hover:text-blue-500 font-bold">➡️{post.title}</p>
         </Link>
       </div>
     );
