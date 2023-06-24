@@ -1,7 +1,7 @@
 import fs from "fs";
 import Markdown from "markdown-to-jsx";
 import matter from "gray-matter";
-import { getPostMetadata } from "@/components/getPostMetadata";
+import { getPostMetadata } from "@/utils/getPostMetadata";
 
 const getPostContent = (slug: string) => {
   const folder = "./src/posts";
