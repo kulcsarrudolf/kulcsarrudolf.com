@@ -35,6 +35,5 @@ yarn-error.log*
 next-env.d.ts
 
 /src/posts/temp
-/src/posts
 
 /public/images/temp
