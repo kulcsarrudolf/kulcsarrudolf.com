@@ -1,12 +1,15 @@
 import { Title, Paragraph } from "@/components/general/typography";
+import { getMyAge } from "@/utils/getMyAge";
 
 const AboutMe = () => {
+  const myAge = getMyAge();
+
   return (
     <>
       <Title>About Me</Title>
       <Paragraph>
-        I am a 28 year-old software developer living in Cluj-Napoca. Since I
-        remember of my first experience, I have been a big fan of technology,
+        I am a {myAge} year-old software developer living in Cluj-Napoca. Since
+        I remember of my first experience, I have been a big fan of technology,
         and I try to keep up with all the news of its. The most groundbreaking
         experience of my life with coding was when I was 12 years old. I got my
         first professional full-time job as a software developer in 2017.
