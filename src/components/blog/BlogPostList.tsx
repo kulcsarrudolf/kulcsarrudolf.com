@@ -14,13 +14,21 @@ const BlogPostList = ({
 }: BlogPostListProps) => {
   const posts = getPostMetadata();
 
+  const numberOfPostsDisplayed = noOfElements ? noOfElements : posts.length;
+
   return (
     <div>
-      <Title>{title}</Title>
+      <Title mb={!compact ? 2 : 1}>{title}</Title>
       {posts
-        .slice(0, noOfElements ? noOfElements : posts.length)
-        .map((post) => (
-          <BlogPostPreview key={post.slug} post={post} compact={compact} />
+        .slice(0, numberOfPostsDisplayed)
+        .sort((a, b) => (a.date > b.date ? -1 : 1))
+        .map((post, idx) => (
+          <>
+            <BlogPostPreview key={post.slug} post={post} compact={compact} />
+            {!compact && idx < numberOfPostsDisplayed - 1 && (
+              <hr className="h-px my-3" />
+            )}
+          </>
         ))}
     </div>
   );
