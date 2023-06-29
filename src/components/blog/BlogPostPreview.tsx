@@ -1,7 +1,8 @@
 import Link from "next/link";
+import BlogPost from "@/types/blog-post.type";
 
 type BlogPostPreviewProps = {
-  post: any;
+  post: BlogPost;
   compact?: boolean;
 };
 const BlogPostPreview = ({ post, compact = false }: BlogPostPreviewProps) => {

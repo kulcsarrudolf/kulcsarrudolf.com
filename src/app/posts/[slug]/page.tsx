@@ -24,8 +24,12 @@ export const generateStaticParams = () => {
   });
 };
 
-const PostPage = (props: any) => {
-  const slug = props.params.slug;
+interface PostPageParams {
+  params: {
+    slug: string;
+  };
+}
+const PostPage = ({ params: { slug } }: PostPageParams) => {
   const post = getPostContent(slug);
 
   return (

@@ -1,4 +1,7 @@
-const Subtitle = ({ children }: any) => {
+interface SubtitleProps {
+  children: React.ReactNode;
+}
+const Subtitle = ({ children }: SubtitleProps) => {
   return (
     <h1
       className="text-xl mb-2"
