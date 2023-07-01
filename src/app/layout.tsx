@@ -1,5 +1,8 @@
 import Navbar from "@/components/navbar/Navbar";
 import "./globals.css";
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+config.autoAddCss = false;
 
 export const metadata = {
   title: "Kulcsar Rudolf - Software Developer",
@@ -31,7 +34,7 @@ export default function RootLayout({
         backgroundColor: "#E9EBEE",
       }}
     >
-      <body>
+      <body style={{ marginTop: "7rem" }}>
         <div className="mx-auto max-w-5xl">
           <Navbar />
           <div className="border border-black-500 p-4 rounded-xl shadow-md">

@@ -1,40 +1,56 @@
-import Link from "next/link";
+"use client";
+import Image from "next/image";
 
-const NAVBAR_ELEMENTS = [
-  {
-    title: "Home",
-    href: "/",
-  },
-  {
-    title: "About Me",
-    href: "/about-me",
-  },
-  {
-    title: "Blog",
-    href: "/blog",
-  },
-  {
-    title: "Contact",
-    href: "/contact",
-  },
-];
+import { useState } from "react";
+
+import SocialMediaLinks from "./SocialMediaLinks";
+import HamburgerButton from "./HamburgerButton";
+import MenuItems from "./MenuItems";
+import NavbarData from "./data";
 
 const Navbar = () => {
+  const [isNavbarOpen, setIsNavbarOpen] = useState(false);
+
+  const toggleNavbar = () => {
+    setIsNavbarOpen((prev) => !prev);
+  };
+
+  const mNavBarVisible = isNavbarOpen ? "" : "hidden";
+
+  const { title, logoSrc, link } = NavbarData;
+
   return (
-    <div
-      className="border border-black-500 px-4 py-2 rounded-2xl mb-2 flex flex-row items-center shadow-md"
-      style={{
-        minHeight: "3.5rem",
-        backgroundColor: "#4267b2",
-        color: "#FFFFFF",
-      }}
-    >
-      {NAVBAR_ELEMENTS.map((element) => (
-        <Link key={element.title} href={element.href} className="ml-4">
-          <p className="hover:font-bold">{element.title}</p>
-        </Link>
-      ))}
-    </div>
+    <>
+      <nav className="fixed w-full z-20 top-0 left-0  mt-5 p-2">
+        <div
+          className="max-w-5xl flex flex-wrap items-center justify-between mx-auto p-4 rounded-2xl shadow-md"
+          style={{ backgroundColor: "#4267b2" }}
+        >
+          <a href={link} className="flex items-center">
+            <Image
+              width={40}
+              height={40}
+              src={logoSrc}
+              className="mr-3 rounded-full shadow-md"
+              alt="Rudolf"
+            />
+            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+              {title}
+            </span>
+          </a>
+          <div className="flex md:order-2" style={{ alignItems: "center" }}>
+            <SocialMediaLinks />
+            <HamburgerButton onClick={toggleNavbar} />
+          </div>
+          <div
+            className={`flex-grow justify-end pt-6 md:pt-0 ${mNavBarVisible} w-full md:flex md:w-auto md:order-1 `}
+            id="navbar-sticky"
+          >
+            <MenuItems onClick={() => setIsNavbarOpen(false)} />
+          </div>
+        </div>
+      </nav>
+    </>
   );
 };
 
