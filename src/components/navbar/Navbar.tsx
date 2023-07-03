@@ -10,6 +10,7 @@ import NavbarData from "./data";
 
 const Navbar = () => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
+  const [marginTop, setMarginTop] = useState(true);
 
   const toggleNavbar = () => {
     setIsNavbarOpen((prev) => !prev);
@@ -36,8 +37,17 @@ const Navbar = () => {
     const scrollThreshold = 100;
 
     function handleScroll() {
+      console.log(window.scrollY);
+
       if (window.scrollY > scrollThreshold) {
+        setMarginTop(false);
+        console.log("scrolling down");
+
         setIsNavbarOpen(false);
+      }
+
+      if (window.scrollY < scrollThreshold) {
+        setMarginTop(true);
       }
     }
 
@@ -54,10 +64,16 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="fixed w-full z-20 top-0 left-0  mt-5 p-2" ref={ref}>
+      <nav
+        className={`fixed w-full z-20 top-0 left-0 ${
+          marginTop ? "mt-5" : "mt-0"
+        } px-2`}
+        ref={ref}
+      >
         <div
-          className="max-w-5xl flex flex-wrap items-center justify-between mx-auto p-4 rounded-2xl shadow-md"
-          style={{ backgroundColor: "#4267b2" }}
+          className={`max-w-5xl flex flex-wrap items-center justify-between mx-auto p-4 rounded-2xl ${
+            marginTop ? "" : "rounded-t-none"
+          } shadow-md bg-[#4267b2]`}
         >
           <a href={link} className="flex items-center">
             <Image
