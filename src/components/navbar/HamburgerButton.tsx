@@ -5,7 +5,7 @@ const HamburgerButton = ({ onClick }: HamburgerButtonProps) => (
   <button
     data-collapse-toggle="navbar-sticky"
     type="button"
-    className="ml-5 inline-flex items-center p-2 text-sm text-white rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-transparent  "
+    className="ml-5 inline-flex items-center p-2  md:hidden hover:#bg-[#3b64b8] hover:shadow-lg hover:rounded-lg border border-transparent hover:border-white"
     aria-controls="navbar-sticky"
     aria-expanded="false"
     onClick={onClick}
