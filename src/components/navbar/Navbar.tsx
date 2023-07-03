@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import SocialMediaLinks from "./SocialMediaLinks";
 import HamburgerButton from "./HamburgerButton";
@@ -15,13 +15,46 @@ const Navbar = () => {
     setIsNavbarOpen((prev) => !prev);
   };
 
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const targetNode = event.target as Node | null;
+      if (ref.current && targetNode && !ref.current.contains(targetNode)) {
+        setIsNavbarOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
+
+  useEffect(() => {
+    const scrollThreshold = 100;
+
+    function handleScroll() {
+      if (window.scrollY > scrollThreshold) {
+        setIsNavbarOpen(false);
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const mNavBarVisible = isNavbarOpen ? "" : "hidden";
 
   const { title, logoSrc, link } = NavbarData;
 
   return (
     <>
-      <nav className="fixed w-full z-20 top-0 left-0  mt-5 p-2">
+      <nav className="fixed w-full z-20 top-0 left-0  mt-5 p-2" ref={ref}>
         <div
           className="max-w-5xl flex flex-wrap items-center justify-between mx-auto p-4 rounded-2xl shadow-md"
           style={{ backgroundColor: "#4267b2" }}
