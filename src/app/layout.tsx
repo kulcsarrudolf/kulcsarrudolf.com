@@ -2,6 +2,8 @@ import Navbar from "@/components/navbar/Navbar";
 import "./globals.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import Quote from "@/components/quote/Quote";
+
 config.autoAddCss = false;
 
 export const metadata = {
@@ -37,6 +39,7 @@ export default function RootLayout({
       <body style={{ marginTop: "7rem" }}>
         <div className="mx-auto max-w-5xl">
           <Navbar />
+          <Quote />
           <div className="border border-black-500 p-4 rounded-xl shadow-md">
             {children}
           </div>
