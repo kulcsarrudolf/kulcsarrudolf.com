@@ -17,7 +17,7 @@ Welcome to my personal blog and portfolio project! This project showcases my jou
 
 To get started with the project, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/your-username/your-repo.git`
+1. Clone the repository: `git clone https://github.com/kulcsarrudolf/kulcsarrudolf.com.git
 2. Install dependencies: `yarn install`
 3. Start the development server: `yarn dev`
 
