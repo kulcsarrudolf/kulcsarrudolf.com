@@ -2,6 +2,11 @@
 
 Welcome to my personal blog and portfolio project! This project showcases my journey of learning and experimenting with new frontend technologies, particularly Next.js and Tailwind CSS. Through this project, I aim to create a dynamic and visually appealing website that reflects my skills, experiences, and projects.
 
+## Links
+
+- PROD: [https://kulcsarrudolf.com](https://kulcsarrudolf.com)
+- DEV: [https://kulcsarrudolf.vercel.app](https://kulcsarrudolf.vercel.app)
+
 ## Technologies Used
 
 - Next.js: Next.js is a powerful React framework that enables server-side rendering (SSR) and static site generation (SSG). It provides optimized performance and improved developer experience.
