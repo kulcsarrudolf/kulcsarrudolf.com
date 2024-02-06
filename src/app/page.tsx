@@ -1,6 +1,11 @@
 import BlogPostList from "@/components/blog/BlogPostList";
+import Link from "@/components/general/typography/Link";
 import Paragraph from "@/components/general/typography/Paragraph";
 import Title from "@/components/general/typography/Title";
+
+const GitHubLink = () => (
+  <Link href="https://github.com/kulcsarrudolf">GitHub</Link>
+);
 
 export default function Home() {
   return (
@@ -24,11 +29,11 @@ export default function Home() {
         possible.
       </Paragraph>
       <Paragraph>
-        You can find the source code of this website on my GitHub profile. I
-        tried to do my best in developing this website according to my current
-        experiences and knowledge. But of course in the future, when I will
-        learn better solutions for it, I will try to refactor it. If you have
-        any suggestions, please share them with me, thank you in advance.
+        You can find the source code of this website on my <GitHubLink />{" "}
+        profile. I tried to do my best in developing this website according to
+        my current experiences and knowledge. But of course in the future, when
+        I will learn better solutions for it, I will try to refactor it. If you
+        have any suggestions, please share them with me, thank you in advance.
       </Paragraph>
       <hr className="my-4" />
       <BlogPostList title="Latest Blogs" noOfElements={3} compact />
