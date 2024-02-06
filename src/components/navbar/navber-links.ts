@@ -4,6 +4,7 @@ import {
   faLinkedin,
   faTwitter,
   faInstagram,
+  faGithub,
 } from "@fortawesome/free-brands-svg-icons";
 
 const NAVBAR_ELEMENTS: NavbarElement[] = [
@@ -40,6 +41,11 @@ const SOCIAL_MEDIA: SocialMediaLink[] = [
     title: "Instagram",
     href: "https://www.instagram.com/rudolf0k/",
     icon: faInstagram,
+  },
+  {
+    title: "GitHub",
+    href: "https://www.github.com/kulcsarrudolf",
+    icon: faGithub,
   },
 ];
 
