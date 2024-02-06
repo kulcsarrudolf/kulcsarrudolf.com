@@ -61,6 +61,10 @@ const quotes: Quote[] = [
     quote: "Continuous improvement is better then delayed perfection.",
     author: "Mark Twain",
   },
+  {
+    quote: "The only way to go fast is to go well.",
+    author: "Robert C. Martin",
+  },
 ];
 
 export default quotes;
