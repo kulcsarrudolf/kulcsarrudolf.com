@@ -6,6 +6,7 @@ import matter from "gray-matter";
 import { Title, Subtitle } from "@/components/general/typography";
 
 import { getPostMetadata } from "@/utils/getPostMetadata";
+import PostedOn from "@/components/general/PostedOn";
 
 const getPostContent = (slug: string) => {
   const folder = "./src/posts";
@@ -24,11 +25,11 @@ export const generateStaticParams = () => {
   });
 };
 
-interface PostPageParams {
+type PostPageParams = {
   params: {
     slug: string;
   };
-}
+};
 const PostPage = ({ params: { slug } }: PostPageParams) => {
   const post = getPostContent(slug);
 
@@ -36,6 +37,7 @@ const PostPage = ({ params: { slug } }: PostPageParams) => {
     <div>
       <Title>{post.data.title}</Title>
       <Subtitle>{post.data.subtitle}</Subtitle>
+      <PostedOn date={post.data.date} />
       <article className="prose container mx-auto max-w-none">
         <Markdown>{post.content}</Markdown>
       </article>
