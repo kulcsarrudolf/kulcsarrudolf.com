@@ -4,6 +4,7 @@ export interface BlogPost {
   date: string;
   author: string;
   slug: string;
+  lang: "hu" | "en";
 }
 
 export default BlogPost;

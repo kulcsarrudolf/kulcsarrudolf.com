@@ -20,6 +20,7 @@ export const getPostMetadata = (): BlogPost[] => {
       subtitle: matterResult.data.subtitle,
       author: matterResult.data.author,
       slug: fileName.replace(".md", ""),
+      lang: matterResult.data.lang,
     };
   });
 
