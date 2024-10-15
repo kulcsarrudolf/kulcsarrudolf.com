@@ -28,7 +28,3 @@ As I progressed in my career, I used more open-source projects in my daily work.
 ## Community and Collaboration
 
 One of the biggest motivations behind making this project open-source is the potential for collaboration. I’ve benefited greatly from the open-source community and want to give back in any way I can. I’m excited to see where this project goes and how others might improve or expand on it.
-
-## Conclusion
-
-You can check out my project on [GitHub/Repository Link]. I’d love to hear your thoughts and ideas—let’s continue building a strong community together!
