@@ -23,10 +23,10 @@ As I progressed in my career, I used more open-source projects in my daily work.
 
 ## About my first project
 
-**[samsung-device-helper](https://github.com/kulcsarrudolf)** is an npm package I developed to provide a comprehensive list of Samsung devices, including phones, tablets, and watches. It includes utility functions to easily retrieve device names by model and to fetch lists of devices by category. I’ve already integrated this library into two of my projects, and it’s proving to be a useful tool for managing Samsung device data efficiently.
+**[samsung-device-helper](https://www.npmjs.com/package/samsung-device-helper)** is an npm package I developed to provide a comprehensive list of Samsung devices, including phones, tablets, and watches. It includes utility functions to easily retrieve device names by model and to fetch lists of devices by category. I’ve already integrated this library into two of my projects, and it’s proving to be a useful tool for managing Samsung device data efficiently.
 
 ## Community and collaboration
 
 One of the biggest motivations behind making this project open-source is the potential for collaboration. I’ve benefited so much from the open-source community and want to give back in any way I can. This project is my way of contributing to the ecosystem that has helped me grow as a developer.
 
-I’d love to hear from you! Do you have any contributions you'd like to make? What advice would you give someone starting their journey in open-source? What are your thoughts on open-source and the impact it has on our industry? Feel free to share your experiences and insights. I’m eager to learn from you, too!
+I’d love to hear from you! Do you have any contributions you'd like to make? What advice would you give someone starting their journey in open-source? What are your thoughts on open-source and the impact it has on our industry? Feel free to share your experiences and insights, [here](https://linkedin.com/). I’m eager to learn from you, too!
