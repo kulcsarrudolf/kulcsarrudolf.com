@@ -2,7 +2,7 @@
 title: "My first open-source project: A quest for learning and contribution"
 subtitle: "From inspiration to code and real-world impact"
 author: "Kulcsar Rudolf"
-date: "2024-10-15"
+date: "2024-10-24"
 ---
 
 ## Introduction
@@ -29,4 +29,4 @@ As I progressed in my career, I used more open-source projects in my daily work.
 
 One of the biggest motivations behind making this project open-source is the potential for collaboration. I’ve benefited so much from the open-source community and want to give back in any way I can. This project is my way of contributing to the ecosystem that has helped me grow as a developer.
 
-I’d love to hear from you! Do you have any contributions you'd like to make? What advice would you give someone starting their journey in open-source? What are your thoughts on open-source and the impact it has on our industry? Feel free to share your experiences and insights, [here](https://linkedin.com/). I’m eager to learn from you, too!
+I’d love to hear from you! Do you have any contributions you'd like to make? What advice would you give someone starting their journey in open-source? What are your thoughts on open-source and the impact it has on our industry? Feel free to share your experiences and insights, [here](https://www.linkedin.com/feed/update/urn:li:activity:7255128626554109952/). I’m eager to learn from you, too!
