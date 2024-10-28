@@ -65,6 +65,11 @@ const quotes: Quote[] = [
     quote: "The only way to go fast is to go well.",
     author: "Robert C. Martin",
   },
+  {
+    quote:
+      "The meaning of life is to find your gift. The purpose of life is to give it away.",
+    author: "Pablo Picasso",
+  },
 ];
 
 export default quotes;
