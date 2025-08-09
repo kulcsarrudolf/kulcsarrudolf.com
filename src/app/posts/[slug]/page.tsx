@@ -25,12 +25,10 @@ export const generateStaticParams = () => {
   });
 };
 
-type PostPageParams = {
-  params: {
-    slug: string;
-  };
-};
-const PostPage = ({ params: { slug } }: PostPageParams) => {
+type Params = Promise<{ slug: string }>;
+
+const PostPage = async ({ params }: { params: Params }) => {
+  const { slug } = await params;
   const post = getPostContent(slug);
 
   return (

@@ -30,13 +30,14 @@ export default function RootLayout({
 }) {
   return (
     <html
+      suppressHydrationWarning
       lang="en"
       className="p-2"
       style={{
         backgroundColor: "#E9EBEE",
       }}
     >
-      <body style={{ marginTop: "7rem" }}>
+      <body suppressHydrationWarning style={{ marginTop: "7rem" }}>
         <div className="mx-auto max-w-5xl">
           <Navbar />
           <Quote />

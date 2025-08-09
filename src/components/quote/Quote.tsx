@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import getRandomQuote from "./getRandomQuote";
-import Quote from "@/types/quote.type";
+import type Quote from "@/types/quote.type";
 import { usePathname } from "next/navigation";
 
 const Quote = () => {
