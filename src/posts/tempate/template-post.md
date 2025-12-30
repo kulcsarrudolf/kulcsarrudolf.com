@@ -2,7 +2,7 @@
 title: "Title of the Blog Post"
 subtitle: "Subtitle of the Blog Post"
 author: "Author Name"
-date: "YYYY-MM-DD"
+date: "2024-01-01"
 ---
 
 ## Introduction
