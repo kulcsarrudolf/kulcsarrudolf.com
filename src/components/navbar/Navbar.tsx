@@ -2,6 +2,7 @@
 import Image from "next/image";
 
 import { useEffect, useRef, useState } from "react";
+import { useMediaQuery } from "react-responsive";
 
 import SocialMediaLinks from "./SocialMediaLinks";
 import HamburgerButton from "./HamburgerButton";
@@ -11,6 +12,7 @@ import NavbarData from "./data";
 const Navbar = () => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
   const [marginTop, setMarginTop] = useState(true);
+  const isMobileView = useMediaQuery({ maxWidth: 474 });
 
   const toggleNavbar = () => {
     setIsNavbarOpen((prev) => !prev);
@@ -88,7 +90,7 @@ const Navbar = () => {
             </span>
           </a>
           <div className="flex md:order-2" style={{ alignItems: "center" }}>
-            <SocialMediaLinks />
+            {!isMobileView && <SocialMediaLinks />}
             <HamburgerButton onClick={toggleNavbar} />
           </div>
           <div
@@ -96,6 +98,11 @@ const Navbar = () => {
             id="navbar-sticky"
           >
             <MenuItems onClick={() => setIsNavbarOpen(false)} />
+            {isMobileView && (
+              <div className="mt-4 flex gap-4 justify-center">
+                <SocialMediaLinks iconClassName="ml-0" />
+              </div>
+            )}
           </div>
         </div>
       </nav>
