@@ -30,7 +30,7 @@ const Quote = () => {
         className="text-xl font-normal mb-5 leading-relaxed"
         style={{ lineHeight: "2rem" }}
       >
-        "{quote.quote}"
+        &ldquo;{quote.quote}&rdquo;
       </p>
       <p className="text-[#3b64b8] font-semibold text-lg tracking-wide">
         — {quote.author}
