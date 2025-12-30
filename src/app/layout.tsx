@@ -3,8 +3,14 @@ import "./globals.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import Quote from "@/components/quote/Quote";
+import { Inter } from "next/font/google";
 
 config.autoAddCss = false;
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
 
 export const metadata = {
   title: "Kulcsar Rudolf - Software Developer",
@@ -32,7 +38,7 @@ export default function RootLayout({
     <html
       suppressHydrationWarning
       lang="en"
-      className="p-2"
+      className={`p-2 ${inter.variable}`}
       style={{
         backgroundColor: "#E9EBEE",
       }}

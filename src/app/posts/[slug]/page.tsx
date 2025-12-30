@@ -36,7 +36,7 @@ const PostPage = async ({ params }: { params: Params }) => {
       <Title>{post.data.title}</Title>
       <Subtitle>{post.data.subtitle}</Subtitle>
       <PostedOn date={post.data.date} />
-      <article className="prose container mx-auto max-w-none">
+      <article className="prose prose-sans container mx-auto max-w-none">
         <Markdown>{post.content}</Markdown>
       </article>
     </div>
