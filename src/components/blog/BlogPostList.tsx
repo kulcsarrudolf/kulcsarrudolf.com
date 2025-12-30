@@ -22,8 +22,12 @@ const BlogPostList = ({
     <div>
       <Title mb={!compact ? 2 : 1}>{title}</Title>
       {posts
+        .sort((a, b) => {
+          const dateA = new Date(a.date).getTime();
+          const dateB = new Date(b.date).getTime();
+          return dateB - dateA; // Sort descending (newest first)
+        })
         .slice(0, numberOfPostsDisplayed)
-        .sort((a, b) => (a.date > b.date ? -1 : 1))
         .map((post: BlogPost, idx: number) => (
           <Fragment key={`${post.slug}-${idx}-blog-post-list`}>
             <BlogPostPreview key={post.slug} post={post} compact={compact} />
