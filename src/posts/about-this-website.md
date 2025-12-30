@@ -2,7 +2,7 @@
 title: "About this website"
 subtitle: "Why I built this personal blog and portfolio website"
 author: "Kulcsar Rudolf"
-date: "2024-01-01"
+date: "2019-06-26"
 ---
 
 ## Introduction
@@ -16,4 +16,3 @@ I've experienced many things during my professional career, so I decided to shar
 ## Open Source and Continuous Improvement
 
 You can find the source code of this website on my [GitHub](https://github.com/kulcsarrudolf) profile. I tried to do my best in developing this website according to my current experiences and knowledge. But of course in the future, when I will learn better solutions for it, I will try to refactor it. If you have any suggestions, please share them with me, thank you in advance.
-
