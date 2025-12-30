@@ -13,10 +13,6 @@ const NAVBAR_ELEMENTS: NavbarElement[] = [
     href: "/",
   },
   {
-    title: "About Me",
-    href: "/about-me",
-  },
-  {
     title: "Blog",
     href: "/blog",
   },

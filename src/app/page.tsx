@@ -1,40 +1,29 @@
 import BlogPostList from "@/components/blog/BlogPostList";
-import Link from "@/components/general/typography/Link";
+import Age from "@/components/general/Age";
 import Paragraph from "@/components/general/typography/Paragraph";
 import Title from "@/components/general/typography/Title";
-
-const GitHubLink = () => (
-  <Link href="https://github.com/kulcsarrudolf">GitHub</Link>
-);
 
 export default function Home() {
   return (
     <div>
-      <Title>Introduction</Title>
+      <Title>About Me</Title>
       <Paragraph>
-        Welcome to my website. Please feel free to browse it through, I really
-        hope you will find something useful.
+        I am a <Age /> year-old software developer living in Cluj-Napoca. Since
+        I remember of my first experience, I have been a big fan of technology,
+        and I try to keep up with all the news of its. The most groundbreaking
+        experience of my life with coding was when I was 12 years old. I got my
+        first professional full-time job as a software developer in 2017.
       </Paragraph>
       <Paragraph>
-        I have started to develop this page because web development is one of my
-        hobbies and by working on this website I have the possibility to try,
-        learn and experiment with new things.
+        I have constantly been trying to improve my skills and I don’t hesitate
+        when I realize that there is still a lot to learn, so I am always open
+        to new challenges.
       </Paragraph>
       <Paragraph>
-        I’ve experienced many things during my professional career, so I decided
-        to share some of my ideas and attempts hoping that some of them can be
-        helpful for someone. I hope you will find them beneficial and
-        interesting. If you consider that I can help you or if you have
-        questions, don’t hesitate to contact me, I will try to answer as soon as
-        possible.
+        Besides my profession I also love to relax and recharge my batteries
+        with my friends and family and of course by doing my favourite hobbies.
       </Paragraph>
-      <Paragraph>
-        You can find the source code of this website on my <GitHubLink />{" "}
-        profile. I tried to do my best in developing this website according to
-        my current experiences and knowledge. But of course in the future, when
-        I will learn better solutions for it, I will try to refactor it. If you
-        have any suggestions, please share them with me, thank you in advance.
-      </Paragraph>
+
       <hr className="my-4" />
       <BlogPostList title="Latest Blogs" noOfElements={3} compact />
     </div>
