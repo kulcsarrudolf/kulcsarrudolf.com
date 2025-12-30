@@ -2,7 +2,7 @@ import NavbarElement from "@/types/navbar-element.type";
 import SocialMediaLink from "@/types/social-media-link";
 import {
   faLinkedin,
-  faTwitter,
+  faXTwitter,
   faInstagram,
   faGithub,
 } from "@fortawesome/free-brands-svg-icons";
@@ -33,9 +33,9 @@ const SOCIAL_MEDIA: SocialMediaLink[] = [
     icon: faLinkedin,
   },
   {
-    title: "Twitter",
-    href: "https://twitter.com/kulcsar_rudolf",
-    icon: faTwitter,
+    title: "X",
+    href: "https://x.com/kulcsar_rudolf",
+    icon: faXTwitter,
   },
   {
     title: "Instagram",
