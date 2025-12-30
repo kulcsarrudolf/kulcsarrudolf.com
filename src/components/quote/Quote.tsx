@@ -21,13 +21,20 @@ const Quote = () => {
 
   return (
     <div
-      className="border border-black-500 p-4 rounded-xl shadow-md mb-4 text-center"
+      className="border border-gray-300 p-6 rounded-xl shadow-md mb-4 text-center cursor-pointer hover:shadow-lg transition-shadow"
       onClick={() => {
         window.location.href = "/quotes";
       }}
     >
-      <p className="text-xl font-medium mb-4">{quote.quote}</p>
-      <p className="text-[#3b64b8] font-bold">{quote.author}</p>
+      <p
+        className="text-xl font-normal mb-5 leading-relaxed"
+        style={{ lineHeight: "2rem" }}
+      >
+        "{quote.quote}"
+      </p>
+      <p className="text-[#3b64b8] font-semibold text-lg tracking-wide">
+        — {quote.author}
+      </p>
     </div>
   );
 };

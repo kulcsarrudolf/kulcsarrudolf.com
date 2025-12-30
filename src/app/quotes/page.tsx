@@ -11,14 +11,21 @@ const Quotes = () => {
         from voices that resonate. They serve as reminders to stay grounded,
         focused, and purposeful in everyday life.
       </Paragraph>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {quotes.map((quote: Quote) => (
           <div
-            className="border border-black-500 p-3 rounded-l shadow-md mb-4"
+            className="border border-gray-300 p-6 rounded-xl shadow-md mb-4 hover:shadow-lg transition-shadow"
             key={quote.id}
           >
-            <p className="text-l font-medium mb-2">{quote.quote}</p>
-            <p className="text-[#3b64b8] font-bold text-sm">{quote.author}</p>
+            <p
+              className="text-lg font-normal mb-4 leading-relaxed"
+              style={{ lineHeight: "1.75rem" }}
+            >
+              "{quote.quote}"
+            </p>
+            <p className="text-[#3b64b8] font-semibold text-base tracking-wide">
+              — {quote.author}
+            </p>
           </div>
         ))}
       </div>

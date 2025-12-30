@@ -41,7 +41,7 @@ export default function RootLayout({
         <div className="mx-auto max-w-5xl">
           <Navbar />
           <Quote />
-          <div className="border border-black-500 p-4 rounded-xl shadow-md">
+          <div className="border border-gray-300 p-4 rounded-xl shadow-md">
             {children}
           </div>
         </div>
