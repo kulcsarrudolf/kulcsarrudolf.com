@@ -17,7 +17,7 @@ const Quotes = () => {
             className="border border-black-500 p-3 rounded-l shadow-md mb-4"
             key={quote.id}
           >
-            <p className="text-l font-medium italic mb-2">{quote.quote}</p>
+            <p className="text-l font-medium mb-2">{quote.quote}</p>
             <p className="text-[#3b64b8] font-bold text-sm">{quote.author}</p>
           </div>
         ))}

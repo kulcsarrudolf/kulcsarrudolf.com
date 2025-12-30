@@ -26,7 +26,7 @@ const Quote = () => {
         window.location.href = "/quotes";
       }}
     >
-      <p className="text-xl font-medium	italic mb-4">{quote.quote}</p>
+      <p className="text-xl font-medium mb-4">{quote.quote}</p>
       <p className="text-[#3b64b8] font-bold">{quote.author}</p>
     </div>
   );
