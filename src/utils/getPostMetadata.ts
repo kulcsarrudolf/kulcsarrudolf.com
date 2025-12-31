@@ -21,6 +21,12 @@ export const getPostMetadata = (): BlogPost[] => {
       author: matterResult.data.author,
       slug: fileName.replace(".md", ""),
       lang: matterResult.data.lang,
+      description: matterResult.data.description,
+      keywords: matterResult.data.keywords
+        ? Array.isArray(matterResult.data.keywords)
+          ? matterResult.data.keywords
+          : matterResult.data.keywords.split(",").map((k: string) => k.trim())
+        : undefined,
     };
   });
 

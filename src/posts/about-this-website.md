@@ -3,6 +3,8 @@ title: "About this website"
 subtitle: "Why I built this personal blog and portfolio website"
 author: "Kulcsar Rudolf"
 date: "2019-06-26"
+description: "Discover why I built this personal blog and portfolio website. Learn about my journey in web development, my passion for sharing knowledge, and my commitment to open-source and continuous improvement."
+keywords: ["personal website", "blog", "portfolio", "web development", "open source", "software developer", "nextjs", "react", "typescript"]
 ---
 
 ## Introduction

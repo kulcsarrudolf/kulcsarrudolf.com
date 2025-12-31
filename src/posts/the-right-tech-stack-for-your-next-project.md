@@ -3,6 +3,8 @@ title: "The Right Tech Stack for Your Next Project"
 subtitle: "Beyond the Hype: How to Choose the Right Tech Stack for Your Project?"
 author: "Kulcsar Rudolf"
 date: "2024-02-24"
+description: "Learn how to choose the right tech stack for your project by focusing on fundamentals, aligning with project goals, and prioritizing long-term value over trends. Expert advice on making informed technology decisions."
+keywords: ["tech stack", "technology selection", "software development", "project planning", "technology trends", "software architecture", "development tools", "frameworks", "programming", "best practices"]
 ---
 
 ## Introduction

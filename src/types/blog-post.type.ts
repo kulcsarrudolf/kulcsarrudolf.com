@@ -5,6 +5,8 @@ export interface BlogPost {
   author: string;
   slug: string;
   lang: "hu" | "en";
+  description?: string;
+  keywords?: string[];
 }
 
 export default BlogPost;
