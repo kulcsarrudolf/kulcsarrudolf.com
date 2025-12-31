@@ -2,17 +2,33 @@ import BlogPostList from "@/components/blog/BlogPostList";
 import Age from "@/components/general/Age";
 import Paragraph from "@/components/general/typography/Paragraph";
 import Title from "@/components/general/typography/Title";
+import HighlightP from "@/components/general/typography/HighlightP";
+import Link from "@/components/general/typography/Link";
+
+const CVLink = () => <Link href="https://cv.kulcsarrudolf.com">CV</Link>;
+const GitHubLink = () => (
+  <Link href="https://github.com/kulcsarrudolf">GitHub</Link>
+);
+
+const ClujNapocaLink = () => (
+  <Link href="https://en.wikipedia.org/wiki/Cluj-Napoca">Cluj-Napoca</Link>
+);
 
 export default function Home() {
   return (
     <div>
       <Title>About Me</Title>
       <Paragraph>
-        I am a <Age /> year-old software developer living in Cluj-Napoca. Since
-        I remember of my first experience, I have been a big fan of technology,
+        I am a <Age />
+        -year-old <HighlightP>full-stack software developer</HighlightP> living
+        in <ClujNapocaLink />. I have almost{" "}
+        <HighlightP>10 years of experience in the industry</HighlightP>. Since I
+        remember of my first experience, I have been a big fan of technology,
         and I try to keep up with all the news of its. The most groundbreaking
         experience of my life with coding was when I was 12 years old. I got my
-        first professional full-time job as a software developer in 2017.
+        first professional full-time job as a software developer in 2017. Check
+        out my <GitHubLink /> to explore my latest projects and my <CVLink />{" "}
+        for a full breakdown of my professional journey.
       </Paragraph>
       <Paragraph>
         I have constantly been trying to improve my skills and I don’t hesitate

@@ -11,6 +11,7 @@ const MenuItems = ({ onClick }: MenuItemsProps) => (
       <Link
         key={element.title}
         href={element.href}
+        target={element.openInNewTab ? "_blank" : "_self"}
         onClick={onClick}
         className="mb-4 md:mb-0"
       >
