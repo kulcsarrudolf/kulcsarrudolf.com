@@ -10,6 +10,10 @@ interface BlogPageProps {
 
 export default function BlogPage({ posts }: BlogPageProps) {
   const { t } = useTranslation();
-  return <BlogPostListClient title={t("blog.title")} posts={posts} />;
+  return (
+    <BlogPostListClient
+      title={String(t("blog.title")) as string}
+      posts={posts}
+    />
+  );
 }
-

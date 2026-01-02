@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { getPostMetadata } from "@/utils/getPostMetadata";
-import BlogPage from "@/components/pages/BlogPage";
+import BlogPage from "@/pages/BlogPage";
 
 export const metadata: Metadata = {
   title: "Blog | Kulcsar Rudolf - Software Developer",

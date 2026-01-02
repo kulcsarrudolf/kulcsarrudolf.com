@@ -1,5 +1,5 @@
 import { getPostMetadata } from "@/utils/getPostMetadata";
-import HomePageContent from "@/components/pages/HomePageContent";
+import HomePageContent from "@/pages/HomePage";
 
 export default function Home() {
   const posts = getPostMetadata();

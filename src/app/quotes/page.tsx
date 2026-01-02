@@ -1,4 +1,4 @@
-import QuotesPage from "@/components/pages/QuotesPage";
+import QuotesPage from "@/pages/QuotesPage";
 
 const Quotes = () => {
   return <QuotesPage />;
