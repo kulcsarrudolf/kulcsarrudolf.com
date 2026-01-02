@@ -1,24 +1,53 @@
+"use client";
+
 import { NAVBAR_ELEMENTS } from "./navber-links";
 import NavbarElement from "@/types/navbar-element.type";
 import Link from "next/link";
+import { useTranslation } from "@/i18n/useTranslation";
 
 interface MenuItemsProps {
   onClick: () => void;
 }
-const MenuItems = ({ onClick }: MenuItemsProps) => (
-  <ul className="flex flex-col font-medium md:flex-row md:align-middle md:space-x-4">
-    {NAVBAR_ELEMENTS.map((element: NavbarElement) => (
-      <Link
-        key={element.title}
-        href={element.href}
-        target={element.openInNewTab ? "_blank" : "_self"}
-        onClick={onClick}
-        className="mb-4 md:mb-0"
-      >
-        <p className="text-white hover:font-bold">{element.title}</p>
-      </Link>
-    ))}
-  </ul>
-);
+const MenuItems = ({ onClick }: MenuItemsProps) => {
+  const { t, lang } = useTranslation();
+
+  const getTranslatedTitle = (title: string) => {
+    const titleMap: Record<string, string> = {
+      "Home": t("nav.home"),
+      "Blog": t("nav.blog"),
+      "Résumé": t("nav.resume"),
+      "Contact": t("nav.contact"),
+    };
+    return titleMap[title] || title;
+  };
+
+  const getHrefWithLang = (href: string) => {
+    // Don't add lang to external links
+    if (href.startsWith("http")) {
+      return href;
+    }
+    // Add lang query param to internal links if not default
+    if (lang !== "en") {
+      return `${href}?lang=${lang}`;
+    }
+    return href;
+  };
+
+  return (
+    <ul className="flex flex-col font-medium md:flex-row md:align-middle md:space-x-4">
+      {NAVBAR_ELEMENTS.map((element: NavbarElement) => (
+        <Link
+          key={element.title}
+          href={getHrefWithLang(element.href)}
+          target={element.openInNewTab ? "_blank" : "_self"}
+          onClick={onClick}
+          className="mb-4 md:mb-0"
+        >
+          <p className="text-white hover:font-bold">{getTranslatedTitle(element.title)}</p>
+        </Link>
+      ))}
+    </ul>
+  );
+};
 
 export default MenuItems;

@@ -1,0 +1,43 @@
+{
+  "nav": {
+    "home": "Home",
+    "blog": "Blog",
+    "resume": "Résumé",
+    "contact": "Contact"
+  },
+  "home": {
+    "title": "About Me",
+    "paragraph1_part1": "I am a {age}-year-old",
+    "paragraph1_part2": "full-stack software developer",
+    "paragraph1_part3": "living in {clujLink}. I love to build software products. I have",
+    "paragraph1_part4": "over 8 years of experience in the industry",
+    "paragraph1_part5": ". Since I remember of my first experience, I have been a big fan of technology, and I try to keep up with all the news of its. The most groundbreaking experience of my life with coding was when I was 12 years old.",
+    "paragraph2": "I have constantly been trying to improve my skills and I don't hesitate when I realize that there is still a lot to learn, so I am always open to new challenges. I can show my best skills, when I find a task that fires my interest up to a level where I will focus 100% on the task and recognize no time nor hungers.",
+    "paragraph3_part1": "Check out my {githubLink} to explore my latest projects and my",
+    "paragraph3_part2": "{cvLink}",
+    "paragraph3_part3": "for a full breakdown of my professional journey.",
+    "paragraph4": "Besides my profession I also love to relax and recharge my batteries with my friends and family and of course by doing my favourite hobbies.",
+    "latestBlogs": "Latest Blogs",
+    "clujNapoca": "Cluj-Napoca"
+  },
+  "blog": {
+    "title": "My Blog",
+    "articles": "Articles"
+  },
+  "contact": {
+    "title": "Contact Me",
+    "description": "If you have any questions or suggestion, please don't hesitate to contact me. You can do this via social media or email at {email}.",
+    "email": "kulcsarrudolf@gmail.com"
+  },
+  "quotes": {
+    "title": "Inspiring Thoughts",
+    "description": "These quotes offer moments of clarity, encouragement, and perspective from voices that resonate. They serve as reminders to stay grounded, focused, and purposeful in everyday life."
+  },
+  "blogPost": {
+    "postedOn": "Posted On",
+    "author": "Author"
+  },
+  "footer": {
+    "selectLanguage": "Select Language"
+  }
+}

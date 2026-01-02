@@ -1,0 +1,43 @@
+{
+  "nav": {
+    "home": "Kezdőlap",
+    "blog": "Blog",
+    "resume": "Önéletrajz",
+    "contact": "Kapcsolat"
+  },
+  "home": {
+    "title": "Rólam",
+    "paragraph1_part1": "Egy {age} éves",
+    "paragraph1_part2": "full-stack szoftverfejlesztő",
+    "paragraph1_part3": "vagyok, aki {clujLink}-ban él. Szeretek szoftvertermékeket építeni.",
+    "paragraph1_part4": "Több mint 8 év tapasztalatom van az iparban",
+    "paragraph1_part5": ". Amióta az eszemet tudom, nagy rajongója vagyok a technológiának, és igyekszem lépést tartani minden hírrel. Az életem legmeghatározóbb tapasztalata a programozással akkor volt, amikor 12 éves voltam.",
+    "paragraph2": "Folyamatosan igyekszem fejleszteni a képességeimet, és nem habozok, amikor rájövök, hogy még mindig sok mindent kell tanulnom, ezért mindig nyitott vagyok új kihívásokra. A legjobb képességeimet akkor tudom bemutatni, amikor olyan feladatot találok, ami annyira felkelti az érdeklődésemet, hogy 100%-ban a feladatra fókuszálok és nem ismerem fel az időt vagy az éhséget.",
+    "paragraph3_part1": "Nézd meg a {githubLink} oldalamat, hogy felfedezd legújabb projekteimet, és az",
+    "paragraph3_part2": "{cvLink}",
+    "paragraph3_part3": "oldalamat a szakmai útmutatásomért.",
+    "paragraph4": "A szakmámon kívül szeretek pihenni és feltölteni az akkumulátoraimat a barátaimmal és családommal, és természetesen a kedvenc hobbijaimmal.",
+    "latestBlogs": "Legfrissebb Blogok",
+    "clujNapoca": "Kolozsvár"
+  },
+  "blog": {
+    "title": "Blogom",
+    "articles": "Cikkek"
+  },
+  "contact": {
+    "title": "Lépj velem kapcsolatba",
+    "description": "Ha bármilyen kérdésed vagy javaslatod van, kérlek ne habozz kapcsolatba lépni velem. Ezt megteheted közösségi médián keresztül vagy e-mailben a {email} címen.",
+    "email": "kulcsarrudolf@gmail.com"
+  },
+  "quotes": {
+    "title": "Inspiráló Gondolatok",
+    "description": "Ezek a idézetek pillanatokat nyújtanak az egyértelműséghez, bátorításhoz és perspektívához olyan hangoktól, amelyek rezonálnak. Emlékeztetőként szolgálnak, hogy maradjunk földhözragadtak, fókuszáltak és céltudatosak a mindennapi életben."
+  },
+  "blogPost": {
+    "postedOn": "Közzétéve",
+    "author": "Szerző"
+  },
+  "footer": {
+    "selectLanguage": "Nyelv kiválasztása"
+  }
+}

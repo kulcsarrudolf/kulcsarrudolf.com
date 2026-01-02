@@ -1,5 +1,6 @@
 import { Metadata } from "next";
-import BlogPostList from "@/components/blog/BlogPostList";
+import { getPostMetadata } from "@/utils/getPostMetadata";
+import BlogPage from "@/components/pages/BlogPage";
 
 export const metadata: Metadata = {
   title: "Blog | Kulcsar Rudolf - Software Developer",
@@ -35,7 +36,8 @@ export const metadata: Metadata = {
 };
 
 const Blog = () => {
-  return <BlogPostList title="My Blog" />;
+  const posts = getPostMetadata();
+  return <BlogPage posts={posts} />;
 };
 
 export default Blog;

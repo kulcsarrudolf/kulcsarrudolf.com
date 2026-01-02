@@ -4,6 +4,7 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import Quote from "@/components/quote/Quote";
 import { Inter } from "next/font/google";
+import Footer from "@/components/footer/Footer";
 
 config.autoAddCss = false;
 
@@ -49,6 +50,7 @@ export default function RootLayout({
           <Quote />
           <div className="border border-gray-300 p-4 rounded-xl shadow-md">
             {children}
+            <Footer />
           </div>
         </div>
       </body>
