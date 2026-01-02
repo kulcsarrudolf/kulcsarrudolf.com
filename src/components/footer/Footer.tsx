@@ -15,7 +15,7 @@ const Footer = () => {
     if (newLang === lang) return;
 
     setStoredLanguage(newLang);
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(searchParams?.toString() || "");
     params.set("lang", newLang);
     const newUrl = params.toString()
       ? `${pathname}?${params.toString()}`
