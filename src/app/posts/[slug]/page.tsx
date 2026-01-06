@@ -3,6 +3,7 @@ import fs from "fs";
 import Markdown from "markdown-to-jsx";
 import matter from "gray-matter";
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 import { Title, Subtitle } from "@/components/general/typography";
 
@@ -147,7 +148,9 @@ const PostPage = async ({ params }: { params: Params }) => {
       <article itemScope itemType="https://schema.org/BlogPosting">
         <Title itemProp="headline">{post.data.title}</Title>
         <Subtitle itemProp="description">{post.data.subtitle}</Subtitle>
-        <PostedOn date={post.data.date} />
+        <Suspense fallback={<p className="text-sm">Loading...</p>}>
+          <PostedOn date={post.data.date} />
+        </Suspense>
         <div
           className="prose prose-sans container mx-auto max-w-none"
           itemProp="articleBody"

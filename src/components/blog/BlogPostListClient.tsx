@@ -18,12 +18,13 @@ const BlogPostListClient = ({
   noOfElements = 0,
   compact = false,
 }: BlogPostListClientProps) => {
-  const numberOfPostsDisplayed = noOfElements ? noOfElements : posts.length;
+  const safePosts = posts || [];
+  const numberOfPostsDisplayed = noOfElements ? noOfElements : safePosts.length;
 
   return (
     <div>
       <Title mb={!compact ? 2 : 1}>{title}</Title>
-      {posts
+      {safePosts
         .sort((a, b) => {
           const dateA = new Date(a.date).getTime();
           const dateB = new Date(b.date).getTime();

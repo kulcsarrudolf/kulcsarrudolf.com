@@ -13,7 +13,7 @@ export default function BlogPage({ posts }: BlogPageProps) {
   return (
     <BlogPostListClient
       title={String(t("blog.title")) as string}
-      posts={posts}
+      posts={posts || []}
     />
   );
 }

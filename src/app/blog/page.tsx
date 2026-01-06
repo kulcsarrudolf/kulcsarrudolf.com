@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { Suspense } from "react";
 import { getPostMetadata } from "@/utils/getPostMetadata";
 import BlogPage from "@/pages/BlogPage";
 
@@ -37,7 +38,11 @@ export const metadata: Metadata = {
 
 const Blog = () => {
   const posts = getPostMetadata();
-  return <BlogPage posts={posts} />;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <BlogPage posts={posts} />
+    </Suspense>
+  );
 };
 
 export default Blog;

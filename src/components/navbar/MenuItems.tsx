@@ -13,10 +13,10 @@ const MenuItems = ({ onClick }: MenuItemsProps) => {
 
   const getTranslatedTitle = (title: string) => {
     const titleMap: Record<string, string> = {
-      "Home": t("nav.home"),
-      "Blog": t("nav.blog"),
-      "Résumé": t("nav.resume"),
-      "Contact": t("nav.contact"),
+      "Home": t("nav.home") as string,
+      "Blog": t("nav.blog") as string,
+      "Résumé": t("nav.resume") as string,
+      "Contact": t("nav.contact") as string,
     };
     return titleMap[title] || title;
   };

@@ -5,6 +5,7 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import Quote from "@/components/quote/Quote";
 import { Inter } from "next/font/google";
 import Footer from "@/components/footer/Footer";
+import { Suspense } from "react";
 
 config.autoAddCss = false;
 
@@ -74,11 +75,15 @@ export default function RootLayout({
     >
       <body suppressHydrationWarning style={{ marginTop: "7rem" }}>
         <div className="mx-auto max-w-5xl">
-          <Navbar />
+          <Suspense fallback={<div style={{ height: "7rem" }} />}>
+            <Navbar />
+          </Suspense>
           <Quote />
           <div className="border border-gray-300 p-4 rounded-xl shadow-md">
             {children}
-            <Footer />
+            <Suspense fallback={null}>
+              <Footer />
+            </Suspense>
           </div>
         </div>
       </body>
