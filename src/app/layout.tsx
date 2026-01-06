@@ -6,6 +6,7 @@ import Quote from "@/components/quote/Quote";
 import { Inter } from "next/font/google";
 import Footer from "@/components/footer/Footer";
 import { Suspense } from "react";
+import ConditionalSpeedInsights from "@/components/general/SpeedInsights";
 
 config.autoAddCss = false;
 
@@ -86,6 +87,7 @@ export default function RootLayout({
             </Suspense>
           </div>
         </div>
+        <ConditionalSpeedInsights />
       </body>
     </html>
   );
