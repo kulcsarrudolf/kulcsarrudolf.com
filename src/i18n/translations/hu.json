@@ -2,39 +2,39 @@
   "nav": {
     "home": "Kezdőlap",
     "blog": "Blog",
-    "resume": "Önéletrajz",
+    "resume": "CV",
     "contact": "Kapcsolat"
   },
   "home": {
     "title": "Rólam",
-    "paragraph1_part1": "Egy {age} éves",
-    "paragraph1_part2": "full-stack szoftverfejlesztő",
-    "paragraph1_part3": "vagyok, aki {clujLink}-ban él. Szeretek szoftvertermékeket építeni.",
-    "paragraph1_part4": "Több mint 8 év tapasztalatom van az iparban",
-    "paragraph1_part5": ". Amióta az eszemet tudom, nagy rajongója vagyok a technológiának, és igyekszem lépést tartani minden hírrel. Az életem legmeghatározóbb tapasztalata a programozással akkor volt, amikor 12 éves voltam.",
-    "paragraph2": "Folyamatosan igyekszem fejleszteni a képességeimet, és nem habozok, amikor rájövök, hogy még mindig sok mindent kell tanulnom, ezért mindig nyitott vagyok új kihívásokra. A legjobb képességeimet akkor tudom bemutatni, amikor olyan feladatot találok, ami annyira felkelti az érdeklődésemet, hogy 100%-ban a feladatra fókuszálok és nem ismerem fel az időt vagy az éhséget.",
-    "paragraph3_part1": "Nézd meg a {githubLink} oldalamat, hogy felfedezd legújabb projekteimet, és az",
+    "paragraph1_part1": "A nevem Kulcsár Rudolf, {age} éves vagyok,",
+    "paragraph1_part2": " ",
+    "paragraph1_part3": "jelenleg {clujLink} élek. Több mint",
+    "paragraph1_part4": " 8 éve dolgozom software fejlesztőként",
+    "paragraph1_part5": ". Amióta az eszemet tudom, nagy rajongója vagyok a technológiának, és igyekszem lépést tartani minden újdonsággal. Az első találkozásom a programozással 12 éves koromban volt, amikor megírtam az első sor kódomat.",
+    "paragraph2": "Folyamatosan igyekszem fejleszteni a képességeimet, és nem habozok, amikor rájövök, hogy még mindig sok mindent kell tanulnom, ezért mindig nyitott vagyok új kihívásokra. A legjobban akkor teljesítek, amikor olyan feladatot találok, ami annyira felkelti az érdeklődésemet, hogy 100%-ban a feladatra tudok fókuszálni. Ilyenkor megfeledkezek az időről és sok egyéb dologról.",
+    "paragraph3_part1": "A legújabb projektjeimet megtalálod a {githubLink} profilomon. Valamint több infót a szakmai tapasztalatomról a ",
     "paragraph3_part2": "{cvLink}",
-    "paragraph3_part3": "oldalamat a szakmai útmutatásomért.",
-    "paragraph4": "A szakmámon kívül szeretek pihenni és feltölteni az akkumulátoraimat a barátaimmal és családommal, és természetesen a kedvenc hobbijaimmal.",
+    "paragraph3_part3": "-ben találsz.",
+    "paragraph4": "Amikor nem programozok, akkor próbálok a barátaimmal és családommal lenni, ez nagyon feltölti az akkumulátoromat. Valamint minidg nyított vagyok egy jó társasozásra, bringázásra, futásra, legózásra és mindenre ami érdekes. A legjújabb hobbim a 3D puzzle.",
     "latestBlogs": "Legfrissebb Blogok",
-    "clujNapoca": "Kolozsvár"
+    "clujNapoca": "Kolozsváron"
   },
   "blog": {
-    "title": "Blogom",
+    "title": "Blog",
     "articles": "Cikkek"
   },
   "contact": {
-    "title": "Lépj velem kapcsolatba",
-    "description": "Ha bármilyen kérdésed vagy javaslatod van, kérlek ne habozz kapcsolatba lépni velem. Ezt megteheted közösségi médián keresztül vagy e-mailben a {email} címen.",
+    "title": "Kapcsolat",
+    "description": "Ha bármilyen kérdésed vagy javaslatod van, nyugodtan vedd fel a kapcsolatot velem. Ezt megteheted közösségi médián keresztül vagy e-mailben a {email} címen.",
     "email": "kulcsarrudolf@gmail.com"
   },
   "quotes": {
     "title": "Inspiráló Gondolatok",
-    "description": "Ezek a idézetek pillanatokat nyújtanak az egyértelműséghez, bátorításhoz és perspektívához olyan hangoktól, amelyek rezonálnak. Emlékeztetőként szolgálnak, hogy maradjunk földhözragadtak, fókuszáltak és céltudatosak a mindennapi életben."
+    "description": "Néhány gondolat, amelyek inspirálnak és segíthetnek a mindennapokban."
   },
   "blogPost": {
-    "postedOn": "Közzétéve",
+    "postedOn": "Dátum",
     "author": "Szerző"
   },
   "footer": {
