@@ -17,9 +17,10 @@ const Footer = () => {
     setStoredLanguage(newLang);
     const params = new URLSearchParams(searchParams?.toString() || "");
     params.set("lang", newLang);
+    const currentPath = pathname || "/";
     const newUrl = params.toString()
-      ? `${pathname}?${params.toString()}`
-      : pathname;
+      ? `${currentPath}?${params.toString()}`
+      : currentPath;
     router.push(newUrl);
   };
 
