@@ -26,7 +26,7 @@
   },
   "contact": {
     "title": "Kapcsolat",
-    "description": "Ha bármilyen kérdésed vagy javaslatod van, nyugodtan vedd fel a kapcsolatot velem. Ezt megteheted közösségi médián keresztül vagy e-mailben a {email} címen.",
+    "description": "Szívesen beszélgetek új lehetőségekről, izgalmas projektekről vagy technikai kollaborációkról. Ha senior full-stack fejlesztőt keresel, vagy csak szeretnél csevegni, keress bátran!",
     "email": "kulcsarrudolf@gmail.com",
     "form": {
       "name": "Név",
