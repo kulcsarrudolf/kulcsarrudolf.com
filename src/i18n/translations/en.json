@@ -27,7 +27,20 @@
   "contact": {
     "title": "Contact Me",
     "description": "If you have any questions or suggestion, please don't hesitate to contact me. You can do this via social media or email at {email}.",
-    "email": "kulcsarrudolf@gmail.com"
+    "email": "kulcsarrudolf@gmail.com",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "your.email@example.com",
+      "message": "Message",
+      "messagePlaceholder": "Your message...",
+      "submit": "Send Message",
+      "submitting": "Submitting...",
+      "sending": "Sending...",
+      "success": "Form Submitted Successfully",
+      "error": "Error submitting form. Please try again."
+    }
   },
   "quotes": {
     "title": "Inspiring Thoughts",

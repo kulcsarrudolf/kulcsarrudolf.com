@@ -27,7 +27,20 @@
   "contact": {
     "title": "Kapcsolat",
     "description": "Ha bármilyen kérdésed vagy javaslatod van, nyugodtan vedd fel a kapcsolatot velem. Ezt megteheted közösségi médián keresztül vagy e-mailben a {email} címen.",
-    "email": "kulcsarrudolf@gmail.com"
+    "email": "kulcsarrudolf@gmail.com",
+    "form": {
+      "name": "Név",
+      "namePlaceholder": "A neved",
+      "email": "E-mail",
+      "emailPlaceholder": "pelda@email.com",
+      "message": "Üzenet",
+      "messagePlaceholder": "Az üzeneted...",
+      "submit": "Üzenet küldése",
+      "submitting": "Küldés...",
+      "sending": "Küldés...",
+      "success": "Az űrlap sikeresen elküldve",
+      "error": "Hiba történt az űrlap küldése során. Kérlek próbáld újra."
+    }
   },
   "quotes": {
     "title": "Inspiráló Gondolatok",

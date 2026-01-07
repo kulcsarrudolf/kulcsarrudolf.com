@@ -2,6 +2,7 @@
 
 import { Title, Paragraph } from "@/components/general/typography";
 import { useTranslation } from "@/i18n/useTranslation";
+import ContactForm from "@/components/contact/ContactForm";
 
 export default function ContactPage() {
   const { t } = useTranslation();
@@ -13,6 +14,7 @@ export default function ContactPage() {
       <Paragraph>
         {t("contact.description", { email: <span className="font-bold">{email}</span> })}
       </Paragraph>
+      <ContactForm />
     </>
   );
 }
