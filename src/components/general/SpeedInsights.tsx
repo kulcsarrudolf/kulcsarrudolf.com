@@ -1,6 +1,6 @@
 "use client";
 
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 
 export default function ConditionalSpeedInsights() {
   const isProduction = process.env.NEXT_PUBLIC_ENV === "production";
@@ -9,5 +9,5 @@ export default function ConditionalSpeedInsights() {
     return null;
   }
 
-  return <SpeedInsights />;
+  return <Analytics />;
 }
