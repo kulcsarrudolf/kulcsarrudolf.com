@@ -79,7 +79,7 @@ const Navbar = () => {
               className="mr-3 rounded-full shadow-md"
               alt="Rudolf"
             />
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+            <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
               {title}
             </span>
           </a>
