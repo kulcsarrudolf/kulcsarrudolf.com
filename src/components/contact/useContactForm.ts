@@ -11,7 +11,23 @@ export function useContactForm() {
     setIsSubmitting(true);
     setResult(t("contact.form.sending"));
 
-    const formData = new FormData(event.currentTarget);
+    // Store form reference before async operations
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    // Normalize website URL if provided (add https:// if protocol is missing)
+    const website = formData.get("website") as string;
+    if (website && website.trim()) {
+      const trimmedWebsite = website.trim();
+      // Check if it already has a protocol
+      if (!trimmedWebsite.match(/^https?:\/\//i)) {
+        // Add https:// if it looks like a domain
+        if (trimmedWebsite.includes(".") || trimmedWebsite.includes("/")) {
+          formData.set("website", `https://${trimmedWebsite}`);
+        }
+      }
+    }
+
     const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
 
     if (!accessKey) {
@@ -38,7 +54,7 @@ export function useContactForm() {
 
       if (data.success) {
         setResult(t("contact.form.success"));
-        event.currentTarget.reset();
+        form.reset();
       } else {
         setResult(t("contact.form.error"));
       }

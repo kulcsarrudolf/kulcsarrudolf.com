@@ -33,7 +33,7 @@
       "namePlaceholder": "A neved",
       "email": "E-mail",
       "emailPlaceholder": "pelda@email.com",
-      "website": "Weboldal / LinkedIn / GitHub",
+      "website": "Weboldal",
       "websiteOptional": "opcionális",
       "websitePlaceholder": "https://weboldal.hu vagy https://linkedin.com/in/profilod",
       "websiteHint": "Oszd meg a weboldalad, LinkedIn profilod vagy GitHub profilod (opcionális)",

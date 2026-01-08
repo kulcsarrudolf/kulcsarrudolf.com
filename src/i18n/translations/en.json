@@ -33,7 +33,7 @@
       "namePlaceholder": "Your name",
       "email": "Email",
       "emailPlaceholder": "your.email@example.com",
-      "website": "Website / LinkedIn / GitHub",
+      "website": "Website",
       "websiteOptional": "optional",
       "websitePlaceholder": "https://yourwebsite.com or https://linkedin.com/in/yourprofile",
       "websiteHint": "Share your website, LinkedIn profile, or GitHub profile (optional)",
