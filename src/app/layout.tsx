@@ -82,11 +82,11 @@ export default function RootLayout({
           <Quote />
           <div className="border border-gray-300 p-4 rounded-xl shadow-md">
             {children}
-            <Suspense fallback={null}>
-              <Footer />
-            </Suspense>
           </div>
         </div>
+        <Suspense fallback={null}>
+          <Footer />
+        </Suspense>
         <ConditionalSpeedInsights />
       </body>
     </html>

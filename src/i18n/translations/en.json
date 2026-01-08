@@ -55,6 +55,7 @@
     "author": "Author"
   },
   "footer": {
-    "selectLanguage": "Select Language"
+    "selectLanguage": "Select Language",
+    "copyright": "© {year} Kulcsár Rudolf. All rights reserved."
   }
 }

@@ -55,6 +55,7 @@
     "author": "Szerző"
   },
   "footer": {
-    "selectLanguage": "Nyelv kiválasztása"
+    "selectLanguage": "Nyelv kiválasztása",
+    "copyright": "© {year} Kulcsár Rudolf. Minden jog fenntartva."
   }
 }
