@@ -46,7 +46,10 @@ export default function ContactForm() {
           htmlFor="website"
           className="block text-sm font-medium text-gray-700 mb-2"
         >
-          {t("contact.form.website")}
+          {t("contact.form.website")}{" "}
+          <span className="text-gray-500 font-normal">
+            ({t("contact.form.websiteOptional")})
+          </span>
         </label>
         <input
           type="url"

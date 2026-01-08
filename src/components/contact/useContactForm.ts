@@ -28,6 +28,12 @@ export function useContactForm() {
         body: formData,
       });
 
+      if (!response.ok) {
+        setResult(t("contact.form.error"));
+        setIsSubmitting(false);
+        return;
+      }
+
       const data = await response.json();
 
       if (data.success) {
