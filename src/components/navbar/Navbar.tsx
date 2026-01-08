@@ -37,12 +37,8 @@ const Navbar = () => {
     const scrollThreshold = 100;
 
     function handleScroll() {
-      console.log(window.scrollY);
-
       if (window.scrollY > scrollThreshold) {
         setMarginTop(false);
-        console.log("scrolling down");
-
         setIsNavbarOpen(false);
       }
 
