@@ -22,11 +22,11 @@
       "title": "Jelenlegi Fókusz",
       "fullStack": {
         "title": "Full-Stack Fejlesztés",
-        "description": "A {theBriefAI}-nál dolgozom {react}, {nodejs} és {typescript} technológiákkal. Folyamatosan felfedezem és alkalmazom az új technológiákat és fejlesztési gyakorlatokat."
+        "description": "A {theBriefAI}-nál dolgozom {react} és {nodejs} technológiákkal. Folyamatosan felfedezem és alkalmazom az új technológiákat és fejlesztési gyakorlatokat {personalProjects} dolgozásával."
       },
       "aiTooling": {
         "title": "AI Eszközök",
-        "description": "Naprakész maradok a gyorsan változó AI eszközök ökoszisztémájával, hogy javítsam a munkafolyamatomat és a produktivitásomat. Jelenleg a {cursor} és {claudeCode} ({zod}-dal) eszközöket használom a kódolási munkám felgyorsítására."
+        "description": "Naprakész maradok a gyorsan változó AI eszközök ökoszisztémájával, hogy javítsam a munkafolyamatomat és a produktivitásomat. Jelenleg a {cursor} és {claudeCode} ({zed}-dal) eszközöket használom a kódolási munkám felgyorsítására."
       },
       "aiIntegration": {
         "title": "AI Integráció",

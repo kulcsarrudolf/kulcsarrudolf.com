@@ -13,15 +13,15 @@ const CurrentFocus = () => {
   );
   const ReactLink = () => <Link href="https://react.dev">React</Link>;
   const NodeJSLink = () => <Link href="https://nodejs.org">Node.js</Link>;
-  const TypeScriptLink = () => (
-    <Link href="https://www.typescriptlang.org">TypeScript</Link>
+  const PersonalProjectsLink = () => (
+    <Link href="https://github.com/kulcsarrudolf">personal projects</Link>
   );
 
   const CursorLink = () => <Link href="https://cursor.sh">Cursor</Link>;
   const ClaudeCodeLink = () => (
     <Link href="https://www.anthropic.com/claude">Claude Code</Link>
   );
-  const ZodLink = () => <Link href="https://zod.dev">Zod</Link>;
+  const ZedLink = () => <Link href="https://zed.dev">Zed</Link>;
 
   const MastraAILink = () => <Link href="https://mastra.ai">Mastra AI</Link>;
 
@@ -72,13 +72,13 @@ const CurrentFocus = () => {
                     theBriefAI: <TheBriefAILink />,
                     react: <ReactLink />,
                     nodejs: <NodeJSLink />,
-                    typescript: <TypeScriptLink />,
+                    personalProjects: <PersonalProjectsLink />,
                   })}
                 {area.key === "aiTooling" &&
                   t(`home.currentFocus.${area.key}.description`, {
                     cursor: <CursorLink />,
                     claudeCode: <ClaudeCodeLink />,
-                    zod: <ZodLink />,
+                    zed: <ZedLink />,
                   })}
                 {area.key === "aiIntegration" &&
                   t(`home.currentFocus.${area.key}.description`, {
