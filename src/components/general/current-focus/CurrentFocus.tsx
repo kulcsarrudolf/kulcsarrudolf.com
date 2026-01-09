@@ -5,6 +5,7 @@ import Title from "../typography/Title";
 import Paragraph from "../typography/Paragraph";
 import Link from "../typography/Link";
 import Image from "next/image";
+import { useRef, useState, useEffect } from "react";
 import programmingSvg from "./programming.svg";
 import aiToolingSvg from "./ai-tooling.svg";
 import openSourceSvg from "./open-source.svg";
@@ -58,27 +59,109 @@ const CurrentFocus = () => {
     },
   ];
 
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!scrollContainerRef.current) return;
+    setIsDragging(true);
+    setStartX(e.pageX - scrollContainerRef.current.offsetLeft);
+    setScrollLeft(scrollContainerRef.current.scrollLeft);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || !scrollContainerRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - scrollContainerRef.current.offsetLeft;
+    const walk = (x - startX) * 2;
+    scrollContainerRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (!scrollContainerRef.current) return;
+    setIsDragging(true);
+    setStartX(e.touches[0].pageX - scrollContainerRef.current.offsetLeft);
+    setScrollLeft(scrollContainerRef.current.scrollLeft);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging || !scrollContainerRef.current) return;
+    const x = e.touches[0].pageX - scrollContainerRef.current.offsetLeft;
+    const walk = (x - startX) * 2;
+    scrollContainerRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+  };
+
+  useEffect(() => {
+    const handleMouseLeave = () => {
+      setIsDragging(false);
+    };
+
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.addEventListener(
+        "mouseleave",
+        handleMouseLeave
+      );
+    }
+
+    return () => {
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.removeEventListener(
+          "mouseleave",
+          handleMouseLeave
+        );
+      }
+    };
+  }, []);
+
   return (
     <div style={{ fontSize: "0.85em", lineHeight: "1.0" }}>
       <Title>{t("home.currentFocus.title")}</Title>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div
+        ref={scrollContainerRef}
+        className="flex gap-4 overflow-x-auto overflow-y-hidden snap-x snap-mandatory cursor-grab active:cursor-grabbing"
+        style={{
+          WebkitOverflowScrolling: "touch",
+        }}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         {focusAreas.map((area) => (
           <div
             key={area.key}
-            className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow flex flex-col"
+            className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow flex flex-col flex-shrink-0 snap-start"
+            style={{ minWidth: "210px", maxWidth: "280px", width: "100%" }}
           >
-            <div className="flex justify-center mb-4">
+            <div
+              className="flex justify-center mb-4"
+              style={{ width: "125px", height: "125px", margin: "0 auto" }}
+            >
               <Image
                 src={area.image}
                 alt={t(`home.currentFocus.${area.key}.title`) as string}
                 width={125}
                 height={125}
+                style={{ objectFit: "contain", width: "100%", height: "100%" }}
               />
             </div>
             <div className="flex-1">
               <h3
-                className="text-lg font-semibold mb-2"
+                className="text-lg font-semibold mb-2 text-center"
                 style={{ color: "#4267b2" }}
               >
                 {t(`home.currentFocus.${area.key}.title`)}

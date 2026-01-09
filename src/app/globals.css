@@ -11,3 +11,14 @@
     font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif !important;
   }
 }
+
+@layer utilities {
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
