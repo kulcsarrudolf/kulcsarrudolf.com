@@ -66,7 +66,7 @@ const CurrentFocus = () => {
         {focusAreas.map((area) => (
           <div
             key={area.key}
-            className="border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow flex flex-col"
+            className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow flex flex-col"
           >
             <div className="flex justify-center mb-4">
               <Image
