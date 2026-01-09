@@ -16,6 +16,11 @@ const NAVBAR_ELEMENTS: NavbarElement[] = [
     title: "Blog",
     href: "/blog",
   },
+  {
+    title: "Projects",
+    href: "https://www.github.com/kulcsarrudolf",
+    openInNewTab: true,
+  },
   // {
   //   title: "Résumé",
   //   href: "https://cv.kulcsarrudolf.com",

@@ -15,6 +15,7 @@ const MenuItems = ({ onClick }: MenuItemsProps) => {
     const titleMap: Record<string, string> = {
       "Home": t("nav.home") as string,
       "Blog": t("nav.blog") as string,
+      "Projects": t("nav.projects") as string,
       "Résumé": t("nav.resume") as string,
       "Contact": t("nav.contact") as string,
     };
