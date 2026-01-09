@@ -8,6 +8,8 @@
   },
   "home": {
     "title": "Rólam",
+    "fullStackDeveloper": " ",
+    "experience": " 8 éve dolgozom software fejlesztőként",
     "paragraph1": "A nevem Kulcsár Rudolf, {age} éves vagyok,{fullStackDeveloper} jelenleg {clujLink} élek. Több mint {experience}. Amióta az eszemet tudom, nagy rajongója vagyok a technológiának, és igyekszem lépést tartani minden újdonsággal. Az első találkozásom a programozással 12 éves koromban volt, amikor megírtam az első sor kódomat.",
     "paragraph2": "Folyamatosan igyekszem fejleszteni a képességeimet, és nem habozok, amikor rájövök, hogy még mindig sok mindent kell tanulnom, ezért mindig nyitott vagyok új kihívásokra. A legjobban akkor teljesítek, amikor olyan feladatot találok, ami annyira felkelti az érdeklődésemet, hogy 100%-ban a feladatra tudok fókuszálni. Ilyenkor megfeledkezek az időről és sok egyéb dologról.",
     "paragraph3": "A legújabb projektjeimet megtalálod a {githubLink} profilomon. Valamint több infót a szakmai tapasztalatomról a {cvLink}-ben találsz.",

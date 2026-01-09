@@ -28,21 +28,11 @@ export default function HomePageContent({ posts }: HomePageContentProps) {
     </Link>
   );
 
-  const FullStackDeveloper = () => {
-    return lang === "hu" ? (
-      " "
-    ) : (
-      <HighlightP>full-stack software developer</HighlightP>
-    );
-  };
+  const FullStackDeveloper = () => (
+    <HighlightP>{t("home.fullStackDeveloper")}</HighlightP>
+  );
 
-  const Experience = () => {
-    return lang === "hu" ? (
-      <HighlightP> 8 éve dolgozom software fejlesztőként</HighlightP>
-    ) : (
-      <HighlightP>over 8 years of experience in the industry</HighlightP>
-    );
-  };
+  const Experience = () => <HighlightP>{t("home.experience")}</HighlightP>;
 
   return (
     <div>
