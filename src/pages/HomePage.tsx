@@ -15,7 +15,7 @@ interface HomePageContentProps {
 }
 
 export default function HomePageContent({ posts }: HomePageContentProps) {
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
 
   const CVLink = () => <Link href="https://cv.kulcsarrudolf.com">CV</Link>;
   const GitHubLink = () => (
@@ -28,23 +28,41 @@ export default function HomePageContent({ posts }: HomePageContentProps) {
     </Link>
   );
 
+  const FullStackDeveloper = () => {
+    return lang === "hu" ? (
+      " "
+    ) : (
+      <HighlightP>full-stack software developer</HighlightP>
+    );
+  };
+
+  const Experience = () => {
+    return lang === "hu" ? (
+      <HighlightP> 8 éve dolgozom software fejlesztőként</HighlightP>
+    ) : (
+      <HighlightP>over 8 years of experience in the industry</HighlightP>
+    );
+  };
+
   return (
     <div>
       <Title>{t("home.title")}</Title>
       <Paragraph>
-        {t("home.paragraph1_part1", { age: <Age /> })}{" "}
-        <HighlightP>{t("home.paragraph1_part2")}</HighlightP>{" "}
-        {t("home.paragraph1_part3", { clujLink: <ClujNapocaLink /> })}{" "}
-        <HighlightP>{t("home.paragraph1_part4")}</HighlightP>
-        {t("home.paragraph1_part5")}
+        {t("home.paragraph1", {
+          age: <Age />,
+          fullStackDeveloper: <FullStackDeveloper />,
+          clujLink: <ClujNapocaLink />,
+          experience: <Experience />,
+        })}
       </Paragraph>
 
       <Paragraph>{t("home.paragraph2")}</Paragraph>
 
       <Paragraph>
-        {t("home.paragraph3_part1", { githubLink: <GitHubLink /> })}{" "}
-        {t("home.paragraph3_part2", { cvLink: <CVLink /> })}{" "}
-        {t("home.paragraph3_part3")}
+        {t("home.paragraph3", {
+          githubLink: <GitHubLink />,
+          cvLink: <CVLink />,
+        })}
       </Paragraph>
 
       <Paragraph>{t("home.paragraph4")}</Paragraph>

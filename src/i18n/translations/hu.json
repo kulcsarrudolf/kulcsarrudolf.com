@@ -8,15 +8,9 @@
   },
   "home": {
     "title": "Rólam",
-    "paragraph1_part1": "A nevem Kulcsár Rudolf, {age} éves vagyok,",
-    "paragraph1_part2": " ",
-    "paragraph1_part3": "jelenleg {clujLink} élek. Több mint",
-    "paragraph1_part4": " 8 éve dolgozom software fejlesztőként",
-    "paragraph1_part5": ". Amióta az eszemet tudom, nagy rajongója vagyok a technológiának, és igyekszem lépést tartani minden újdonsággal. Az első találkozásom a programozással 12 éves koromban volt, amikor megírtam az első sor kódomat.",
+    "paragraph1": "A nevem Kulcsár Rudolf, {age} éves vagyok,{fullStackDeveloper} jelenleg {clujLink} élek. Több mint {experience}. Amióta az eszemet tudom, nagy rajongója vagyok a technológiának, és igyekszem lépést tartani minden újdonsággal. Az első találkozásom a programozással 12 éves koromban volt, amikor megírtam az első sor kódomat.",
     "paragraph2": "Folyamatosan igyekszem fejleszteni a képességeimet, és nem habozok, amikor rájövök, hogy még mindig sok mindent kell tanulnom, ezért mindig nyitott vagyok új kihívásokra. A legjobban akkor teljesítek, amikor olyan feladatot találok, ami annyira felkelti az érdeklődésemet, hogy 100%-ban a feladatra tudok fókuszálni. Ilyenkor megfeledkezek az időről és sok egyéb dologról.",
-    "paragraph3_part1": "A legújabb projektjeimet megtalálod a {githubLink} profilomon. Valamint több infót a szakmai tapasztalatomról a ",
-    "paragraph3_part2": "{cvLink}",
-    "paragraph3_part3": "-ben találsz.",
+    "paragraph3": "A legújabb projektjeimet megtalálod a {githubLink} profilomon. Valamint több infót a szakmai tapasztalatomról a {cvLink}-ben találsz.",
     "paragraph4": "Amikor nem programozok, akkor próbálok a barátaimmal és családommal lenni, ez nagyon feltölti az akkumulátoromat. Valamint minidg nyított vagyok egy jó társasozásra, bringázásra, futásra, legózásra és mindenre ami érdekes. A legjújabb hobbim a 3D puzzle.",
     "currentFocus": {
       "title": "Jelenleg ezekre fókuszálok",
