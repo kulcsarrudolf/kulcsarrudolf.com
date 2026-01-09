@@ -8,6 +8,7 @@ import Link from "@/components/general/typography/Link";
 import { useTranslation } from "@/i18n/useTranslation";
 import BlogPostListClient from "@/components/blog/BlogPostListClient";
 import BlogPost from "@/types/blog-post.type";
+import CurrentFocus from "@/components/general/CurrentFocus";
 
 interface HomePageContentProps {
   posts: BlogPost[];
@@ -48,6 +49,8 @@ export default function HomePageContent({ posts }: HomePageContentProps) {
 
       <Paragraph>{t("home.paragraph4")}</Paragraph>
 
+      <hr className="my-4" />
+      <CurrentFocus />
       <hr className="my-4" />
       <BlogPostListClient
         title={String(t("home.latestBlogs")) as string}

@@ -18,6 +18,25 @@
     "paragraph3_part2": "{cvLink}",
     "paragraph3_part3": "for a full breakdown of my professional journey.",
     "paragraph4": "Besides my profession I also love to relax and recharge my batteries with my friends and family and of course by doing my favourite hobbies.",
+    "currentFocus": {
+      "title": "Current Focus",
+      "fullStack": {
+        "title": "Full-Stack Development",
+        "description": "Working at {theBriefAI} with {react}, {nodejs}, and {typescript}. Always exploring and adopting new technologies and development practices."
+      },
+      "aiTooling": {
+        "title": "AI Tooling",
+        "description": "Staying current with the fast-changing AI tooling ecosystem to enhance workflow and productivity. Currently I use {cursor} and {claudeCode} (with {zod}) to speed up my coding work."
+      },
+      "aiIntegration": {
+        "title": "AI Integration",
+        "description": "Exploring AI agent implementation with {mastraAI} framework. Interested in practical patterns for integrating AI capabilities into production applications."
+      },
+      "openSource": {
+        "title": "Open Source",
+        "description": "Maintaining {zimmeZoom} and {samsungDeviceHelper}. Contributing shared tooling and solutions back to the developer community."
+      }
+    },
     "latestBlogs": "Latest Blogs",
     "clujNapoca": "Cluj-Napoca"
   },

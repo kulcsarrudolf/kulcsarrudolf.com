@@ -18,6 +18,25 @@
     "paragraph3_part2": "{cvLink}",
     "paragraph3_part3": "-ben találsz.",
     "paragraph4": "Amikor nem programozok, akkor próbálok a barátaimmal és családommal lenni, ez nagyon feltölti az akkumulátoromat. Valamint minidg nyított vagyok egy jó társasozásra, bringázásra, futásra, legózásra és mindenre ami érdekes. A legjújabb hobbim a 3D puzzle.",
+    "currentFocus": {
+      "title": "Jelenlegi Fókusz",
+      "fullStack": {
+        "title": "Full-Stack Fejlesztés",
+        "description": "A {theBriefAI}-nál dolgozom {react}, {nodejs} és {typescript} technológiákkal. Folyamatosan felfedezem és alkalmazom az új technológiákat és fejlesztési gyakorlatokat."
+      },
+      "aiTooling": {
+        "title": "AI Eszközök",
+        "description": "Naprakész maradok a gyorsan változó AI eszközök ökoszisztémájával, hogy javítsam a munkafolyamatomat és a produktivitásomat. Jelenleg a {cursor} és {claudeCode} ({zod}-dal) eszközöket használom a kódolási munkám felgyorsítására."
+      },
+      "aiIntegration": {
+        "title": "AI Integráció",
+        "description": "AI ügynök implementációk felfedezése a {mastraAI} keretrendszerrel. Érdekelnek a gyakorlati minták az AI képességek produkciós alkalmazásokba való integrálásához."
+      },
+      "openSource": {
+        "title": "Nyílt Forráskód",
+        "description": "A {zimmeZoom} és {samsungDeviceHelper} projektek karbantartása. Közös eszközök és megoldások hozzájárulása a fejlesztői közösséghez."
+      }
+    },
     "latestBlogs": "Legfrissebb Blogok",
     "clujNapoca": "Kolozsváron"
   },
