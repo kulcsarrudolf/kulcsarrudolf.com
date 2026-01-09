@@ -83,7 +83,7 @@ const Navbar = () => {
               {title}
             </span>
           </a>
-          <div className="flex md:order-2" style={{ alignItems: "center" }}>
+          <div className="flex items-center md:order-2">
             <div className="hidden min-[475px]:block">
               <SocialMediaLinks />
             </div>

@@ -35,18 +35,29 @@ const MenuItems = ({ onClick }: MenuItemsProps) => {
   };
 
   return (
-    <ul className="flex flex-col font-medium md:flex-row md:align-middle md:space-x-4">
-      {NAVBAR_ELEMENTS.map((element: NavbarElement) => (
-        <Link
-          key={element.title}
-          href={getHrefWithLang(element.href)}
-          target={element.openInNewTab ? "_blank" : "_self"}
-          onClick={onClick}
-          className="mb-4 md:mb-0"
-        >
-          <p className="text-white hover:font-bold">{getTranslatedTitle(element.title)}</p>
-        </Link>
-      ))}
+    <ul className="flex flex-col font-medium md:flex-row md:items-center md:space-x-4">
+      {NAVBAR_ELEMENTS.map((element: NavbarElement) => {
+        const isContact = element.title === "Contact";
+        return (
+          <Link
+            key={element.title}
+            href={getHrefWithLang(element.href)}
+            target={element.openInNewTab ? "_blank" : "_self"}
+            onClick={onClick}
+            className="mb-4 md:mb-0 flex items-center"
+          >
+            <p
+              className={
+                isContact
+                  ? "text-blue-600 bg-white px-3 py-1 rounded-md hover:font-bold"
+                  : "text-white hover:font-bold py-1"
+              }
+            >
+              {getTranslatedTitle(element.title)}
+            </p>
+          </Link>
+        );
+      })}
     </ul>
   );
 };
