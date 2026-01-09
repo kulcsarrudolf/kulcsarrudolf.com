@@ -47,6 +47,8 @@
   "contact": {
     "title": "Get In Touch",
     "description": "I'm always open to discussing new opportunities, interesting projects, or technical collaborations. Whether you're looking for a senior full-stack engineer or just want to connect, feel free to reach out.",
+    "linkedinText": "Connect with me on {linkedInLink}",
+    "dividerText": "or leave me a message here",
     "email": "kulcsarrudolf@gmail.com",
     "form": {
       "name": "Name",
