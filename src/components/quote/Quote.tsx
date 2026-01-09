@@ -21,7 +21,7 @@ const Quote = () => {
 
   return (
     <div
-      className="border border-gray-300 p-6 rounded-xl shadow-md mb-4 text-center cursor-pointer hover:shadow-lg transition-shadow"
+      className="border border-gray-300 p-6 rounded-xl shadow-md mt-4 text-center cursor-pointer hover:shadow-lg transition-shadow"
       onClick={() => {
         window.location.href = "/quotes";
       }}

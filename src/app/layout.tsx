@@ -79,10 +79,11 @@ export default function RootLayout({
           <Suspense fallback={<div style={{ height: "7rem" }} />}>
             <Navbar />
           </Suspense>
-          <Quote />
           <div className="border border-gray-300 p-4 rounded-xl shadow-md">
             {children}
           </div>
+
+          {/* <Quote /> disable for now */}
         </div>
         <Suspense fallback={null}>
           <Footer />
