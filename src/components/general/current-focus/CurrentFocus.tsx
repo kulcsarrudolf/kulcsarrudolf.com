@@ -1,9 +1,14 @@
 "use client";
 
 import { useTranslation } from "@/i18n/useTranslation";
-import Title from "./typography/Title";
-import Paragraph from "./typography/Paragraph";
-import Link from "./typography/Link";
+import Title from "../typography/Title";
+import Paragraph from "../typography/Paragraph";
+import Link from "../typography/Link";
+import Image from "next/image";
+import programmingSvg from "./programming.svg";
+import aiToolingSvg from "./ai-tooling.svg";
+import openSourceSvg from "./open-source.svg";
+import aiIntegrationSvg from "./ai-integration.svg";
 
 const CurrentFocus = () => {
   const { t } = useTranslation();
@@ -37,15 +42,19 @@ const CurrentFocus = () => {
   const focusAreas = [
     {
       key: "fullStack",
+      image: programmingSvg,
     },
     {
       key: "aiTooling",
+      image: aiToolingSvg,
     },
     {
       key: "aiIntegration",
+      image: aiIntegrationSvg,
     },
     {
       key: "openSource",
+      image: openSourceSvg,
     },
   ];
 
@@ -57,8 +66,16 @@ const CurrentFocus = () => {
         {focusAreas.map((area) => (
           <div
             key={area.key}
-            className="border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow flex flex-row items-center gap-4"
+            className="border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow flex flex-col"
           >
+            <div className="flex justify-center mb-4">
+              <Image
+                src={area.image}
+                alt={t(`home.currentFocus.${area.key}.title`) as string}
+                width={125}
+                height={125}
+              />
+            </div>
             <div className="flex-1">
               <h3
                 className="text-lg font-semibold mb-2"

@@ -8,7 +8,7 @@ import Link from "@/components/general/typography/Link";
 import { useTranslation } from "@/i18n/useTranslation";
 import BlogPostListClient from "@/components/blog/BlogPostListClient";
 import BlogPost from "@/types/blog-post.type";
-import CurrentFocus from "@/components/general/CurrentFocus";
+import CurrentFocus from "@/components/general/current-focus/CurrentFocus";
 
 interface HomePageContentProps {
   posts: BlogPost[];
