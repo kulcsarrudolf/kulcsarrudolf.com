@@ -79,6 +79,16 @@
   "welcomeModal": {
     "title": "Üdvözöllek!",
     "message": "Megtaláltad a titkot! A türelem erény... és neked megvan!",
-    "close": "Bezárás"
+    "close": "Bezárás",
+    "playSudoku": "Sudoku játék"
+  },
+  "sudoku": {
+    "title": "Sudoku",
+    "loading": "Betöltés...",
+    "mistakes": "Hibák",
+    "won": "Gratulálok! Nyertél!",
+    "lost": "Játék vége! Itt a megoldás.",
+    "clear": "Törlés",
+    "newGame": "Új játék"
   }
 }

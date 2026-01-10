@@ -79,6 +79,16 @@
   "welcomeModal": {
     "title": "Welcome!",
     "message": "You found the secret! Patience is a virtue... and you have it!",
-    "close": "Close"
+    "close": "Close",
+    "playSudoku": "Play Sudoku"
+  },
+  "sudoku": {
+    "title": "Sudoku",
+    "loading": "Loading...",
+    "mistakes": "Mistakes",
+    "won": "Congratulations! You won!",
+    "lost": "Game Over! Here's the solution.",
+    "clear": "Clear",
+    "newGame": "New Game"
   }
 }

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "@/i18n/useTranslation";
 import getRandomQuote from "@/components/quote/getRandomQuote";
 import Quote from "@/components/quote/Quote";
+import SudokuModal from "@/components/sudoku/SudokuModal";
 import type QuoteType from "@/types/quote.type";
 
 interface WelcomeModalProps {
@@ -12,6 +13,7 @@ const WelcomeModal = ({ onClose }: WelcomeModalProps) => {
   const { t } = useTranslation();
   const [quote] = useState<QuoteType>(() => getRandomQuote());
   const [isVisible, setIsVisible] = useState(false);
+  const [showSudoku, setShowSudoku] = useState(false);
 
   useEffect(() => {
     requestAnimationFrame(() => {
@@ -23,6 +25,18 @@ const WelcomeModal = ({ onClose }: WelcomeModalProps) => {
     setIsVisible(false);
     setTimeout(onClose, 200);
   };
+
+  const handlePlaySudoku = () => {
+    setShowSudoku(true);
+  };
+
+  const handleCloseSudoku = () => {
+    setShowSudoku(false);
+  };
+
+  if (showSudoku) {
+    return <SudokuModal onClose={handleCloseSudoku} />;
+  }
 
   return (
     <div
@@ -56,6 +70,13 @@ const WelcomeModal = ({ onClose }: WelcomeModalProps) => {
           <p className="text-gray-600 mb-6">{t("welcomeModal.message")}</p>
 
           <Quote quote={quote} clickable={false} className="mt-0 shadow-none" />
+
+          <button
+            onClick={handlePlaySudoku}
+            className="mt-6 px-6 py-3 bg-[#4267b2] text-white rounded-lg font-semibold hover:bg-[#365899] transition-colors"
+          >
+            {t("welcomeModal.playSudoku")}
+          </button>
         </div>
       </div>
     </div>
