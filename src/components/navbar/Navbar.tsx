@@ -1,11 +1,11 @@
 "use client";
-import Image from "next/image";
 
 import { useEffect, useRef, useState } from "react";
 
 import SocialMediaLinks from "./SocialMediaLinks";
 import HamburgerButton from "./HamburgerButton";
 import MenuItems from "./MenuItems";
+import NavbarAvatar from "./NavbarAvatar";
 import NavbarData from "./data";
 
 const Navbar = () => {
@@ -72,13 +72,7 @@ const Navbar = () => {
           } shadow-md bg-[#4267b2]`}
         >
           <a href={link} className="flex items-center">
-            <Image
-              width={40}
-              height={40}
-              src={logoSrc}
-              className="mr-3 rounded-full shadow-md"
-              alt="Rudolf"
-            />
+            <NavbarAvatar src={logoSrc} alt="Rudolf" />
             <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
               {title}
             </span>
