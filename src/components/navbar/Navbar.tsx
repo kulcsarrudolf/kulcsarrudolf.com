@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 
 import SocialMediaLinks from "./SocialMediaLinks";
 import HamburgerButton from "./HamburgerButton";
@@ -9,6 +10,7 @@ import NavbarAvatar from "./NavbarAvatar";
 import NavbarData from "./data";
 
 const Navbar = () => {
+  const router = useRouter();
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
   const [marginTop, setMarginTop] = useState(true);
 
@@ -56,7 +58,7 @@ const Navbar = () => {
 
   const mNavBarVisible = isNavbarOpen ? "" : "hidden";
 
-  const { title, logoSrc, link } = NavbarData;
+  const { title, logoSrc } = NavbarData;
 
   return (
     <>
@@ -71,12 +73,15 @@ const Navbar = () => {
             marginTop ? "" : "rounded-t-none"
           } shadow-md bg-[#4267b2]`}
         >
-          <a href={link} className="flex items-center">
+          <div
+            className="flex items-center cursor-pointer"
+            onClick={() => router.push("/")}
+          >
             <NavbarAvatar src={logoSrc} alt="Rudolf" />
             <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
               {title}
             </span>
-          </a>
+          </div>
           <div className="flex items-center md:order-2">
             <div className="hidden min-[475px]:block">
               <SocialMediaLinks />
