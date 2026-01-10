@@ -11,7 +11,7 @@ type SolveResult = { state: SolveState; answer: Board | null };
 function makepuzzle(board: Board): Board {
   const puzzle: Entry[] = [];
   const deduced: Board = Array(81).fill(null);
-  const order = [...Array(81).keys()];
+  const order = Array.from({ length: 81 }, (_, i) => i);
   shuffleArray(order);
 
   for (let i = 0; i < order.length; i++) {
