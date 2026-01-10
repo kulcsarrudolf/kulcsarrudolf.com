@@ -2,29 +2,43 @@
 
 import { useEffect, useState } from "react";
 import getRandomQuote from "./getRandomQuote";
-import type Quote from "@/types/quote.type";
+import type QuoteType from "@/types/quote.type";
 import { usePathname } from "next/navigation";
 
-const Quote = () => {
-  const [quote, setQuote] = useState<Quote | null>(null);
+interface QuoteProps {
+  quote?: QuoteType;
+  clickable?: boolean;
+  className?: string;
+}
 
+const Quote = ({ quote: propQuote, clickable = true, className = "" }: QuoteProps) => {
+  const [quote, setQuote] = useState<QuoteType | null>(propQuote || null);
   const pathname = usePathname();
 
   useEffect(() => {
-    const currentQuote = getRandomQuote();
-    setQuote(currentQuote);
-  }, []);
+    if (!propQuote) {
+      const currentQuote = getRandomQuote();
+      setQuote(currentQuote);
+    }
+  }, [propQuote]);
 
-  if (!quote || pathname !== "/") {
+  // Only apply homepage restriction when no quote prop is passed (original behavior)
+  if (!quote || (!propQuote && pathname !== "/")) {
     return null;
   }
 
+  const handleClick = () => {
+    if (clickable) {
+      window.location.href = "/quotes";
+    }
+  };
+
   return (
     <div
-      className="border border-gray-300 p-6 rounded-xl shadow-md mt-4 text-center cursor-pointer hover:shadow-lg transition-shadow"
-      onClick={() => {
-        window.location.href = "/quotes";
-      }}
+      className={`border border-gray-300 p-6 rounded-xl shadow-md text-center ${
+        clickable ? "cursor-pointer hover:shadow-lg transition-shadow" : ""
+      } ${className}`}
+      onClick={handleClick}
     >
       <p
         className="text-xl font-normal mb-5 leading-relaxed"

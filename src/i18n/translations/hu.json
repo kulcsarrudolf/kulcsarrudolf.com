@@ -75,5 +75,10 @@
   "footer": {
     "selectLanguage": "Nyelv kiválasztása",
     "copyright": "© {year} Kulcsár Rudolf. Minden jog fenntartva."
+  },
+  "welcomeModal": {
+    "title": "Üdvözöllek!",
+    "message": "Megtaláltad a titkot! A türelem erény... és neked megvan!",
+    "close": "Bezárás"
   }
 }

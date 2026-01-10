@@ -75,5 +75,10 @@
   "footer": {
     "selectLanguage": "Select Language",
     "copyright": "© {year} Kulcsár Rudolf. All rights reserved."
+  },
+  "welcomeModal": {
+    "title": "Welcome!",
+    "message": "You found the secret! Patience is a virtue... and you have it!",
+    "close": "Close"
   }
 }

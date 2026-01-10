@@ -1,25 +1,19 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "@/i18n/useTranslation";
+import getRandomQuote from "@/components/quote/getRandomQuote";
+import Quote from "@/components/quote/Quote";
+import type QuoteType from "@/types/quote.type";
 
 interface WelcomeModalProps {
   onClose: () => void;
 }
 
-const welcomeMessages = [
-  "You found the secret! Welcome, curious one!",
-  "Patience is a virtue... and you have it! Welcome!",
-  "7 seconds well spent! Welcome aboard!",
-  "You're persistent! I like that. Welcome!",
-  "Achievement unlocked: Master of Patience!",
-];
-
 const WelcomeModal = ({ onClose }: WelcomeModalProps) => {
-  const [message] = useState(
-    () => welcomeMessages[Math.floor(Math.random() * welcomeMessages.length)]
-  );
+  const { t } = useTranslation();
+  const [quote] = useState<QuoteType>(() => getRandomQuote());
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Trigger fade-in animation
     requestAnimationFrame(() => {
       setIsVisible(true);
     });
@@ -56,8 +50,12 @@ const WelcomeModal = ({ onClose }: WelcomeModalProps) => {
 
         <div className="text-center">
           <div className="text-4xl mb-4">🎉</div>
-          <h2 className="text-xl font-bold text-gray-800 mb-2">Welcome!</h2>
-          <p className="text-gray-600">{message}</p>
+          <h2 className="text-xl font-bold text-gray-800 mb-2">
+            {t("welcomeModal.title")}
+          </h2>
+          <p className="text-gray-600 mb-6">{t("welcomeModal.message")}</p>
+
+          <Quote quote={quote} clickable={false} className="mt-0 shadow-none" />
         </div>
       </div>
     </div>
