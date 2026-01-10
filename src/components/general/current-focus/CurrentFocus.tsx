@@ -66,6 +66,13 @@ const CurrentFocus = () => {
 
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!scrollContainerRef.current) return;
+
+    // Check if the click target is a link or within a link
+    const target = e.target as HTMLElement;
+    if (target.closest("a")) {
+      return; // Don't start dragging if clicking on a link
+    }
+
     setIsDragging(true);
     setStartX(e.pageX - scrollContainerRef.current.offsetLeft);
     setScrollLeft(scrollContainerRef.current.scrollLeft);
@@ -85,6 +92,13 @@ const CurrentFocus = () => {
 
   const handleTouchStart = (e: React.TouchEvent) => {
     if (!scrollContainerRef.current) return;
+
+    // Check if the touch target is a link or within a link
+    const target = e.target as HTMLElement;
+    if (target.closest("a")) {
+      return; // Don't start dragging if touching a link
+    }
+
     setIsDragging(true);
     setStartX(e.touches[0].pageX - scrollContainerRef.current.offsetLeft);
     setScrollLeft(scrollContainerRef.current.scrollLeft);
