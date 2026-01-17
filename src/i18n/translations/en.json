@@ -89,6 +89,7 @@
     "won": "Congratulations! You won!",
     "lost": "Game Over! Here's the solution.",
     "clear": "Clear",
-    "newGame": "New Game"
+    "newGame": "New Game",
+    "endGame": "End Game"
   }
 }

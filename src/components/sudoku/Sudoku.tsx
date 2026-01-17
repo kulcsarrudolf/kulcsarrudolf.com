@@ -22,6 +22,7 @@ const Sudoku = ({ onClose }: SudokuProps) => {
   const [gameOver, setGameOver] = useState(false);
   const [won, setWon] = useState(false);
   const [shakingCell, setShakingCell] = useState<number | null>(null);
+  const [elapsedSeconds, setElapsedSeconds] = useState(0);
 
   const initGame = useCallback(() => {
     const newPuzzle = makePuzzle();
@@ -43,11 +44,29 @@ const Sudoku = ({ onClose }: SudokuProps) => {
     setGameOver(false);
     setWon(false);
     setShakingCell(null);
+    setElapsedSeconds(0);
   }, []);
 
   useEffect(() => {
     initGame();
   }, [initGame]);
+
+  // Timer
+  useEffect(() => {
+    if (gameOver) return;
+
+    const interval = setInterval(() => {
+      setElapsedSeconds((prev) => prev + 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [gameOver]);
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, "0")}`;
+  };
 
   const handleCellClick = (index: number) => {
     if (gameOver) return;
@@ -232,12 +251,9 @@ const Sudoku = ({ onClose }: SudokuProps) => {
             {mistakes}/{MAX_MISTAKES}
           </span>
         </div>
-        <button
-          onClick={onClose}
-          className="text-gray-400 hover:text-gray-600 text-2xl leading-none"
-        >
-          &times;
-        </button>
+        <div className="text-sm text-gray-600 font-mono">
+          {formatTime(elapsedSeconds)}
+        </div>
       </div>
 
       {/* Game status */}
@@ -315,13 +331,21 @@ const Sudoku = ({ onClose }: SudokuProps) => {
         </div>
       )}
 
-      {/* New game button */}
-      <button
-        onClick={initGame}
-        className="px-4 py-2 bg-green-500 text-white rounded-lg font-semibold hover:bg-green-600"
-      >
-        {t("sudoku.newGame")}
-      </button>
+      {/* Game buttons */}
+      <div className="flex gap-2">
+        <button
+          onClick={initGame}
+          className="px-4 py-2 bg-green-500 text-white rounded-lg font-semibold hover:bg-green-600"
+        >
+          {t("sudoku.newGame")}
+        </button>
+        <button
+          onClick={onClose}
+          className="px-4 py-2 bg-gray-500 text-white rounded-lg font-semibold hover:bg-gray-600"
+        >
+          {t("sudoku.endGame")}
+        </button>
+      </div>
     </div>
   );
 };

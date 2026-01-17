@@ -89,6 +89,7 @@
     "won": "Gratulálok! Nyertél!",
     "lost": "Játék vége! Itt a megoldás.",
     "clear": "Törlés",
-    "newGame": "Új játék"
+    "newGame": "Új játék",
+    "endGame": "Játék vége"
   }
 }
