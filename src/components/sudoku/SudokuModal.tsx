@@ -35,7 +35,7 @@ const SudokuModal = ({ onClose }: SudokuModalProps) => {
 
       {/* Modal */}
       <div
-        className={`relative bg-white rounded-2xl p-6 mx-4 shadow-2xl transform transition-all duration-200 ${
+        className={`relative bg-white p-6 shadow-2xl transform transition-all duration-200 w-full h-full md:w-auto md:h-auto md:mx-4 md:rounded-2xl flex flex-col justify-center ${
           isVisible ? "scale-100" : "scale-95"
         }`}
         onClick={(e) => e.stopPropagation()}
