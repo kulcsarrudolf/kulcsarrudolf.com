@@ -160,6 +160,22 @@ const Sudoku = ({ onClose }: SudokuProps) => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [selectedCell, gameOver, handleClear, handleNumberInput]);
 
+  // Count occurrences of each number (1-9) on the board
+  const getNumberCounts = useCallback(() => {
+    const counts = new Map<number, number>();
+    for (let i = 0; i < 9; i++) {
+      counts.set(i, 0);
+    }
+    userBoard.forEach((val) => {
+      if (val !== null) {
+        counts.set(val, (counts.get(val) || 0) + 1);
+      }
+    });
+    return counts;
+  }, [userBoard]);
+
+  const numberCounts = getNumberCounts();
+
   // Get highlighting info for a cell
   const getCellHighlighting = (index: number) => {
     if (selectedCell === null) {
@@ -269,16 +285,26 @@ const Sudoku = ({ onClose }: SudokuProps) => {
       {/* Number pad */}
       {!gameOver && (
         <div className="grid grid-cols-5 gap-2">
-          {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
-            <button
-              key={num}
-              onClick={() => handleNumberInput(num)}
-              disabled={selectedCell === null}
-              className="w-10 h-10 bg-blue-500 text-white rounded-lg font-bold hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed"
-            >
-              {num + 1}
-            </button>
-          ))}
+          {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((num) => {
+            const count = numberCounts.get(num) || 0;
+            const isComplete = count >= 9;
+            return (
+              <button
+                key={num}
+                onClick={() => handleNumberInput(num)}
+                disabled={selectedCell === null || isComplete}
+                className={`w-10 h-10 rounded-lg font-bold disabled:cursor-not-allowed ${
+                  isComplete
+                    ? "bg-green-200 text-green-600 opacity-50"
+                    : selectedCell === null
+                      ? "bg-gray-300 text-gray-500"
+                      : "bg-blue-500 text-white hover:bg-blue-600"
+                }`}
+              >
+                {num + 1}
+              </button>
+            );
+          })}
           <button
             onClick={handleClear}
             disabled={selectedCell === null}
