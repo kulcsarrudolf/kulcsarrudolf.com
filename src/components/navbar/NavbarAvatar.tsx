@@ -71,6 +71,11 @@ const NavbarAvatar = ({ src, alt }: NavbarAvatarProps) => {
   const handleTouchStart = useCallback(() => startProgress(), [startProgress]);
   const handleTouchEnd = useCallback(() => stopProgress(), [stopProgress]);
 
+  // Prevent context menu on long press (mobile)
+  const handleContextMenu = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+  }, []);
+
   const handleCloseModal = useCallback(() => {
     setShowModal(false);
     resetState();
@@ -92,6 +97,7 @@ const NavbarAvatar = ({ src, alt }: NavbarAvatarProps) => {
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
         onTouchCancel={handleTouchEnd}
+        onContextMenu={handleContextMenu}
       >
         <Image
           width={40}
