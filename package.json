@@ -21,7 +21,7 @@
     "gray-matter": "^4.0.3",
     "markdown-to-jsx": "^7.2.1",
     "moment": "^2.29.4",
-    "next": "^15.4.8",
+    "next": "^16.1.5",
     "postcss": "^8.4.31",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
