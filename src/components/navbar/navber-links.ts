@@ -18,8 +18,7 @@ const NAVBAR_ELEMENTS: NavbarElement[] = [
   },
   {
     title: "Projects",
-    href: "https://www.github.com/kulcsarrudolf",
-    openInNewTab: true,
+    href: "/projects",
   },
   // {
   //   title: "Résumé",
