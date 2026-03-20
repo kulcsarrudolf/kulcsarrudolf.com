@@ -40,12 +40,6 @@ const personalProjects = [
       "Chrome Extension for measuring elapsed time between any two browser interactions, down to the millisecond. Works on any webpage.",
     repo: "https://puncto.live/extension/",
   },
-  {
-    name: "yt2media",
-    description:
-      "A unified tool that downloads YouTube content as either audio (MP3, M4A, Opus) or video (MP4, WebM, MKV). Perfect for downloading music, podcasts, tutorials, or any media you need. No registration, no payments, no ads, use it locally for free. Docker-based solution for easy deployment and usage. The project is fully vibe coded.",
-    repo: "https://kulcsarrudolf.github.io/yt2media/",
-  },
 ];
 
 type Project = (typeof personalProjects)[number];
