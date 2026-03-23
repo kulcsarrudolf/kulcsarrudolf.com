@@ -40,6 +40,12 @@ const personalProjects = [
       "Chrome Extension for measuring elapsed time between any two browser interactions, down to the millisecond. Works on any webpage.",
     repo: "https://puncto.live/extension/",
   },
+  {
+    name: "Mongoose Seed Kit",
+    description:
+      "A lightweight seeder toolkit for Mongoose that runs seed scripts on application startup and tracks their execution status. Supports one-time execution, automatic retries for failed seeds, a CLI for generating new seeders, and helper functions for building admin routes. Zero external dependencies.",
+    repo: "https://www.npmjs.com/package/mongoose-seed-kit",
+  },
 ];
 
 type Project = (typeof personalProjects)[number];
