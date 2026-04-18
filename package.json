@@ -21,7 +21,7 @@
     "gray-matter": "^4.0.3",
     "markdown-to-jsx": "^7.2.1",
     "moment": "^2.29.4",
-    "next": "^15.4.8",
+    "next": "^15.5.15",
     "postcss": "^8.4.31",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
@@ -32,5 +32,16 @@
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
     "@types/react": "19.1.9"
+  },
+  "resolutions": {
+    "ajv": "^6.14.0",
+    "brace-expansion": "^2.0.3",
+    "cross-spawn": "^7.0.6",
+    "flatted": "^3.4.2",
+    "gray-matter/js-yaml": "^3.14.2",
+    "js-yaml": "^4.1.1",
+    "minimatch": "^9.0.7",
+    "picomatch": "^2.3.2",
+    "yaml": "^2.8.3"
   }
 }
