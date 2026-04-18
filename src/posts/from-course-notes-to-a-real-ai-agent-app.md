@@ -19,17 +19,17 @@ keywords:
   ]
 ---
 
+## Introduction
+
+I recently finished [The Complete Agentic AI Engineering Course](https://www.udemy.com/course/the-complete-agentic-ai-engineering-course/learn/lecture/49770319?start=15#overview) on Udemy. The instructor kept pushing one simple idea: build agents, explore, and play with LLMs by doing real work.
+
+After more than 17 hours of lessons, plus plenty of additional self-study on the side, I wanted to stop consuming and start building. So I created this app as a small playground for agents, LLMs, and the kind of engineering patterns I wanted to understand better.
+
 <PostImage
 src="https://res.cloudinary.com/dialh0kqy/image/upload/q_auto/f_auto/v1776523645/udemy-ai-agents-rudolf_b4u2gm.jpg"
 alt="Udemy certificate for AI Engineer Agentic Track: The Complete Agent & MCP Course"
 
 />
-
-## Introduction
-
-I recently finished [The Complete Agentic AI Engineering Course](https://www.udemy.com/course/the-complete-agentic-ai-engineering-course/learn/lecture/49770319?start=15#overview) on Udemy. The instructor kept pushing one simple idea: build agents, explore, and play with LLMs by doing real work.
-
-After more than 17 hours of lessons, I wanted to stop consuming and start building. So I created this app as a small playground for agents, LLMs, and the kind of engineering patterns I wanted to understand better.
 
 I wanted to build it fast, without dragging a big frontend stack into the project. I also wanted clear code, fast feedback, and a setup that I could hold in my head as a solo developer.
 
