@@ -1,24 +1,26 @@
 ---
-title: "Multiple GitHub Accounts Without Losing Your Mind"
-subtitle: "SSH keys, signing keys, and the config file that makes it all click"
+title: "Multiple Git Accounts Without Losing Your Mind"
+subtitle: "Two GitHub accounts, a Bitbucket account, and the SSH config that makes it all click"
 author: "Kulcsar Rudolf"
 date: "2026-04-18"
-description: "A short, practical guide to juggling a personal and a work GitHub account on the same machine. Auth keys, signing keys, and a ready-to-use SSH config."
-keywords: ["github", "ssh", "ssh keys", "signing key", "authentication key", "git", "multiple accounts", "ssh config", "gpg signing"]
+description: "A short, practical guide to juggling multiple GitHub accounts and a Bitbucket account on the same machine. Auth keys, signing keys, and a ready-to-use SSH config."
+keywords: ["github", "bitbucket", "ssh", "ssh keys", "signing key", "authentication key", "git", "multiple accounts", "ssh config", "gpg signing"]
 ---
 
 ## Introduction
 
-I have fought with GitHub SSH keys for years. Every new laptop, same wall. My personal account works, my work account breaks, or my commits show up "Unverified". I always forget why.
+I have fought with SSH keys for years. Every new laptop, same wall. My personal account works, my work account breaks, or my commits show up "Unverified". I always forget why.
 
-This is the short guide I wish I had on day one. Two accounts on one machine. Clear steps. No magic.
+It got worse when I had projects on Bitbucket and two GitHub accounts at the same time. Three hosts, three keys, and one `git clone` that picked the wrong one every single time.
+
+This is the short guide I wish I had on day one. Clear steps. No magic.
 
 ### TL;DR
 
-1. Create two SSH keys, one per account.
-2. Add an **Authentication Key** and a **Signing Key** in GitHub settings.
-3. Point each account to its own key in `~/.ssh/config`.
-4. GitHub does not allow the same key on two accounts. Use two keys.
+1. Create one SSH key per account. One per GitHub account, one per Bitbucket account.
+2. Add an **Authentication Key** and a **Signing Key** on each account.
+3. Point each account to its own key in `~/.ssh/config` with a host alias.
+4. GitHub does not allow the same key on two accounts. Use separate keys.
 
 ## Auth Key vs Signing Key in one minute
 
@@ -33,14 +35,17 @@ Add the same public key in both slots if you want. They are separate entries. I 
 
 GitHub blocks the same SSH key on two accounts. Add your personal key on a work account and GitHub rejects it with "Key is already in use". This cost me a full afternoon before I read the actual error.
 
+Bitbucket does not block it, but I still use a separate key per host. It keeps things clean and makes revocation simple if one laptop goes missing.
+
 So the rule is simple. One key per account. Never reuse.
 
 ```bash
 ssh-keygen -t ed25519 -C "me@personal.com" -f ~/.ssh/id_ed25519_personal
 ssh-keygen -t ed25519 -C "me@work.com" -f ~/.ssh/id_ed25519_work
+ssh-keygen -t ed25519 -C "me@bitbucket.com" -f ~/.ssh/id_ed25519_bitbucket
 ```
 
-Then add each public key to its own GitHub account, in both the Authentication Keys and Signing Keys sections.
+Then add each public key to its own account, in both the Authentication Keys and Signing Keys sections on GitHub, or in SSH keys on Bitbucket.
 
 ## The SSH config that ties it together
 
@@ -60,15 +65,23 @@ Host github-work
   User git
   IdentityFile ~/.ssh/id_ed25519_work
   IdentitiesOnly yes
+
+# Bitbucket
+Host bitbucket-work
+  HostName bitbucket.org
+  User git
+  IdentityFile ~/.ssh/id_ed25519_bitbucket
+  IdentitiesOnly yes
 ```
 
-To clone a work repo, I use the work alias instead of `github.com`:
+To clone a work GitHub repo, I use the work alias instead of `github.com`:
 
 ```bash
 git clone git@github-work:my-company/project.git
+git clone git@bitbucket-work:my-company/other-project.git
 ```
 
-`IdentitiesOnly yes` is the small flag that saved me hours. Without it, SSH tries every key in the agent, fails after three wrong tries, and GitHub locks the connection.
+`IdentitiesOnly yes` is the small flag that saved me hours. Without it, SSH tries every key in the agent, fails after three wrong tries, and the host locks the connection.
 
 ## Generate the config programmatically
 
@@ -88,11 +101,17 @@ Host github-work
   User git
   IdentityFile ~/.ssh/id_ed25519_work
   IdentitiesOnly yes
+
+Host bitbucket-work
+  HostName bitbucket.org
+  User git
+  IdentityFile ~/.ssh/id_ed25519_bitbucket
+  IdentitiesOnly yes
 EOF
 chmod 600 "$HOME/.ssh/config"
 ```
 
-I keep the full version in [this gist](https://gist.github.com/kulcsarrudolf). Fork it and change the paths.
+I keep the full version in [this gist](https://gist.github.com/kulcsarrudolf). Fork it and add or remove hosts as you need.
 
 One warning. This overwrites `~/.ssh/config`. If you already have entries there, back it up or append instead.
 
