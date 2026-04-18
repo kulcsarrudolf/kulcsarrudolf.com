@@ -20,9 +20,9 @@ keywords:
 ---
 
 <PostImage
-  src="https://res.cloudinary.com/dialh0kqy/image/upload/q_auto/f_auto/v1776523645/udemy-ai-agents-rudolf_b4u2gm.jpg"
-  alt="Udemy certificate for AI Engineer Agentic Track: The Complete Agent & MCP Course"
-  maxWidth="333"
+src="https://res.cloudinary.com/dialh0kqy/image/upload/q_auto/f_auto/v1776523645/udemy-ai-agents-rudolf_b4u2gm.jpg"
+alt="Udemy certificate for AI Engineer Agentic Track: The Complete Agent & MCP Course"
+
 />
 
 ## Introduction
