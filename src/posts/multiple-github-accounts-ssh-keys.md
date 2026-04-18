@@ -9,11 +9,11 @@ keywords: ["github", "bitbucket", "ssh", "ssh keys", "signing key", "authenticat
 
 ## Introduction
 
-I have fought with SSH keys for years. Every new laptop, same wall. My personal account works, my work account breaks, or my commits show up "Unverified". I always forget why.
+You just finished your awesome new feature. You try to push and the terminal replies with **"Please make sure you have the correct access rights and the repository exists"**. You try to add an SSH key to GitHub and you see **"Key is already in use"**. The pull request is right there, one push away, and nothing works.
 
-It got worse when I had projects on Bitbucket and two GitHub accounts at the same time. Three hosts, three keys, and one `git clone` that picked the wrong one every single time.
+I know the feeling. I have been there many times. I had projects on Bitbucket and two GitHub accounts at the same time. Three hosts, three keys, and one `git clone` that always picked the wrong one.
 
-This is the short guide I wish I had on day one. Clear steps. No magic.
+This is the short guide I wish I had on day one. If you juggle multiple Git accounts and SSH keys drive you crazy, this post is for you. I share what finally worked for me.
 
 ### TL;DR
 
@@ -35,7 +35,7 @@ Add the same public key in both slots if you want. They are separate entries. I 
 
 GitHub blocks the same SSH key on two accounts. Add your personal key on a work account and GitHub rejects it with "Key is already in use". This cost me a full afternoon before I read the actual error.
 
-Bitbucket does not block it, but I still use a separate key per host. It keeps things clean and makes revocation simple if one laptop goes missing.
+Bitbucket applies the same rule. An SSH key belongs to a single Bitbucket account, and a second account cannot reuse it.
 
 So the rule is simple. One key per account. Never reuse.
 
@@ -131,4 +131,4 @@ Three lines inside each work repo. After that, every commit shows "Verified" on 
 
 This setup is boring in the best way. It just works. I stopped fighting SSH keys and went back to writing code.
 
-If you have a cleaner setup, I want to see it. Send it to me on [LinkedIn](https://www.linkedin.com/in/kulcsarrudolf/) or open an issue on the [repo of this site](https://github.com/kulcsarrudolf/kulcsarrudolf.com/issues).
+If you have questions or suggestions, feel free to [contact me](/contact).
