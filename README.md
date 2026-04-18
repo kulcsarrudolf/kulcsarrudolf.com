@@ -23,7 +23,6 @@ This is the source code for my personal website at [kulcsarrudolf.com](https://k
 - **[zimme-zoom](https://www.npmjs.com/package/zimme-zoom)** — my own small library for click-to-zoom images, used on blog post images.
 - **Font Awesome** (`@fortawesome/*`) — icons throughout the site.
 - **Vercel Analytics** — lightweight traffic analytics.
-- **moment** — date formatting for posts.
 - **react-responsive** — responsive layout helpers.
 
 ## Getting Started
