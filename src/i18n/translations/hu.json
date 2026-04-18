@@ -26,7 +26,7 @@
       },
       "aiIntegration": {
         "title": "AI Integráció",
-        "description": "AI ügynök implementációk felfedezése a {mastraAI} keretrendszerrel. Érdekelnek a gyakorlati minták az AI képességek produkciós alkalmazásokba való integrálásához."
+        "description": "AI ügynök implementációk felfedezése. Érdekelnek a gyakorlati minták az AI képességek produkciós alkalmazásokba való integrálásához."
       },
       "openSource": {
         "title": "Nyílt Forráskód",

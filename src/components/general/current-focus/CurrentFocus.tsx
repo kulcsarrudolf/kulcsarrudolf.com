@@ -29,8 +29,6 @@ const CurrentFocus = () => {
   );
   const ZedLink = () => <Link href="https://zed.dev">Zed</Link>;
 
-  const MastraAILink = () => <Link href="https://mastra.ai">Mastra AI</Link>;
-
   const ZimmeZoomLink = () => (
     <Link href="https://github.com/kulcsarrudolf/zimme-zoom">zimme-zoom</Link>
   );
@@ -195,9 +193,7 @@ const CurrentFocus = () => {
                     zed: <ZedLink />,
                   })}
                 {area.key === "aiIntegration" &&
-                  t(`home.currentFocus.${area.key}.description`, {
-                    mastraAI: <MastraAILink />,
-                  })}
+                  t(`home.currentFocus.${area.key}.description`)}
                 {area.key === "openSource" &&
                   t(`home.currentFocus.${area.key}.description`, {
                     zimmeZoom: <ZimmeZoomLink />,
