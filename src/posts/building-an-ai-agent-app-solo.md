@@ -35,6 +35,8 @@ I used two small agents instead of one big prompt. I used HTMX instead of React.
 
 In short, the app takes a YouTube video and turns it into structured information. I handle the YouTube download, the transcript, and the agent flow that produces a summary, topics, quotes, and discussion questions from the video.
 
+The app also persists everything. The audio, the transcript, the video metadata, and every summary the app generates all sit in storage. The saved summaries are filterable by many fields, so I can search and slice the archive instead of running the pipeline again.
+
 ## Two small agents worked better than one big prompt
 
 The core idea is simple. One agent handles the main analysis. Another agent handles quote extraction. Each agent has a small job, a smaller prompt, and a clearer output shape.
@@ -102,12 +104,6 @@ AI helped me scaffold FastAPI routes, shape Pydantic models, draft prompt files,
 AI did not solve the hard parts for me. I still had to decide the product shape, tune prompts, debug async edges, and judge output quality. That part still needs taste and context.
 
 The best trick I found is simple. Keep files small. Give things clear names. Split responsibilities early. AI works much better when the context stays clean.
-
-## What I would do again
-
-I would still pick a small stack. I would still split agents by responsibility. I would still avoid a heavy frontend unless the product truly needs it.
-
-Most of all, I would still treat AI like a fast pair programmer, not like an autopilot. It writes a lot of code quickly. I still choose the direction.
 
 ## What's next
 
