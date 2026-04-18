@@ -1,10 +1,10 @@
 import fs from "fs";
 
-import Markdown from "markdown-to-jsx";
 import matter from "gray-matter";
 import { Metadata } from "next";
 import { Suspense } from "react";
 
+import PostBody from "@/components/blog/PostBody";
 import { Title, Subtitle } from "@/components/general/typography";
 
 import { getPostMetadata } from "@/utils/getPostMetadata";
@@ -145,20 +145,7 @@ const PostPage = async ({ params }: { params: Params }) => {
           className="prose prose-sans container mx-auto max-w-none"
           itemProp="articleBody"
         >
-          <Markdown
-            options={{
-              overrides: {
-                a: {
-                  props: {
-                    target: "_blank",
-                    rel: "noopener noreferrer",
-                  },
-                },
-              },
-            }}
-          >
-            {post.content}
-          </Markdown>
+          <PostBody content={post.content} />
         </div>
       </article>
     </>

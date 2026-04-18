@@ -19,6 +19,12 @@ keywords:
   ]
 ---
 
+<PostImage
+  src="https://res.cloudinary.com/dialh0kqy/image/upload/q_auto/f_auto/v1776523645/udemy-ai-agents-rudolf_b4u2gm.jpg"
+  alt="Udemy certificate for AI Engineer Agentic Track: The Complete Agent & MCP Course"
+  maxWidth="333"
+/>
+
 ## Introduction
 
 I recently finished [The Complete Agentic AI Engineering Course](https://www.udemy.com/course/the-complete-agentic-ai-engineering-course/learn/lecture/49770319?start=15#overview) on Udemy. The instructor kept pushing one simple idea: build agents, explore, and play with LLMs by doing real work.
@@ -87,9 +93,11 @@ I like React, but this project did not need React. I did not need a client-side 
 HTMX handled that with very little code. FastAPI returns HTML. Jinja renders the templates. HTMX swaps the right fragment into the page.
 
 ```html
-<form hx-post="/quotes/{{ q._id }}/text"
-      hx-target="#quote-{{ q._id }}"
-      hx-swap="outerHTML">
+<form
+  hx-post="/quotes/{{ q._id }}/text"
+  hx-target="#quote-{{ q._id }}"
+  hx-swap="outerHTML"
+>
   <textarea name="text" required>{{ q.text }}</textarea>
   <button type="submit">Save</button>
 </form>
