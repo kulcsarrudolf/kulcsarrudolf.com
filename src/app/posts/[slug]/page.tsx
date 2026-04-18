@@ -49,7 +49,8 @@ export async function generateMetadata({
   const baseUrl = getBaseUrl();
   const url = `${baseUrl}/posts/${slug}`;
 
-  const title = `${post.data.title} | Kulcsar Rudolf`;
+  const title = post.data.title;
+  const fullTitle = `${title} | Kulcsar Rudolf`;
   const description =
     post.data.description ||
     post.data.subtitle ||
@@ -66,11 +67,11 @@ export async function generateMetadata({
     keywords: keywords.length > 0 ? keywords : undefined,
     authors: [{ name: post.data.author }],
     openGraph: {
-      title,
+      title: fullTitle,
       description,
       url,
       siteName: "Kulcsar Rudolf - Software Developer",
-      locale: post.data.lang || "en",
+      locale: post.data.lang || "en_US",
       type: "article",
       publishedTime: post.data.date,
       authors: [post.data.author],
@@ -78,23 +79,12 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: fullTitle,
       description,
-      creator: "@kulcsarrudolf", // Update with your actual Twitter handle if you have one
+      creator: "@kulcsarrudolf",
     },
     alternates: {
       canonical: url,
-    },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        "max-video-preview": -1,
-        "max-image-preview": "large",
-        "max-snippet": -1,
-      },
     },
   };
 }

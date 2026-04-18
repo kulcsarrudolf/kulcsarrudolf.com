@@ -7,6 +7,7 @@ import { Inter } from "next/font/google";
 import Footer from "@/components/footer/Footer";
 import { Suspense } from "react";
 import ConditionalSpeedInsights from "@/components/general/SpeedInsights";
+import type { Metadata } from "next";
 
 config.autoAddCss = false;
 
@@ -15,12 +16,26 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-export const metadata = {
-  title: "Kulcsar Rudolf - Software Developer",
-  description:
-    "Welcome to my personal website! I'm Kulcsar Rudolf, a passionate software developer, and this is where I showcase my work, share my thoughts, and document my journey in the world of technology. Explore my portfolio, read my blog posts, and discover the projects I've been working on. Join me as I delve into the exciting realm of software development and share my insights, experiences, and learnings. Let's connect and explore the endless possibilities of coding together!",
+const SITE_NAME = "Kulcsar Rudolf - Software Developer";
+const SITE_URL = "https://kulcsarrudolf.com";
+const DEFAULT_DESCRIPTION =
+  "Personal website of Kulcsar Rudolf, a full-stack software developer. Read articles about software development, explore side projects, and see the tools and ideas I work with every day.";
+
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: SITE_NAME,
+    template: "%s | Kulcsar Rudolf",
+  },
+  description: DEFAULT_DESCRIPTION,
+  applicationName: SITE_NAME,
+  authors: [{ name: "Kulcsar Rudolf", url: SITE_URL }],
+  creator: "Kulcsar Rudolf",
+  publisher: "Kulcsar Rudolf",
   keywords: [
+    "Kulcsar Rudolf",
     "software developer",
+    "full-stack developer",
     "portfolio",
     "blog",
     "technology",
@@ -29,7 +44,45 @@ export const metadata = {
     "typescript",
     "nextjs",
     "nodejs",
+    "ai agents",
   ],
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    title: SITE_NAME,
+    description: DEFAULT_DESCRIPTION,
+    locale: "en_US",
+    images: [
+      {
+        url: "/images/me-logo.png",
+        width: 512,
+        height: 512,
+        alt: "Kulcsar Rudolf",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_NAME,
+    description: DEFAULT_DESCRIPTION,
+    creator: "@kulcsarrudolf",
+    images: ["/images/me-logo.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   icons: {
     icon: [
       { url: "/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
