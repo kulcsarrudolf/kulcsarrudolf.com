@@ -155,7 +155,20 @@ const PostPage = async ({ params }: { params: Params }) => {
           className="prose prose-sans container mx-auto max-w-none"
           itemProp="articleBody"
         >
-          <Markdown>{post.content}</Markdown>
+          <Markdown
+            options={{
+              overrides: {
+                a: {
+                  props: {
+                    target: "_blank",
+                    rel: "noopener noreferrer",
+                  },
+                },
+              },
+            }}
+          >
+            {post.content}
+          </Markdown>
         </div>
       </article>
     </>
