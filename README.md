@@ -1,29 +1,44 @@
 # My Personal Blog and Portfolio
 
-Welcome to my personal blog and portfolio project! This project showcases my journey of learning and experimenting with new frontend technologies, particularly Next.js and Tailwind CSS. Through this project, I aim to create a dynamic and visually appealing website that reflects my skills, experiences, and projects.
+This is the source code for my personal website at [kulcsarrudolf.com](https://kulcsarrudolf.com). It serves as both a portfolio — showcasing my projects, focus areas, and experience — and a blog where I write about the things I'm learning and building.
 
 ## Links
 
 - PROD: [https://kulcsarrudolf.com](https://kulcsarrudolf.com)
 - DEV: [https://kulcsarrudolf.vercel.app](https://kulcsarrudolf.vercel.app)
 
+## Project Scope
+
+- **Portfolio**: projects page, current focus, and a short bio rendered from typed content under `src/`.
+- **Blog**: Markdown-based posts stored in `src/posts/`, dynamically rendered with per-post metadata (title, date, cover image, etc.).
+- **Internationalization**: UI is available in English and Hungarian. Translations live in `src/i18n/translations/` (`en.json`, `hu.json`).
+- **Deployment**: hosted on Vercel — `master` deploys to production, `develop` deploys to the preview URL.
+
 ## Technologies Used
 
-- Next.js: Next.js is a powerful React framework that enables server-side rendering (SSR) and static site generation (SSG). It provides optimized performance and improved developer experience.
-- Tailwind CSS: Tailwind CSS is a utility-first CSS framework that allows rapid prototyping and efficient styling. It enables me to create responsive and visually appealing designs with ease.
-- GitHub Copilot: GitHub Copilot, an AI-powered coding assistant, has been an invaluable tool throughout the development process. It assists in automating repetitive tasks and provides helpful suggestions.
+- **Next.js** — React framework used for routing, SSR, and static generation.
+- **Tailwind CSS** — utility-first styling, paired with `@tailwindcss/typography` for prose formatting in posts.
+- **TypeScript** — used across the codebase for type safety.
+- **gray-matter** + **markdown-to-jsx** — parse Markdown frontmatter and render post content.
+- **[zimme-zoom](https://www.npmjs.com/package/zimme-zoom)** — my own small library for click-to-zoom images, used on blog post images.
+- **Font Awesome** (`@fortawesome/*`) — icons throughout the site.
+- **Vercel Analytics** — lightweight traffic analytics.
+- **moment** — date formatting for posts.
+- **react-responsive** — responsive layout helpers.
 
 ## Getting Started
 
-To get started with the project, follow these steps:
+This project uses Yarn (enforced via a `preinstall` check — npm/pnpm will fail).
 
-1. Clone the repository: `git clone https://github.com/kulcsarrudolf/kulcsarrudolf.com.git
+1. Clone the repository: `git clone https://github.com/kulcsarrudolf/kulcsarrudolf.com.git`
 2. Install dependencies: `yarn install`
 3. Start the development server: `yarn dev`
 
+Other scripts: `yarn build`, `yarn start`, `yarn lint`.
+
 ## Writing Blog Posts
 
-Blog posts in this project are written in Markdown format and stored in the `src/posts/` directory. To add a new blog post, create a new Markdown file following the naming convention `post-title.md` and include the necessary content. The posts will be dynamically rendered on the website. To maintain consistency in writing blog posts for this project, we have a template available. You can find the template [here](./src/posts/tempate/template-post.md). It provides a structured format for creating informative and engaging blog posts.
+Blog posts are written in Markdown and stored in `src/posts/`. To add a new post, create a Markdown file named `post-title.md` and fill in the frontmatter and content. Posts are rendered dynamically on the site. A template is available [here](./src/posts/tempate/template-post.md) to keep formatting consistent.
 
 ## Contributing
 
