@@ -1,6 +1,6 @@
 ---
-title: "Building an AI Agent App Solo"
-subtitle: "Why two small agents, HTMX, and AI pair programming beat a big SPA"
+title: "From Course Notes to a Real AI Agent App"
+subtitle: "A practical stack for moving fast with small agents, server-rendered UI, and AI pairing"
 author: "Kulcsar Rudolf"
 date: "2026-04-18"
 description: "How I built a Python AI agent app as a solo developer using FastAPI, HTMX, Gemini, Groq, and AI pair programming. Notes on the stack and the trade-offs."
@@ -36,6 +36,8 @@ I used two small agents instead of one big prompt. I used HTMX instead of React.
 In short, the app takes a YouTube video and turns it into structured information. I handle the YouTube download, the transcript, and the agent flow that produces a summary, topics, quotes, and discussion questions from the video.
 
 The app also persists everything. The audio, the transcript, the video metadata, and every summary the app generates all sit in storage. The saved summaries are filterable by many fields, so I can search and slice the archive instead of running the pipeline again.
+
+**This is more than a playground for me. I plan to use it every day, and I think a few friends will use it soon too. That matters a lot to me. I do not want to build things only for the sake of building them. I want to build things that are useful in real life.**
 
 ## Two small agents worked better than one big prompt
 
