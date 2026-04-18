@@ -37,3 +37,6 @@ next-env.d.ts
 /src/posts/temp
 
 /public/images/temp
+
+# cursor skills
+/.cursor/skills/write-blog-post/
