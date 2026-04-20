@@ -33,7 +33,7 @@ This project uses Yarn (enforced via a `preinstall` check — npm/pnpm will fail
 2. Install dependencies: `yarn install`
 3. Start the development server: `yarn dev`
 
-Other scripts: `yarn build` (production build), `yarn start` (serve built app), `yarn lint` (run ESLint).
+Other scripts: `yarn build` (production build), `yarn start` (serve built app), `yarn lint` (run ESLint), `yarn deploy` (fast-forward `master` to `develop` and push).
 
 ## Writing Blog Posts
 
