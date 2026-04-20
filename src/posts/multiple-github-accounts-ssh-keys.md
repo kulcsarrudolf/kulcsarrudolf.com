@@ -5,6 +5,7 @@ author: "Kulcsar Rudolf"
 date: "2026-04-18"
 description: "A short, practical guide to juggling multiple GitHub accounts and a Bitbucket account on the same machine. Auth keys, signing keys, and a ready-to-use SSH config."
 keywords: ["github", "bitbucket", "ssh", "ssh keys", "signing key", "authentication key", "git", "multiple accounts", "ssh config", "gpg signing"]
+private: false
 ---
 
 ## Introduction

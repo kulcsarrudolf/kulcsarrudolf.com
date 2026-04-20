@@ -27,8 +27,9 @@ export const getPostMetadata = (): BlogPost[] => {
           ? matterResult.data.keywords
           : matterResult.data.keywords.split(",").map((k: string) => k.trim())
         : undefined,
+      private: matterResult.data.private === true,
     };
   });
 
-  return posts;
+  return posts.filter((post) => !post.private);
 };

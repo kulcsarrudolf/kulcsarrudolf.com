@@ -7,6 +7,7 @@ export interface BlogPost {
   lang: "hu" | "en";
   description?: string;
   keywords?: string[];
+  private?: boolean;
 }
 
 export default BlogPost;

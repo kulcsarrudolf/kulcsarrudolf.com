@@ -2,6 +2,7 @@ import fs from "fs";
 
 import matter from "gray-matter";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
 import PostBody from "@/components/blog/PostBody";
@@ -92,6 +93,11 @@ export async function generateMetadata({
 const PostPage = async ({ params }: { params: Params }) => {
   const { slug } = await params;
   const post = getPostContent(slug);
+
+  if (post.data.private === true) {
+    notFound();
+  }
+
   const baseUrl = getBaseUrl();
   const url = `${baseUrl}/posts/${slug}`;
   const description =

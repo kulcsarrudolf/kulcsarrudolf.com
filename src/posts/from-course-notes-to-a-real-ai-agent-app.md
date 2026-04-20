@@ -17,6 +17,7 @@ keywords:
     "ai pair programming",
     "cursor",
   ]
+private: true
 ---
 
 ## Introduction
