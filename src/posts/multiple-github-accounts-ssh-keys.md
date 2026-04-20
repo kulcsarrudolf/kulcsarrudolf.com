@@ -21,6 +21,8 @@ This is the short guide I wish I had on day one. If you juggle multiple Git acco
 2. Add an **Authentication Key** and a **Signing Key** on each account.
 3. Point each account to its own key in `~/.ssh/config` with a host alias.
 4. GitHub does not allow the same key on two accounts. Use separate keys.
+5. Prefer a script? Use my [bash script](https://gist.github.com/kulcsarrudolf/99376c3fc94217d1e2cf3d30fcf8e325) to generate `~/.ssh/config` in one command.
+6. Prefer an AI agent? Drop my [skill file](https://gist.github.com/kulcsarrudolf/e98b3dcd9a6265787a3863e70f9dfeb5) into `~/.claude/skills/` and let Claude Code handle the setup.
 
 ## Auth Key vs Signing Key in one minute
 
@@ -111,9 +113,22 @@ EOF
 chmod 600 "$HOME/.ssh/config"
 ```
 
-I keep the full version in [this gist](https://gist.github.com/kulcsarrudolf). Fork it and add or remove hosts as you need.
+I keep the full version in [this gist](https://gist.github.com/kulcsarrudolf/99376c3fc94217d1e2cf3d30fcf8e325). Fork it and add or remove hosts as you need.
 
 One warning. This overwrites `~/.ssh/config`. If you already have entries there, back it up or append instead.
+
+## Let an AI agent do it for you
+
+If you use [Claude Code](https://www.anthropic.com/claude-code) or a similar coding agent, you can skip the manual steps. I wrote a skill file for this. Save it as `~/.claude/skills/setup-multi-git-ssh/SKILL.md`, then tell the agent:
+
+> Set up my Git SSH keys. My accounts:
+> `personal github me@personal.com`
+> `work github me@company.com`
+> `work-bb bitbucket me.work@company.com`
+
+The agent generates the keys, writes `~/.ssh/config`, copies each public key to your clipboard, walks you through where to paste it, verifies with `ssh -T`, and turns on commit signing.
+
+You can grab the skill from [this gist](https://gist.github.com/kulcsarrudolf/e98b3dcd9a6265787a3863e70f9dfeb5).
 
 ## Turn on commit signing per repo
 
