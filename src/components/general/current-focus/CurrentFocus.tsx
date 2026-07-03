@@ -14,8 +14,8 @@ import aiIntegrationSvg from "./ai-integration.svg";
 const CurrentFocus = () => {
   const { t } = useTranslation();
 
-  const TheBriefAILink = () => (
-    <Link href="https://thebrief.ai">The Brief AI</Link>
+  const InnovatorSparkLink = () => (
+    <Link href="https://innovatorspark.com/">InnovatorSpark</Link>
   );
   const ReactLink = () => <Link href="https://react.dev">React</Link>;
   const NodeJSLink = () => <Link href="https://nodejs.org">Node.js</Link>;
@@ -23,11 +23,9 @@ const CurrentFocus = () => {
     <Link href="https://github.com/kulcsarrudolf">personal projects</Link>
   );
 
-  const CursorLink = () => <Link href="https://cursor.sh">Cursor</Link>;
   const ClaudeCodeLink = () => (
     <Link href="https://www.anthropic.com/claude">Claude Code</Link>
   );
-  const ZedLink = () => <Link href="https://zed.dev">Zed</Link>;
 
   const ZimmeZoomLink = () => (
     <Link href="https://github.com/kulcsarrudolf/zimme-zoom">zimme-zoom</Link>
@@ -159,16 +157,14 @@ const CurrentFocus = () => {
               <Paragraph>
                 {area.key === "fullStack" &&
                   t(`home.currentFocus.${area.key}.description`, {
-                    theBriefAI: <TheBriefAILink />,
+                    innovatorSpark: <InnovatorSparkLink />,
                     react: <ReactLink />,
                     nodejs: <NodeJSLink />,
                     personalProjects: <PersonalProjectsLink />,
                   })}
                 {area.key === "aiTooling" &&
                   t(`home.currentFocus.${area.key}.description`, {
-                    cursor: <CursorLink />,
                     claudeCode: <ClaudeCodeLink />,
-                    zed: <ZedLink />,
                   })}
                 {area.key === "aiIntegration" &&
                   t(`home.currentFocus.${area.key}.description`)}
