@@ -5,7 +5,7 @@ import Title from "../typography/Title";
 import Paragraph from "../typography/Paragraph";
 import Link from "../typography/Link";
 import Image from "next/image";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import programmingSvg from "./programming.svg";
 import aiToolingSvg from "./ai-tooling.svg";
 import openSourceSvg from "./open-source.svg";
@@ -112,28 +112,6 @@ const CurrentFocus = () => {
   const handleTouchEnd = () => {
     setIsDragging(false);
   };
-
-  useEffect(() => {
-    const handleMouseLeave = () => {
-      setIsDragging(false);
-    };
-
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.addEventListener(
-        "mouseleave",
-        handleMouseLeave
-      );
-    }
-
-    return () => {
-      if (scrollContainerRef.current) {
-        scrollContainerRef.current.removeEventListener(
-          "mouseleave",
-          handleMouseLeave
-        );
-      }
-    };
-  }, []);
 
   return (
     <div style={{ fontSize: "0.85em", lineHeight: "1.0" }}>
