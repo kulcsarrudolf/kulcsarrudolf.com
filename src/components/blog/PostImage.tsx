@@ -25,6 +25,7 @@ const PostImage = ({ src, alt, title }: PostImageProps) => {
 
   return (
     <div className="my-6 flex justify-center">
+      {/* eslint-disable-next-line jsx-a11y/alt-text -- zimme-zoom's Image takes alt via the image object, not an alt prop */}
       <Image
         image={image}
         size={{
