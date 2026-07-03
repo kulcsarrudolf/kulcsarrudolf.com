@@ -18,11 +18,11 @@
       "title": "Currently Focused On",
       "fullStack": {
         "title": "Full-Stack Development",
-        "description": "Working at {theBriefAI} with {react} and {nodejs}. Always exploring and adopting new technologies and development practices by working on {personalProjects}."
+        "description": "Working at {innovatorSpark} with {react} and {nodejs}. Always exploring and adopting new technologies and development practices by working on {personalProjects}."
       },
       "aiTooling": {
         "title": "AI Tooling",
-        "description": "Staying current with the fast-changing AI tooling ecosystem to enhance workflow and productivity. Currently I use {cursor} and {claudeCode} (with {zed}) to speed up my coding work."
+        "description": "Staying current with the fast-changing AI tooling ecosystem to enhance workflow and productivity. Currently I use {claudeCode} to speed up my coding work."
       },
       "aiIntegration": {
         "title": "AI Integration",
