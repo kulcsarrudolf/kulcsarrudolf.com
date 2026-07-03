@@ -3,6 +3,11 @@ import matter from "gray-matter";
 
 import BlogPost from "@/types/blog-post.type";
 
+// Draft posts (private: true) are visible on the local dev server so they
+// can be previewed, but stay hidden in the production build.
+export const shouldShowPrivatePosts = (): boolean =>
+  process.env.NODE_ENV === "development";
+
 export const getPostMetadata = (): BlogPost[] => {
   const folder = "./src/posts";
 
@@ -30,6 +35,10 @@ export const getPostMetadata = (): BlogPost[] => {
       private: matterResult.data.private === true,
     };
   });
+
+  if (shouldShowPrivatePosts()) {
+    return posts;
+  }
 
   return posts.filter((post) => !post.private);
 };
