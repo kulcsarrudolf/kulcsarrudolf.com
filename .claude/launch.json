@@ -6,7 +6,10 @@
       "runtimeExecutable": "yarn",
       "runtimeArgs": ["dev"],
       "port": 3000,
-      "autoPort": true
+      "autoPort": true,
+      "env": {
+        "NEXT_DIST_DIR": ".next-preview"
+      }
     }
   ]
 }
