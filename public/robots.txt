@@ -1,0 +1,12 @@
+# robots.txt for https://kulcsarrudolf.com
+#
+# AI usage preferences are declared with Content-Signal directives.
+# See https://contentsignals.org for the specification.
+# A machine-readable overview of this site is available at
+# https://kulcsarrudolf.com/llms.txt
+
+User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
+Allow: /
+
+Sitemap: https://kulcsarrudolf.com/sitemap.xml

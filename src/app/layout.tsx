@@ -8,6 +8,13 @@ import Footer from "@/components/footer/Footer";
 import { Suspense } from "react";
 import ConditionalSpeedInsights from "@/components/general/SpeedInsights";
 import type { Metadata } from "next";
+import {
+  AUTHOR_NAME,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_URL,
+  SOCIAL_PROFILES,
+} from "@/config/site";
 
 config.autoAddCss = false;
 
@@ -16,10 +23,29 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const SITE_NAME = "Kulcsar Rudolf - Software Developer";
-const SITE_URL = "https://kulcsarrudolf.com";
-const DEFAULT_DESCRIPTION =
-  "Personal website of Kulcsar Rudolf, a full-stack software developer. Read articles about software development, explore side projects, and see the tools and ideas I work with every day.";
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${SITE_URL}/#person`,
+      name: AUTHOR_NAME,
+      url: SITE_URL,
+      jobTitle: "Software Developer",
+      image: `${SITE_URL}/images/me-logo.png`,
+      sameAs: SOCIAL_PROFILES,
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      name: SITE_NAME,
+      url: SITE_URL,
+      description: SITE_DESCRIPTION,
+      inLanguage: "en",
+      publisher: { "@id": `${SITE_URL}/#person` },
+    },
+  ],
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -27,7 +53,7 @@ export const metadata: Metadata = {
     default: SITE_NAME,
     template: "%s | Kulcsar Rudolf",
   },
-  description: DEFAULT_DESCRIPTION,
+  description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
   authors: [{ name: "Kulcsar Rudolf", url: SITE_URL }],
   creator: "Kulcsar Rudolf",
@@ -54,7 +80,7 @@ export const metadata: Metadata = {
     url: SITE_URL,
     siteName: SITE_NAME,
     title: SITE_NAME,
-    description: DEFAULT_DESCRIPTION,
+    description: SITE_DESCRIPTION,
     locale: "en_US",
     images: [
       {
@@ -68,7 +94,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: SITE_NAME,
-    description: DEFAULT_DESCRIPTION,
+    description: SITE_DESCRIPTION,
     creator: "@kulcsarrudolf",
     images: ["/images/me-logo.png"],
   },
@@ -128,6 +154,10 @@ export default function RootLayout({
       }}
     >
       <body suppressHydrationWarning style={{ marginTop: "7rem" }}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
         <div className="mx-auto max-w-5xl">
           <Suspense fallback={<div style={{ height: "7rem" }} />}>
             <Navbar />
