@@ -8,7 +8,7 @@ import { Suspense } from "react";
 import PostBody from "@/components/blog/PostBody";
 import { Title, Subtitle } from "@/components/general/typography";
 
-import { getPostMetadata } from "@/utils/getPostMetadata";
+import { getPostMetadata, shouldShowPrivatePosts } from "@/utils/getPostMetadata";
 import PostedOn from "@/components/general/PostedOn";
 
 const getPostContent = (slug: string) => {
@@ -94,7 +94,7 @@ const PostPage = async ({ params }: { params: Params }) => {
   const { slug } = await params;
   const post = getPostContent(slug);
 
-  if (post.data.private === true) {
+  if (post.data.private === true && !shouldShowPrivatePosts()) {
     notFound();
   }
 
