@@ -179,6 +179,20 @@ const WeddingCountdown = () => {
             <CountdownTile value={timeLeft?.seconds ?? 0} label="mp" />
           </div>
         )}
+
+        <figure className="mt-14 max-w-xl">
+          <span className="mx-auto mb-4 block h-10 w-px bg-[#c09a5e]/50" />
+          <blockquote
+            className="text-2xl italic leading-relaxed text-[#6d2237] sm:text-3xl"
+            style={{ fontFamily: "var(--font-cormorant), serif" }}
+          >
+            „Megtaláltam azt, akit szeret a lelkem.”
+          </blockquote>
+          <figcaption className="mt-4 text-xs uppercase tracking-[0.3em] text-[#8a5a63] sm:text-sm">
+            Énekek éneke 3:4
+          </figcaption>
+          <span className="mx-auto mt-4 block h-10 w-px bg-[#c09a5e]/50" />
+        </figure>
       </div>
     </div>
   );
