@@ -125,8 +125,8 @@ const WeddingCountdown = () => {
             // eslint-disable-next-line @next/next/no-img-element
             <img
               ref={photoRef}
-              src="/images/nr.jpg"
-              alt="Nóra és Rudolf"
+              src="/images/nr.jpeg"
+              alt="Rudolf és Nóra"
               className="h-44 w-44 rounded-full border-4 border-white object-cover object-top sm:h-60 sm:w-60"
               onError={() => setPhotoOk(false)}
             />
@@ -135,7 +135,7 @@ const WeddingCountdown = () => {
               className="flex h-44 w-44 items-center justify-center rounded-full border-4 border-white bg-[#fdf9f4] text-4xl text-[#6d2237] sm:h-60 sm:w-60 sm:text-5xl"
               style={{ fontFamily: "var(--font-great-vibes), cursive" }}
             >
-              N ♥ R
+              R ♥ N
             </div>
           )}
         </div>
@@ -144,7 +144,7 @@ const WeddingCountdown = () => {
           className="mt-8 text-5xl leading-tight text-[#6d2237] sm:text-7xl"
           style={{ fontFamily: "var(--font-great-vibes), cursive" }}
         >
-          Nóra és Rudolf
+          Rudolf és Nóra
         </h1>
 
         <p className="mt-3 text-sm uppercase tracking-[0.45em] text-[#8a5a63] sm:text-base">
