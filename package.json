@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "packageManager": "yarn@1.22.22",
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "preinstall": "node -e \"if (!process.env.npm_config_user_agent || !process.env.npm_config_user_agent.startsWith('yarn/')) { console.error('This project uses Yarn. Please run: yarn install'); process.exit(1); }\"",
     "dev": "next dev",
