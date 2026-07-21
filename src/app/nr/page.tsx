@@ -1,20 +1,34 @@
 import type { Metadata } from "next";
 import WeddingCountdown from "@/components/nr/WeddingCountdown";
+import { getNrContent, getNrLanguage } from "@/components/nr/translations";
 
-export const metadata: Metadata = {
-  title: "Rudolf és Nóra",
-  robots: {
-    index: false,
-    follow: false,
-    googleBot: {
-      index: false,
-      follow: false,
+type SearchParams = Promise<{ lang?: string | string[] }>;
+
+const NOINDEX = {
+  index: false,
+  follow: false,
+} as const;
+
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: SearchParams;
+}): Promise<Metadata> {
+  const { lang } = await searchParams;
+  const content = getNrContent(getNrLanguage(lang));
+
+  return {
+    title: content.names,
+    robots: {
+      ...NOINDEX,
+      googleBot: NOINDEX,
     },
-  },
-};
+  };
+}
 
-const NrPage = () => {
-  return <WeddingCountdown />;
+const NrPage = async ({ searchParams }: { searchParams: SearchParams }) => {
+  const { lang } = await searchParams;
+  return <WeddingCountdown lang={getNrLanguage(lang)} />;
 };
 
 export default NrPage;
