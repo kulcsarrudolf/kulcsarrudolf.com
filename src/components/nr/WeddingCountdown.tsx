@@ -2,6 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Cormorant_Garamond, Great_Vibes } from "next/font/google";
+import {
+  NR_DEFAULT_LANGUAGE,
+  getNrContent,
+  type NrLanguage,
+} from "./translations";
 
 const greatVibes = Great_Vibes({
   subsets: ["latin", "latin-ext"],
@@ -62,7 +67,12 @@ const CountdownTile = ({ value, label }: { value: number; label: string }) => (
   </div>
 );
 
-const WeddingCountdown = () => {
+const WeddingCountdown = ({
+  lang = NR_DEFAULT_LANGUAGE,
+}: {
+  lang?: NrLanguage;
+}) => {
+  const content = getNrContent(lang);
   const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null);
   const [mounted, setMounted] = useState(false);
   const [photoOk, setPhotoOk] = useState(true);
@@ -126,7 +136,7 @@ const WeddingCountdown = () => {
             <img
               ref={photoRef}
               src="/images/nr.jpeg"
-              alt="Rudolf és Nóra"
+              alt={content.names}
               className="h-44 w-44 rounded-full border-4 border-white object-cover object-top sm:h-60 sm:w-60"
               onError={() => setPhotoOk(false)}
             />
@@ -144,11 +154,11 @@ const WeddingCountdown = () => {
           className="mt-8 text-5xl leading-tight text-[#6d2237] sm:text-7xl"
           style={{ fontFamily: "var(--font-great-vibes), cursive" }}
         >
-          Rudolf és Nóra
+          {content.names}
         </h1>
 
         <p className="mt-3 text-sm uppercase tracking-[0.45em] text-[#8a5a63] sm:text-base">
-          menyegző
+          {content.subtitle}
         </p>
 
         <div className="mt-6 flex items-center gap-3 text-[#c09a5e]">
@@ -161,7 +171,7 @@ const WeddingCountdown = () => {
           className="mt-6 text-2xl text-[#4f2a33] sm:text-3xl"
           style={{ fontFamily: "var(--font-cormorant), serif" }}
         >
-          2026. november 28. · 10:00
+          {content.date}
         </p>
 
         {isWeddingDay ? (
@@ -169,14 +179,14 @@ const WeddingCountdown = () => {
             className="mt-10 text-3xl text-[#6d2237] sm:text-5xl"
             style={{ fontFamily: "var(--font-great-vibes), cursive" }}
           >
-            Eljött a nagy nap! ♥
+            {content.weddingDay}
           </p>
         ) : (
           <div className="mt-10 grid w-full max-w-2xl grid-cols-4 gap-2 sm:gap-4">
-            <CountdownTile value={timeLeft?.days ?? 0} label="nap" />
-            <CountdownTile value={timeLeft?.hours ?? 0} label="óra" />
-            <CountdownTile value={timeLeft?.minutes ?? 0} label="perc" />
-            <CountdownTile value={timeLeft?.seconds ?? 0} label="mp" />
+            <CountdownTile value={timeLeft?.days ?? 0} label={content.labels.days} />
+            <CountdownTile value={timeLeft?.hours ?? 0} label={content.labels.hours} />
+            <CountdownTile value={timeLeft?.minutes ?? 0} label={content.labels.minutes} />
+            <CountdownTile value={timeLeft?.seconds ?? 0} label={content.labels.seconds} />
           </div>
         )}
 
@@ -186,10 +196,10 @@ const WeddingCountdown = () => {
             className="text-2xl italic leading-relaxed text-[#6d2237] sm:text-3xl"
             style={{ fontFamily: "var(--font-cormorant), serif" }}
           >
-            „Megtaláltam azt, akit szeret a lelkem.”
+            {content.quote}
           </blockquote>
           <figcaption className="mt-4 text-xs uppercase tracking-[0.3em] text-[#8a5a63] sm:text-sm">
-            Énekek éneke 3:4
+            {content.quoteReference}
           </figcaption>
           <span className="mx-auto mt-4 block h-10 w-px bg-[#c09a5e]/50" />
         </figure>
