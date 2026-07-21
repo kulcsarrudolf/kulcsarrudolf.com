@@ -45,7 +45,7 @@ export const nrTranslations: Record<NrLanguage, NrContent> = {
   },
   ro: {
     names: "Rudolf și Nóra",
-    subtitle: "cununie",
+    subtitle: "nuntă",
     date: "28 noiembrie 2026 · 10:00",
     weddingDay: "A sosit ziua cea mare! ♥",
     labels: {
