@@ -20,6 +20,8 @@ const PROJECTS_KEYWORDS = [
   "samsung-device-helper",
   "zimme-zoom",
   "mongoose-seed-kit",
+  "pg-seed-kit",
+  "stl-metrics",
 ];
 
 export const metadata: Metadata = {
