@@ -40,6 +40,13 @@
     "title": "My Blog",
     "articles": "Articles"
   },
+  "projects": {
+    "title": "Projects",
+    "description": "A selection of things I've built: side projects, open-source packages, and tools I use myself.",
+    "viewProject": "View project →",
+    "moreOnGitHub": "Want to see more? {githubLink}",
+    "findOnGitHub": "Find more on my GitHub"
+  },
   "contact": {
     "title": "Get In Touch",
     "description": "I'm always open to discussing new opportunities, interesting projects, or technical collaborations. Whether you're looking for a senior full-stack engineer or just want to connect, feel free to reach out.",
