@@ -17,7 +17,7 @@ export default function ProjectsPage({ projects }: ProjectsPageProps) {
     <>
       <Title>{t("projects.title")}</Title>
       <p className="text-gray-600 mb-6">{t("projects.description")}</p>
-      <div className="flex flex-col gap-4">
+      <div className="grid gap-4 sm:grid-cols-2">
         {(projects || []).map((project) => (
           <ProjectCard key={project.slug} project={project} />
         ))}

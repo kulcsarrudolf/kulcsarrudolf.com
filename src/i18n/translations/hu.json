@@ -43,7 +43,7 @@
   "projects": {
     "title": "Projektek",
     "description": "Néhány dolog, amit építettem: mellékprojektek, nyílt forráskódú csomagok és eszközök, amelyeket magam is használok.",
-    "viewProject": "Projekt megtekintése →",
+    "viewProject": "Projekt megtekintése",
     "moreOnGitHub": "Kíváncsi vagy többre? {githubLink}",
     "findOnGitHub": "Nézd meg a GitHub oldalamat"
   },

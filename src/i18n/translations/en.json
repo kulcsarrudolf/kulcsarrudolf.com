@@ -43,7 +43,7 @@
   "projects": {
     "title": "Projects",
     "description": "A selection of things I've built: side projects, open-source packages, and tools I use myself.",
-    "viewProject": "View project →",
+    "viewProject": "View project",
     "moreOnGitHub": "Want to see more? {githubLink}",
     "findOnGitHub": "Find more on my GitHub"
   },
