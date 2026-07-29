@@ -10,6 +10,7 @@ import { Title, Subtitle } from "@/components/general/typography";
 
 import { getPostMetadata, shouldShowPrivatePosts } from "@/utils/getPostMetadata";
 import PostedOn from "@/components/general/PostedOn";
+import { SITE_URL } from "@/config/site";
 
 const getPostContent = (slug: string) => {
   const folder = "./src/posts";
@@ -30,16 +31,6 @@ export const generateStaticParams = () => {
 
 type Params = Promise<{ slug: string }>;
 
-const getBaseUrl = () => {
-  if (process.env.NEXT_PUBLIC_BASE_URL) {
-    return process.env.NEXT_PUBLIC_BASE_URL;
-  }
-  if (process.env.VERCEL_URL) {
-    return `https://${process.env.VERCEL_URL}`;
-  }
-  return "https://kulcsarrudolf.com";
-};
-
 export async function generateMetadata({
   params,
 }: {
@@ -47,8 +38,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const post = getPostContent(slug);
-  const baseUrl = getBaseUrl();
-  const url = `${baseUrl}/posts/${slug}`;
+  const url = `${SITE_URL}/posts/${slug}`;
 
   const title = post.data.title;
   const fullTitle = `${title} | Kulcsar Rudolf`;
@@ -85,7 +75,7 @@ export async function generateMetadata({
       creator: "@kulcsarrudolf",
     },
     alternates: {
-      canonical: url,
+      canonical: `/posts/${slug}`,
     },
   };
 }
@@ -98,8 +88,7 @@ const PostPage = async ({ params }: { params: Params }) => {
     notFound();
   }
 
-  const baseUrl = getBaseUrl();
-  const url = `${baseUrl}/posts/${slug}`;
+  const url = `${SITE_URL}/posts/${slug}`;
   const description =
     post.data.description ||
     post.data.subtitle ||
@@ -111,18 +100,18 @@ const PostPage = async ({ params }: { params: Params }) => {
     "@type": "BlogPosting",
     headline: post.data.title,
     description: description,
-    image: `${baseUrl}/images/me-logo.png`,
+    image: `${SITE_URL}/images/me-logo.png`,
     datePublished: post.data.date,
     dateModified: post.data.date,
     author: {
       "@type": "Person",
       name: post.data.author,
-      url: baseUrl,
+      url: SITE_URL,
     },
     publisher: {
       "@type": "Person",
       name: post.data.author,
-      url: baseUrl,
+      url: SITE_URL,
     },
     mainEntityOfPage: {
       "@type": "WebPage",
