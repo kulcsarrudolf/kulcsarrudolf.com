@@ -39,6 +39,21 @@ Other scripts: `yarn build` (production build), `yarn start` (serve built app), 
 
 Blog posts are written in Markdown and stored in `src/posts/`. To add a new post, create a Markdown file named `post-title.md` and fill in the frontmatter and content. Posts are rendered dynamically on the site. A template is available [here](./src/posts/tempate/template-post.md) to keep formatting consistent.
 
+## Adding a Project
+
+Projects work the same way as blog posts: each one is a Markdown file in `src/projects/`, and the
+file name becomes the URL (`src/projects/pg-seed-kit.md` renders at `/projects/pg-seed-kit`). Copy
+[the template](./src/projects/template/template-project.md), fill in the frontmatter, and keep the
+body short: an intro, a few feature bullets, an install snippet, and links.
+
+Frontmatter worth knowing about:
+
+- `order` controls the position on `/projects`, ascending, defaulting to `100`.
+- `github`, `npm` and `website` are optional and render as links on the project page.
+- `relatedPosts` takes blog post slugs. Private posts are filtered out automatically, so it is
+  safe to reference a draft.
+- `private: true` keeps a project on the local dev server only, exactly like blog posts.
+
 ## Contributing
 
 I welcome contributions and feedback from the community. If you find any issues or have suggestions for improvements, please feel free to submit a pull request or open an issue.
