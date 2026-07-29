@@ -1,6 +1,9 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
+
 import ProjectsPage from "@/pages/ProjectsPage";
+import { SITE_URL } from "@/config/site";
+import { getProjectMetadata } from "@/utils/getProjectMetadata";
 
 const PROJECTS_TITLE = "Projects";
 const PROJECTS_DESCRIPTION =
@@ -16,6 +19,7 @@ const PROJECTS_KEYWORDS = [
   "puncto",
   "samsung-device-helper",
   "zimme-zoom",
+  "mongoose-seed-kit",
 ];
 
 export const metadata: Metadata = {
@@ -27,7 +31,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    url: "https://kulcsarrudolf.com/projects",
+    url: `${SITE_URL}/projects`,
     title: `${PROJECTS_TITLE} | Kulcsar Rudolf`,
     description: PROJECTS_DESCRIPTION,
   },
@@ -39,10 +43,32 @@ export const metadata: Metadata = {
 };
 
 const Projects = () => {
+  const projects = getProjectMetadata();
+
+  // Built on the server, so the list costs nothing on the client.
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: PROJECTS_TITLE,
+    description: PROJECTS_DESCRIPTION,
+    itemListElement: projects.map((project, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: project.title,
+      url: `${SITE_URL}/projects/${project.slug}`,
+    })),
+  };
+
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <ProjectsPage />
-    </Suspense>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <Suspense fallback={<div>Loading...</div>}>
+        <ProjectsPage projects={projects} />
+      </Suspense>
+    </>
   );
 };
 
