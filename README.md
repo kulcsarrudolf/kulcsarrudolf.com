@@ -54,6 +54,16 @@ Frontmatter worth knowing about:
   safe to reference a draft.
 - `private: true` keeps a project on the local dev server only, exactly like blog posts.
 
+## Markdown for AI Agents
+
+Every blog post and project page is also served as clean markdown, so agents and LLM tooling can
+read the content without parsing HTML. Two ways to get it:
+
+- Append `.md` to the URL: `https://kulcsarrudolf.com/projects/pg-seed-kit.md`
+- Request the normal URL with an `Accept: text/markdown` header
+
+`/llms.txt` lists every post and project with a summary and a link to its markdown version.
+
 ## Contributing
 
 I welcome contributions and feedback from the community. If you find any issues or have suggestions for improvements, please feel free to submit a pull request or open an issue.

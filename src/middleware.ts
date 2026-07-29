@@ -1,25 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
 
-// Serves blog posts as clean markdown for AI agents:
-// - /posts/<slug>.md always returns markdown
-// - /posts/<slug> returns markdown when the client asks for it
-//   via an Accept: text/markdown header
+// Serves blog posts and project pages as clean markdown for AI agents:
+// - /posts/<slug>.md and /projects/<slug>.md always return markdown
+// - /posts/<slug> and /projects/<slug> return markdown when the client
+//   asks for it via an Accept: text/markdown header
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  const mdExtensionMatch = pathname.match(/^\/posts\/([^/]+)\.md$/);
+  const mdExtensionMatch = pathname.match(/^\/(posts|projects)\/([^/]+)\.md$/);
   if (mdExtensionMatch) {
     const url = request.nextUrl.clone();
-    url.pathname = `/markdown/posts/${mdExtensionMatch[1]}`;
+    url.pathname = `/markdown/${mdExtensionMatch[1]}/${mdExtensionMatch[2]}`;
     return NextResponse.rewrite(url);
   }
 
-  const postMatch = pathname.match(/^\/posts\/([^/]+)$/);
+  const pageMatch = pathname.match(/^\/(posts|projects)\/([^/]+)$/);
   const accept = request.headers.get("accept") ?? "";
-  if (postMatch && accept.includes("text/markdown")) {
+  if (pageMatch && accept.includes("text/markdown")) {
     const url = request.nextUrl.clone();
-    url.pathname = `/markdown/posts/${postMatch[1]}`;
+    url.pathname = `/markdown/${pageMatch[1]}/${pageMatch[2]}`;
     const response = NextResponse.rewrite(url);
+    // Without this a CDN can serve the markdown response to HTML clients.
     response.headers.set("Vary", "Accept");
     return response;
   }
@@ -27,6 +28,7 @@ export function middleware(request: NextRequest) {
   return NextResponse.next();
 }
 
+// `:slug+` rather than `:slug*` so /projects itself does not invoke this.
 export const config = {
-  matcher: ["/posts/:slug*"],
+  matcher: ["/posts/:slug*", "/projects/:slug+"],
 };
