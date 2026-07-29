@@ -27,7 +27,7 @@
     "gray-matter": "^4.0.3",
     "markdown-to-jsx": "^7.2.1",
     "next": "^15.5.21",
-    "postcss": "^8.5.10",
+    "postcss": "^8.5.18",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-responsive": "^9.0.2",
@@ -48,7 +48,7 @@
     "js-yaml": "^4.2.0",
     "minimatch": "^9.0.7",
     "picomatch": "^2.3.2",
-    "postcss": "^8.5.10",
+    "postcss": "^8.5.18",
     "yaml": "^2.8.3"
   }
 }
