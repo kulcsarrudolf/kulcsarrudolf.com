@@ -8,7 +8,7 @@ const PostImage = dynamic(() => import("@/components/blog/PostImage"), {
   ssr: false,
 });
 
-const PostLink = ({
+const MarkdownLink = ({
   href,
   children,
   ...rest
@@ -24,17 +24,17 @@ const PostLink = ({
   );
 };
 
-type PostBodyProps = {
+type MarkdownBodyProps = {
   content: string;
 };
 
-const PostBody = ({ content }: PostBodyProps) => {
+const MarkdownBody = ({ content }: MarkdownBodyProps) => {
   return (
     <Markdown
       options={{
         overrides: {
           a: {
-            component: PostLink,
+            component: MarkdownLink,
           },
           PostImage: {
             component: PostImage,
@@ -47,4 +47,4 @@ const PostBody = ({ content }: PostBodyProps) => {
   );
 };
 
-export default PostBody;
+export default MarkdownBody;

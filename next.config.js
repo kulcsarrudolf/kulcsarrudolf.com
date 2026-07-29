@@ -15,6 +15,14 @@ const nextConfig = {
       { source: "/rudolf-and-nora", destination: "/nr" },
     ];
   },
+
+  // /projects/diamond was a placeholder page that has been removed. Send
+  // anything that already crawled it to the projects list instead of a 404.
+  async redirects() {
+    return [
+      { source: "/projects/diamond", destination: "/projects", permanent: true },
+    ];
+  },
 };
 
 module.exports = nextConfig;

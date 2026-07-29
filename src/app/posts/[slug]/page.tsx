@@ -5,7 +5,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
-import PostBody from "@/components/blog/PostBody";
+import MarkdownBody from "@/components/markdown/MarkdownBody";
 import { Title, Subtitle } from "@/components/general/typography";
 
 import { getPostMetadata, shouldShowPrivatePosts } from "@/utils/getPostMetadata";
@@ -151,7 +151,7 @@ const PostPage = async ({ params }: { params: Params }) => {
           className="prose prose-sans container mx-auto max-w-none"
           itemProp="articleBody"
         >
-          <PostBody content={post.content} />
+          <MarkdownBody content={post.content} />
         </div>
       </article>
     </>
