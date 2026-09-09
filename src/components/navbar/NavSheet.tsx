@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 
 import LangSelector from "@/components/footer/LangSelector";
+import CloseButton from "@/components/general/CloseButton";
 import { useTranslation } from "@/i18n/useTranslation";
 
 import Brand from "./Brand";
@@ -78,15 +79,11 @@ const NavSheet = ({ id, onClose }: NavSheetProps) => {
         aria-label={t("nav.menu") as string}
         className="absolute inset-0 flex flex-col bg-white px-5 py-8"
       >
-        <button
+        <CloseButton
           ref={closeRef}
-          type="button"
           onClick={onClose}
-          aria-label={t("nav.close") as string}
-          className="absolute right-3 top-3 flex h-11 w-11 items-center justify-center rounded-lg text-2xl leading-none text-gray-400 transition-colors hover:text-gray-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
-        >
-          &times;
-        </button>
+          label={t("nav.close") as string}
+        />
 
         <div className="mb-5 px-4">
           <Brand tone="onSurface" onNavigate={onClose} />

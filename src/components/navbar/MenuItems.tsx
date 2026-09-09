@@ -1,6 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 
+import useLangSearch from "@/i18n/useLangSearch";
 import { useTranslation } from "@/i18n/useTranslation";
 import type NavbarElement from "@/types/navbar-element.type";
 
@@ -55,7 +56,8 @@ const SHEET_CTA =
   "flex min-h-12 w-full items-center justify-center rounded-lg bg-brand px-3 text-base font-semibold text-white transition-colors hover:bg-brand-hover";
 
 const MenuItems = ({ variant = "bar", onNavigate }: MenuItemsProps) => {
-  const { t, lang } = useTranslation();
+  const { t } = useTranslation();
+  const langSearch = useLangSearch();
   const pathname = useRouterState({
     select: (state) => state.location.pathname,
   });
@@ -116,8 +118,7 @@ const MenuItems = ({ variant = "bar", onNavigate }: MenuItemsProps) => {
     return (
       <Link
         to={element.href}
-        // Keep the chosen language across internal navigation.
-        search={{ lang: lang !== "en" ? lang : undefined }}
+        search={langSearch}
         target={target}
         onClick={onNavigate}
         className={className}

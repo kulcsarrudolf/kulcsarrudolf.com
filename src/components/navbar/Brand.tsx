@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useCallback, useState } from "react";
 
-import { useTranslation } from "@/i18n/useTranslation";
+import useLangSearch from "@/i18n/useLangSearch";
 
 import NavbarData from "./data";
 import NavbarAvatar from "./NavbarAvatar";
@@ -24,7 +24,7 @@ interface BrandProps {
  * the browser follows the href, which reloads the page out from under the game.
  */
 const Brand = ({ tone = "onBrand", onNavigate }: BrandProps) => {
-  const { lang } = useTranslation();
+  const langSearch = useLangSearch();
   const { title, logoSrc } = NavbarData;
   const [isEggOpen, setIsEggOpen] = useState(false);
 
@@ -35,7 +35,7 @@ const Brand = ({ tone = "onBrand", onNavigate }: BrandProps) => {
     <>
       <Link
         to="/"
-        search={{ lang: lang !== "en" ? lang : undefined }}
+        search={langSearch}
         onClick={onNavigate}
         className="flex shrink-0 items-center rounded-lg"
         aria-label={title}

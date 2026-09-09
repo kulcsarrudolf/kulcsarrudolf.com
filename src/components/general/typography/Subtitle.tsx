@@ -3,13 +3,7 @@ interface SubtitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
 }
 const Subtitle = ({ children, ...props }: SubtitleProps) => {
   return (
-    <h1
-      className="text-xl mb-2"
-      style={{
-        color: "#4267b2",
-      }}
-      {...props}
-    >
+    <h1 className="text-xl mb-2 text-brand" {...props}>
       {children}
     </h1>
   );
