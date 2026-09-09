@@ -1,0 +1,35 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["eslint", "typescript", "unicorn", "oxc", "react"],
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2024": true
+  },
+  "categories": {
+    "correctness": "error"
+  },
+  "rules": {
+    "react/rules-of-hooks": "error",
+    "react/exhaustive-deps": "warn",
+    "typescript/no-explicit-any": "off",
+    // Several components initialise browser-only state (age, countdown,
+    // stored language) inside an effect on purpose, so the server render
+    // and the first client render agree. The rule flags exactly that.
+    "react/set-state-in-effect": "off",
+    "no-unused-vars": [
+      "error",
+      { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }
+    ]
+  },
+  "ignorePatterns": [
+    "node_modules",
+    ".output",
+    ".nitro",
+    ".tanstack",
+    ".vercel",
+    "dist",
+    "storybook-static",
+    "src/routeTree.gen.ts"
+  ]
+}
