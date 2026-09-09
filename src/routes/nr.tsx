@@ -1,8 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { NrPage, nrHead } from "@/components/nr/nrRoute";
+import WeddingPage from "@/pages/WeddingPage";
+
+import { weddingHead } from "./-wedding";
 
 export const Route = createFileRoute("/nr")({
-  head: nrHead,
-  component: NrPage,
+  head: weddingHead,
+  component: WeddingPage,
 });

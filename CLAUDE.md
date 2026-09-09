@@ -14,28 +14,49 @@ When a file approaches the limit, split it along the seams it already has rather
 - Pull each visually distinct block (a card, a toolbar, a row) into its own component file.
 - Pull inline SVG icons into an `icons.tsx` beside the component that uses them.
 
+## Layers
+
+`src/` is arranged so that a file's folder says what may import it:
+
+| Folder                               | Holds                                                                                                                            | May import from                                           |
+| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| `routes/`                            | One file per URL: loader, `head`, and the page it renders. Convention-bound, stays thin                                          | anything                                                  |
+| `pages/`                             | What a route renders, composed from features and components. No Tailwind                                                         | `features`, `components`, `i18n`, `types`, `config`       |
+| `features/`                          | One folder per domain (blog, projects, contact, quotes, home, sudoku, easter-egg, wedding): its components, hooks, data, stories | `components`, `i18n`, `lib`, `types`, `config`, `content` |
+| `components/`                        | Shared code only: `ui/` (primitives), `layout/` (the shell), `content/` (rendering posts and projects)                           | `i18n`, `lib`, `types`, `config`                          |
+| `server/`                            | Reading the content and building the plain-text responses. Reached only from `routes/` and `start.ts`                            | `types`, `config`, `content`                              |
+| `content/`                           | Everything authored: posts, projects, drafts, templates, quotes                                                                  | `types`                                                   |
+| `i18n/`, `lib/`, `types/`, `config/` | Leaves                                                                                                                           | each other                                                |
+
+A feature never imports another feature, and a component never imports a feature.
+The one exception is `components/layout/navbar/Brand`, which renders `features/easter-egg/WelcomeModal` once the avatar ring fills: the modal has to sit outside the brand link, so the wiring lives there.
+Adding a second exception means writing it down here.
+
+Imports use `./` inside a folder and `@/` everywhere else.
+A component file exports its component as the default; hooks, data and helpers export names only.
+
 ## Reuse
 
 Before writing markup, check whether one of these already covers it:
 
-| Need                                                                   | Use                                                     |
-| ---------------------------------------------------------------------- | ------------------------------------------------------- |
-| A filled or outlined button, on a `<button>`, `<a>` or router `<Link>` | `components/general/Button` (`Button`, `buttonClasses`) |
-| A centred dialog over a dimmed backdrop                                | `components/general/modal/Modal`                        |
-| A text link with a leading or trailing arrow                           | `components/general/ArrowLink`                          |
-| A quotation in a bordered card                                         | `components/quote/QuoteCard`                            |
-| The `[HU]` marker on Hungarian content                                 | `components/general/LanguageBadge`                      |
-| A labelled form input or textarea                                      | `components/contact/FormField`                          |
-| Headings, body copy, a muted intro, small print                        | `components/general/typography`                         |
-| A two-column grid of cards                                             | `components/general/CardGrid`                           |
-| A rule between sections, with or without a label                       | `components/general/Divider`                            |
-| The closing block under a page's content                               | `components/general/EndNote`                            |
-| The frame a page sits in: the centred column and the card              | `components/layout/PageShell`                           |
+| Need                                                                   | Use                                                |
+| ---------------------------------------------------------------------- | -------------------------------------------------- |
+| A filled or outlined button, on a `<button>`, `<a>` or router `<Link>` | `components/ui/Button` (`Button`, `buttonClasses`) |
+| A centred dialog over a dimmed backdrop                                | `components/ui/modal/Modal`                        |
+| A text link with a leading or trailing arrow                           | `components/ui/ArrowLink`                          |
+| A quotation in a bordered card                                         | `features/quotes/QuoteCard`                        |
+| The `[HU]` marker on Hungarian content                                 | `components/content/LanguageBadge`                 |
+| A labelled form input or textarea                                      | `features/contact/FormField`                       |
+| Headings, body copy, links, a muted intro, small print                 | `components/ui/typography`                         |
+| A two-column grid of cards                                             | `components/ui/CardGrid`                           |
+| A rule between sections, with or without a label                       | `components/ui/Divider`                            |
+| The closing block under a page's content                               | `components/ui/EndNote`                            |
+| The frame a page sits in: the centred column and the card              | `components/layout/PageShell`                      |
 
 ## Where Tailwind lives
 
-Tailwind classes only appear in files under `src/components/`.
-Everywhere else (routes, pages, `lib`, `i18n`) composes components and passes them props, rather than styling markup itself.
+Tailwind classes only appear in files under `src/components/` and `src/features/`.
+Everywhere else (routes, pages, `server`, `lib`, `i18n`) composes components and passes them props, rather than styling markup itself.
 
 `yarn lint` enforces this through `boundary/no-tailwind`, a local rule in [.oxlint/tailwind-boundary.js](./.oxlint/tailwind-boundary.js).
 It reads each `className` string literal and asks Tailwind itself whether the classes in it are Tailwind's own, so the project's own classes (`hide-scrollbar`, `nav-label`) pass and `bg-surface` or `nav:hidden` do not.
@@ -71,12 +92,13 @@ Call `useLangSearch()` from `@/i18n/useLangSearch` and spread the result into a 
 
 ## Storybook
 
-Every component under `src/components/` has a `*.stories.tsx` next to it.
+Every component under `src/components/` and `src/features/` has a `*.stories.tsx` next to it, titled after its folder (`UI/Button`, `Layout/Navbar/Brand`, `Blog/PostedOn`), so the Storybook sidebar mirrors the tree.
 A new component file means a new story file in the same commit.
 
-The one exception is `components/layout/RootDocument`, which renders `<html>` and `<body>`.
-Storybook draws every story inside a document of its own, so a second one nested in it shows nothing worth looking at.
+Two files are exempt.
+`components/layout/RootDocument` renders `<html>` and `<body>`; Storybook draws every story inside a document of its own, so a second one nested in it shows nothing worth looking at.
 The part that can be looked at is `PageShell`, and that has a story.
+`components/layout/SpeedInsights` renders nothing outside production.
 
 ## Formatting
 

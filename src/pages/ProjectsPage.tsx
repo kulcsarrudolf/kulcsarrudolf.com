@@ -1,8 +1,7 @@
-import CardGrid from "@/components/general/CardGrid";
-import EndNote from "@/components/general/EndNote";
-import { Lead, Note, Title } from "@/components/general/typography";
-import Link from "@/components/general/typography/Link";
-import ProjectCard from "@/components/projects/ProjectCard";
+import CardGrid from "@/components/ui/CardGrid";
+import EndNote from "@/components/ui/EndNote";
+import { Lead, Link, Note, Title } from "@/components/ui/typography";
+import ProjectCard from "@/features/projects/ProjectCard";
 import { useTranslation } from "@/i18n/useTranslation";
 import type { Project } from "@/types/project";
 

@@ -2,11 +2,11 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import { Outlet, createRootRoute } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 
-import Footer from "@/components/footer/Footer";
-import ConditionalSpeedInsights from "@/components/general/SpeedInsights";
+import Footer from "@/components/layout/footer/Footer";
+import ConditionalSpeedInsights from "@/components/layout/SpeedInsights";
 import PageShell from "@/components/layout/PageShell";
 import RootDocument from "@/components/layout/RootDocument";
-import NotFound from "@/components/NotFound";
+import NotFound from "@/components/layout/NotFound";
 import { AUTHOR_NAME, SITE_DESCRIPTION, SITE_NAME, SITE_URL, SOCIAL_PROFILES } from "@/config/site";
 import { siteHead } from "@/lib/seo";
 import { fetchRecentPosts } from "@/server/functions";

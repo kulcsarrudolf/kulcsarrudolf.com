@@ -1,12 +1,10 @@
-import Paragraph from "@/components/general/typography/Paragraph";
-import Title from "@/components/general/typography/Title";
-import Link from "@/components/general/typography/Link";
+import { Link, Paragraph, Title } from "@/components/ui/typography";
 import { useTranslation } from "@/i18n/useTranslation";
-import BlogPostListClient from "@/components/blog/BlogPostListClient";
-import Divider from "@/components/general/Divider";
+import BlogPostList from "@/features/blog/BlogPostList";
+import Divider from "@/components/ui/Divider";
 import type { BlogPost } from "@/types/blog-post";
-import CurrentFocus from "@/components/general/current-focus/CurrentFocus";
-import LetsTalk from "@/components/general/lets-talk/LetsTalk";
+import CurrentFocus from "@/features/home/current-focus/CurrentFocus";
+import LetsTalk from "@/features/home/lets-talk/LetsTalk";
 
 interface HomePageContentProps {
   posts: BlogPost[];
@@ -51,7 +49,7 @@ export default function HomePageContent({ posts }: HomePageContentProps) {
       <Divider />
       <CurrentFocus />
       <Divider />
-      <BlogPostListClient
+      <BlogPostList
         title={String(t("home.latestBlogs")) as string}
         posts={posts}
         noOfElements={3}

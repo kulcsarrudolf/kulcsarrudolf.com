@@ -1,14 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import ArrowLink from "@/components/general/ArrowLink";
-import EndNote from "@/components/general/EndNote";
-
-import { Subtitle, Title } from "@/components/general/typography";
-import MarkdownBody from "@/components/markdown/MarkdownBody";
-import ProjectLinks from "@/components/projects/ProjectLinks";
-import RelatedPosts from "@/components/projects/RelatedPosts";
 import { AUTHOR_NAME, SITE_URL } from "@/config/site";
 import { pageHead } from "@/lib/seo";
+import ProjectPage from "@/pages/ProjectPage";
 import { fetchProject } from "@/server/functions";
 import type { Project } from "@/types/project";
 
@@ -71,24 +65,10 @@ export const Route = createFileRoute("/projects/$slug")({
       structuredData: buildStructuredData(project, `${SITE_URL}${path}`),
     });
   },
-  component: ProjectPage,
+  component: ProjectRoute,
 });
 
-function ProjectPage() {
+function ProjectRoute() {
   const { project, relatedPosts } = Route.useLoaderData();
-
-  return (
-    <article>
-      <Title>{project.title}</Title>
-      <Subtitle>{project.subtitle}</Subtitle>
-      <ProjectLinks project={project} />
-      <MarkdownBody content={project.content} />
-      <RelatedPosts posts={relatedPosts} />
-      <EndNote>
-        <ArrowLink to="/projects" direction="back">
-          Back to all projects
-        </ArrowLink>
-      </EndNote>
-    </article>
-  );
+  return <ProjectPage project={project} relatedPosts={relatedPosts} />;
 }
