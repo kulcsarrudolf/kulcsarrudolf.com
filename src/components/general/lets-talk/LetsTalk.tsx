@@ -47,6 +47,15 @@ const ShipIcon = () => (
   </svg>
 );
 
+const TeamIcon = () => (
+  <svg {...strokeProps} className="h-[22px] w-[22px]" aria-hidden="true">
+    <path d="M16 20v-1.5a3.5 3.5 0 0 0-3.5-3.5h-5A3.5 3.5 0 0 0 4 18.5V20" />
+    <circle cx="10" cy="7.5" r="3.5" />
+    <path d="M20.5 20v-1.5a3.5 3.5 0 0 0-2.6-3.4" />
+    <path d="M15.5 4.2a3.5 3.5 0 0 1 0 6.6" />
+  </svg>
+);
+
 const CodeIcon = () => (
   <svg {...strokeProps} className="h-[22px] w-[22px]" aria-hidden="true">
     <path d="M9 7l-5 5 5 5" />
@@ -76,6 +85,7 @@ const REASONS = [
   { key: "idea", Icon: IdeaIcon },
   { key: "stuck", Icon: GrowthIcon },
   { key: "ship", Icon: ShipIcon },
+  { key: "team", Icon: TeamIcon },
   { key: "projects", Icon: CodeIcon },
 ];
 
