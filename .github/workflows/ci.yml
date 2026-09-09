@@ -25,6 +25,16 @@ jobs:
           cache: yarn
 
       - run: yarn install --frozen-lockfile
+      # Squash-merge uses the pull request title as the commit subject, so it
+      # has to pass the same check as a local commit message.
+      - name: Check pull request title and branch name
+        if: github.event_name == 'pull_request'
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          HEAD_REF: ${{ github.head_ref }}
+        run: |
+          printf '%s\n' "$PR_TITLE" | yarn -s commitlint
+          node scripts/check-branch-name.ts "$HEAD_REF"
 
       - run: yarn typecheck
       - run: yarn lint

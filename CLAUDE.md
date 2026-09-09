@@ -101,6 +101,20 @@ Two files are exempt.
 The part that can be looked at is `PageShell`, and that has a story.
 `components/layout/SpeedInsights` renders nothing outside production.
 
+## Commits and branches
+
+A commit subject is `<type>(<scope>): <description>`, in the Conventional Commits shape: lowercase type, an optional scope in parentheses, a lowercase imperative description with no trailing period.
+The types are `feat`, `fix`, `chore`, `refactor`, `docs`, `test`, `content`, `style`, `perf`, `ci`, `build` and `revert`.
+`content` is the project's own: a change to a post, a project or other authored copy under `src/content/`.
+
+A branch is `<type>/<kebab-case>` with the same types, such as `chore/typescript-7` or `fix/navbar-link-shift`.
+Nothing is committed straight onto `develop` or `master`: work reaches `develop` through a pull request and `master` through `yarn deploy`.
+
+Both rules are enforced, so a slip is caught rather than remembered.
+The list of types lives once, in [scripts/conventions.ts](./scripts/conventions.ts); [commitlint.config.ts](./commitlint.config.ts) reads it for the `commit-msg` hook and `scripts/check-branch-name.ts` reads it for the `pre-commit` hook.
+CI runs the same two checks over a pull request's title and head branch, because a squash-merge lands on `develop` with the pull request title as its subject.
+So a pull request title follows the commit subject rule too.
+
 ## Formatting
 
 `oxfmt` owns the formatting, so no discussion of it belongs in review.
