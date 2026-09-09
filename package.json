@@ -33,7 +33,7 @@
     "nitro": "3.0.260903-beta",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "zimme-zoom": "^0.2.3"
+    "zimme-zoom": "^0.3.0"
   },
   "devDependencies": {
     "@storybook/addon-a11y": "^10.6.0",

@@ -3151,10 +3151,10 @@ yaml@^2.8.3, yaml@^2.9.0:
   resolved "https://registry.yarnpkg.com/yaml/-/yaml-2.9.0.tgz#78274afd93598a1dfdd6130df6a566defcbf9aa4"
   integrity sha512-2AvhNX3mb8zd6Zy7INTtSpl1F15HW6Wnqj0srWlkKLcpYl/gMIMJiyuGq2KeI2YFxUPjdlB+3Lc10seMLtL4cA==
 
-zimme-zoom@^0.2.3:
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/zimme-zoom/-/zimme-zoom-0.2.3.tgz#0f728764d7c0a1fd2de98f730812ae99fc3e1d1e"
-  integrity sha512-FfKfGWWWSS4FXwN6Dmp1dyqYodsgHCTGd/eJHWkBA+5WvQ1BYzUf3ZeHZSsub3SzoZAxFODg04NmYII6qskweg==
+zimme-zoom@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/zimme-zoom/-/zimme-zoom-0.3.0.tgz#c1f6a9f7d578edbd37886d8cf2e1567548328f93"
+  integrity sha512-7h9UHYAserLEF8wiKtFfsocKOaiBj4sjAeLFKLd4Gt5O4ef3aEC9C2WBa/k2T+jcelH2TM1nUZe8DHiaSW4aFw==
 
 zod@^4.4.3:
   version "4.5.4"
