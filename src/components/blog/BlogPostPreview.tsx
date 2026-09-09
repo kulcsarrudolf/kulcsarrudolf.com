@@ -8,8 +8,13 @@ type BlogPostPreviewProps = {
 };
 const BlogPostPreview = ({ post, compact = false }: BlogPostPreviewProps) => {
   const { t, lang } = useTranslation();
-  const languageLabel = post.lang === "hu" ? "[HU]" : "";
-  
+  // Null rather than an empty span, so the trailing margin only exists
+  // when there is a badge to separate from the title.
+  const languageBadge =
+    post.lang === "hu" ? (
+      <span className="text-blue-900 mr-1">[HU]</span>
+    ) : null;
+
   // Keep the chosen language across navigation; undefined drops the param.
   const linkProps = {
     to: "/posts/$slug",
@@ -19,11 +24,18 @@ const BlogPostPreview = ({ post, compact = false }: BlogPostPreviewProps) => {
 
   if (compact) {
     return (
-      <div key={post.title} className="mb-2">
+      <div key={post.title} className="mb-3">
         <Link {...linkProps}>
-          <p className="hover:text-blue-500 font-bold">
-            ➡️<span className="text-blue-900">{languageLabel}</span>
-            {post.title}
+          {/* Flex so the arrow keeps its gap and wrapped titles hang under
+              the title, not under the arrow. */}
+          <p className="hover:text-blue-500 font-bold flex items-baseline gap-2">
+            <span aria-hidden="true" className="shrink-0">
+              ➡️
+            </span>
+            <span>
+              {languageBadge}
+              {post.title}
+            </span>
           </p>
         </Link>
       </div>
@@ -34,7 +46,7 @@ const BlogPostPreview = ({ post, compact = false }: BlogPostPreviewProps) => {
     <div key={post.title} className="mb-2">
       <Link {...linkProps} className="group">
         <p className="font-bold group-hover:text-blue-500">
-          <span className="text-blue-900">{languageLabel}</span>
+          {languageBadge}
           {post.title}
         </p>
         <p>{post.subtitle}</p>
