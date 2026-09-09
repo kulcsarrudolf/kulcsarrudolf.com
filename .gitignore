@@ -40,8 +40,10 @@ yarn-error.log*
 
 /public/images/temp
 
-# cursor skills
-/.cursor/skills/write-blog-post/
+# editor / agent local config
+/.cursor/
+.claude/settings.local.json
+.claude/*.local.json
 
 # design canvas scratch
 /.design/
