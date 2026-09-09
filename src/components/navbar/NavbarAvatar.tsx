@@ -93,7 +93,7 @@ const NavbarAvatar = ({
 
   return (
     <div
-      className="relative mr-2.5 flex h-10 w-10 shrink-0 touch-none select-none items-center justify-center"
+      className="relative mr-2 flex h-9 w-9 shrink-0 touch-none select-none items-center justify-center sm:mr-2.5 sm:h-10 sm:w-10"
       onMouseEnter={startProgress}
       onMouseLeave={stopProgress}
       onTouchStart={startProgress}
@@ -107,7 +107,7 @@ const NavbarAvatar = ({
         width={36}
         height={36}
         src={src}
-        className={`h-9 w-9 rounded-full border-2 p-0.5 shadow-md ${ringClassName}`}
+        className={`h-8 w-8 rounded-full border-2 p-0.5 shadow-md sm:h-9 sm:w-9 ${ringClassName}`}
         alt={alt}
       />
       {progress > 0 && (

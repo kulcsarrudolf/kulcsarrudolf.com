@@ -48,7 +48,7 @@ const Brand = ({ tone = "onBrand", onNavigate }: BrandProps) => {
           onReveal={openEgg}
         />
         <span
-          className={`whitespace-nowrap text-lg font-semibold ${
+          className={`whitespace-nowrap text-base font-semibold sm:text-lg ${
             tone === "onBrand" ? "text-white" : "text-gray-800"
           }`}
         >
