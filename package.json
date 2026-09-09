@@ -67,15 +67,6 @@
     "postcss": "^8.5.18",
     "yaml": "^2.8.3"
   },
-  "lint-staged": {
-    "*.{ts,tsx,js,jsx,mjs,cjs}": [
-      "oxlint --fix --max-warnings=0",
-      "oxfmt"
-    ],
-    "*.{json,jsonc,css,md,yml,yaml}": [
-      "oxfmt"
-    ]
-  },
   "engines": {
     "node": "24.x"
   },

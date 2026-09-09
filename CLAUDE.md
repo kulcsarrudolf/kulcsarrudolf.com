@@ -82,7 +82,8 @@ The part that can be looked at is `PageShell`, and that has a story.
 
 `oxfmt` owns the formatting, so no discussion of it belongs in review.
 `yarn install` installs a pre-commit hook that runs `oxlint --fix` and then `oxfmt` over the staged files and stages what they rewrite, so a commit is formatted whether or not anyone remembered.
-An unfixable lint error stops the commit.
+It then runs `tsc --noEmit` over the whole project.
+An unfixable lint error or a type error stops the commit.
 
 Run `yarn format` by hand when you want the working tree formatted before then, and never hand-format around it.
 

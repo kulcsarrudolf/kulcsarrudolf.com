@@ -56,8 +56,13 @@ The rules live in `.oxlintrc.json`: correctness rules as errors, rules-of-hooks 
 `yarn format` runs [oxfmt](https://oxc.rs/docs/guide/usage/formatter), oxlint's formatter, over the TypeScript, JSON, CSS and Markdown in the repo; `yarn format:check` reports without writing.
 It reads `.oxfmtrc.json`, which skips the generated `src/routeTree.gen.ts`, and `.gitignore`.
 
-Neither is something to remember. `yarn install` installs a Husky pre-commit hook that runs [lint-staged](https://github.com/lint-staged/lint-staged) over the staged files: `oxlint --fix` first, then `oxfmt`, and whatever they rewrite is staged along with the commit.
-A lint error nothing can fix aborts the commit and leaves the working tree as it was.
+Neither is something to remember. `yarn install` installs a Husky pre-commit hook that runs [lint-staged](https://github.com/lint-staged/lint-staged) over the staged files, in the order [lint-staged.config.js](./lint-staged.config.js) lists them: `oxlint --fix`, then `oxfmt`, then `tsc --noEmit`.
+Whatever the first two rewrite is staged along with the commit.
+An unfixable lint error or a type error aborts the commit and leaves the working tree as it was.
+
+The typecheck is the whole project rather than the staged files, because that is the only way `tsc` reads `tsconfig.json`, so a type error anywhere stops the commit even if it sits in a file the commit does not touch.
+It is skipped for a commit that only touches Markdown or CSS.
+
 `git commit --no-verify` skips the hook.
 
 ### Environment variables
