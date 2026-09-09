@@ -1,5 +1,5 @@
 import { useRouterState } from "@tanstack/react-router";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { useTranslation } from "@/i18n/useTranslation";
 
@@ -25,11 +25,21 @@ const DOCK_THRESHOLD = 100;
  * The bar itself is 56px on phones and 80px from 640px up, since below that it
  * is mostly carrying whitespace. `body`'s top margin in __root.tsx clears the
  * fixed bar and has to move with it.
+ *
+ * Past DOCK_THRESHOLD the bar gives up its top gap and squares its top corners.
+ * Both halves of that move are eased together, and the margin lives on the
+ * <nav> while the radius lives on the inner bar, so each carries its own
+ * transition. Motion is off until the first real scroll: the read on mount only
+ * syncs the bar to a scroll position the browser restored, and animating that
+ * would slide the bar into place on every reload.
  */
 const Navbar = () => {
   const { t } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDocked, setIsDocked] = useState(false);
+  const [isAnimated, setIsAnimated] = useState(false);
+
+  const hasSyncedRef = useRef(false);
 
   const pathname = useRouterState({ select: (state) => state.location.pathname });
 
@@ -52,6 +62,13 @@ const Navbar = () => {
         const docked = window.scrollY > DOCK_THRESHOLD;
         setIsDocked(docked);
         if (docked) setIsMenuOpen(false);
+
+        // The first pass is the mount-time sync below, which has to be instant.
+        // Turning the transition on in the same commit as a later state change
+        // still animates it, since the browser reads transition-property from
+        // the after-change style.
+        if (hasSyncedRef.current) setIsAnimated(true);
+        else hasSyncedRef.current = true;
       });
     };
 
@@ -67,14 +84,18 @@ const Navbar = () => {
   return (
     <nav
       aria-label={t("nav.menu") as string}
-      className={`fixed left-0 top-0 z-20 w-full px-2 transition-[margin] duration-200 ${
-        isDocked ? "mt-0" : "mt-3 sm:mt-5"
-      }`}
+      className={`fixed left-0 top-0 z-20 w-full px-2 ${
+        isAnimated
+          ? "transition-[margin] duration-200 motion-reduce:transition-none"
+          : ""
+      } ${isDocked ? "mt-0" : "mt-3 sm:mt-5"}`}
     >
       <div
         className={`mx-auto flex h-14 max-w-5xl items-center rounded-2xl bg-brand px-3 shadow-md sm:h-20 sm:px-4 ${
-          isDocked ? "rounded-t-none" : ""
-        }`}
+          isAnimated
+            ? "transition-[border-radius] duration-200 motion-reduce:transition-none"
+            : ""
+        } ${isDocked ? "rounded-t-none" : ""}`}
       >
         <Brand />
 
