@@ -59,7 +59,7 @@ Tailwind classes only appear in files under `src/components/` and `src/features/
 Everywhere else (routes, pages, `server`, `lib`, `i18n`) composes components and passes them props, rather than styling markup itself.
 
 `yarn lint` enforces this through `boundary/no-tailwind`, a local rule in [.oxlint/tailwind-boundary.js](./.oxlint/tailwind-boundary.js).
-It reads each `className` string literal and asks Tailwind itself whether the classes in it are Tailwind's own, so the project's own classes (`hide-scrollbar`, `nav-label`) pass and `bg-surface` or `nav:hidden` do not.
+It reads each `className` string literal and asks Tailwind itself, loaded from `globals.css`, whether it knows the classes in it, so `bg-surface`, `nav:hidden` and the project's own `@utility` classes (`hide-scrollbar`, `nav-label`) are all refused and an unknown class passes.
 Inline `style` is refused the same way, so it cannot become the side door out.
 
 When a route or a page needs markup it does not have, the answer is a component, not a `className`:
@@ -80,8 +80,9 @@ The reason is not optional, and there are none in the codebase today.
 
 ## Colour
 
-Colours come from the Tailwind theme in `tailwind.config.js`, never from a hex literal in a component:
+Colours come from the `@theme` block in `src/styles/globals.css`, never from a hex literal in a component:
 `brand`, `brand-active`, `brand-hover` and `surface`, as `text-brand`, `bg-brand`, `bg-surface` and so on.
+The two navbar breakpoints, `socials` and `nav`, are declared there too.
 
 The one exception is a colour that has to be interpolated into a gradient or an inline `style`, and those are named constants at the top of the file that needs them.
 

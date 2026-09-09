@@ -7,7 +7,7 @@ The preview deployment is [kulcsarrudolf.vercel.app](https://kulcsarrudolf.verce
 
 ## Stack
 
-TanStack Start (TanStack Router + Vite) with Nitro building the server bundle for Vercel, TypeScript and Tailwind throughout, Storybook for the components, and oxlint in place of ESLint.
+TanStack Start (TanStack Router + Vite) with Nitro building the server bundle for Vercel, TypeScript and Tailwind 4 throughout (the theme lives in `src/styles/globals.css`), Storybook for the components, and oxlint in place of ESLint.
 Posts are parsed with gray-matter and rendered with markdown-to-jsx.
 Blog post images use [zimme-zoom](https://www.npmjs.com/package/zimme-zoom), my own click-to-zoom library.
 

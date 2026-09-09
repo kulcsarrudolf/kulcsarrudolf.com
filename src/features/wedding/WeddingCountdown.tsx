@@ -47,7 +47,7 @@ const FLOATING_HEARTS = [
 ];
 
 const CountdownTile = ({ value, label }: { value: number; label: string }) => (
-  <div className="flex flex-col items-center justify-center rounded-2xl border border-white/80 bg-white/60 px-1 py-4 shadow-lg shadow-rose-900/5 backdrop-blur-sm sm:px-4 sm:py-6">
+  <div className="flex flex-col items-center justify-center rounded-2xl border border-white/80 bg-white/60 px-1 py-4 shadow-lg shadow-rose-900/5 backdrop-blur-xs sm:px-4 sm:py-6">
     <span
       className="text-4xl font-semibold tabular-nums text-[#6d2237] sm:text-6xl"
       style={{ fontFamily: "var(--font-cormorant), serif" }}
@@ -88,7 +88,7 @@ const WeddingCountdown = ({ lang = NR_DEFAULT_LANGUAGE }: { lang?: NrLanguage })
 
   return (
     <div
-      className="fixed inset-0 z-50 overflow-y-auto bg-gradient-to-b from-[#fbf7f1] via-[#f7ece3] to-[#efdcd2]"
+      className="fixed inset-0 z-50 overflow-y-auto bg-linear-to-b from-[#fbf7f1] via-[#f7ece3] to-[#efdcd2]"
       style={FONT_VARIABLES}
     >
       <style>
@@ -120,7 +120,7 @@ const WeddingCountdown = ({ lang = NR_DEFAULT_LANGUAGE }: { lang?: NrLanguage })
       </div>
 
       <div className="relative flex min-h-full flex-col items-center justify-center px-5 py-14 text-center">
-        <div className="rounded-full bg-gradient-to-br from-[#d9b87f] via-[#f0dfbe] to-[#c09a5e] p-1.5 shadow-xl shadow-rose-900/10">
+        <div className="rounded-full bg-linear-to-br from-[#d9b87f] via-[#f0dfbe] to-[#c09a5e] p-1.5 shadow-xl shadow-rose-900/10">
           {photoOk ? (
             <img
               ref={photoRef}
@@ -140,7 +140,7 @@ const WeddingCountdown = ({ lang = NR_DEFAULT_LANGUAGE }: { lang?: NrLanguage })
         </div>
 
         <h1
-          className="mt-8 text-5xl leading-tight text-[#6d2237] sm:text-7xl"
+          className="mt-8 text-5xl leading-tight text-[#6d2237] sm:text-7xl sm:leading-none"
           style={{ fontFamily: "var(--font-great-vibes), cursive" }}
         >
           {content.names}
@@ -182,7 +182,7 @@ const WeddingCountdown = ({ lang = NR_DEFAULT_LANGUAGE }: { lang?: NrLanguage })
         <figure className="mt-14 max-w-xl">
           <span className="mx-auto mb-4 block h-10 w-px bg-[#c09a5e]/50" />
           <blockquote
-            className="text-2xl italic leading-relaxed text-[#6d2237] sm:text-3xl"
+            className="text-2xl italic leading-relaxed text-[#6d2237] sm:text-3xl sm:leading-[1.2]"
             style={{ fontFamily: "var(--font-cormorant), serif" }}
           >
             {content.quote}

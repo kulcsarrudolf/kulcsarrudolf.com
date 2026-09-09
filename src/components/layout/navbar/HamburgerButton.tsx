@@ -16,7 +16,7 @@ const HamburgerButton = ({
 }: HamburgerButtonProps) => (
   <button
     type="button"
-    className={`inline-flex h-11 w-11 items-center justify-center rounded-lg border border-transparent text-white transition-colors hover:border-white hover:bg-brand-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white ${className}`}
+    className={`inline-flex h-11 w-11 items-center justify-center rounded-lg border border-transparent text-white transition-colors hover:border-white hover:bg-brand-active focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-white ${className}`}
     aria-controls={controls}
     aria-expanded={isOpen}
     aria-label={label}

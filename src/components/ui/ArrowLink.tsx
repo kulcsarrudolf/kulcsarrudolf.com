@@ -10,7 +10,7 @@ import type { ReactNode } from "react";
  * stays comfortably large.
  */
 const LINK =
-  "group -ml-3 inline-flex items-start gap-2 rounded-md px-3 py-3 text-sm font-medium text-brand transition-colors hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand";
+  "group -ml-3 inline-flex items-start gap-2 rounded-md px-3 py-3 text-sm font-medium text-brand transition-colors hover:bg-gray-100 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand";
 
 // mt centres the icon on the first line, so it stays put as a list marker when
 // a long title wraps on narrow screens.
