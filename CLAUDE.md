@@ -109,10 +109,15 @@ An unfixable lint error or a type error stops the commit.
 
 Run `yarn format` by hand when you want the working tree formatted before then, and never hand-format around it.
 
+## Tests
+
+Pure modules (`server/`, `lib/`, `i18n/`, a feature's engine or data helpers) get a `*.test.ts` next to them, run by `yarn test`.
+Components are covered by their stories, not by unit tests.
+
 ## Checks
 
-Run all three before calling a change done:
+Run all four before calling a change done:
 
 ```bash
-yarn typecheck && yarn lint && yarn build
+yarn typecheck && yarn lint && yarn test && yarn build
 ```

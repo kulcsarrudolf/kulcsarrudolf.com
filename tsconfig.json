@@ -23,6 +23,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src", ".storybook", "vite.config.ts"],
+  "include": ["src", ".storybook", "vite.config.ts", "vitest.config.ts"],
   "exclude": ["node_modules", ".output", ".nitro", "dist", "storybook-static"]
 }
