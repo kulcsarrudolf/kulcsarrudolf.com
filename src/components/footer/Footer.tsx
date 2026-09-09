@@ -1,5 +1,3 @@
-"use client";
-
 import Copyright from "./Copyright";
 import LangSelector from "./LangSelector";
 

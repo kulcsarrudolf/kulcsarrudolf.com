@@ -1,12 +1,18 @@
-"use client";
-
-import dynamic from "next/dynamic";
+import { ClientOnly } from "@tanstack/react-router";
 import Markdown from "markdown-to-jsx";
-import { AnchorHTMLAttributes } from "react";
+import { Suspense, lazy, type AnchorHTMLAttributes, type ComponentProps } from "react";
 
-const PostImage = dynamic(() => import("@/components/blog/PostImage"), {
-  ssr: false,
-});
+// zimme-zoom injects styles into `document` when it is imported, so the image
+// viewer is only loaded in the browser, after hydration.
+const LazyPostImage = lazy(() => import("@/components/blog/PostImage"));
+
+const PostImage = (props: ComponentProps<typeof LazyPostImage>) => (
+  <ClientOnly fallback={null}>
+    <Suspense fallback={null}>
+      <LazyPostImage {...props} />
+    </Suspense>
+  </ClientOnly>
+);
 
 const MarkdownLink = ({
   href,

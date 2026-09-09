@@ -1,5 +1,3 @@
-"use client";
-
 import { useCallback, useEffect, useState } from "react";
 import { makePuzzle, solvePuzzle, type Board } from "@/lib/sudoku";
 import SudokuCell from "./SudokuCell";

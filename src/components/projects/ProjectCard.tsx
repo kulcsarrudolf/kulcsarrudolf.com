@@ -1,12 +1,10 @@
-"use client";
-
-import NextLink from "next/link";
+import { Link } from "@tanstack/react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faNpm } from "@fortawesome/free-brands-svg-icons";
 import { faArrowRight, faGlobe } from "@fortawesome/free-solid-svg-icons";
 
 import { useTranslation } from "@/i18n/useTranslation";
-import Project from "@/types/project.type";
+import type Project from "@/types/project.type";
 
 type ProjectCardProps = {
   project: Project;
@@ -18,7 +16,6 @@ type ProjectCardProps = {
 const ProjectCard = ({ project }: ProjectCardProps) => {
   const { t } = useTranslation();
   const languageLabel = project.lang === "hu" ? "[HU]" : "";
-  const href = `/projects/${project.slug}`;
 
   const linkIcons = [
     { key: "github", icon: faGithub, label: "GitHub", has: project.github },
@@ -27,8 +24,9 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
   ].filter((link) => Boolean(link.has));
 
   return (
-    <NextLink
-      href={href}
+    <Link
+      to="/projects/$slug"
+      params={{ slug: project.slug }}
       className="group flex h-full flex-col rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-blue-400 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2"
     >
       {/* The body grows so the footer sits on the same line in every card of a row. */}
@@ -81,7 +79,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
           />
         </span>
       </div>
-    </NextLink>
+    </Link>
   );
 };
 

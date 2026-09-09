@@ -1,5 +1,3 @@
-"use client";
-
 import { type Language, defaultLanguage } from "./index";
 
 const LANGUAGE_STORAGE_KEY = "kulcsarrudolf-language";

@@ -1,5 +1,5 @@
-import NavbarElement from "@/types/navbar-element.type";
-import SocialMediaLink from "@/types/social-media-link";
+import type NavbarElement from "@/types/navbar-element.type";
+import type SocialMediaLink from "@/types/social-media-link";
 import {
   faLinkedin,
   faXTwitter,

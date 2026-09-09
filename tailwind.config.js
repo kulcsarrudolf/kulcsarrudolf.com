@@ -1,10 +1,8 @@
+import typography from "@tailwindcss/typography";
+
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+export default {
+  content: ["./src/**/*.{js,ts,jsx,tsx,md}"],
   theme: {
     extend: {
       fontFamily: {
@@ -17,9 +15,5 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require("@tailwindcss/typography")({
-      target: "modern",
-    }),
-  ],
+  plugins: [typography({ target: "modern" })],
 };

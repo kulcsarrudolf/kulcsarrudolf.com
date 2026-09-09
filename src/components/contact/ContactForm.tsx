@@ -1,5 +1,3 @@
-"use client";
-
 import { useContactForm } from "./useContactForm";
 
 export default function ContactForm() {

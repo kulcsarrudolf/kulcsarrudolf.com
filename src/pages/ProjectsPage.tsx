@@ -1,10 +1,8 @@
-"use client";
-
 import { Title } from "@/components/general/typography";
 import Link from "@/components/general/typography/Link";
 import ProjectCard from "@/components/projects/ProjectCard";
 import { useTranslation } from "@/i18n/useTranslation";
-import Project from "@/types/project.type";
+import type Project from "@/types/project.type";
 
 interface ProjectsPageProps {
   projects: Project[];

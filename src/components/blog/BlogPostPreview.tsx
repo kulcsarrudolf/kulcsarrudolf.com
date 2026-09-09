@@ -1,7 +1,5 @@
-"use client";
-
-import Link from "next/link";
-import BlogPost from "@/types/blog-post.type";
+import { Link } from "@tanstack/react-router";
+import type BlogPost from "@/types/blog-post.type";
 import { useTranslation } from "@/i18n/useTranslation";
 
 type BlogPostPreviewProps = {
@@ -12,18 +10,17 @@ const BlogPostPreview = ({ post, compact = false }: BlogPostPreviewProps) => {
   const { t, lang } = useTranslation();
   const languageLabel = post.lang === "hu" ? "[HU]" : "";
   
-  const getPostHref = () => {
-    const baseHref = `/posts/${post.slug}`;
-    if (lang !== "en") {
-      return `${baseHref}?lang=${lang}`;
-    }
-    return baseHref;
-  };
+  // Keep the chosen language across navigation; undefined drops the param.
+  const linkProps = {
+    to: "/posts/$slug",
+    params: { slug: post.slug },
+    search: { lang: lang !== "en" ? lang : undefined },
+  } as const;
 
   if (compact) {
     return (
       <div key={post.title} className="mb-2">
-        <Link href={getPostHref()}>
+        <Link {...linkProps}>
           <p className="hover:text-blue-500 font-bold">
             ➡️<span className="text-blue-900">{languageLabel}</span>
             {post.title}
@@ -35,7 +32,7 @@ const BlogPostPreview = ({ post, compact = false }: BlogPostPreviewProps) => {
 
   return (
     <div key={post.title} className="mb-2">
-      <Link href={getPostHref()} className="group">
+      <Link {...linkProps} className="group">
         <p className="font-bold group-hover:text-blue-500">
           <span className="text-blue-900">{languageLabel}</span>
           {post.title}

@@ -1,4 +1,4 @@
-export interface BlogPost {
+export default interface BlogPost {
   title: string;
   subtitle: string;
   date: string;
@@ -9,5 +9,3 @@ export interface BlogPost {
   keywords?: string[];
   private?: boolean;
 }
-
-export default BlogPost;

@@ -1,4 +1,4 @@
-import { useState, FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { useTranslation } from "@/i18n/useTranslation";
 
 export function useContactForm() {
@@ -28,7 +28,7 @@ export function useContactForm() {
       }
     }
 
-    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
 
     if (!accessKey) {
       setResult(t("contact.form.error"));
@@ -58,7 +58,7 @@ export function useContactForm() {
       } else {
         setResult(t("contact.form.error"));
       }
-    } catch (error) {
+    } catch {
       setResult(t("contact.form.error"));
     } finally {
       setIsSubmitting(false);

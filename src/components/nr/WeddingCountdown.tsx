@@ -1,24 +1,21 @@
-"use client";
+import "@fontsource/great-vibes/400.css";
+import "@fontsource/cormorant-garamond/400.css";
+import "@fontsource/cormorant-garamond/500.css";
+import "@fontsource/cormorant-garamond/600.css";
 
-import { useEffect, useRef, useState } from "react";
-import { Cormorant_Garamond, Great_Vibes } from "next/font/google";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import {
   NR_DEFAULT_LANGUAGE,
   getNrContent,
   type NrLanguage,
 } from "./translations";
 
-const greatVibes = Great_Vibes({
-  subsets: ["latin", "latin-ext"],
-  weight: "400",
-  variable: "--font-great-vibes",
-});
-
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin", "latin-ext"],
-  weight: ["400", "500", "600"],
-  variable: "--font-cormorant",
-});
+// The fonts are self-hosted through Fontsource; the variables keep the
+// markup below unchanged from the earlier font setup.
+const FONT_VARIABLES = {
+  "--font-great-vibes": '"Great Vibes"',
+  "--font-cormorant": '"Cormorant Garamond"',
+} as CSSProperties;
 
 const WEDDING_DATE = new Date(2026, 10, 28, 10, 0, 0);
 
@@ -99,7 +96,8 @@ const WeddingCountdown = ({
 
   return (
     <div
-      className={`fixed inset-0 z-50 overflow-y-auto bg-gradient-to-b from-[#fbf7f1] via-[#f7ece3] to-[#efdcd2] ${greatVibes.variable} ${cormorant.variable}`}
+      className="fixed inset-0 z-50 overflow-y-auto bg-gradient-to-b from-[#fbf7f1] via-[#f7ece3] to-[#efdcd2]"
+      style={FONT_VARIABLES}
     >
       <style>
         {`
@@ -132,7 +130,6 @@ const WeddingCountdown = ({
       <div className="relative flex min-h-full flex-col items-center justify-center px-5 py-14 text-center">
         <div className="rounded-full bg-gradient-to-br from-[#d9b87f] via-[#f0dfbe] to-[#c09a5e] p-1.5 shadow-xl shadow-rose-900/10">
           {photoOk ? (
-            // eslint-disable-next-line @next/next/no-img-element
             <img
               ref={photoRef}
               src="/images/nr.jpeg"

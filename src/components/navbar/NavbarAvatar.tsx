@@ -1,6 +1,3 @@
-"use client";
-
-import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import CircularProgress from "./CircularProgress";
@@ -15,8 +12,8 @@ const NavbarAvatar = ({ src, alt }: NavbarAvatarProps) => {
   const [progress, setProgress] = useState(0);
   const [showModal, setShowModal] = useState(false);
 
-  const delayTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const delayTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const DELAY_MS = 1000;
   const ANIMATION_DURATION_MS = 6000;
@@ -99,7 +96,7 @@ const NavbarAvatar = ({ src, alt }: NavbarAvatarProps) => {
         onTouchCancel={handleTouchEnd}
         onContextMenu={handleContextMenu}
       >
-        <Image
+        <img
           width={40}
           height={40}
           src={src}

@@ -1,4 +1,4 @@
-export interface Project {
+export default interface Project {
   title: string;
   subtitle: string;
   slug: string;
@@ -17,5 +17,3 @@ export interface Project {
   featured?: boolean;
   private?: boolean;
 }
-
-export default Project;
