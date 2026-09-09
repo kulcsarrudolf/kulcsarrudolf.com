@@ -37,8 +37,11 @@ const isCurrent = (element: NavbarElement, pathname: string) => {
 };
 
 // The current entry carries `data-status="active"`, so it styles itself in CSS.
+// The box is deliberately identical in both states: the padding is always on
+// and `nav-label` reserves the width of the bold text, so only colour and
+// weight react to `data-status` and the row never shifts on navigation.
 const BAR_LINK =
-  "flex min-h-11 items-center rounded-md py-1 text-white transition-colors hover:text-white/75 data-[status=active]:bg-brand-active data-[status=active]:px-3 data-[status=active]:font-semibold data-[status=active]:text-white data-[status=active]:hover:text-white";
+  "flex min-h-11 items-center rounded-md px-3 py-1 text-white transition-colors hover:text-white/75 data-[status=active]:bg-brand-active data-[status=active]:font-semibold data-[status=active]:text-white data-[status=active]:hover:text-white";
 
 const BAR_CTA =
   "flex min-h-11 items-center rounded-md bg-white px-3 py-1 font-medium text-blue-600 transition-colors hover:bg-white/90";
@@ -72,12 +75,23 @@ const MenuItems = ({ variant = "bar", onNavigate }: MenuItemsProps) => {
         ? "mt-5 w-full border-t border-gray-200 pt-5"
         : "w-full";
     }
-    return element.cta ? "hidden socials:block" : "hidden nav:block";
+    // The call to action carries its own padding, so it needs a little more
+    // room than the tightened gap gives it to clear the active pill.
+    return element.cta ? "hidden socials:ml-3 socials:block" : "hidden nav:block";
   };
 
   const renderLink = (element: NavbarElement): ReactNode => {
-    const label = t(element.labelKey);
+    const label = t(element.labelKey) as string;
     const className = classNameFor(element);
+    // Only the bar links change weight, so only they need the reserved width.
+    const labelNode =
+      variant === "bar" && !element.cta ? (
+        <span className="nav-label" data-label={label}>
+          {label}
+        </span>
+      ) : (
+        label
+      );
     const target = element.openInNewTab ? "_blank" : undefined;
     const current = isCurrent(element, pathname);
     const currentProps = current
@@ -94,7 +108,7 @@ const MenuItems = ({ variant = "bar", onNavigate }: MenuItemsProps) => {
           onClick={onNavigate}
           className={className}
         >
-          {label}
+          {labelNode}
         </a>
       );
     }
@@ -113,7 +127,7 @@ const MenuItems = ({ variant = "bar", onNavigate }: MenuItemsProps) => {
         inactiveProps={{}}
         {...currentProps}
       >
-        {label}
+        {labelNode}
       </Link>
     );
   };
@@ -123,7 +137,7 @@ const MenuItems = ({ variant = "bar", onNavigate }: MenuItemsProps) => {
       className={
         variant === "sheet"
           ? "flex w-full flex-col gap-1.5"
-          : "flex items-center gap-4"
+          : "flex items-center gap-1"
       }
     >
       {NAVBAR_ELEMENTS.map((element) => (
