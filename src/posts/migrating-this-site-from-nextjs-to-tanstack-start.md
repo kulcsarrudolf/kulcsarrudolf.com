@@ -31,6 +31,18 @@ The Next.js middleware became a request middleware in `src/start.ts`. The sitema
 
 `next/font` became Fontsource, `next/image` became a plain `img`, and `next/dynamic` became `ClientOnly` with `React.lazy` for the image zoom library, which touches `document` on import.
 
+## Next.js vs TanStack Start in short
+
+| | Next.js (app router) | TanStack Start |
+| --- | --- | --- |
+| Routing | Folders with `page.tsx` and `layout.tsx` | One file per route, links and params checked by TypeScript |
+| Data | Async server components fetch inline | A `loader` per route that runs on the server for SSR and in the browser on navigation |
+| Server-only code | Server components by default | Server functions; everything else runs on both sides |
+| Metadata | `export const metadata` | `head()` on the route, with access to loader data |
+| Build and server | Its own bundler and server | Vite for the build, Nitro for the server, one deploy target per preset |
+
+For a site this size the day-to-day difference is the loader. Data for a page lives next to the route, the component reads it with `Route.useLoaderData()`, and the same code path serves the first request and every client-side navigation after it.
+
 ## Two things I did not expect
 
 The pages that read `?lang=` through `useSearchParams` were never fully server-rendered on Next.js. They bailed out to client rendering and visitors saw "Loading..." for a moment. Now the whole page comes from the server.
