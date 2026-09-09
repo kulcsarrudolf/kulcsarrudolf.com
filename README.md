@@ -60,24 +60,29 @@ The rules live in `.oxlintrc.json`: correctness rules as errors, rules-of-hooks 
 `yarn format` runs [oxfmt](https://oxc.rs/docs/guide/usage/formatter), oxlint's formatter, over the TypeScript, JSON, CSS and Markdown in the repo; `yarn format:check` reports without writing.
 It reads `.oxfmtrc.json`, which skips the generated `src/routeTree.gen.ts`, and `.gitignore`.
 
-Neither is something to remember. `yarn install` installs a Husky pre-commit hook that runs [lint-staged](https://github.com/lint-staged/lint-staged) over the staged files, in the order [lint-staged.config.js](./lint-staged.config.js) lists them: `oxlint --fix`, then `oxfmt`, then `tsc --noEmit`.
+Neither is something to remember. `yarn install` installs two Husky hooks.
+The pre-commit hook runs [lint-staged](https://github.com/lint-staged/lint-staged) over the staged files, in the order [lint-staged.config.js](./lint-staged.config.js) lists them: `oxlint --fix`, then `oxfmt`, then `tsc --noEmit`.
 Whatever the first two rewrite is staged along with the commit.
 An unfixable lint error or a type error aborts the commit and leaves the working tree as it was.
 
 The typecheck is the whole project rather than the staged files, because that is the only way `tsc` reads `tsconfig.json`, so a type error anywhere stops the commit even if it sits in a file the commit does not touch.
 It is skipped for a commit that only touches Markdown or CSS.
 
-`git commit --no-verify` skips the hook.
+Before lint-staged, the same hook runs [scripts/check-branch-name.ts](./scripts/check-branch-name.ts), which refuses a commit on `develop` or `master` and a branch not named `<type>/<kebab-case>`.
+The commit-msg hook runs [commitlint](https://commitlint.js.org) with [commitlint.config.ts](./commitlint.config.ts): Conventional Commits, with the type list from [scripts/conventions.ts](./scripts/conventions.ts), which the branch check shares.
+
+`git commit --no-verify` skips both hooks.
 
 ### Tests
 
-`yarn test` runs [Vitest](https://vitest.dev) over the `*.test.ts` files next to the modules they cover: the content loader, the markdown, `llms.txt` and sitemap builders, the `<head>` builder, the translation interpolator and the sudoku engine.
+`yarn test` runs [Vitest](https://vitest.dev) over the `*.test.ts` files next to the modules they cover: the content loader, the markdown, `llms.txt` and sitemap builders, the `<head>` builder, the translation interpolator, the sudoku engine and the branch name rule.
 It reads `vitest.config.ts`, a config of its own, because the app's Vite config carries the TanStack Start and Nitro plugins.
 `yarn test:watch` keeps it running.
 
 ### Continuous integration
 
 [ci.yml](./.github/workflows/ci.yml) runs on every pull request and on every push to `develop` and `master`: `yarn typecheck`, `yarn lint`, `yarn format:check`, `yarn test`, `yarn build` and `yarn build-storybook`, on the Node version in `.nvmrc`.
+On a pull request it first checks the title against the commit message rule and the head branch against the branch name rule, since a squash-merge takes the title as its subject.
 Dependabot opens a weekly pull request for npm updates (minor and patch versions grouped into one) and for the GitHub Actions the workflow uses.
 
 ### Environment variables

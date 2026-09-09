@@ -1,1 +1,2 @@
+node scripts/check-branch-name.ts
 yarn lint-staged --concurrent false
