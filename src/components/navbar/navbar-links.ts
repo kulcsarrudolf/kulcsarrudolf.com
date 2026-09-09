@@ -1,7 +1,7 @@
 import { faGithub, faInstagram, faLinkedin, faXTwitter } from "@fortawesome/free-brands-svg-icons";
 
-import type NavbarElement from "@/types/navbar-element.type";
-import type SocialMediaLink from "@/types/social-media-link";
+import type { NavbarElement } from "./types";
+import type { SocialMediaLink } from "./types";
 
 const NAVBAR_ELEMENTS: NavbarElement[] = [
   {

@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 
 import useLangSearch from "@/i18n/useLangSearch";
 import { useTranslation } from "@/i18n/useTranslation";
-import type NavbarElement from "@/types/navbar-element.type";
+import type { NavbarElement } from "./types";
 
 import { NAVBAR_ELEMENTS } from "./navbar-links";
 

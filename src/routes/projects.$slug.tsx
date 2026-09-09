@@ -10,7 +10,7 @@ import RelatedPosts from "@/components/projects/RelatedPosts";
 import { AUTHOR_NAME, SITE_URL } from "@/config/site";
 import { pageHead } from "@/lib/seo";
 import { fetchProject } from "@/server/functions";
-import type Project from "@/types/project.type";
+import type { Project } from "@/types/project";
 
 const describeProject = (project: Project): string => project.description || project.subtitle;
 

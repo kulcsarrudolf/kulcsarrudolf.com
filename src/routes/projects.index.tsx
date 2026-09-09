@@ -4,7 +4,7 @@ import { SITE_URL } from "@/config/site";
 import { pageHead } from "@/lib/seo";
 import ProjectsPage from "@/pages/ProjectsPage";
 import { fetchProjects } from "@/server/functions";
-import type Project from "@/types/project.type";
+import type { Project } from "@/types/project";
 
 const PROJECTS_TITLE = "Projects";
 const PROJECTS_DESCRIPTION =

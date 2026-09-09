@@ -5,7 +5,7 @@ import { faArrowRight, faGlobe } from "@fortawesome/free-solid-svg-icons";
 
 import LanguageBadge from "@/components/general/LanguageBadge";
 import { useTranslation } from "@/i18n/useTranslation";
-import type Project from "@/types/project.type";
+import type { Project } from "@/types/project";
 
 type ProjectCardProps = {
   project: Project;

@@ -1,23 +1,34 @@
 import matter from "gray-matter";
 
-import type BlogPost from "@/types/blog-post.type";
-import type Project from "@/types/project.type";
+import type { BlogPost } from "@/types/blog-post";
+import type { Project } from "@/types/project";
 
 // The markdown sources are bundled into the server build at compile time, so
 // reading them never depends on the working directory of the deployed
 // function. Only top-level files are matched: drafts and templates live in
 // subfolders and are intentionally left out.
-const postFiles = import.meta.glob("../posts/*.md", {
+const postFiles = import.meta.glob("../content/posts/*.md", {
   query: "?raw",
   import: "default",
   eager: true,
 }) as Record<string, string>;
 
-const projectFiles = import.meta.glob("../projects/*.md", {
+const projectFiles = import.meta.glob("../content/projects/*.md", {
   query: "?raw",
   import: "default",
   eager: true,
 }) as Record<string, string>;
+
+// A glob that matches nothing is not a type error: the cast above hides it, and
+// the site would deploy with an empty blog. Fail the build instead.
+const assertMatched = (files: Record<string, string>, pattern: string): void => {
+  if (Object.keys(files).length === 0) {
+    throw new Error(`No markdown files matched ${pattern}. Was the content folder moved?`);
+  }
+};
+
+assertMatched(postFiles, "src/content/posts/*.md");
+assertMatched(projectFiles, "src/content/projects/*.md");
 
 // Draft content (private: true) is visible on the local dev server so it can
 // be previewed, but stays hidden in the production build.

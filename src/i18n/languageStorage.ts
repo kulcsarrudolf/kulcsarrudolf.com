@@ -1,4 +1,4 @@
-import { type Language, defaultLanguage } from "./index";
+import type { Language } from "./index";
 
 const LANGUAGE_STORAGE_KEY = "kulcsarrudolf-language";
 
@@ -30,9 +30,4 @@ export function setStoredLanguage(lang: Language): void {
   } catch (error) {
     console.warn("Failed to save language to localStorage:", error);
   }
-}
-
-export function getLanguage(): Language {
-  const stored = getStoredLanguage();
-  return stored || defaultLanguage;
 }

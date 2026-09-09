@@ -1,4 +1,4 @@
-import type QuoteType from "@/types/quote.type";
+import type { Quote as QuoteType } from "@/types/quote";
 
 /**
  * `lg` is the single quote on the home page and in the welcome dialog; `md` is

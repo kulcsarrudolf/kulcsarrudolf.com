@@ -1,6 +1,6 @@
 import BlogPostListClient from "@/components/blog/BlogPostListClient";
 import { useTranslation } from "@/i18n/useTranslation";
-import type BlogPost from "@/types/blog-post.type";
+import type { BlogPost } from "@/types/blog-post";
 
 interface BlogPageProps {
   posts: BlogPost[];

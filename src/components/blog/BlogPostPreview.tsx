@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 import LanguageBadge from "@/components/general/LanguageBadge";
 import useLangSearch from "@/i18n/useLangSearch";
 import { useTranslation } from "@/i18n/useTranslation";
-import type BlogPost from "@/types/blog-post.type";
+import type { BlogPost } from "@/types/blog-post";
 
 type BlogPostPreviewProps = {
   post: BlogPost;

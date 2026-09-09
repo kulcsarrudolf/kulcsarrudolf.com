@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { MARKDOWN_HEADERS, buildLlmsTxt } from "@/server/markdown";
+import { buildLlmsTxt } from "@/server/llms";
+import { MARKDOWN_HEADERS } from "@/server/markdown";
 
 export const Route = createFileRoute("/llms.txt")({
   server: {

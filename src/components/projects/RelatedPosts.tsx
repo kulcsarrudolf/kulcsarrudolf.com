@@ -1,5 +1,5 @@
 import ArrowLink from "@/components/general/ArrowLink";
-import type BlogPost from "@/types/blog-post.type";
+import type { BlogPost } from "@/types/blog-post";
 
 type RelatedPostsProps = {
   posts: BlogPost[];

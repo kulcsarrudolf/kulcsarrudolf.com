@@ -1,5 +1,5 @@
 import Link from "@/components/general/typography/Link";
-import type Project from "@/types/project.type";
+import type { Project } from "@/types/project";
 
 type ProjectLinksProps = {
   project: Project;
