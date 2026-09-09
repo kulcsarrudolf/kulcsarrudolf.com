@@ -41,7 +41,7 @@ yarn install
 yarn dev
 ```
 
-Other scripts: `yarn build` (production build into `.output/`), `yarn start` (serve the built app with Node), `yarn typecheck`, `yarn lint`, `yarn format`, `yarn deploy` (fast-forward `master` to `develop` and push).
+Other scripts: `yarn build` (production build into `.output/`), `yarn start` (serve the built app with Node), `yarn typecheck`, `yarn lint`, `yarn format`, `yarn test`, `yarn deploy` (fast-forward `master` to `develop` and push).
 
 ### Storybook
 
@@ -69,9 +69,15 @@ It is skipped for a commit that only touches Markdown or CSS.
 
 `git commit --no-verify` skips the hook.
 
+### Tests
+
+`yarn test` runs [Vitest](https://vitest.dev) over the `*.test.ts` files next to the modules they cover: the content loader, the markdown, `llms.txt` and sitemap builders, the `<head>` builder, the translation interpolator and the sudoku engine.
+It reads `vitest.config.ts`, a config of its own, because the app's Vite config carries the TanStack Start and Nitro plugins.
+`yarn test:watch` keeps it running.
+
 ### Continuous integration
 
-[ci.yml](./.github/workflows/ci.yml) runs on every pull request and on every push to `develop` and `master`: `yarn typecheck`, `yarn lint`, `yarn format:check`, `yarn build` and `yarn build-storybook`, on the Node version in `.nvmrc`.
+[ci.yml](./.github/workflows/ci.yml) runs on every pull request and on every push to `develop` and `master`: `yarn typecheck`, `yarn lint`, `yarn format:check`, `yarn test`, `yarn build` and `yarn build-storybook`, on the Node version in `.nvmrc`.
 Dependabot opens a weekly pull request for npm updates (minor and patch versions grouped into one) and for the GitHub Actions the workflow uses.
 
 ### Environment variables
