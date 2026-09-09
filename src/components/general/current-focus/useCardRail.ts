@@ -1,10 +1,4 @@
-import {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  type MouseEvent,
-} from "react";
+import { useCallback, useEffect, useRef, useState, type MouseEvent } from "react";
 
 // A card only counts as visible once it is all but whole, so the "1-3 of 4"
 // counter never claims a card that is still clipped by the edge of the rail.
@@ -66,9 +60,7 @@ export function useCardRail(cardCount: number) {
       last: visible[visible.length - 1] ?? mostVisible,
     });
     setCanScrollBack(viewLeft > SCROLL_EPSILON);
-    setCanScrollForward(
-      viewLeft < container.scrollWidth - container.clientWidth - SCROLL_EPSILON,
-    );
+    setCanScrollForward(viewLeft < container.scrollWidth - container.clientWidth - SCROLL_EPSILON);
   }, []);
 
   useEffect(() => {

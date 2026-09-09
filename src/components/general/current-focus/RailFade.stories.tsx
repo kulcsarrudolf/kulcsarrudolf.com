@@ -13,7 +13,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "The soft edge on a rail that has more cards beyond it, so a clipped card reads as \"there is more\" rather than as a cropping mistake. It dissolves into the page background, so the story sits on that colour rather than on white.",
+          'The soft edge on a rail that has more cards beyond it, so a clipped card reads as "there is more" rather than as a cropping mistake. It dissolves into the page background, so the story sits on that colour rather than on white.',
       },
     },
   },

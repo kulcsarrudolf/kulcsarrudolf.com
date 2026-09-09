@@ -110,9 +110,7 @@ const NavbarAvatar = ({
         className={`h-8 w-8 rounded-full border-2 p-0.5 shadow-md sm:h-9 sm:w-9 ${ringClassName}`}
         alt={alt}
       />
-      {progress > 0 && (
-        <CircularProgress progress={progress} size={40} strokeWidth={3} />
-      )}
+      {progress > 0 && <CircularProgress progress={progress} size={40} strokeWidth={3} />}
     </div>
   );
 };

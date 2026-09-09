@@ -1,10 +1,6 @@
 import { createMiddleware, createStart } from "@tanstack/react-start";
 
-import {
-  MARKDOWN_HEADERS,
-  buildPostMarkdown,
-  buildProjectMarkdown,
-} from "@/server/markdown";
+import { MARKDOWN_HEADERS, buildPostMarkdown, buildProjectMarkdown } from "@/server/markdown";
 
 type MarkdownTarget = { kind: "posts" | "projects"; slug: string };
 
@@ -12,10 +8,7 @@ type MarkdownTarget = { kind: "posts" | "projects"; slug: string };
 // - /posts/<slug>.md and /projects/<slug>.md always return markdown
 // - /posts/<slug> and /projects/<slug> return markdown when the client
 //   asks for it via an Accept: text/markdown header
-const resolveMarkdownTarget = (
-  pathname: string,
-  accept: string
-): MarkdownTarget | null => {
+const resolveMarkdownTarget = (pathname: string, accept: string): MarkdownTarget | null => {
   const extensionMatch = pathname.match(/^\/(posts|projects)\/([^/]+)\.md$/);
   if (extensionMatch) {
     return { kind: extensionMatch[1] as MarkdownTarget["kind"], slug: extensionMatch[2] };
@@ -35,19 +28,14 @@ const markdownMiddleware = createMiddleware({ type: "request" }).server(
       return next();
     }
 
-    const target = resolveMarkdownTarget(
-      pathname,
-      request.headers.get("accept") ?? ""
-    );
+    const target = resolveMarkdownTarget(pathname, request.headers.get("accept") ?? "");
 
     if (!target) {
       return next();
     }
 
     const body =
-      target.kind === "posts"
-        ? buildPostMarkdown(target.slug)
-        : buildProjectMarkdown(target.slug);
+      target.kind === "posts" ? buildPostMarkdown(target.slug) : buildProjectMarkdown(target.slug);
 
     // Without Vary a CDN could serve the markdown response to HTML clients.
     if (!body) {
@@ -60,7 +48,7 @@ const markdownMiddleware = createMiddleware({ type: "request" }).server(
     return new Response(body, {
       headers: { ...MARKDOWN_HEADERS, Vary: "Accept" },
     });
-  }
+  },
 );
 
 export const startInstance = createStart(() => ({

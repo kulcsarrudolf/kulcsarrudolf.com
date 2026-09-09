@@ -1,9 +1,4 @@
-import {
-  AUTHOR_NAME,
-  SITE_DESCRIPTION,
-  SITE_NAME,
-  SITE_URL,
-} from "@/config/site";
+import { AUTHOR_NAME, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/config/site";
 
 // Builds the per-page <head> entries. The root route declares the site-wide
 // defaults (og:image, icons, robots, ...); the router de-duplicates meta tags
@@ -116,13 +111,11 @@ export const siteHead = (stylesheetHref: string) => ({
     { name: "publisher", content: AUTHOR_NAME },
     {
       name: "robots",
-      content:
-        "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
     },
     {
       name: "googlebot",
-      content:
-        "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
     },
     { property: "og:type", content: "website" },
     { property: "og:site_name", content: SITE_NAME },
@@ -175,4 +168,3 @@ export const siteHead = (stylesheetHref: string) => ({
     { rel: "manifest", href: "/favicon/site.webmanifest" },
   ],
 });
-

@@ -34,25 +34,15 @@ const Sudoku = ({ onClose }: SudokuProps) => {
       <div className="flex items-center justify-between w-full">
         <div className="text-sm text-gray-600">
           {t("sudoku.mistakes")}:{" "}
-          <span
-            className={
-              game.mistakes >= MAX_MISTAKES ? "text-red-500 font-bold" : ""
-            }
-          >
+          <span className={game.mistakes >= MAX_MISTAKES ? "text-red-500 font-bold" : ""}>
             {game.mistakes}/{MAX_MISTAKES}
           </span>
         </div>
-        <div className="text-sm text-gray-600 font-mono">
-          {formatTime(game.elapsedSeconds)}
-        </div>
+        <div className="text-sm text-gray-600 font-mono">{formatTime(game.elapsedSeconds)}</div>
       </div>
 
       {game.gameOver && (
-        <div
-          className={`text-center font-bold ${
-            game.won ? "text-green-600" : "text-red-500"
-          }`}
-        >
+        <div className={`text-center font-bold ${game.won ? "text-green-600" : "text-red-500"}`}>
           {game.won ? t("sudoku.won") : t("sudoku.lost")}
         </div>
       )}
@@ -84,10 +74,7 @@ const Sudoku = ({ onClose }: SudokuProps) => {
         >
           {t("sudoku.newGame")}
         </button>
-        <button
-          onClick={onClose}
-          className={`${GAME_BUTTON} bg-gray-500 hover:bg-gray-600`}
-        >
+        <button onClick={onClose} className={`${GAME_BUTTON} bg-gray-500 hover:bg-gray-600`}>
           {t("sudoku.endGame")}
         </button>
       </div>

@@ -1,8 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChevronLeft,
-  faChevronRight,
-} from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 interface RailControlsProps {
   /** "1-3 of 4", already translated. */
@@ -43,9 +40,7 @@ const RailControls = ({
     // Hidden rather than unmounted, so the heading keeps its height.
     style={{ visibility: isScrollable ? "visible" : "hidden" }}
   >
-    <span className="mr-1 whitespace-nowrap text-xs text-gray-500">
-      {counter}
-    </span>
+    <span className="mr-1 whitespace-nowrap text-xs text-gray-500">{counter}</span>
     <button
       type="button"
       aria-label={previousLabel}

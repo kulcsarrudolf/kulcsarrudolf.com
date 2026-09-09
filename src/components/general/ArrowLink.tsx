@@ -35,11 +35,7 @@ type ArrowLinkProps = Omit<LinkProps, "className"> & {
   children: ReactNode;
 };
 
-const ArrowLink = ({
-  direction = "forward",
-  children,
-  ...linkProps
-}: ArrowLinkProps) => (
+const ArrowLink = ({ direction = "forward", children, ...linkProps }: ArrowLinkProps) => (
   <Link {...linkProps} className={LINK}>
     <svg
       aria-hidden="true"

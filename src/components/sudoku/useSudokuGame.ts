@@ -13,8 +13,7 @@ export interface CellHighlighting {
 
 const rowOf = (index: number) => Math.floor(index / SIZE);
 const colOf = (index: number) => index % SIZE;
-const boxOf = (index: number) =>
-  `${Math.floor(rowOf(index) / 3)}-${Math.floor(colOf(index) / 3)}`;
+const boxOf = (index: number) => `${Math.floor(rowOf(index) / 3)}-${Math.floor(colOf(index) / 3)}`;
 
 /**
  * The whole game: the puzzle, the player's board, the clock, and the keyboard.

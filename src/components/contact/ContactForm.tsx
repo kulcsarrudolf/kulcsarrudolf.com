@@ -30,10 +30,7 @@ export default function ContactForm() {
         </div>
 
         <div className="flex flex-col h-full">
-          <label
-            htmlFor="message"
-            className="block text-sm font-medium text-gray-700 mb-2"
-          >
+          <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
             {t("contact.form.message")}
           </label>
           <textarea

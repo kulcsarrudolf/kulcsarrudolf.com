@@ -26,9 +26,7 @@ export default function ProjectsPage({ projects }: ProjectsPageProps) {
         <Note>
           {t("projects.moreOnGitHub", {
             githubLink: (
-              <Link href="https://github.com/kulcsarrudolf">
-                {t("projects.findOnGitHub")}
-              </Link>
+              <Link href="https://github.com/kulcsarrudolf">{t("projects.findOnGitHub")}</Link>
             ),
           })}
         </Note>

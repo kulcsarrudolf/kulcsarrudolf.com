@@ -37,7 +37,7 @@ yarn install
 yarn dev
 ```
 
-Other scripts: `yarn build` (production build into `.output/`), `yarn start` (serve the built app with Node), `yarn typecheck`, `yarn lint`, `yarn deploy` (fast-forward `master` to `develop` and push).
+Other scripts: `yarn build` (production build into `.output/`), `yarn start` (serve the built app with Node), `yarn typecheck`, `yarn lint`, `yarn format`, `yarn deploy` (fast-forward `master` to `develop` and push).
 
 ### Storybook
 
@@ -48,20 +48,27 @@ Stories render inside a real TanStack Router with an in-memory history, so `<Lin
 The toolbar has a language switch that sets the same `?lang=` query the site uses.
 Configuration lives in `.storybook/`, on its own small Vite config, because the app's config carries the TanStack Start and Nitro plugins.
 
-### Linting
+### Linting and formatting
 
 `yarn lint` runs [oxlint](https://oxc.rs/docs/guide/usage/linter).
 The rules live in `.oxlintrc.json`: correctness rules as errors, rules-of-hooks and exhaustive-deps on, unused variables allowed with a leading underscore, and `max-lines` capping every file at 500 lines.
+
+`yarn format` runs [oxfmt](https://oxc.rs/docs/guide/usage/formatter), oxlint's formatter, over the TypeScript, JSON, CSS and Markdown in the repo; `yarn format:check` reports without writing.
+It reads `.oxfmtrc.json`, which skips the generated `src/routeTree.gen.ts`, and `.gitignore`.
+
+Neither is something to remember. `yarn install` installs a Husky pre-commit hook that runs [lint-staged](https://github.com/lint-staged/lint-staged) over the staged files: `oxlint --fix` first, then `oxfmt`, and whatever they rewrite is staged along with the commit.
+A lint error nothing can fix aborts the commit and leaves the working tree as it was.
+`git commit --no-verify` skips the hook.
 
 ### Environment variables
 
 Client-side variables need the `VITE_` prefix.
 Put them in `.env.local` locally and in the Vercel project settings for deployments.
 
-| Variable | Purpose |
-| --- | --- |
-| `VITE_ENV` | Set to `production` to enable Vercel Analytics. |
-| `VITE_WEB3FORMS_ACCESS_KEY` | Web3Forms access key used by the contact form. |
+| Variable                    | Purpose                                         |
+| --------------------------- | ----------------------------------------------- |
+| `VITE_ENV`                  | Set to `production` to enable Vercel Analytics. |
+| `VITE_WEB3FORMS_ACCESS_KEY` | Web3Forms access key used by the contact form.  |
 
 ## Adding a post or a project
 

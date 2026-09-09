@@ -36,9 +36,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
           {project.title}
         </h2>
 
-        <p className="mt-2 text-sm leading-relaxed text-gray-600">
-          {project.subtitle}
-        </p>
+        <p className="mt-2 text-sm leading-relaxed text-gray-600">{project.subtitle}</p>
 
         {project.tech?.length ? (
           <div className="mt-3 flex flex-wrap gap-1.5">

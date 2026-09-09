@@ -13,7 +13,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "One link list, two presentations. The current page marks itself from TanStack Router's `data-status=\"active\"`, fuzzy so a post at /blog/<slug> keeps Blog highlighted.",
+          'One link list, two presentations. The current page marks itself from TanStack Router\'s `data-status="active"`, fuzzy so a post at /blog/<slug> keeps Blog highlighted.',
       },
     },
   },

@@ -13,9 +13,7 @@ const meta = {
       <div className="text-center">
         <div className="text-4xl mb-4">🎉</div>
         <h2 className="text-xl font-bold text-gray-800 mb-2">You found it</h2>
-        <p className="text-gray-600">
-          Full bleed on a phone, a centred card from `md` up.
-        </p>
+        <p className="text-gray-600">Full bleed on a phone, a centred card from `md` up.</p>
       </div>
     ),
   },

@@ -49,9 +49,7 @@ const QuoteCard = ({
       >
         &ldquo;{quote.quote}&rdquo;
       </p>
-      <p
-        className={`text-brand-active font-semibold tracking-wide ${style.author}`}
-      >
+      <p className={`text-brand-active font-semibold tracking-wide ${style.author}`}>
         &mdash; {quote.author}
       </p>
     </div>

@@ -18,10 +18,7 @@
     // stored language) inside an effect on purpose, so the server render
     // and the first client render agree. The rule flags exactly that.
     "react/set-state-in-effect": "off",
-    "no-unused-vars": [
-      "error",
-      { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }
-    ],
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }],
     // A file past 500 lines is doing more than one job. Split it into the
     // pieces it is already made of rather than raising this number.
     "max-lines": ["error", { "max": 500 }],

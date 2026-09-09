@@ -4,7 +4,19 @@ subtitle: "From Code to Community: How Podcasts have Enhanced my Software Develo
 author: "Kulcsar Rudolf"
 date: "2023-06-27"
 description: "Discover how podcasts have transformed my software development career. Learn about the power of community, expanding technical knowledge, non-technical skills, and networking opportunities through podcasts."
-keywords: ["podcasts", "software development", "career growth", "developer community", "technical skills", "soft skills", "networking", "learning", "programming", "software engineering"]
+keywords:
+  [
+    "podcasts",
+    "software development",
+    "career growth",
+    "developer community",
+    "technical skills",
+    "soft skills",
+    "networking",
+    "learning",
+    "programming",
+    "software engineering",
+  ]
 private: false
 ---
 

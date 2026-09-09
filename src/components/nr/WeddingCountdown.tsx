@@ -4,11 +4,7 @@ import "@fontsource/cormorant-garamond/500.css";
 import "@fontsource/cormorant-garamond/600.css";
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
-import {
-  NR_DEFAULT_LANGUAGE,
-  getNrContent,
-  type NrLanguage,
-} from "./translations";
+import { NR_DEFAULT_LANGUAGE, getNrContent, type NrLanguage } from "./translations";
 
 // The fonts are self-hosted through Fontsource; the variables keep the
 // markup below unchanged from the earlier font setup.
@@ -64,11 +60,7 @@ const CountdownTile = ({ value, label }: { value: number; label: string }) => (
   </div>
 );
 
-const WeddingCountdown = ({
-  lang = NR_DEFAULT_LANGUAGE,
-}: {
-  lang?: NrLanguage;
-}) => {
+const WeddingCountdown = ({ lang = NR_DEFAULT_LANGUAGE }: { lang?: NrLanguage }) => {
   const content = getNrContent(lang);
   const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null);
   const [mounted, setMounted] = useState(false);

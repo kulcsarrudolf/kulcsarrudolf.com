@@ -8,12 +8,7 @@ type LinkProps = {
 
 export const Link = ({ href, children }: LinkProps) => {
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noreferrer"
-      className="text-brand hover:underline"
-    >
+    <a href={href} target="_blank" rel="noreferrer" className="text-brand hover:underline">
       {children}
       <FontAwesomeIcon
         icon={faExternalLink}

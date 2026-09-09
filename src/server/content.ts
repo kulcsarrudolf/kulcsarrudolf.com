@@ -64,15 +64,11 @@ const visiblePosts = (posts: PostContent[]): PostContent[] =>
   shouldShowPrivateContent() ? posts : posts.filter((post) => !post.private);
 
 export const getPostMetadata = (): BlogPost[] =>
-  visiblePosts(Object.keys(postFiles).map(readPost)).map(
-    ({ content: _content, ...post }) => post
-  );
+  visiblePosts(Object.keys(postFiles).map(readPost)).map(({ content: _content, ...post }) => post);
 
 // Newest first. Used wherever a chronological list is wanted.
 export const getRecentPosts = (limit: number): BlogPost[] =>
-  [...getPostMetadata()]
-    .sort((a, b) => b.date.localeCompare(a.date))
-    .slice(0, limit);
+  [...getPostMetadata()].sort((a, b) => b.date.localeCompare(a.date)).slice(0, limit);
 
 // Only slugs of published posts resolve, which also rejects private posts in
 // production and any path-traversal attempt.
@@ -100,10 +96,7 @@ const toProject = (slug: string, data: Record<string, any>): Project => ({
   slug,
   order: typeof data.order === "number" ? data.order : DEFAULT_ORDER,
   lang: data.lang === "hu" ? "hu" : "en",
-  schemaType:
-    data.schemaType === "WebApplication"
-      ? "WebApplication"
-      : "SoftwareSourceCode",
+  schemaType: data.schemaType === "WebApplication" ? "WebApplication" : "SoftwareSourceCode",
   date: data.date || undefined,
   updated: data.updated || undefined,
   description: data.description,
@@ -133,9 +126,7 @@ const byOrderThenDate = (a: Project, b: Project): number => {
 };
 
 const visibleProjects = (projects: ProjectContent[]): ProjectContent[] =>
-  shouldShowPrivateContent()
-    ? projects
-    : projects.filter((project) => !project.private);
+  shouldShowPrivateContent() ? projects : projects.filter((project) => !project.private);
 
 // Returned already sorted, so callers never have to re-sort.
 export const getProjectMetadata = (): Project[] =>

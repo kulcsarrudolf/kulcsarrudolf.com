@@ -41,4 +41,4 @@ npm install package-name
 
 ## Links
 
-Source on [GitHub](), package on [npm]().
+Source on [GitHub](<>), package on [npm](<>).

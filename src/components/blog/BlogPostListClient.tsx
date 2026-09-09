@@ -32,9 +32,7 @@ const BlogPostListClient = ({
         .map((post: BlogPost, idx: number) => (
           <Fragment key={`${post.slug}-${idx}-blog-post-list`}>
             <BlogPostPreview key={post.slug} post={post} compact={compact} />
-            {!compact && idx < numberOfPostsDisplayed - 1 && (
-              <hr className="h-px my-3" />
-            )}
+            {!compact && idx < numberOfPostsDisplayed - 1 && <hr className="h-px my-3" />}
           </Fragment>
         ))}
     </div>
@@ -42,4 +40,3 @@ const BlogPostListClient = ({
 };
 
 export default BlogPostListClient;
-

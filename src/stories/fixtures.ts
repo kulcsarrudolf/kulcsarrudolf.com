@@ -43,8 +43,7 @@ export const posts: BlogPost[] = [
 export const projects: Project[] = [
   {
     title: "zimme-zoom",
-    subtitle:
-      "A small React library for click-to-zoom images with a photo viewer.",
+    subtitle: "A small React library for click-to-zoom images with a photo viewer.",
     slug: "zimme-zoom",
     order: 1,
     lang: "en",

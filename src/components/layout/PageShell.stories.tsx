@@ -29,9 +29,7 @@ const meta = {
     children: (
       <>
         <Title>A page</Title>
-        <Paragraph>
-          Whatever the route renders lands here, inside the card.
-        </Paragraph>
+        <Paragraph>Whatever the route renders lands here, inside the card.</Paragraph>
       </>
     ),
   },

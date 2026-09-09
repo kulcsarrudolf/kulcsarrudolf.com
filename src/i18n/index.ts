@@ -33,4 +33,3 @@ export function getLanguageFromString(lang: string | null | undefined): Language
   }
   return defaultLanguage;
 }
-

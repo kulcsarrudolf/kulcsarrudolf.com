@@ -85,16 +85,12 @@ const Navbar = () => {
     <nav
       aria-label={t("nav.menu") as string}
       className={`fixed left-0 top-0 z-20 w-full px-2 ${
-        isAnimated
-          ? "transition-[margin] duration-200 motion-reduce:transition-none"
-          : ""
+        isAnimated ? "transition-[margin] duration-200 motion-reduce:transition-none" : ""
       } ${isDocked ? "mt-0" : "mt-3 sm:mt-5"}`}
     >
       <div
         className={`mx-auto flex h-14 max-w-5xl items-center rounded-2xl bg-brand px-3 shadow-md sm:h-20 sm:px-4 ${
-          isAnimated
-            ? "transition-[border-radius] duration-200 motion-reduce:transition-none"
-            : ""
+          isAnimated ? "transition-[border-radius] duration-200 motion-reduce:transition-none" : ""
         } ${isDocked ? "rounded-t-none" : ""}`}
       >
         <Brand />

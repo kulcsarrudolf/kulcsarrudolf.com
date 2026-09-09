@@ -17,13 +17,11 @@ const NotFound = ({ recentPosts }: NotFoundProps) => {
         404
       </p>
 
-      <h1 className="text-2xl font-bold mt-2 mb-3 text-brand">
-        This page could not be found
-      </h1>
+      <h1 className="text-2xl font-bold mt-2 mb-3 text-brand">This page could not be found</h1>
 
       <p className="text-gray-600 max-w-md mb-8" style={{ lineHeight: "2rem" }}>
-        The address may be mistyped, or the page may have been moved or
-        removed. Let&apos;s get you back on track.
+        The address may be mistyped, or the page may have been moved or removed. Let&apos;s get you
+        back on track.
       </p>
 
       <div className="mb-12">
@@ -45,12 +43,8 @@ const NotFound = ({ recentPosts }: NotFoundProps) => {
                   params={{ slug: post.slug }}
                   className="block px-4 py-3 transition-colors hover:bg-gray-50"
                 >
-                  <span className="block font-medium text-brand">
-                    {post.title}
-                  </span>
-                  <span className="block text-sm text-gray-500 mt-0.5">
-                    {post.subtitle}
-                  </span>
+                  <span className="block font-medium text-brand">{post.title}</span>
+                  <span className="block text-sm text-gray-500 mt-0.5">{post.subtitle}</span>
                 </Link>
               </li>
             ))}

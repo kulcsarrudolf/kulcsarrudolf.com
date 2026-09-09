@@ -3,17 +3,16 @@
   "version": "0.2.0",
   "private": true,
   "type": "module",
-  "packageManager": "yarn@1.22.22",
-  "engines": {
-    "node": "24.x"
-  },
   "scripts": {
     "preinstall": "node -e \"if (!process.env.npm_config_user_agent || !process.env.npm_config_user_agent.startsWith('yarn/')) { console.error('This project uses Yarn. Please run: yarn install'); process.exit(1); }\"",
+    "prepare": "husky",
     "dev": "vite dev",
     "build": "vite build",
     "start": "node .output/server/index.mjs",
     "typecheck": "tsc --noEmit",
     "lint": "oxlint",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "deploy": "bash scripts/deploy.sh"
@@ -46,6 +45,9 @@
     "@types/react-dom": "^19.2.7",
     "@vitejs/plugin-react": "^6.1.1",
     "autoprefixer": "^10.5.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.5.0",
+    "oxfmt": "^0.67.0",
     "oxlint": "^1.82.0",
     "postcss": "^8.5.18",
     "storybook": "^10.6.0",
@@ -64,5 +66,18 @@
     "picomatch": "^2.3.2",
     "postcss": "^8.5.18",
     "yaml": "^2.8.3"
-  }
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,mjs,cjs}": [
+      "oxlint --fix --max-warnings=0",
+      "oxfmt"
+    ],
+    "*.{json,jsonc,css,md,yml,yaml}": [
+      "oxfmt"
+    ]
+  },
+  "engines": {
+    "node": "24.x"
+  },
+  "packageManager": "yarn@1.22.22"
 }

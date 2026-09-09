@@ -24,7 +24,8 @@ export const Narrow: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Constrained to a phone-sized width so one card shows at a time and the counter, dots and edge fades do their work.",
+        story:
+          "Constrained to a phone-sized width so one card shows at a time and the counter, dots and edge fades do their work.",
       },
     },
   },

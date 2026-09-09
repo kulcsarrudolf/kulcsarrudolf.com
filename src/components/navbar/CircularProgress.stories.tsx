@@ -18,7 +18,8 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: "The green ring that fills up around the navbar avatar while it is hovered. It is absolutely positioned, so the story wraps it in a relative box.",
+        component:
+          "The green ring that fills up around the navbar avatar while it is hovered. It is absolutely positioned, so the story wraps it in a relative box.",
       },
     },
   },

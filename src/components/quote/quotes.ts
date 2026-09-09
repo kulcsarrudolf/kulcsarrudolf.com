@@ -19,20 +19,17 @@ const quotes: Quote[] = [
   },
   {
     id: "4d5e6f7g",
-    quote:
-      "Focus on one thing, make it your priority, and stick with it no matter what!",
+    quote: "Focus on one thing, make it your priority, and stick with it no matter what!",
     author: "Tyler Perry",
   },
   {
     id: "5e6f7g8h",
-    quote:
-      "Perseverance is not a long race; it is many short races one after the other.",
+    quote: "Perseverance is not a long race; it is many short races one after the other.",
     author: "Walter Elliot",
   },
   {
     id: "6f7g8h9i",
-    quote:
-      "There are two kinds of decisions - the right decision and a lesson learned.",
+    quote: "There are two kinds of decisions - the right decision and a lesson learned.",
     author: "Simon Sinek",
   },
   {
@@ -59,8 +56,7 @@ const quotes: Quote[] = [
   },
   {
     id: "1k2l3m4n",
-    quote:
-      "The best time to plant a tree was 20 years ago. The second best time is now.",
+    quote: "The best time to plant a tree was 20 years ago. The second best time is now.",
     author: "Chinese proverb",
   },
   {
@@ -75,8 +71,7 @@ const quotes: Quote[] = [
   },
   {
     id: "4n5o6p7q",
-    quote:
-      "The meaning of life is to find your gift. The purpose of life is to give it away.",
+    quote: "The meaning of life is to find your gift. The purpose of life is to give it away.",
     author: "Pablo Picasso",
   },
 ];
