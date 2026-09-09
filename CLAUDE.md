@@ -26,7 +26,36 @@ Before writing markup, check whether one of these already covers it:
 | A quotation in a bordered card | `components/quote/QuoteCard` |
 | The `[HU]` marker on Hungarian content | `components/general/LanguageBadge` |
 | A labelled form input or textarea | `components/contact/FormField` |
-| Headings and body copy | `components/general/typography` |
+| Headings, body copy, a muted intro, small print | `components/general/typography` |
+| A two-column grid of cards | `components/general/CardGrid` |
+| A rule between sections, with or without a label | `components/general/Divider` |
+| The closing block under a page's content | `components/general/EndNote` |
+| The frame a page sits in: the centred column and the card | `components/layout/PageShell` |
+
+## Where Tailwind lives
+
+Tailwind classes only appear in files under `src/components/`.
+Everywhere else (routes, pages, `lib`, `i18n`) composes components and passes them props, rather than styling markup itself.
+
+`yarn lint` enforces this through `boundary/no-tailwind`, a local rule in [.oxlint/tailwind-boundary.js](./.oxlint/tailwind-boundary.js).
+It reads each `className` string literal and asks Tailwind itself whether the classes in it are Tailwind's own, so the project's own classes (`hide-scrollbar`, `nav-label`) pass and `bg-surface` or `nav:hidden` do not.
+Inline `style` is refused the same way, so it cannot become the side door out.
+
+When a route or a page needs markup it does not have, the answer is a component, not a `className`:
+
+| Instead of | Write |
+| --- | --- |
+| `<div className="grid gap-6 sm:grid-cols-2">` | `<CardGrid>` |
+| `<hr className="my-6" />` | `<Divider />` |
+| `<p className="text-gray-600 mb-6">` | `<Lead>` |
+
+A rule with no way out is a rule that gets deleted the first time it blocks something urgent, so there is one:
+
+```tsx
+// oxlint-disable-next-line boundary/no-tailwind -- why this one has to stay
+```
+
+The reason is not optional, and there are none in the codebase today.
 
 ## Colour
 
@@ -44,6 +73,10 @@ Call `useLangSearch()` from `@/i18n/useLangSearch` and spread the result into a 
 
 Every component under `src/components/` has a `*.stories.tsx` next to it.
 A new component file means a new story file in the same commit.
+
+The one exception is `components/layout/RootDocument`, which renders `<html>` and `<body>`.
+Storybook draws every story inside a document of its own, so a second one nested in it shows nothing worth looking at.
+The part that can be looked at is `PageShell`, and that has a story.
 
 ## Checks
 
