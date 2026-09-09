@@ -1,0 +1,46 @@
+# syntax=docker/dockerfile:1
+
+# Tracks the 24 in .nvmrc and the "24.x" in engines.node. The bookworm-slim tag
+# also ships yarn 1.22.22, exactly what packageManager pins, so there is no
+# corepack step and the yarn-only preinstall guard in package.json passes as is.
+#
+# Debian rather than Alpine: @tailwindcss/oxide, lightningcss, rolldown and the
+# oxc binaries all publish glibc builds, and those are the ones CI and Vercel
+# exercise, so the container runs what the other two run.
+FROM node:24-bookworm-slim
+
+# HUSKY=0 makes the `prepare` script a no-op. The git hooks belong to the host
+# checkout, and CI installs the same way.
+ENV HUSKY=0 \
+    YARN_CACHE_FOLDER=/home/node/.yarn-cache
+
+# Both directories are created and handed to `node` before privileges drop, so
+# the unprivileged user owns node_modules outright. Doing it afterwards with a
+# recursive chown would copy the entire dependency tree into a second layer.
+RUN mkdir -p /app "$YARN_CACHE_FOLDER" && chown node:node /app "$YARN_CACHE_FOLDER"
+
+USER node
+WORKDIR /app
+
+# Only the manifests, so this layer survives every source change. The source
+# itself arrives as a bind mount at run time and is never copied in.
+COPY --chown=node:node package.json yarn.lock ./
+
+# yarn 1 gives up early on a slow registry, hence the timeout. The cache mount
+# keeps tarballs between builds; at run time a compose volume takes the same path.
+RUN --mount=type=cache,target=/home/node/.yarn-cache,uid=1000,gid=1000 \
+    yarn install --frozen-lockfile --network-timeout 600000
+
+# Copied after the install so editing the script does not invalidate it, and
+# outside /app because the bind mount replaces that directory wholesale.
+COPY --chown=root:root --chmod=0755 docker/entrypoint.sh /usr/local/bin/entrypoint.sh
+
+# 3000 is the dev server, 6006 Storybook.
+EXPOSE 3000 6006
+
+ENTRYPOINT ["entrypoint.sh"]
+
+# --host is required: vite.config.ts sets a port but no host, so the default
+# binding is localhost and a published port would reach nothing. compose.yaml
+# overrides this for the storybook service.
+CMD ["yarn", "dev", "--host", "0.0.0.0"]
