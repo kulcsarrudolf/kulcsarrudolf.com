@@ -1,3 +1,4 @@
+import CardGrid from "@/components/general/CardGrid";
 import { Paragraph, Title } from "@/components/general/typography";
 import QuoteCard from "@/components/quote/QuoteCard";
 import quotes from "@/components/quote/quotes";
@@ -11,17 +12,11 @@ export default function QuotesPage() {
     <>
       <Title>{t("quotes.title")}</Title>
       <Paragraph>{t("quotes.description")}</Paragraph>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <CardGrid>
         {quotes.map((quote: Quote) => (
-          <QuoteCard
-            key={quote.id}
-            quote={quote}
-            size="md"
-            interactive
-            className="mb-4"
-          />
+          <QuoteCard key={quote.id} quote={quote} size="md" interactive />
         ))}
-      </div>
+      </CardGrid>
     </>
   );
 }

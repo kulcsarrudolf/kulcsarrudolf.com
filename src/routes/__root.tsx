@@ -1,15 +1,11 @@
 import { config } from "@fortawesome/fontawesome-svg-core";
-import {
-  HeadContent,
-  Outlet,
-  Scripts,
-  createRootRoute,
-} from "@tanstack/react-router";
+import { Outlet, createRootRoute } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 
 import Footer from "@/components/footer/Footer";
 import ConditionalSpeedInsights from "@/components/general/SpeedInsights";
-import Navbar from "@/components/navbar/Navbar";
+import PageShell from "@/components/layout/PageShell";
+import RootDocument from "@/components/layout/RootDocument";
 import NotFound from "@/components/NotFound";
 import {
   AUTHOR_NAME,
@@ -74,7 +70,7 @@ export const Route = createRootRoute({
       ],
     };
   },
-  shellComponent: RootDocument,
+  shellComponent: Shell,
   component: Outlet,
   notFoundComponent: NotFoundPage,
 });
@@ -84,26 +80,12 @@ function NotFoundPage() {
   return <NotFound recentPosts={recentPosts} />;
 }
 
-function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
+function Shell({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <html suppressHydrationWarning lang="en" className="bg-surface p-2">
-      <head>
-        <HeadContent />
-      </head>
-      {/* Clears the fixed navbar, less the 8px of padding on <html>: the bar
-          sits 12px down and is 56px tall on phones, 20px and 80px from 640px
-          up. Both leave the same 20px between the bar and the first card. */}
-      <body suppressHydrationWarning className="mt-20 sm:mt-28">
-        <div className="mx-auto max-w-5xl">
-          <Navbar />
-          <div className="border border-gray-300 p-4 rounded-xl shadow-md">
-            {children}
-          </div>
-        </div>
-        <Footer />
-        <ConditionalSpeedInsights />
-        <Scripts />
-      </body>
-    </html>
+    <RootDocument>
+      <PageShell>{children}</PageShell>
+      <Footer />
+      <ConditionalSpeedInsights />
+    </RootDocument>
   );
 }

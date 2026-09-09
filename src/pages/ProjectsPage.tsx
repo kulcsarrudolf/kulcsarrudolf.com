@@ -1,4 +1,6 @@
-import { Title } from "@/components/general/typography";
+import CardGrid from "@/components/general/CardGrid";
+import EndNote from "@/components/general/EndNote";
+import { Lead, Note, Title } from "@/components/general/typography";
 import Link from "@/components/general/typography/Link";
 import ProjectCard from "@/components/projects/ProjectCard";
 import { useTranslation } from "@/i18n/useTranslation";
@@ -14,14 +16,14 @@ export default function ProjectsPage({ projects }: ProjectsPageProps) {
   return (
     <>
       <Title>{t("projects.title")}</Title>
-      <p className="text-gray-600 mb-6">{t("projects.description")}</p>
-      <div className="grid gap-4 sm:grid-cols-2">
+      <Lead>{t("projects.description")}</Lead>
+      <CardGrid>
         {(projects || []).map((project) => (
           <ProjectCard key={project.slug} project={project} />
         ))}
-      </div>
-      <div className="mt-8 pt-6 border-t border-gray-200 text-center">
-        <p className="text-gray-600 text-sm">
+      </CardGrid>
+      <EndNote centered>
+        <Note>
           {t("projects.moreOnGitHub", {
             githubLink: (
               <Link href="https://github.com/kulcsarrudolf">
@@ -29,8 +31,8 @@ export default function ProjectsPage({ projects }: ProjectsPageProps) {
               </Link>
             ),
           })}
-        </p>
-      </div>
+        </Note>
+      </EndNote>
     </>
   );
 }

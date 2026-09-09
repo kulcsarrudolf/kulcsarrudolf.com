@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import ArrowLink from "@/components/general/ArrowLink";
+import EndNote from "@/components/general/EndNote";
 
 import { Subtitle, Title } from "@/components/general/typography";
 import MarkdownBody from "@/components/markdown/MarkdownBody";
@@ -86,15 +87,13 @@ function ProjectPage() {
       <Title>{project.title}</Title>
       <Subtitle>{project.subtitle}</Subtitle>
       <ProjectLinks project={project} />
-      <div className="prose prose-sans container mx-auto max-w-none">
-        <MarkdownBody content={project.content} />
-      </div>
+      <MarkdownBody content={project.content} />
       <RelatedPosts posts={relatedPosts} />
-      <div className="mt-8 pt-6 border-t border-gray-200">
+      <EndNote>
         <ArrowLink to="/projects" direction="back">
           Back to all projects
         </ArrowLink>
-      </div>
+      </EndNote>
     </article>
   );
 }
