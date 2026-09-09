@@ -1,0 +1,25 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Introduction" />
+
+# kulcsarrudolf.com components
+
+Every UI component of the site has a story here, grouped the same way as
+`src/components/`.
+
+A few things to know:
+
+- **Language.** The toolbar has a language switch (English / Magyar).
+  It sets the `?lang=` query parameter on the story's in-memory router,
+  which is exactly how the site picks its language, so every translated
+  component reacts to it.
+- **Router.** Stories render inside a real TanStack Router with an in-memory
+  history, so `<Link>`, `useNavigate` and `useSearch` all work.
+  Navigation stays inside the story; nothing leaves the page.
+- **Backgrounds.** The default background matches the site (`#E9EBEE`).
+  Stories for white-on-blue navbar pieces switch to the navbar colour.
+- **Static files.** `public/` is served at the root, so `/images/...` paths
+  resolve like they do in production.
+
+Run it locally with `yarn storybook`, build a static version with
+`yarn build-storybook`.
