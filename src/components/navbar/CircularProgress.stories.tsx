@@ -24,7 +24,7 @@ const meta = {
   },
   render: (args) => (
     <div
-      className="relative flex items-center justify-center rounded-full bg-[#4267b2]"
+      className="relative flex items-center justify-center rounded-full bg-brand"
       style={{ width: args.size, height: args.size }}
     >
       <img

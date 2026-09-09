@@ -1,79 +1,134 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
+import type { ReactNode } from "react";
 
 import { useTranslation } from "@/i18n/useTranslation";
 import type NavbarElement from "@/types/navbar-element.type";
 
-import { NAVBAR_ELEMENTS } from "./navber-links";
+import { NAVBAR_ELEMENTS } from "./navbar-links";
+
+/**
+ * `bar` is the horizontal list inside the blue bar; `sheet` is the stacked
+ * full-width list inside the mobile menu. The link set is identical, so it
+ * lives here once and only the presentation branches.
+ */
+type MenuVariant = "bar" | "sheet";
 
 interface MenuItemsProps {
-  onClick: () => void;
+  variant?: MenuVariant;
+  onNavigate?: () => void;
 }
 
 const isExternal = (href: NavbarElement["href"]): href is `https://${string}` =>
   href.startsWith("http");
 
-const MenuItems = ({ onClick }: MenuItemsProps) => {
-  const { t, lang } = useTranslation();
+const under = (pathname: string, base: string) =>
+  pathname === base || pathname.startsWith(`${base}/`);
 
-  const getTranslatedTitle = (title: string) => {
-    const titleMap: Record<string, string> = {
-      Home: t("nav.home") as string,
-      Blog: t("nav.blog") as string,
-      Projects: t("nav.projects") as string,
-      "Résumé": t("nav.resume") as string,
-      Contact: t("nav.contact") as string,
-    };
-    return titleMap[title] || title;
+/**
+ * One rule for the current page, rather than leaning on the router's own
+ * matching. "/" has to be exact or it matches everything, and Blog has to cover
+ * `/posts/<slug>`, which is not nested under `/blog` at all.
+ */
+const isCurrent = (element: NavbarElement, pathname: string) => {
+  if (isExternal(element.href)) return false;
+  if (element.href === "/") return pathname === "/";
+  if (under(pathname, element.href)) return true;
+  return (element.matchPrefixes ?? []).some((prefix) => under(pathname, prefix));
+};
+
+// The current entry carries `data-status="active"`, so it styles itself in CSS.
+const BAR_LINK =
+  "flex min-h-11 items-center rounded-md py-1 text-white transition-colors hover:text-white/75 data-[status=active]:bg-brand-active data-[status=active]:px-3 data-[status=active]:font-semibold data-[status=active]:text-white data-[status=active]:hover:text-white";
+
+const BAR_CTA =
+  "flex min-h-11 items-center rounded-md bg-white px-3 py-1 font-medium text-blue-600 transition-colors hover:bg-white/90";
+
+const SHEET_LINK =
+  "flex min-h-14 w-full items-center rounded-lg px-4 text-xl font-semibold text-gray-800 transition-colors hover:bg-gray-100 data-[status=active]:bg-brand data-[status=active]:text-white data-[status=active]:hover:bg-brand";
+
+const SHEET_CTA =
+  "flex min-h-14 w-full items-center justify-center rounded-lg bg-brand px-4 text-xl font-semibold text-white transition-colors hover:bg-brand-hover";
+
+const MenuItems = ({ variant = "bar", onNavigate }: MenuItemsProps) => {
+  const { t, lang } = useTranslation();
+  const pathname = useRouterState({
+    select: (state) => state.location.pathname,
+  });
+
+  const classNameFor = (element: NavbarElement) => {
+    if (variant === "sheet") return element.cta ? SHEET_CTA : SHEET_LINK;
+    return element.cta ? BAR_CTA : BAR_LINK;
   };
 
-  const linkClassName = "mb-4 md:mb-0 flex items-center";
+  // In the bar the links only appear once they fit: the call to action from
+  // `socials` up, the rest from `nav` up. In the sheet everything is visible.
+  const itemClassName = (element: NavbarElement) => {
+    if (variant === "sheet") {
+      // A hairline separates the call to action from the navigation above it,
+      // so it reads as a button rather than a fourth destination.
+      return element.cta
+        ? "mt-5 w-full border-t border-gray-200 pt-5"
+        : "w-full";
+    }
+    return element.cta ? "hidden socials:block" : "hidden nav:block";
+  };
+
+  const renderLink = (element: NavbarElement): ReactNode => {
+    const label = t(element.labelKey);
+    const className = classNameFor(element);
+    const target = element.openInNewTab ? "_blank" : undefined;
+    const current = isCurrent(element, pathname);
+    const currentProps = current
+      ? { "data-status": "active", "aria-current": "page" as const }
+      : {};
+
+    // External links never carry the lang query param.
+    if (isExternal(element.href)) {
+      return (
+        <a
+          href={element.href}
+          target={target}
+          rel={element.openInNewTab ? "noopener noreferrer" : undefined}
+          onClick={onNavigate}
+          className={className}
+        >
+          {label}
+        </a>
+      );
+    }
+
+    return (
+      <Link
+        to={element.href}
+        // Keep the chosen language across internal navigation.
+        search={{ lang: lang !== "en" ? lang : undefined }}
+        target={target}
+        onClick={onNavigate}
+        className={className}
+        // The router's own active matching is off: it would treat a different
+        // `?lang` as a different page, and it cannot know about /posts.
+        activeProps={{}}
+        inactiveProps={{}}
+        {...currentProps}
+      >
+        {label}
+      </Link>
+    );
+  };
 
   return (
-    <ul className="flex flex-col font-medium md:flex-row md:items-center md:space-x-4">
-      {NAVBAR_ELEMENTS.map((element) => {
-        const isContact = element.title === "Contact";
-        const label = (
-          <p
-            className={
-              isContact
-                ? "text-blue-600 bg-white px-3 py-1 rounded-md hover:font-bold"
-                : "text-white hover:font-bold py-1"
-            }
-          >
-            {getTranslatedTitle(element.title)}
-          </p>
-        );
-
-        // External links never carry the lang query param.
-        if (isExternal(element.href)) {
-          return (
-            <a
-              key={element.title}
-              href={element.href}
-              target={element.openInNewTab ? "_blank" : "_self"}
-              rel={element.openInNewTab ? "noopener noreferrer" : undefined}
-              onClick={onClick}
-              className={linkClassName}
-            >
-              {label}
-            </a>
-          );
-        }
-
-        return (
-          <Link
-            key={element.title}
-            to={element.href}
-            // Keep the chosen language across internal navigation.
-            search={{ lang: lang !== "en" ? lang : undefined }}
-            target={element.openInNewTab ? "_blank" : "_self"}
-            onClick={onClick}
-            className={linkClassName}
-          >
-            {label}
-          </Link>
-        );
-      })}
+    <ul
+      className={
+        variant === "sheet"
+          ? "flex w-full flex-col gap-1.5"
+          : "flex items-center gap-4"
+      }
+    >
+      {NAVBAR_ELEMENTS.map((element) => (
+        <li key={element.labelKey} className={itemClassName(element)}>
+          {renderLink(element)}
+        </li>
+      ))}
     </ul>
   );
 };

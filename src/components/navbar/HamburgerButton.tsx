@@ -1,20 +1,31 @@
 interface HamburgerButtonProps {
   onClick: () => void;
+  isOpen: boolean;
+  /** Id of the element this button controls, for `aria-controls`. */
+  controls: string;
+  label: string;
+  className?: string;
 }
-const HamburgerButton = ({ onClick }: HamburgerButtonProps) => (
+
+const HamburgerButton = ({
+  onClick,
+  isOpen,
+  controls,
+  label,
+  className = "",
+}: HamburgerButtonProps) => (
   <button
-    data-collapse-toggle="navbar-sticky"
     type="button"
-    className="ml-5 inline-flex items-center p-2 md:hidden hover:bg-[#3b64b8] hover:shadow-lg hover:rounded-lg border border-transparent hover:border-white"
-    aria-controls="navbar-sticky"
-    aria-expanded="false"
+    className={`inline-flex h-11 w-11 items-center justify-center rounded-lg border border-transparent text-white transition-colors hover:border-white hover:bg-brand-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white ${className}`}
+    aria-controls={controls}
+    aria-expanded={isOpen}
+    aria-label={label}
     onClick={onClick}
   >
-    <span className="sr-only">Open main menu</span>
     <svg
-      className="w-6 h-6"
+      className="h-6 w-6"
       aria-hidden="true"
-      fill="#fff"
+      fill="currentColor"
       viewBox="0 0 20 20"
       xmlns="http://www.w3.org/2000/svg"
     >

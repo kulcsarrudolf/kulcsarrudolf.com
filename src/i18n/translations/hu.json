@@ -4,7 +4,10 @@
     "blog": "Blog",
     "projects": "Projektek",
     "resume": "CV",
-    "contact": "Kapcsolat"
+    "contact": "Kapcsolat",
+    "menu": "Menü",
+    "close": "Menü bezárása",
+    "openMenu": "Főmenü megnyitása"
   },
   "home": {
     "title": "Rólam",

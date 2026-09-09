@@ -45,7 +45,7 @@ const Quote = ({ quote: propQuote, clickable = true, className = "" }: QuoteProp
       >
         &ldquo;{quote.quote}&rdquo;
       </p>
-      <p className="text-[#3b64b8] font-semibold text-lg tracking-wide">
+      <p className="text-brand-active font-semibold text-lg tracking-wide">
         — {quote.author}
       </p>
     </div>

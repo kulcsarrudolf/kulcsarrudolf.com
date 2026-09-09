@@ -7,9 +7,16 @@ const meta = {
   title: "Navbar/MenuItems",
   component: MenuItems,
   args: {
-    onClick: fn(),
+    onNavigate: fn(),
   },
-  globals: { backgrounds: { value: "navbar" } },
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "One link list, two presentations. The current page marks itself from TanStack Router's `data-status=\"active\"`, fuzzy so a post at /blog/<slug> keeps Blog highlighted.",
+      },
+    },
+  },
   decorators: [
     (Story) => (
       <div className="p-4">
@@ -22,15 +29,35 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Desktop: Story = {};
-
-export const Stacked: Story = {
+export const Bar: Story = {
+  args: { variant: "bar" },
+  globals: { backgrounds: { value: "navbar" } },
   parameters: {
     docs: {
       description: {
-        story: "Below the `md` breakpoint the items stack vertically inside the open hamburger menu.",
+        story:
+          "Items appear as they fit: the call to action from 546px, the rest from 706px. Below that this list is empty and the menu button takes over.",
       },
     },
   },
-  globals: { viewport: { value: "mobile1", isRotated: false } },
+};
+
+export const Sheet: Story = {
+  args: { variant: "sheet" },
+  globals: { backgrounds: { value: "white" } },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Full-width rows inside the menu sheet: the whole row is the target and the highlight spans it.",
+      },
+    },
+  },
+  decorators: [
+    (Story) => (
+      <div className="w-[350px] p-4">
+        <Story />
+      </div>
+    ),
+  ],
 };

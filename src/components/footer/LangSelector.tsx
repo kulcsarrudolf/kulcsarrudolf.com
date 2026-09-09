@@ -4,12 +4,26 @@ import { languages, type Language } from "@/i18n";
 import { setStoredLanguage } from "@/i18n/languageStorage";
 import { useTranslation } from "@/i18n/useTranslation";
 
-const LangSelector = () => {
+interface LangSelectorProps {
+  className?: string;
+  /** Called after a language is picked, so the mobile menu can close itself. */
+  onSelect?: () => void;
+}
+
+const LABELS: Record<Language, string> = {
+  en: "English",
+  hu: "Magyar",
+};
+
+const LangSelector = ({ className = "", onSelect }: LangSelectorProps) => {
   const navigate = useNavigate();
   const { lang } = useTranslation();
 
   const changeLanguage = (newLang: Language) => {
-    if (newLang === lang) return;
+    if (newLang === lang) {
+      onSelect?.();
+      return;
+    }
 
     setStoredLanguage(newLang);
     // Stay on the current page and only swap the lang query param.
@@ -17,23 +31,23 @@ const LangSelector = () => {
       to: ".",
       search: (prev) => ({ ...prev, lang: newLang }),
     });
+    onSelect?.();
   };
 
   return (
-    <div className="flex items-center gap-3">
+    <div className={`flex items-center gap-3 ${className}`}>
       {languages.map((language) => (
-        <span key={language}>
-          <button
-            onClick={() => changeLanguage(language)}
-            className={`hover:underline ${
-              lang === language
-                ? "font-semibold text-blue-600"
-                : "text-gray-600"
-            }`}
-          >
-            {language === "en" ? "English" : "Magyar"}
-          </button>
-        </span>
+        <button
+          key={language}
+          type="button"
+          onClick={() => changeLanguage(language)}
+          aria-current={lang === language ? "true" : undefined}
+          className={`rounded px-1 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand ${
+            lang === language ? "font-semibold text-brand" : "text-gray-600"
+          }`}
+        >
+          {LABELS[language]}
+        </button>
       ))}
     </div>
   );

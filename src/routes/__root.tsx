@@ -86,16 +86,12 @@ function NotFoundPage() {
 
 function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <html
-      suppressHydrationWarning
-      lang="en"
-      className="p-2"
-      style={{ backgroundColor: "#E9EBEE" }}
-    >
+    <html suppressHydrationWarning lang="en" className="bg-surface p-2">
       <head>
         <HeadContent />
       </head>
-      <body suppressHydrationWarning style={{ marginTop: "7rem" }}>
+      {/* Clears the fixed navbar: 20px of top margin plus its 80px bar. */}
+      <body suppressHydrationWarning className="mt-28">
         <div className="mx-auto max-w-5xl">
           <Navbar />
           <div className="border border-gray-300 p-4 rounded-xl shadow-md">
