@@ -80,12 +80,7 @@ function PostPage() {
       <Title itemProp="headline">{post.title}</Title>
       <Subtitle itemProp="description">{post.subtitle}</Subtitle>
       <PostedOn date={post.date} />
-      <div
-        className="prose prose-sans container mx-auto max-w-none"
-        itemProp="articleBody"
-      >
-        <MarkdownBody content={post.content} />
-      </div>
+      <MarkdownBody content={post.content} itemProp="articleBody" />
     </article>
   );
 }

@@ -3,6 +3,7 @@ import Title from "@/components/general/typography/Title";
 import Link from "@/components/general/typography/Link";
 import { useTranslation } from "@/i18n/useTranslation";
 import BlogPostListClient from "@/components/blog/BlogPostListClient";
+import Divider from "@/components/general/Divider";
 import type BlogPost from "@/types/blog-post.type";
 import CurrentFocus from "@/components/general/current-focus/CurrentFocus";
 import LetsTalk from "@/components/general/lets-talk/LetsTalk";
@@ -49,11 +50,11 @@ export default function HomePageContent({ posts }: HomePageContentProps) {
 
       <Paragraph>{t("home.paragraph4")}</Paragraph>
 
-      <hr className="my-4" />
+      <Divider />
       <LetsTalk />
-      <hr className="my-4" />
+      <Divider />
       <CurrentFocus />
-      <hr className="my-4" />
+      <Divider />
       <BlogPostListClient
         title={String(t("home.latestBlogs")) as string}
         posts={posts}

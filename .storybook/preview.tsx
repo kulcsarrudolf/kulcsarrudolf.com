@@ -114,6 +114,7 @@ const preview: Preview = {
         order: [
           "Introduction",
           "Typography",
+          "Layout",
           "General",
           "Navbar",
           "Footer",

@@ -1,7 +1,9 @@
-import { Title, Paragraph } from "@/components/general/typography";
+import ContactCallout from "@/components/contact/ContactCallout";
+import ContactForm from "@/components/contact/ContactForm";
+import Divider from "@/components/general/Divider";
+import { Paragraph, Title } from "@/components/general/typography";
 import Link from "@/components/general/typography/Link";
 import { useTranslation } from "@/i18n/useTranslation";
-import ContactForm from "@/components/contact/ContactForm";
 
 const linkedInLink = (
   <Link href="https://www.linkedin.com/in/kulcsarrudolf">LinkedIn</Link>
@@ -14,18 +16,10 @@ export default function ContactPage() {
     <>
       <Title>{t("contact.title")}</Title>
       <Paragraph>{t("contact.description")}</Paragraph>
-      <div className="text-center my-6">
-        <p className="text-lg font-semibold text-gray-800">
-          {t("contact.linkedinText", { linkedInLink })}
-        </p>
-      </div>
-      <div className="flex items-center my-6">
-        <div className="flex-1 border-t border-gray-300"></div>
-        <span className="px-4 text-gray-500 text-sm">
-          {t("contact.dividerText")}
-        </span>
-        <div className="flex-1 border-t border-gray-300"></div>
-      </div>
+      <ContactCallout>
+        {t("contact.linkedinText", { linkedInLink })}
+      </ContactCallout>
+      <Divider label={t("contact.dividerText")} />
       <ContactForm />
     </>
   );
