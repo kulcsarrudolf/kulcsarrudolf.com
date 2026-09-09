@@ -36,7 +36,8 @@ export const Grid: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Cards in the responsive grid used on `/projects`. The footers line up because the body of each card grows to fill the row.",
+        story:
+          "Cards in the responsive grid used on `/projects`. The footers line up because the body of each card grows to fill the row.",
       },
     },
   },

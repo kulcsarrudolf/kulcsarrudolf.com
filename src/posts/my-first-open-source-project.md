@@ -4,7 +4,20 @@ subtitle: "From inspiration to code and real-world impact"
 author: "Kulcsar Rudolf"
 date: "2024-10-24"
 description: "Join me on my journey of creating my first open-source project. Learn about the samsung-device-helper npm package, the inspiration behind it, and the importance of contributing to the open-source community."
-keywords: ["open source", "open-source project", "npm package", "samsung devices", "hacktoberfest", "software development", "contribution", "github", "javascript", "nodejs", "community"]
+keywords:
+  [
+    "open source",
+    "open-source project",
+    "npm package",
+    "samsung devices",
+    "hacktoberfest",
+    "software development",
+    "contribution",
+    "github",
+    "javascript",
+    "nodejs",
+    "community",
+  ]
 private: false
 ---
 

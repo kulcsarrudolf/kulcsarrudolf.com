@@ -13,9 +13,7 @@ import {
 // navigation. These server functions keep the filesystem-backed content
 // behind an RPC boundary so loaders can call them from either side.
 
-export const fetchPosts = createServerFn({ method: "GET" }).handler(() =>
-  getPostMetadata()
-);
+export const fetchPosts = createServerFn({ method: "GET" }).handler(() => getPostMetadata());
 
 export const fetchRecentPosts = createServerFn({ method: "GET" })
   .validator((limit: number) => limit)
@@ -33,9 +31,7 @@ export const fetchPost = createServerFn({ method: "GET" })
     return post;
   });
 
-export const fetchProjects = createServerFn({ method: "GET" }).handler(() =>
-  getProjectMetadata()
-);
+export const fetchProjects = createServerFn({ method: "GET" }).handler(() => getProjectMetadata());
 
 export const fetchProject = createServerFn({ method: "GET" })
   .validator((slug: string) => slug)

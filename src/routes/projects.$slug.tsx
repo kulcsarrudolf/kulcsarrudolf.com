@@ -12,8 +12,7 @@ import { pageHead } from "@/lib/seo";
 import { fetchProject } from "@/server/functions";
 import type Project from "@/types/project.type";
 
-const describeProject = (project: Project): string =>
-  project.description || project.subtitle;
+const describeProject = (project: Project): string => project.description || project.subtitle;
 
 const buildStructuredData = (project: Project, url: string) => ({
   "@context": "https://schema.org",
@@ -29,13 +28,9 @@ const buildStructuredData = (project: Project, url: string) => ({
       maintainer: { "@id": `${SITE_URL}/#person` },
       ...(project.github ? { codeRepository: project.github } : {}),
       ...(project.tech?.length ? { programmingLanguage: project.tech } : {}),
-      ...(project.keywords?.length
-        ? { keywords: project.keywords.join(", ") }
-        : {}),
+      ...(project.keywords?.length ? { keywords: project.keywords.join(", ") } : {}),
       ...(project.date ? { datePublished: project.date } : {}),
-      ...(project.updated || project.date
-        ? { dateModified: project.updated || project.date }
-        : {}),
+      ...(project.updated || project.date ? { dateModified: project.updated || project.date } : {}),
     },
     {
       "@type": "BreadcrumbList",

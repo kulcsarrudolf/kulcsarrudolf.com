@@ -13,8 +13,7 @@ interface NavSheetProps {
   onClose: () => void;
 }
 
-const FOCUSABLE =
-  'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 /**
  * The mobile menu, built from the vocabulary the site already owns: the same
@@ -42,9 +41,7 @@ const NavSheet = ({ id, onClose }: NavSheetProps) => {
       if (event.key !== "Tab" || !panelRef.current) return;
 
       // Keep tabbing inside the sheet while it is open.
-      const items = Array.from(
-        panelRef.current.querySelectorAll<HTMLElement>(FOCUSABLE),
-      );
+      const items = Array.from(panelRef.current.querySelectorAll<HTMLElement>(FOCUSABLE));
       if (items.length === 0) return;
 
       const first = items[0];
@@ -79,11 +76,7 @@ const NavSheet = ({ id, onClose }: NavSheetProps) => {
         aria-label={t("nav.menu") as string}
         className="absolute inset-0 flex flex-col bg-white px-5 py-8"
       >
-        <CloseButton
-          ref={closeRef}
-          onClick={onClose}
-          label={t("nav.close") as string}
-        />
+        <CloseButton ref={closeRef} onClick={onClose} label={t("nav.close") as string} />
 
         <div className="mb-5 px-4">
           <Brand tone="onSurface" onNavigate={onClose} />
@@ -93,12 +86,7 @@ const NavSheet = ({ id, onClose }: NavSheetProps) => {
 
         <div className="flex-1" />
 
-        <SocialMediaLinks
-          size="md"
-          tone="onSurface"
-          padded
-          className="mb-2 justify-center"
-        />
+        <SocialMediaLinks size="md" tone="onSurface" padded className="mb-2 justify-center" />
         <LangSelector className="justify-center" onSelect={onClose} />
       </div>
     </div>

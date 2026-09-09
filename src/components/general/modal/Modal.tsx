@@ -26,12 +26,7 @@ const PANEL =
  * A dialog over a dimmed backdrop, fading and scaling in on mount and back out
  * on dismissal. Clicking the backdrop closes it; clicking the panel does not.
  */
-const Modal = ({
-  onClose,
-  children,
-  panelClassName = "p-6",
-  closeLabel,
-}: ModalProps) => {
+const Modal = ({ onClose, children, panelClassName = "p-6", closeLabel }: ModalProps) => {
   const { isVisible, close } = useModalTransition(onClose);
 
   return (
@@ -46,9 +41,7 @@ const Modal = ({
       <div
         role="dialog"
         aria-modal="true"
-        className={`${PANEL} ${panelClassName} ${
-          isVisible ? "scale-100" : "scale-95"
-        }`}
+        className={`${PANEL} ${panelClassName} ${isVisible ? "scale-100" : "scale-95"}`}
         onClick={(event) => event.stopPropagation()}
       >
         {closeLabel && <CloseButton onClick={close} label={closeLabel} />}

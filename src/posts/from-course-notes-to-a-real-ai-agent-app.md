@@ -94,11 +94,7 @@ I like React, but this project did not need React. I did not need a client-side 
 HTMX handled that with very little code. FastAPI returns HTML. Jinja renders the templates. HTMX swaps the right fragment into the page.
 
 ```html
-<form
-  hx-post="/quotes/{{ q._id }}/text"
-  hx-target="#quote-{{ q._id }}"
-  hx-swap="outerHTML"
->
+<form hx-post="/quotes/{{ q._id }}/text" hx-target="#quote-{{ q._id }}" hx-swap="outerHTML">
   <textarea name="text" required>{{ q.text }}</textarea>
   <button type="submit">Save</button>
 </form>

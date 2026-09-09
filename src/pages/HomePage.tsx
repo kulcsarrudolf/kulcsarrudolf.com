@@ -16,17 +16,13 @@ interface HomePageContentProps {
 // the sentence, so nothing here needs to be a component.
 const cvLink = <Link href="https://cv.kulcsarrudolf.com">CV</Link>;
 const gitHubLink = <Link href="https://github.com/kulcsarrudolf">GitHub</Link>;
-const innovatorSparkLink = (
-  <Link href="https://innovatorspark.com/">InnovatorSpark</Link>
-);
+const innovatorSparkLink = <Link href="https://innovatorspark.com/">InnovatorSpark</Link>;
 
 export default function HomePageContent({ posts }: HomePageContentProps) {
   const { t } = useTranslation();
 
   const clujLink = (
-    <Link href="https://en.wikipedia.org/wiki/Cluj-Napoca">
-      {t("home.clujNapoca")}
-    </Link>
+    <Link href="https://en.wikipedia.org/wiki/Cluj-Napoca">{t("home.clujNapoca")}</Link>
   );
 
   return (

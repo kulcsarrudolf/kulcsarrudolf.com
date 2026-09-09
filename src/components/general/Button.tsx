@@ -21,10 +21,8 @@ const VARIANTS: Record<ButtonVariant, string> = {
  * The button look on its own, for the anchors and router links that have to
  * read as buttons without being one.
  */
-export const buttonClasses = (
-  variant: ButtonVariant = "primary",
-  className = "",
-) => `${BASE} ${VARIANTS[variant]} ${className}`.trim();
+export const buttonClasses = (variant: ButtonVariant = "primary", className = "") =>
+  `${BASE} ${VARIANTS[variant]} ${className}`.trim();
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;

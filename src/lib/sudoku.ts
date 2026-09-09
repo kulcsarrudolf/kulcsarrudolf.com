@@ -264,11 +264,7 @@ function listbits(bits: number): number[] {
   return list;
 }
 
-function pickbetter(
-  b: Guess | null,
-  c: number,
-  t: Guess
-): { guess: Guess; count: number } {
+function pickbetter(b: Guess | null, c: number, t: Guess): { guess: Guess; count: number } {
   if (b === null || t.length < b.length) {
     return {
       guess: t,

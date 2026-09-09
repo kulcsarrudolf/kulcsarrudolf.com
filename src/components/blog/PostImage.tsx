@@ -18,7 +18,7 @@ const PostImage = ({ src, alt, title }: PostImageProps) => {
       alt,
       title,
     }),
-    [alt, src, title]
+    [alt, src, title],
   );
 
   return (

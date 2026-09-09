@@ -53,13 +53,7 @@ function createStoryRouter(lang: string) {
   });
 }
 
-function RouterDecorator({
-  lang,
-  children,
-}: {
-  lang: string;
-  children: ReactNode;
-}) {
+function RouterDecorator({ lang, children }: { lang: string; children: ReactNode }) {
   const router = useMemo(() => createStoryRouter(lang), [lang]);
 
   return (

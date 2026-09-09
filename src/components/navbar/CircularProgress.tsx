@@ -4,11 +4,7 @@ interface CircularProgressProps {
   strokeWidth?: number;
 }
 
-const CircularProgress = ({
-  progress,
-  size = 48,
-  strokeWidth = 3,
-}: CircularProgressProps) => {
+const CircularProgress = ({ progress, size = 48, strokeWidth = 3 }: CircularProgressProps) => {
   const radius = (size - strokeWidth) / 2;
   const circumference = radius * 2 * Math.PI;
   const offset = circumference - (progress / 100) * circumference;

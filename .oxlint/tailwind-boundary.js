@@ -33,8 +33,7 @@ const isTailwind = (token) => {
   if (!answers.has(token)) {
     answers.set(
       token,
-      MARKERS.test(token) ||
-        generateRules(new Set([token]), tailwindContext).length > 0,
+      MARKERS.test(token) || generateRules(new Set([token]), tailwindContext).length > 0,
     );
   }
 
@@ -43,8 +42,7 @@ const isTailwind = (token) => {
 
 // A `className` may hold classes this project defines itself, `hide-scrollbar`
 // and `nav-label` among them. Those are not Tailwind and are left alone.
-const tailwindIn = (value) =>
-  value.split(/\s+/).filter(Boolean).filter(isTailwind);
+const tailwindIn = (value) => value.split(/\s+/).filter(Boolean).filter(isTailwind);
 
 // `className="…"` and `className={"…"}` both reach here. `className={expr}`
 // does not: a computed class list is not something this rule can read, and
@@ -55,9 +53,7 @@ const stringLiteral = (attributeValue) => {
   }
 
   const node =
-    attributeValue.type === "JSXExpressionContainer"
-      ? attributeValue.expression
-      : attributeValue;
+    attributeValue.type === "JSXExpressionContainer" ? attributeValue.expression : attributeValue;
 
   return node.type === "Literal" && typeof node.value === "string" ? node : null;
 };
@@ -73,8 +69,7 @@ const rule = {
         if (name === "style") {
           context.report({
             node,
-            message:
-              "Inline styles belong in a component under `src/components/`.",
+            message: "Inline styles belong in a component under `src/components/`.",
           });
           return;
         }

@@ -10,9 +10,7 @@ import type { CellHighlighting } from "./useSudokuGame";
 // the same board.
 const puzzle = makePuzzle();
 const solution = solvePuzzle(puzzle) ?? puzzle;
-const originalCells = new Set(
-  puzzle.flatMap((value, index) => (value === null ? [] : [index])),
-);
+const originalCells = new Set(puzzle.flatMap((value, index) => (value === null ? [] : [index])));
 
 // The game decides the highlighting; the stories just stand in for it.
 const highlight =

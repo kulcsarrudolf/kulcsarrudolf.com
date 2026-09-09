@@ -1,16 +1,6 @@
-import {
-  AUTHOR_NAME,
-  SITE_NAME,
-  SITE_URL,
-  SOCIAL_PROFILES,
-} from "@/config/site";
+import { AUTHOR_NAME, SITE_NAME, SITE_URL, SOCIAL_PROFILES } from "@/config/site";
 
-import {
-  getPostContent,
-  getPostMetadata,
-  getProjectContent,
-  getProjectMetadata,
-} from "./content";
+import { getPostContent, getPostMetadata, getProjectContent, getProjectMetadata } from "./content";
 
 // Plain-text responses for AI agents and crawlers: the markdown twins of the
 // post and project pages, the llms.txt index, and the XML sitemap.
@@ -68,9 +58,7 @@ export const buildProjectMarkdown = (slug: string): string | null => {
 };
 
 export const buildLlmsTxt = (): string => {
-  const posts = [...getPostMetadata()].sort((a, b) =>
-    b.date.localeCompare(a.date)
-  );
+  const posts = [...getPostMetadata()].sort((a, b) => b.date.localeCompare(a.date));
 
   const postLines = posts.map((post) => {
     const summary = post.description || post.subtitle;
@@ -134,13 +122,9 @@ const toLastModified = (value?: string): string | undefined => {
 };
 
 export const buildSitemapXml = (): string => {
-  const pages: SitemapEntry[] = [
-    "",
-    "/blog",
-    "/projects",
-    "/quotes",
-    "/contact",
-  ].map((path) => ({ url: `${SITE_URL}${path}` }));
+  const pages: SitemapEntry[] = ["", "/blog", "/projects", "/quotes", "/contact"].map((path) => ({
+    url: `${SITE_URL}${path}`,
+  }));
 
   const posts: SitemapEntry[] = getPostMetadata().map((post) => ({
     url: `${SITE_URL}/posts/${post.slug}`,
@@ -156,11 +140,9 @@ export const buildSitemapXml = (): string => {
     [
       "  <url>",
       `    <loc>${escapeXml(entry.url)}</loc>`,
-      ...(entry.lastModified
-        ? [`    <lastmod>${entry.lastModified}</lastmod>`]
-        : []),
+      ...(entry.lastModified ? [`    <lastmod>${entry.lastModified}</lastmod>`] : []),
       "  </url>",
-    ].join("\n")
+    ].join("\n"),
   );
 
   return [

@@ -19,11 +19,7 @@ export const PostedOn = ({ date }: PostedOnProps) => {
         aria-hidden="true"
       />
       {t("blogPost.postedOn")}:{` `}
-      <time
-        dateTime={isoDate}
-        className="italic font-bold text-brand"
-        itemProp="datePublished"
-      >
+      <time dateTime={isoDate} className="italic font-bold text-brand" itemProp="datePublished">
         {date}
       </time>
     </p>

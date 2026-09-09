@@ -12,7 +12,8 @@ const meta = {
     lang: {
       control: "radio",
       options: ["hu", "ro", "en"],
-      description: "This page has its own translations (hu, ro, en) and ignores the global language toolbar.",
+      description:
+        "This page has its own translations (hu, ro, en) and ignores the global language toolbar.",
     },
   },
   parameters: {

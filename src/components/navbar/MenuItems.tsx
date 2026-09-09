@@ -73,9 +73,7 @@ const MenuItems = ({ variant = "bar", onNavigate }: MenuItemsProps) => {
     if (variant === "sheet") {
       // A hairline separates the call to action from the navigation above it,
       // so it reads as a button rather than a fourth destination.
-      return element.cta
-        ? "mt-5 w-full border-t border-gray-200 pt-5"
-        : "w-full";
+      return element.cta ? "mt-5 w-full border-t border-gray-200 pt-5" : "w-full";
     }
     // The call to action carries its own padding, so it needs a little more
     // room than the tightened gap gives it to clear the active pill.
@@ -135,11 +133,7 @@ const MenuItems = ({ variant = "bar", onNavigate }: MenuItemsProps) => {
 
   return (
     <ul
-      className={
-        variant === "sheet"
-          ? "flex w-full flex-col gap-1.5"
-          : "flex items-center gap-1"
-      }
+      className={variant === "sheet" ? "flex w-full flex-col gap-1.5" : "flex items-center gap-1"}
     >
       {NAVBAR_ELEMENTS.map((element) => (
         <li key={element.labelKey} className={itemClassName(element)}>

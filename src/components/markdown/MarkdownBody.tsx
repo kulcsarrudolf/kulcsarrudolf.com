@@ -14,15 +14,9 @@ const PostImage = (props: ComponentProps<typeof LazyPostImage>) => (
   </ClientOnly>
 );
 
-const MarkdownLink = ({
-  href,
-  children,
-  ...rest
-}: AnchorHTMLAttributes<HTMLAnchorElement>) => {
+const MarkdownLink = ({ href, children, ...rest }: AnchorHTMLAttributes<HTMLAnchorElement>) => {
   const isInternal = href?.startsWith("/") ?? false;
-  const externalProps = isInternal
-    ? {}
-    : { target: "_blank", rel: "noopener noreferrer" };
+  const externalProps = isInternal ? {} : { target: "_blank", rel: "noopener noreferrer" };
   return (
     <a href={href} {...externalProps} {...rest}>
       {children}

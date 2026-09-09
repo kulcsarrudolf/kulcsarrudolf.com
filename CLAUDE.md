@@ -18,19 +18,19 @@ When a file approaches the limit, split it along the seams it already has rather
 
 Before writing markup, check whether one of these already covers it:
 
-| Need | Use |
-| --- | --- |
+| Need                                                                   | Use                                                     |
+| ---------------------------------------------------------------------- | ------------------------------------------------------- |
 | A filled or outlined button, on a `<button>`, `<a>` or router `<Link>` | `components/general/Button` (`Button`, `buttonClasses`) |
-| A centred dialog over a dimmed backdrop | `components/general/modal/Modal` |
-| A text link with a leading or trailing arrow | `components/general/ArrowLink` |
-| A quotation in a bordered card | `components/quote/QuoteCard` |
-| The `[HU]` marker on Hungarian content | `components/general/LanguageBadge` |
-| A labelled form input or textarea | `components/contact/FormField` |
-| Headings, body copy, a muted intro, small print | `components/general/typography` |
-| A two-column grid of cards | `components/general/CardGrid` |
-| A rule between sections, with or without a label | `components/general/Divider` |
-| The closing block under a page's content | `components/general/EndNote` |
-| The frame a page sits in: the centred column and the card | `components/layout/PageShell` |
+| A centred dialog over a dimmed backdrop                                | `components/general/modal/Modal`                        |
+| A text link with a leading or trailing arrow                           | `components/general/ArrowLink`                          |
+| A quotation in a bordered card                                         | `components/quote/QuoteCard`                            |
+| The `[HU]` marker on Hungarian content                                 | `components/general/LanguageBadge`                      |
+| A labelled form input or textarea                                      | `components/contact/FormField`                          |
+| Headings, body copy, a muted intro, small print                        | `components/general/typography`                         |
+| A two-column grid of cards                                             | `components/general/CardGrid`                           |
+| A rule between sections, with or without a label                       | `components/general/Divider`                            |
+| The closing block under a page's content                               | `components/general/EndNote`                            |
+| The frame a page sits in: the centred column and the card              | `components/layout/PageShell`                           |
 
 ## Where Tailwind lives
 
@@ -43,11 +43,11 @@ Inline `style` is refused the same way, so it cannot become the side door out.
 
 When a route or a page needs markup it does not have, the answer is a component, not a `className`:
 
-| Instead of | Write |
-| --- | --- |
-| `<div className="grid gap-6 sm:grid-cols-2">` | `<CardGrid>` |
-| `<hr className="my-6" />` | `<Divider />` |
-| `<p className="text-gray-600 mb-6">` | `<Lead>` |
+| Instead of                                    | Write         |
+| --------------------------------------------- | ------------- |
+| `<div className="grid gap-6 sm:grid-cols-2">` | `<CardGrid>`  |
+| `<hr className="my-6" />`                     | `<Divider />` |
+| `<p className="text-gray-600 mb-6">`          | `<Lead>`      |
 
 A rule with no way out is a rule that gets deleted the first time it blocks something urgent, so there is one:
 
@@ -77,6 +77,14 @@ A new component file means a new story file in the same commit.
 The one exception is `components/layout/RootDocument`, which renders `<html>` and `<body>`.
 Storybook draws every story inside a document of its own, so a second one nested in it shows nothing worth looking at.
 The part that can be looked at is `PageShell`, and that has a story.
+
+## Formatting
+
+`oxfmt` owns the formatting, so no discussion of it belongs in review.
+`yarn install` installs a pre-commit hook that runs `oxlint --fix` and then `oxfmt` over the staged files and stages what they rewrite, so a commit is formatted whether or not anyone remembered.
+An unfixable lint error stops the commit.
+
+Run `yarn format` by hand when you want the working tree formatted before then, and never hand-format around it.
 
 ## Checks
 

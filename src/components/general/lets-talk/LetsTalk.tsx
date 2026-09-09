@@ -58,10 +58,7 @@ const LetsTalk = () => {
             <span className="mt-0.5 shrink-0 text-brand sm:mt-0">
               <Icon />
             </span>
-            <span
-              className="text-base leading-[1.6]"
-              style={{ textWrap: "pretty" }}
-            >
+            <span className="text-base leading-[1.6]" style={{ textWrap: "pretty" }}>
               {t(`home.letsTalk.${key}`)}
             </span>
           </div>
@@ -74,10 +71,7 @@ const LetsTalk = () => {
           <span className="mt-0.5 shrink-0 text-gray-500 sm:mt-0">
             <EasterEggIcon />
           </span>
-          <span
-            className="text-[15px] leading-[1.6] text-gray-500"
-            style={{ textWrap: "pretty" }}
-          >
+          <span className="text-[15px] leading-[1.6] text-gray-500" style={{ textWrap: "pretty" }}>
             {t("home.letsTalk.easterEgg")}
           </span>
         </div>

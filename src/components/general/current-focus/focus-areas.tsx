@@ -18,24 +18,14 @@ export type FocusAreaKey = (typeof FOCUS_AREAS)[number]["key"];
 
 // Static links are plain elements: the translation helper clones them into
 // the sentence, so nothing here needs to be a component.
-const innovatorSparkLink = (
-  <Link href="https://innovatorspark.com/">InnovatorSpark</Link>
-);
+const innovatorSparkLink = <Link href="https://innovatorspark.com/">InnovatorSpark</Link>;
 const reactLink = <Link href="https://react.dev">React</Link>;
 const nodeJsLink = <Link href="https://nodejs.org">Node.js</Link>;
-const personalProjectsLink = (
-  <Link href="https://github.com/kulcsarrudolf">personal projects</Link>
-);
-const claudeCodeLink = (
-  <Link href="https://www.anthropic.com/claude">Claude Code</Link>
-);
-const zimmeZoomLink = (
-  <Link href="https://github.com/kulcsarrudolf/zimme-zoom">zimme-zoom</Link>
-);
+const personalProjectsLink = <Link href="https://github.com/kulcsarrudolf">personal projects</Link>;
+const claudeCodeLink = <Link href="https://www.anthropic.com/claude">Claude Code</Link>;
+const zimmeZoomLink = <Link href="https://github.com/kulcsarrudolf/zimme-zoom">zimme-zoom</Link>;
 const samsungDeviceHelperLink = (
-  <Link href="https://github.com/kulcsarrudolf/samsung-device-helper">
-    samsung-device-helper
-  </Link>
+  <Link href="https://github.com/kulcsarrudolf/samsung-device-helper">samsung-device-helper</Link>
 );
 
 // Which links each card's sentence weaves in. Keyed the same as the card, so
@@ -59,6 +49,5 @@ const LINKS: Record<FocusAreaKey, Record<string, React.ReactNode>> = {
 export function useFocusDescriptions() {
   const { t } = useTranslation();
 
-  return (key: FocusAreaKey) =>
-    t(`home.currentFocus.${key}.description`, LINKS[key]);
+  return (key: FocusAreaKey) => t(`home.currentFocus.${key}.description`, LINKS[key]);
 }

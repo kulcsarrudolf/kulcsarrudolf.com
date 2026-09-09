@@ -28,9 +28,7 @@ const CurrentFocus = () => {
   } = useCardRail(FOCUS_AREAS.length);
 
   const counterKey =
-    range.first === range.last
-      ? "home.currentFocus.counterSingle"
-      : "home.currentFocus.counter";
+    range.first === range.last ? "home.currentFocus.counterSingle" : "home.currentFocus.counter";
 
   return (
     <div>
@@ -80,11 +78,7 @@ const CurrentFocus = () => {
         {canScrollForward && <RailFade side="right" />}
       </div>
 
-      <RailDots
-        count={FOCUS_AREAS.length}
-        range={range}
-        hidden={!isScrollable}
-      />
+      <RailDots count={FOCUS_AREAS.length} range={range} hidden={!isScrollable} />
     </div>
   );
 };

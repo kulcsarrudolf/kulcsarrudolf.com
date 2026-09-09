@@ -41,13 +41,13 @@ The redirect is a route that throws `redirect({ statusCode: 301 })`.
 
 ## Next.js vs TanStack Start in short
 
-| | Next.js (app router) | TanStack Start |
-| --- | --- | --- |
-| Routing | Folders with `page.tsx` and `layout.tsx` | One file per route, links and params checked by TypeScript |
-| Data | Async server components fetch inline | A `loader` per route that runs on the server for SSR and in the browser on navigation |
-| Server-only code | Server components by default | Server functions; everything else runs on both sides |
-| Metadata | `export const metadata` | `head()` on the route, with access to loader data |
-| Build and server | Its own bundler and server | Vite for the build, Nitro for the server, one deploy target per preset |
+|                  | Next.js (app router)                     | TanStack Start                                                                        |
+| ---------------- | ---------------------------------------- | ------------------------------------------------------------------------------------- |
+| Routing          | Folders with `page.tsx` and `layout.tsx` | One file per route, links and params checked by TypeScript                            |
+| Data             | Async server components fetch inline     | A `loader` per route that runs on the server for SSR and in the browser on navigation |
+| Server-only code | Server components by default             | Server functions; everything else runs on both sides                                  |
+| Metadata         | `export const metadata`                  | `head()` on the route, with access to loader data                                     |
+| Build and server | Its own bundler and server               | Vite for the build, Nitro for the server, one deploy target per preset                |
 
 For a site this size the day-to-day difference is the loader.
 Data for a page lives next to the route, the component reads it with `Route.useLoaderData()`, and the same code path serves the first request and every client-side navigation after it.

@@ -24,9 +24,8 @@ export const WithHighlight: Story = {
   args: {
     children: (
       <>
-        I'm a <HighlightP>full-stack software engineer</HighlightP> based in
-        Transylvania, building web apps and the occasional open source
-        library.
+        I'm a <HighlightP>full-stack software engineer</HighlightP> based in Transylvania, building
+        web apps and the occasional open source library.
       </>
     ),
   },

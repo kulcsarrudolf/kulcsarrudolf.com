@@ -4,8 +4,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { getLanguageFromString, getTranslation, type Language } from "./index";
 import { getStoredLanguage } from "./languageStorage";
 
-const isLanguage = (value: unknown): value is Language =>
-  value === "en" || value === "hu";
+const isLanguage = (value: unknown): value is Language => value === "en" || value === "hu";
 
 export function useTranslation() {
   const queryLang = useSearch({
@@ -33,7 +32,7 @@ export function useTranslation() {
 
   const translate = (
     key: string,
-    params?: Record<string, string | React.ReactNode>
+    params?: Record<string, string | React.ReactNode>,
   ): string | React.ReactNode[] => {
     const keys = key.split(".");
     let value: any = t;
@@ -142,9 +141,7 @@ export function useTranslation() {
       });
     }
 
-    return result.length === 1 && typeof result[0] === "string"
-      ? result[0]
-      : result;
+    return result.length === 1 && typeof result[0] === "string" ? result[0] : result;
   };
 
   return {

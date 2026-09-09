@@ -7,13 +7,7 @@ import ConditionalSpeedInsights from "@/components/general/SpeedInsights";
 import PageShell from "@/components/layout/PageShell";
 import RootDocument from "@/components/layout/RootDocument";
 import NotFound from "@/components/NotFound";
-import {
-  AUTHOR_NAME,
-  SITE_DESCRIPTION,
-  SITE_NAME,
-  SITE_URL,
-  SOCIAL_PROFILES,
-} from "@/config/site";
+import { AUTHOR_NAME, SITE_DESCRIPTION, SITE_NAME, SITE_URL, SOCIAL_PROFILES } from "@/config/site";
 import { siteHead } from "@/lib/seo";
 import { fetchRecentPosts } from "@/server/functions";
 import globalsCss from "@/styles/globals.css?url";
