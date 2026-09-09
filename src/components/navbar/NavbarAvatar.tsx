@@ -1,12 +1,15 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import CircularProgress from "./CircularProgress";
-import WelcomeModal from "./WelcomeModal";
 
 interface NavbarAvatarProps {
   src: string;
   alt: string;
   ringClassName?: string;
+  /** True while the egg is showing, which parks the hold until it is closed. */
+  isRevealed?: boolean;
+  /** Called once the ring has filled. */
+  onReveal?: () => void;
 }
 
 const DELAY_MS = 1000;
@@ -16,9 +19,10 @@ const NavbarAvatar = ({
   src,
   alt,
   ringClassName = "border-white",
+  isRevealed = false,
+  onReveal,
 }: NavbarAvatarProps) => {
   const [progress, setProgress] = useState(0);
-  const [showModal, setShowModal] = useState(false);
 
   const delayTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const frameRef = useRef<number | null>(null);
@@ -40,7 +44,7 @@ const NavbarAvatar = ({
   }, []);
 
   const startProgress = useCallback(() => {
-    if (showModal || delayTimerRef.current || frameRef.current) return;
+    if (isRevealed || delayTimerRef.current || frameRef.current) return;
 
     delayTimerRef.current = setTimeout(() => {
       delayTimerRef.current = null;
@@ -54,7 +58,8 @@ const NavbarAvatar = ({
         if (next >= 100) {
           frameRef.current = null;
           swallowNextClickRef.current = true;
-          setShowModal(true);
+          setProgress(0);
+          onReveal?.();
           return;
         }
 
@@ -63,18 +68,13 @@ const NavbarAvatar = ({
 
       frameRef.current = requestAnimationFrame(tick);
     }, DELAY_MS);
-  }, [showModal]);
+  }, [isRevealed, onReveal]);
 
   const stopProgress = useCallback(() => {
-    if (!showModal) {
+    if (!isRevealed) {
       resetState();
     }
-  }, [resetState, showModal]);
-
-  const handleCloseModal = useCallback(() => {
-    setShowModal(false);
-    resetState();
-  }, [resetState]);
+  }, [resetState, isRevealed]);
 
   const handleClickCapture = useCallback((event: React.MouseEvent) => {
     if (!swallowNextClickRef.current) return;
@@ -92,32 +92,28 @@ const NavbarAvatar = ({
   );
 
   return (
-    <>
-      <div
-        className="relative mr-2.5 flex h-10 w-10 shrink-0 touch-none select-none items-center justify-center"
-        onMouseEnter={startProgress}
-        onMouseLeave={stopProgress}
-        onTouchStart={startProgress}
-        onTouchEnd={stopProgress}
-        onTouchCancel={stopProgress}
-        onClickCapture={handleClickCapture}
-        // Stops the long press raising the platform context menu on touch.
-        onContextMenu={(event) => event.preventDefault()}
-      >
-        <img
-          width={36}
-          height={36}
-          src={src}
-          className={`h-9 w-9 rounded-full border-2 p-0.5 shadow-md ${ringClassName}`}
-          alt={alt}
-        />
-        {progress > 0 && (
-          <CircularProgress progress={progress} size={40} strokeWidth={3} />
-        )}
-      </div>
-
-      {showModal && <WelcomeModal onClose={handleCloseModal} />}
-    </>
+    <div
+      className="relative mr-2.5 flex h-10 w-10 shrink-0 touch-none select-none items-center justify-center"
+      onMouseEnter={startProgress}
+      onMouseLeave={stopProgress}
+      onTouchStart={startProgress}
+      onTouchEnd={stopProgress}
+      onTouchCancel={stopProgress}
+      onClickCapture={handleClickCapture}
+      // Stops the long press raising the platform context menu on touch.
+      onContextMenu={(event) => event.preventDefault()}
+    >
+      <img
+        width={36}
+        height={36}
+        src={src}
+        className={`h-9 w-9 rounded-full border-2 p-0.5 shadow-md ${ringClassName}`}
+        alt={alt}
+      />
+      {progress > 0 && (
+        <CircularProgress progress={progress} size={40} strokeWidth={3} />
+      )}
+    </div>
   );
 };
 
