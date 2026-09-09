@@ -25,7 +25,7 @@ private: false
 
 This site started in 2020 on Create React App and moved to Next.js in 2023.
 I wanted to try [TanStack Start](https://tanstack.com/start) and had two conditions: every page stays server-rendered, and no URL changes.
-That includes the markdown twins of each post (`/posts/slug.md`), the `Accept: text/markdown` negotiation, `sitemap.xml`, `llms.txt`, a 301 from an old project page, and three aliases of the wedding countdown.
+That includes the markdown twins of each post (`/posts/slug.md`), the `Accept: text/markdown` negotiation, `sitemap.xml`, `llms.txt`, and a 301 from an old project page.
 
 ## What changed
 
@@ -36,7 +36,6 @@ The markdown posts are bundled at build time with `import.meta.glob` and served 
 The Next.js middleware became a request middleware in `src/start.ts`.
 The sitemap and `llms.txt` are server routes.
 The redirect is a route that throws `redirect({ statusCode: 301 })`.
-The aliases are three small route files that reuse the same `head` and component.
 
 `next/font` became Fontsource, `next/image` became a plain `img`, and `next/dynamic` became `ClientOnly` with `React.lazy` for the image zoom library, which touches `document` on import.
 
