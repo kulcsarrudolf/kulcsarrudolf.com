@@ -65,10 +65,15 @@ It is skipped for a commit that only touches Markdown or CSS.
 
 `git commit --no-verify` skips the hook.
 
+### Continuous integration
+
+[ci.yml](./.github/workflows/ci.yml) runs on every pull request and on every push to `develop` and `master`: `yarn typecheck`, `yarn lint`, `yarn format:check`, `yarn build` and `yarn build-storybook`, on the Node version in `.nvmrc`.
+Dependabot opens a weekly pull request for npm updates (minor and patch versions grouped into one) and for the GitHub Actions the workflow uses.
+
 ### Environment variables
 
 Client-side variables need the `VITE_` prefix.
-Put them in `.env.local` locally and in the Vercel project settings for deployments.
+Copy [.env.example](./.env.example) to `.env.local` locally; for deployments, set them in the Vercel project settings.
 
 | Variable                    | Purpose                                         |
 | --------------------------- | ----------------------------------------------- |
