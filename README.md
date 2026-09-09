@@ -53,6 +53,17 @@ This project uses Yarn (enforced via a `preinstall` check, npm and pnpm will fai
 
 Other scripts: `yarn build` (production build into `.output/`), `yarn start` (serve the built app with Node), `yarn typecheck`, `yarn lint`, `yarn deploy` (fast-forward `master` to `develop` and push).
 
+### Storybook
+
+Every UI component under `src/components/` has a story next to it (`*.stories.tsx`).
+
+- `yarn storybook` starts Storybook on [http://localhost:6006](http://localhost:6006).
+- `yarn build-storybook` writes a static build to `storybook-static/`.
+
+Stories render inside a real TanStack Router with an in-memory history, so `<Link>`, `useNavigate` and `useSearch` work without the app shell.
+The toolbar has a language switch that sets the same `?lang=` query the site uses, so translated components can be checked in both languages.
+Configuration lives in `.storybook/`; it uses its own small Vite config because the app's config carries the TanStack Start and Nitro plugins.
+
 ### Environment variables
 
 Client-side variables must use the `VITE_` prefix.

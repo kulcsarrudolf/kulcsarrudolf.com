@@ -23,6 +23,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src", "vite.config.ts", "eslint.config.js"],
-  "exclude": ["node_modules", ".output", ".nitro", "dist"]
+  "include": ["src", ".storybook", "vite.config.ts", "eslint.config.js"],
+  "exclude": ["node_modules", ".output", ".nitro", "dist", "storybook-static"]
 }
