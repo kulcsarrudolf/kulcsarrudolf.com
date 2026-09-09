@@ -41,9 +41,16 @@ const GrowthIcon = () => (
 
 const ShipIcon = () => (
   <svg {...strokeProps} className="h-[22px] w-[22px]" aria-hidden="true">
-    <path d="M12 16V3.5" />
-    <path d="M7 8.5l5-5 5 5" />
-    <path d="M4 20.5h16" />
+    <circle cx="12" cy="12" r="8.75" />
+    <path d="M3.25 12h17.5" />
+    <path d="M12 3.25a13.5 13.5 0 0 1 0 17.5 13.5 13.5 0 0 1 0-17.5z" />
+  </svg>
+);
+
+const EasterEggIcon = () => (
+  <svg {...strokeProps} className="h-[22px] w-[22px]" aria-hidden="true">
+    <path d="M12 2.75c-3.3 0-6 4.4-6 8.6a6 6 0 0 0 12 0c0-4.2-2.7-8.6-6-8.6z" />
+    <path d="M6.35 13.4h11.3" />
   </svg>
 );
 
@@ -79,8 +86,8 @@ const CalendarIcon = () => (
   </svg>
 );
 
-// The four reasons that come with an icon. The easter egg is deliberately not
-// one of them: it is a wink, not a fifth case, and it is rendered apart below.
+// The five cases. The easter egg is not one of them: it is a wink rather than
+// a case, so it is rendered apart below with its own quieter treatment.
 const REASONS = [
   { key: "idea", Icon: IdeaIcon },
   { key: "stuck", Icon: GrowthIcon },
@@ -127,10 +134,13 @@ const LetsTalk = () => {
           </div>
         ))}
 
-        {/* The joke, kept at the end and set a step back from the four cases
-            above it: no icon, a dashed rule, and quieter type. */}
+        {/* The joke, kept at the end and set a step back from the cases above
+            it by a dashed rule, quieter type, and an icon that stays the grey
+            of its own row rather than picking up the brand blue. */}
         <div className="flex items-start gap-4 border-t border-dashed border-[#b9c1cc] py-[15px] sm:items-center">
-          <span aria-hidden="true" className="w-[22px] shrink-0" />
+          <span className="mt-0.5 shrink-0 text-gray-500 sm:mt-0">
+            <EasterEggIcon />
+          </span>
           <span
             className="text-[15px] leading-[1.6] text-gray-500"
             style={{ textWrap: "pretty" }}
