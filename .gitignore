@@ -42,3 +42,6 @@ yarn-error.log*
 
 # cursor skills
 /.cursor/skills/write-blog-post/
+
+# design canvas scratch
+/.design/
