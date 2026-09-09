@@ -1,7 +1,5 @@
-import Age from "@/components/general/Age";
 import Paragraph from "@/components/general/typography/Paragraph";
 import Title from "@/components/general/typography/Title";
-import HighlightP from "@/components/general/typography/HighlightP";
 import Link from "@/components/general/typography/Link";
 import { useTranslation } from "@/i18n/useTranslation";
 import BlogPostListClient from "@/components/blog/BlogPostListClient";
@@ -16,6 +14,9 @@ interface HomePageContentProps {
 // the sentence, so nothing here needs to be a component.
 const cvLink = <Link href="https://cv.kulcsarrudolf.com">CV</Link>;
 const gitHubLink = <Link href="https://github.com/kulcsarrudolf">GitHub</Link>;
+const innovatorSparkLink = (
+  <Link href="https://innovatorspark.com/">InnovatorSpark</Link>
+);
 
 export default function HomePageContent({ posts }: HomePageContentProps) {
   const { t } = useTranslation();
@@ -25,20 +26,14 @@ export default function HomePageContent({ posts }: HomePageContentProps) {
       {t("home.clujNapoca")}
     </Link>
   );
-  const fullStackDeveloper = (
-    <HighlightP>{t("home.fullStackDeveloper")}</HighlightP>
-  );
-  const experience = <HighlightP>{t("home.experience")}</HighlightP>;
 
   return (
     <div>
       <Title>{t("home.title")}</Title>
       <Paragraph>
         {t("home.paragraph1", {
-          age: <Age />,
-          fullStackDeveloper,
           clujLink,
-          experience,
+          innovatorSparkLink,
         })}
       </Paragraph>
 

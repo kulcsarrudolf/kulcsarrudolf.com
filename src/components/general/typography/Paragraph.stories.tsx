@@ -8,7 +8,7 @@ const meta = {
   component: Paragraph,
   args: {
     children:
-      "I'm a full-stack software developer. I write about the things I'm learning and building, mostly around React, Node.js and AI tooling.",
+      "I'm a full-stack software engineer. I write about the things I'm learning and building, mostly around React, Node.js and AI tooling.",
   },
   argTypes: {
     children: { control: "text" },
@@ -24,7 +24,7 @@ export const WithHighlight: Story = {
   args: {
     children: (
       <>
-        I'm a <HighlightP>full-stack software developer</HighlightP> based in
+        I'm a <HighlightP>full-stack software engineer</HighlightP> based in
         Transylvania, building web apps and the occasional open source
         library.
       </>

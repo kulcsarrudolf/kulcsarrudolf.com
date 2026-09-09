@@ -38,7 +38,7 @@ const structuredData = {
       "@id": `${SITE_URL}/#person`,
       name: AUTHOR_NAME,
       url: SITE_URL,
-      jobTitle: "Software Developer",
+      jobTitle: "Software Engineer",
       image: `${SITE_URL}/images/me-logo.png`,
       sameAs: SOCIAL_PROFILES,
     },

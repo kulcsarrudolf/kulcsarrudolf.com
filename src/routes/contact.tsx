@@ -8,10 +8,15 @@ const CONTACT_DESCRIPTION =
   "Get in touch with Kulcsar Rudolf. Send a message through the contact form or connect on LinkedIn for collaboration, questions, or project inquiries.";
 const CONTACT_KEYWORDS = [
   "contact Kulcsar Rudolf",
+  "hire software engineer",
   "hire software developer",
+  "hire AI engineer",
+  "hire forward deployed engineer",
+  "full-stack engineer contact",
   "full-stack developer contact",
   "linkedin",
   "collaboration",
+  "software engineer Cluj-Napoca",
   "software developer Cluj-Napoca",
 ];
 
