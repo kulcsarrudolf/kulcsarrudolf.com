@@ -29,7 +29,11 @@
       "openSource": {
         "title": "Open Source",
         "description": "Maintaining {zimmeZoom} and {samsungDeviceHelper}. Contributing shared tooling and solutions back to the developer community."
-      }
+      },
+      "previous": "Previous",
+      "next": "Next",
+      "counter": "{first}-{last} of {total}",
+      "counterSingle": "{first} of {total}"
     },
     "latestBlogs": "Latest Blogs",
     "clujNapoca": "Cluj-Napoca"
