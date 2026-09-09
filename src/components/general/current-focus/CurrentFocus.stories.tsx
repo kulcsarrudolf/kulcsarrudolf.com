@@ -9,7 +9,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Horizontally scrollable cards describing what I am working on. Drag with the mouse or swipe on touch devices; the copy comes from the translation files, so use the language toolbar to see the Hungarian version.",
+          "A horizontal rail of cards describing what I am working on. Arrows, a card counter and the dots below say how much is off screen; you can also drag with the mouse, swipe, or focus the rail and use the arrow keys. The copy comes from the translation files, so use the language toolbar to see the Hungarian version.",
       },
     },
   },
@@ -24,7 +24,7 @@ export const Narrow: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Constrained to a phone-sized width so the cards overflow and the drag-to-scroll behaviour is visible.",
+        story: "Constrained to a phone-sized width so one card shows at a time and the counter, dots and edge fades do their work.",
       },
     },
   },

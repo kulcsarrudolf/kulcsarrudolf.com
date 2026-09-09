@@ -29,7 +29,11 @@
       "openSource": {
         "title": "Nyílt Forráskód",
         "description": "A {zimmeZoom} és {samsungDeviceHelper} projektek karbantartása. Közös eszközök és megoldások hozzájárulása a fejlesztői közösséghez."
-      }
+      },
+      "previous": "Előző",
+      "next": "Következő",
+      "counter": "{first}-{last} / {total}",
+      "counterSingle": "{first} / {total}"
     },
     "latestBlogs": "Legfrissebb Blogok",
     "clujNapoca": "Kolozsváron"

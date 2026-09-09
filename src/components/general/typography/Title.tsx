@@ -8,7 +8,7 @@ const Title = ({ children, mb, ...props }: TitleProps) => {
       className="text-2xl font-bold mb-2"
       style={{
         color: "#4267b2",
-        marginBottom: mb ? `${mb}rem` : "1rem",
+        marginBottom: mb === undefined ? "1rem" : `${mb}rem`,
       }}
       {...props}
     >
