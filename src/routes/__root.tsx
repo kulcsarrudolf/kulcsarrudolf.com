@@ -90,8 +90,10 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
       <head>
         <HeadContent />
       </head>
-      {/* Clears the fixed navbar: 20px of top margin plus its 80px bar. */}
-      <body suppressHydrationWarning className="mt-28">
+      {/* Clears the fixed navbar, less the 8px of padding on <html>: the bar
+          sits 12px down and is 56px tall on phones, 20px and 80px from 640px
+          up. Both leave the same 20px between the bar and the first card. */}
+      <body suppressHydrationWarning className="mt-20 sm:mt-28">
         <div className="mx-auto max-w-5xl">
           <Navbar />
           <div className="border border-gray-300 p-4 rounded-xl shadow-md">

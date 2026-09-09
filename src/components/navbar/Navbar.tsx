@@ -21,6 +21,10 @@ const DOCK_THRESHOLD = 100;
  *   below 546px  brand + menu button
  *   546px+       adds the call to action, the divider and the social icons
  *   706px+       adds the full link list, and the menu button retires
+ *
+ * The bar itself is 56px on phones and 80px from 640px up, since below that it
+ * is mostly carrying whitespace. `body`'s top margin in __root.tsx clears the
+ * fixed bar and has to move with it.
  */
 const Navbar = () => {
   const { t } = useTranslation();
@@ -64,11 +68,11 @@ const Navbar = () => {
     <nav
       aria-label={t("nav.menu") as string}
       className={`fixed left-0 top-0 z-20 w-full px-2 transition-[margin] duration-200 ${
-        isDocked ? "mt-0" : "mt-5"
+        isDocked ? "mt-0" : "mt-3 sm:mt-5"
       }`}
     >
       <div
-        className={`mx-auto flex h-20 max-w-5xl items-center rounded-2xl bg-brand px-4 shadow-md ${
+        className={`mx-auto flex h-14 max-w-5xl items-center rounded-2xl bg-brand px-3 shadow-md sm:h-20 sm:px-4 ${
           isDocked ? "rounded-t-none" : ""
         }`}
       >
@@ -85,7 +89,7 @@ const Navbar = () => {
         <SocialMediaLinks size="sm" className="hidden socials:flex" />
 
         <HamburgerButton
-          className="ml-3 nav:hidden"
+          className="ml-2 nav:hidden sm:ml-3"
           isOpen={isMenuOpen}
           controls={MENU_ID}
           label={t("nav.openMenu") as string}

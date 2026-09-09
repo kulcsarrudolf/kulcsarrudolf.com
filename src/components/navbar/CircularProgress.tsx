@@ -13,11 +13,12 @@ const CircularProgress = ({
   const circumference = radius * 2 * Math.PI;
   const offset = circumference - (progress / 100) * circumference;
 
+  // `size` is the viewBox, not a pixel width: the svg stretches to whatever
+  // the avatar around it is, which is 36px on phones and 40px from 640px up.
   return (
     <svg
-      width={size}
-      height={size}
-      className="absolute inset-0 transform -rotate-90 z-10 pointer-events-none"
+      viewBox={`0 0 ${size} ${size}`}
+      className="absolute inset-0 h-full w-full transform -rotate-90 z-10 pointer-events-none"
     >
       {/* Progress arc */}
       <circle
