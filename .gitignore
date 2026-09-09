@@ -8,13 +8,11 @@
 # testing
 /coverage
 
-# next.js
-/.next/
-/.next-preview/
-/out/
-
-# production
-/build
+# build output (vite + nitro)
+/.output/
+/.nitro/
+/.tanstack/
+/dist/
 
 # misc
 .DS_Store
@@ -33,7 +31,6 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts
 
 /src/posts/temp
 

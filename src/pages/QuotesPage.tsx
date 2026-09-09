@@ -1,8 +1,6 @@
-"use client";
-
 import { Paragraph, Title } from "@/components/general/typography";
 import quotes from "@/components/quote/quotes";
-import Quote from "@/types/quote.type";
+import type Quote from "@/types/quote.type";
 import { useTranslation } from "@/i18n/useTranslation";
 
 export default function QuotesPage() {

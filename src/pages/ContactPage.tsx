@@ -1,16 +1,14 @@
-"use client";
-
 import { Title, Paragraph } from "@/components/general/typography";
 import Link from "@/components/general/typography/Link";
 import { useTranslation } from "@/i18n/useTranslation";
 import ContactForm from "@/components/contact/ContactForm";
 
+const linkedInLink = (
+  <Link href="https://www.linkedin.com/in/kulcsarrudolf">LinkedIn</Link>
+);
+
 export default function ContactPage() {
   const { t } = useTranslation();
-
-  const LinkedInLink = () => (
-    <Link href="https://www.linkedin.com/in/kulcsarrudolf">LinkedIn</Link>
-  );
 
   return (
     <>
@@ -18,7 +16,7 @@ export default function ContactPage() {
       <Paragraph>{t("contact.description")}</Paragraph>
       <div className="text-center my-6">
         <p className="text-lg font-semibold text-gray-800">
-          {t("contact.linkedinText", { linkedInLink: <LinkedInLink /> })}
+          {t("contact.linkedinText", { linkedInLink })}
         </p>
       </div>
       <div className="flex items-center my-6">

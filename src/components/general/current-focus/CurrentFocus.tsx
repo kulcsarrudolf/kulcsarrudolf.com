@@ -1,40 +1,37 @@
-"use client";
-
 import { useTranslation } from "@/i18n/useTranslation";
 import Title from "../typography/Title";
 import Paragraph from "../typography/Paragraph";
 import Link from "../typography/Link";
-import Image from "next/image";
 import { useRef, useState } from "react";
 import programmingSvg from "./programming.svg";
 import aiToolingSvg from "./ai-tooling.svg";
 import openSourceSvg from "./open-source.svg";
 import aiIntegrationSvg from "./ai-integration.svg";
 
+// Static links are plain elements: the translation helper clones them into
+// the sentence, so nothing here needs to be a component.
+const innovatorSparkLink = (
+  <Link href="https://innovatorspark.com/">InnovatorSpark</Link>
+);
+const reactLink = <Link href="https://react.dev">React</Link>;
+const nodeJsLink = <Link href="https://nodejs.org">Node.js</Link>;
+const personalProjectsLink = (
+  <Link href="https://github.com/kulcsarrudolf">personal projects</Link>
+);
+const claudeCodeLink = (
+  <Link href="https://www.anthropic.com/claude">Claude Code</Link>
+);
+const zimmeZoomLink = (
+  <Link href="https://github.com/kulcsarrudolf/zimme-zoom">zimme-zoom</Link>
+);
+const samsungDeviceHelperLink = (
+  <Link href="https://github.com/kulcsarrudolf/samsung-device-helper">
+    samsung-device-helper
+  </Link>
+);
+
 const CurrentFocus = () => {
   const { t } = useTranslation();
-
-  const InnovatorSparkLink = () => (
-    <Link href="https://innovatorspark.com/">InnovatorSpark</Link>
-  );
-  const ReactLink = () => <Link href="https://react.dev">React</Link>;
-  const NodeJSLink = () => <Link href="https://nodejs.org">Node.js</Link>;
-  const PersonalProjectsLink = () => (
-    <Link href="https://github.com/kulcsarrudolf">personal projects</Link>
-  );
-
-  const ClaudeCodeLink = () => (
-    <Link href="https://www.anthropic.com/claude">Claude Code</Link>
-  );
-
-  const ZimmeZoomLink = () => (
-    <Link href="https://github.com/kulcsarrudolf/zimme-zoom">zimme-zoom</Link>
-  );
-  const SamsungDeviceHelperLink = () => (
-    <Link href="https://github.com/kulcsarrudolf/samsung-device-helper">
-      samsung-device-helper
-    </Link>
-  );
 
   const focusAreas = [
     {
@@ -139,7 +136,7 @@ const CurrentFocus = () => {
               className="flex justify-center mb-4"
               style={{ width: "125px", height: "125px", margin: "0 auto" }}
             >
-              <Image
+              <img
                 src={area.image}
                 alt={t(`home.currentFocus.${area.key}.title`) as string}
                 width={125}
@@ -157,21 +154,21 @@ const CurrentFocus = () => {
               <Paragraph>
                 {area.key === "fullStack" &&
                   t(`home.currentFocus.${area.key}.description`, {
-                    innovatorSpark: <InnovatorSparkLink />,
-                    react: <ReactLink />,
-                    nodejs: <NodeJSLink />,
-                    personalProjects: <PersonalProjectsLink />,
+                    innovatorSpark: innovatorSparkLink,
+                    react: reactLink,
+                    nodejs: nodeJsLink,
+                    personalProjects: personalProjectsLink,
                   })}
                 {area.key === "aiTooling" &&
                   t(`home.currentFocus.${area.key}.description`, {
-                    claudeCode: <ClaudeCodeLink />,
+                    claudeCode: claudeCodeLink,
                   })}
                 {area.key === "aiIntegration" &&
                   t(`home.currentFocus.${area.key}.description`)}
                 {area.key === "openSource" &&
                   t(`home.currentFocus.${area.key}.description`, {
-                    zimmeZoom: <ZimmeZoomLink />,
-                    samsungDeviceHelper: <SamsungDeviceHelperLink />,
+                    zimmeZoom: zimmeZoomLink,
+                    samsungDeviceHelper: samsungDeviceHelperLink,
                   })}
               </Paragraph>
             </div>

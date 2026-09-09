@@ -1,7 +1,5 @@
-interface Quote {
+export default interface Quote {
   id: string;
   quote: string;
   author: string;
 }
-
-export default Quote;

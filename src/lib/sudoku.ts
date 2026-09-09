@@ -331,7 +331,8 @@ function shuffleArray<T>(original: T[]): void {
 function removeElement<T>(array: T[], from: number, to?: number): T[] {
   const rest = array.slice((to || from) + 1 || array.length);
   array.length = from < 0 ? array.length + from : from;
-  return array.push.apply(array, rest) as unknown as T[];
+  array.push(...rest);
+  return array;
 }
 
 export const makePuzzle = (): Board => {

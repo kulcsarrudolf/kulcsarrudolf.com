@@ -1,7 +1,5 @@
-"use client";
-
 import Link from "@/components/general/typography/Link";
-import Project from "@/types/project.type";
+import type Project from "@/types/project.type";
 
 type ProjectLinksProps = {
   project: Project;

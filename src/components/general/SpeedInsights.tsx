@@ -1,9 +1,7 @@
-"use client";
-
-import { Analytics } from "@vercel/analytics/next";
+import { Analytics } from "@vercel/analytics/react";
 
 export default function ConditionalSpeedInsights() {
-  const isProduction = process.env.NEXT_PUBLIC_ENV === "production";
+  const isProduction = import.meta.env.VITE_ENV === "production";
 
   if (!isProduction) {
     return null;

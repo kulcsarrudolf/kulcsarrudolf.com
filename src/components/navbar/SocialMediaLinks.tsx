@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import SocialMediaLink from "@/types/social-media-link";
+import type SocialMediaLink from "@/types/social-media-link";
 import { SOCIAL_MEDIA } from "./navber-links";
 
 interface SocialMediaLinksProps {

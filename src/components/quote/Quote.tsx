@@ -1,9 +1,7 @@
-"use client";
-
 import { useEffect, useState } from "react";
 import getRandomQuote from "./getRandomQuote";
 import type QuoteType from "@/types/quote.type";
-import { usePathname } from "next/navigation";
+import { useLocation, useNavigate } from "@tanstack/react-router";
 
 interface QuoteProps {
   quote?: QuoteType;
@@ -13,7 +11,8 @@ interface QuoteProps {
 
 const Quote = ({ quote: propQuote, clickable = true, className = "" }: QuoteProps) => {
   const [quote, setQuote] = useState<QuoteType | null>(propQuote || null);
-  const pathname = usePathname();
+  const pathname = useLocation({ select: (location) => location.pathname });
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!propQuote) {
@@ -29,7 +28,7 @@ const Quote = ({ quote: propQuote, clickable = true, className = "" }: QuoteProp
 
   const handleClick = () => {
     if (clickable) {
-      window.location.href = "/quotes";
+      navigate({ to: "/quotes" });
     }
   };
 

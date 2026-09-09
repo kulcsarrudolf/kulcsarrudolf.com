@@ -1,27 +1,22 @@
-"use client";
+import { useNavigate } from "@tanstack/react-router";
 
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { useTranslation } from "@/i18n/useTranslation";
 import { languages, type Language } from "@/i18n";
 import { setStoredLanguage } from "@/i18n/languageStorage";
+import { useTranslation } from "@/i18n/useTranslation";
 
 const LangSelector = () => {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const router = useRouter();
+  const navigate = useNavigate();
   const { lang } = useTranslation();
 
   const changeLanguage = (newLang: Language) => {
     if (newLang === lang) return;
 
     setStoredLanguage(newLang);
-    const params = new URLSearchParams(searchParams?.toString() || "");
-    params.set("lang", newLang);
-    const currentPath = pathname || "/";
-    const newUrl = params.toString()
-      ? `${currentPath}?${params.toString()}`
-      : currentPath;
-    router.push(newUrl);
+    // Stay on the current page and only swap the lang query param.
+    navigate({
+      to: ".",
+      search: (prev) => ({ ...prev, lang: newLang }),
+    });
   };
 
   return (

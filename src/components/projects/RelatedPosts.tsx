@@ -1,24 +1,15 @@
-import NextLink from "next/link";
+import { Link } from "@tanstack/react-router";
 
-import { getPostMetadata } from "@/utils/getPostMetadata";
+import type BlogPost from "@/types/blog-post.type";
 
 type RelatedPostsProps = {
-  slugs?: string[];
+  posts: BlogPost[];
 };
 
-// Resolving through getPostMetadata means private posts drop out
-// automatically, so a project can safely reference a draft article.
-const RelatedPosts = ({ slugs }: RelatedPostsProps) => {
-  if (!slugs?.length) {
-    return null;
-  }
-
-  const posts = getPostMetadata();
-  const relatedPosts = slugs
-    .map((slug) => posts.find((post) => post.slug === slug))
-    .filter((post) => post !== undefined);
-
-  if (relatedPosts.length === 0) {
+// The project loader already resolved the slugs against the published posts,
+// so private posts have dropped out and every entry here is linkable.
+const RelatedPosts = ({ posts }: RelatedPostsProps) => {
+  if (posts.length === 0) {
     return null;
   }
 
@@ -28,10 +19,11 @@ const RelatedPosts = ({ slugs }: RelatedPostsProps) => {
         Related reading
       </h2>
       <ul className="flex flex-col gap-0.5">
-        {relatedPosts.map((post) => (
+        {posts.map((post) => (
           <li key={post.slug}>
-            <NextLink
-              href={`/posts/${post.slug}`}
+            <Link
+              to="/posts/$slug"
+              params={{ slug: post.slug }}
               // Negative margin cancels the padding so the arrow sits on the
               // heading's left edge, letting the icons read as list markers
               // while the padded hit area stays comfortably large.
@@ -53,7 +45,7 @@ const RelatedPosts = ({ slugs }: RelatedPostsProps) => {
                 <path d="M3 8h10M9 4l4 4-4 4" />
               </svg>
               {post.title}
-            </NextLink>
+            </Link>
           </li>
         ))}
       </ul>

@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useState } from "react";
 import Sudoku from "./Sudoku";
 import { useTranslation } from "@/i18n/useTranslation";

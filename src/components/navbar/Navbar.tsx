@@ -1,16 +1,14 @@
-"use client";
-
+import { useNavigate } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
 
-import SocialMediaLinks from "./SocialMediaLinks";
+import NavbarData from "./data";
 import HamburgerButton from "./HamburgerButton";
 import MenuItems from "./MenuItems";
 import NavbarAvatar from "./NavbarAvatar";
-import NavbarData from "./data";
+import SocialMediaLinks from "./SocialMediaLinks";
 
 const Navbar = () => {
-  const router = useRouter();
+  const navigate = useNavigate();
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
   const [marginTop, setMarginTop] = useState(true);
 
@@ -75,7 +73,7 @@ const Navbar = () => {
         >
           <div
             className="flex items-center cursor-pointer"
-            onClick={() => router.push("/")}
+            onClick={() => navigate({ to: "/" })}
           >
             <NavbarAvatar src={logoSrc} alt="Rudolf" />
             <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">

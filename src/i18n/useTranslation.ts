@@ -1,32 +1,33 @@
-"use client";
+import { useSearch } from "@tanstack/react-router";
+import React, { useEffect, useMemo, useState } from "react";
 
-import { useSearchParams } from "next/navigation";
-import { useMemo } from "react";
-import { getLanguageFromQuery, getTranslation, type Language } from "./index";
+import { getLanguageFromString, getTranslation, type Language } from "./index";
 import { getStoredLanguage } from "./languageStorage";
-import React from "react";
+
+const isLanguage = (value: unknown): value is Language =>
+  value === "en" || value === "hu";
 
 export function useTranslation() {
-  const searchParams = useSearchParams();
+  const queryLang = useSearch({
+    strict: false,
+    select: (search) => search.lang,
+  });
 
-  // Priority: query param > localStorage > default (en)
+  // localStorage is only read after hydration so the server and the first
+  // client render agree. Priority: query param > localStorage > default (en).
+  const [storedLang, setStoredLang] = useState<Language | null>(null);
+
+  useEffect(() => {
+    setStoredLang(getStoredLanguage());
+  }, []);
+
   const lang = useMemo<Language>(() => {
-    const queryLang = getLanguageFromQuery(searchParams);
-
-    // If query param is valid, use it
-    if (queryLang === "en" || queryLang === "hu") {
+    if (isLanguage(queryLang)) {
       return queryLang;
     }
 
-    // Otherwise, check localStorage
-    const stored = getStoredLanguage();
-    if (stored) {
-      return stored;
-    }
-
-    // Default to English
-    return "en";
-  }, [searchParams]);
+    return storedLang ?? getLanguageFromString(undefined);
+  }, [queryLang, storedLang]);
 
   const t = getTranslation(lang);
 
