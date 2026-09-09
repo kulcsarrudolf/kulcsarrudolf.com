@@ -4,20 +4,15 @@ import { faExternalLink } from "@fortawesome/free-solid-svg-icons";
 type LinkProps = {
   href: string;
   children: React.ReactNode;
-  className?: string;
 };
 
-export const Link = ({
-  href,
-  children,
-  className = "hover:underline",
-}: LinkProps) => {
+export const Link = ({ href, children }: LinkProps) => {
   return (
     <a
       href={href}
       target="_blank"
       rel="noreferrer"
-      className={`text-brand ${className}`}
+      className="text-brand hover:underline"
     >
       {children}
       <FontAwesomeIcon

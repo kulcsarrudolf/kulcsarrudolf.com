@@ -1,6 +1,5 @@
 interface LanguageBadgeProps {
   lang?: string;
-  className?: string;
 }
 
 /**
@@ -9,12 +8,12 @@ interface LanguageBadgeProps {
  * also why it returns null rather than an empty span: the trailing margin
  * should only exist when there is a badge to separate from the title.
  */
-const LanguageBadge = ({ lang, className = "mr-1" }: LanguageBadgeProps) => {
+const LanguageBadge = ({ lang }: LanguageBadgeProps) => {
   if (lang !== "hu") {
     return null;
   }
 
-  return <span className={`text-blue-900 ${className}`.trim()}>[HU]</span>;
+  return <span className="mr-1 text-blue-900">[HU]</span>;
 };
 
 export default LanguageBadge;
