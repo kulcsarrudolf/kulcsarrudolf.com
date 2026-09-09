@@ -70,6 +70,7 @@ Configuration lives in `.storybook/`; it uses its own small Vite config because 
 
 `yarn lint` runs [oxlint](https://oxc.rs/docs/guide/usage/linter), which replaced ESLint and its plugins.
 The rules live in `.oxlintrc.json`: correctness rules as errors, rules-of-hooks and exhaustive-deps on, and unused variables allowed with a leading underscore.
+`max-lines` caps every file at 500 lines, so a file that outgrows its job fails the lint run instead of drifting.
 A full run takes well under a second.
 
 ### Environment variables

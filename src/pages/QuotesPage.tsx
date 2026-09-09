@@ -1,7 +1,8 @@
 import { Paragraph, Title } from "@/components/general/typography";
+import QuoteCard from "@/components/quote/QuoteCard";
 import quotes from "@/components/quote/quotes";
-import type Quote from "@/types/quote.type";
 import { useTranslation } from "@/i18n/useTranslation";
+import type Quote from "@/types/quote.type";
 
 export default function QuotesPage() {
   const { t } = useTranslation();
@@ -12,20 +13,13 @@ export default function QuotesPage() {
       <Paragraph>{t("quotes.description")}</Paragraph>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {quotes.map((quote: Quote) => (
-          <div
-            className="border border-gray-300 p-6 rounded-xl shadow-md mb-4 hover:shadow-lg transition-shadow"
+          <QuoteCard
             key={quote.id}
-          >
-            <p
-              className="text-lg font-normal mb-4 leading-relaxed"
-              style={{ lineHeight: "1.75rem" }}
-            >
-              &ldquo;{quote.quote}&rdquo;
-            </p>
-            <p className="text-brand-active font-semibold text-base tracking-wide">
-              — {quote.author}
-            </p>
-          </div>
+            quote={quote}
+            size="md"
+            interactive
+            className="mb-4"
+          />
         ))}
       </div>
     </>

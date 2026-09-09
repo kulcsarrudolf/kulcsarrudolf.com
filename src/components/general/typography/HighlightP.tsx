@@ -5,11 +5,8 @@ interface HighlightPProps {
 const HighlightP = ({ children }: HighlightPProps) => {
   return (
     <span
-      style={{
-        borderRadius: "0.25rem",
-        lineHeight: "2.0rem",
-        color: "#4267b2",
-      }}
+      className="text-brand"
+      style={{ borderRadius: "0.25rem", lineHeight: "2.0rem" }}
     >
       {children}
     </span>

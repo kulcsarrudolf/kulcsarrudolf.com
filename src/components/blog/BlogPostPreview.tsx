@@ -1,25 +1,22 @@
 import { Link } from "@tanstack/react-router";
-import type BlogPost from "@/types/blog-post.type";
+
+import LanguageBadge from "@/components/general/LanguageBadge";
+import useLangSearch from "@/i18n/useLangSearch";
 import { useTranslation } from "@/i18n/useTranslation";
+import type BlogPost from "@/types/blog-post.type";
 
 type BlogPostPreviewProps = {
   post: BlogPost;
   compact?: boolean;
 };
 const BlogPostPreview = ({ post, compact = false }: BlogPostPreviewProps) => {
-  const { t, lang } = useTranslation();
-  // Null rather than an empty span, so the trailing margin only exists
-  // when there is a badge to separate from the title.
-  const languageBadge =
-    post.lang === "hu" ? (
-      <span className="text-blue-900 mr-1">[HU]</span>
-    ) : null;
+  const { t } = useTranslation();
+  const langSearch = useLangSearch();
 
-  // Keep the chosen language across navigation; undefined drops the param.
   const linkProps = {
     to: "/posts/$slug",
     params: { slug: post.slug },
-    search: { lang: lang !== "en" ? lang : undefined },
+    search: langSearch,
   } as const;
 
   if (compact) {
@@ -33,7 +30,7 @@ const BlogPostPreview = ({ post, compact = false }: BlogPostPreviewProps) => {
               ➡️
             </span>
             <span>
-              {languageBadge}
+              <LanguageBadge lang={post.lang} />
               {post.title}
             </span>
           </p>
@@ -46,7 +43,7 @@ const BlogPostPreview = ({ post, compact = false }: BlogPostPreviewProps) => {
     <div key={post.title} className="mb-2">
       <Link {...linkProps} className="group">
         <p className="font-bold group-hover:text-blue-500">
-          {languageBadge}
+          <LanguageBadge lang={post.lang} />
           {post.title}
         </p>
         <p>{post.subtitle}</p>

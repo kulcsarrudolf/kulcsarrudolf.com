@@ -1,4 +1,6 @@
-import { Link, createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
+
+import ArrowLink from "@/components/general/ArrowLink";
 
 import { Subtitle, Title } from "@/components/general/typography";
 import MarkdownBody from "@/components/markdown/MarkdownBody";
@@ -89,28 +91,9 @@ function ProjectPage() {
       </div>
       <RelatedPosts posts={relatedPosts} />
       <div className="mt-8 pt-6 border-t border-gray-200">
-        <Link
-          to="/projects"
-          // Negative margin cancels the padding so the arrow sits on the
-          // body text's left edge, matching the related-posts links, while
-          // the padded hit area stays comfortably large.
-          className="group -ml-3 inline-flex items-start gap-2 rounded-md px-3 py-3 text-sm font-medium transition-colors hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
-          style={{ color: "#4267b2" }}
-        >
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 16 16"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={1.75}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="mt-[3px] h-3.5 w-3.5 shrink-0 transition-transform group-hover:-translate-x-0.5"
-          >
-            <path d="M13 8H3M7 4l-4 4 4 4" />
-          </svg>
+        <ArrowLink to="/projects" direction="back">
           Back to all projects
-        </Link>
+        </ArrowLink>
       </div>
     </article>
   );

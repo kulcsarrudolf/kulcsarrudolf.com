@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react";
-import { useTranslation } from "@/i18n/useTranslation";
+import { useState } from "react";
+
+import Button from "@/components/general/Button";
+import Modal from "@/components/general/modal/Modal";
 import getRandomQuote from "@/components/quote/getRandomQuote";
-import Quote from "@/components/quote/Quote";
+import QuoteCard from "@/components/quote/QuoteCard";
 import SudokuModal from "@/components/sudoku/SudokuModal";
+import { useTranslation } from "@/i18n/useTranslation";
 import type QuoteType from "@/types/quote.type";
 
 interface WelcomeModalProps {
@@ -12,74 +15,32 @@ interface WelcomeModalProps {
 const WelcomeModal = ({ onClose }: WelcomeModalProps) => {
   const { t } = useTranslation();
   const [quote] = useState<QuoteType>(() => getRandomQuote());
-  const [isVisible, setIsVisible] = useState(false);
   const [showSudoku, setShowSudoku] = useState(false);
 
-  useEffect(() => {
-    requestAnimationFrame(() => {
-      setIsVisible(true);
-    });
-  }, []);
-
-  const handleClose = () => {
-    setIsVisible(false);
-    setTimeout(onClose, 200);
-  };
-
-  const handlePlaySudoku = () => {
-    setShowSudoku(true);
-  };
-
-  const handleCloseSudoku = () => {
-    setShowSudoku(false);
-  };
-
   if (showSudoku) {
-    return <SudokuModal onClose={handleCloseSudoku} />;
+    return <SudokuModal onClose={() => setShowSudoku(false)} />;
   }
 
   return (
-    <div
-      className={`fixed inset-0 z-50 flex items-center justify-center transition-opacity duration-200 ${
-        isVisible ? "opacity-100" : "opacity-0"
-      }`}
-      onClick={handleClose}
+    <Modal
+      onClose={onClose}
+      panelClassName="p-8 md:max-w-sm"
+      closeLabel={t("nav.close") as string}
     >
-      {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/50" />
+      <div className="text-center">
+        <div className="text-4xl mb-4">🎉</div>
+        <h2 className="text-xl font-bold text-gray-800 mb-2">
+          {t("welcomeModal.title")}
+        </h2>
+        <p className="text-gray-600 mb-6">{t("welcomeModal.message")}</p>
 
-      {/* Modal */}
-      <div
-        className={`relative bg-white p-8 shadow-2xl transform transition-all duration-200 w-full h-full md:w-auto md:h-auto md:max-w-sm md:mx-4 md:rounded-2xl flex flex-col justify-center ${
-          isVisible ? "scale-100" : "scale-95"
-        }`}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <button
-          onClick={handleClose}
-          className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 text-2xl leading-none"
-        >
-          &times;
-        </button>
+        <QuoteCard quote={quote} centered className="shadow-none" />
 
-        <div className="text-center">
-          <div className="text-4xl mb-4">🎉</div>
-          <h2 className="text-xl font-bold text-gray-800 mb-2">
-            {t("welcomeModal.title")}
-          </h2>
-          <p className="text-gray-600 mb-6">{t("welcomeModal.message")}</p>
-
-          <Quote quote={quote} clickable={false} className="mt-0 shadow-none" />
-
-          <button
-            onClick={handlePlaySudoku}
-            className="mt-6 px-6 py-3 bg-brand text-white rounded-lg font-semibold hover:bg-brand-hover transition-colors"
-          >
-            {t("welcomeModal.playSudoku")}
-          </button>
-        </div>
+        <Button className="mt-6" onClick={() => setShowSudoku(true)}>
+          {t("welcomeModal.playSudoku")}
+        </Button>
       </div>
-    </div>
+    </Modal>
   );
 };
 

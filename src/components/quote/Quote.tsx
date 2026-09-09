@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
-import getRandomQuote from "./getRandomQuote";
-import type QuoteType from "@/types/quote.type";
 import { useLocation, useNavigate } from "@tanstack/react-router";
+
+import type QuoteType from "@/types/quote.type";
+
+import getRandomQuote from "./getRandomQuote";
+import QuoteCard from "./QuoteCard";
 
 interface QuoteProps {
   quote?: QuoteType;
@@ -9,15 +12,18 @@ interface QuoteProps {
   className?: string;
 }
 
-const Quote = ({ quote: propQuote, clickable = true, className = "" }: QuoteProps) => {
+const Quote = ({
+  quote: propQuote,
+  clickable = true,
+  className = "",
+}: QuoteProps) => {
   const [quote, setQuote] = useState<QuoteType | null>(propQuote || null);
   const pathname = useLocation({ select: (location) => location.pathname });
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!propQuote) {
-      const currentQuote = getRandomQuote();
-      setQuote(currentQuote);
+      setQuote(getRandomQuote());
     }
   }, [propQuote]);
 
@@ -26,29 +32,14 @@ const Quote = ({ quote: propQuote, clickable = true, className = "" }: QuoteProp
     return null;
   }
 
-  const handleClick = () => {
-    if (clickable) {
-      navigate({ to: "/quotes" });
-    }
-  };
-
   return (
-    <div
-      className={`border border-gray-300 p-6 rounded-xl shadow-md text-center ${
-        clickable ? "cursor-pointer hover:shadow-lg transition-shadow" : ""
-      } ${className}`}
-      onClick={handleClick}
-    >
-      <p
-        className="text-xl font-normal mb-5 leading-relaxed"
-        style={{ lineHeight: "2rem" }}
-      >
-        &ldquo;{quote.quote}&rdquo;
-      </p>
-      <p className="text-brand-active font-semibold text-lg tracking-wide">
-        — {quote.author}
-      </p>
-    </div>
+    <QuoteCard
+      quote={quote}
+      centered
+      interactive={clickable}
+      onClick={clickable ? () => navigate({ to: "/quotes" }) : undefined}
+      className={className}
+    />
   );
 };
 

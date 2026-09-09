@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faNpm } from "@fortawesome/free-brands-svg-icons";
 import { faArrowRight, faGlobe } from "@fortawesome/free-solid-svg-icons";
 
+import LanguageBadge from "@/components/general/LanguageBadge";
 import { useTranslation } from "@/i18n/useTranslation";
 import type Project from "@/types/project.type";
 
@@ -15,7 +16,6 @@ type ProjectCardProps = {
 // in the footer only advertise which of those links a project has.
 const ProjectCard = ({ project }: ProjectCardProps) => {
   const { t } = useTranslation();
-  const languageLabel = project.lang === "hu" ? "[HU]" : "";
 
   const linkIcons = [
     { key: "github", icon: faGithub, label: "GitHub", has: project.github },
@@ -31,11 +31,8 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
     >
       {/* The body grows so the footer sits on the same line in every card of a row. */}
       <div className="flex-1">
-        <h2
-          className="text-lg font-semibold leading-snug group-hover:underline"
-          style={{ color: "#4267b2" }}
-        >
-          <span className="text-blue-900">{languageLabel}</span>
+        <h2 className="text-lg font-semibold leading-snug text-brand group-hover:underline">
+          <LanguageBadge lang={project.lang} />
           {project.title}
         </h2>
 
@@ -68,10 +65,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
             />
           ))}
         </span>
-        <span
-          className="flex items-center gap-1.5 text-sm font-medium"
-          style={{ color: "#4267b2" }}
-        >
+        <span className="flex items-center gap-1.5 text-sm font-medium text-brand">
           {t("projects.viewProject")}
           <FontAwesomeIcon
             icon={faArrowRight}

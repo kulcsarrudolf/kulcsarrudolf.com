@@ -20,7 +20,10 @@
     "no-unused-vars": [
       "error",
       { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }
-    ]
+    ],
+    // A file past 500 lines is doing more than one job. Split it into the
+    // pieces it is already made of rather than raising this number.
+    "max-lines": ["error", { "max": 500 }]
   },
   "ignorePatterns": [
     "node_modules",
