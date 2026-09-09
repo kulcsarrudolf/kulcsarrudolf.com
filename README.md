@@ -14,7 +14,10 @@ Blog post images use [zimme-zoom](https://www.npmjs.com/package/zimme-zoom), my 
 ## How it is put together
 
 - `src/routes/` holds one file per URL.
-  A route declares its `loader` (data), `head` (title, meta, canonical, JSON-LD) and `component`.
+  A route declares its `loader` (data), `head` (title, meta, canonical, JSON-LD) and the page it renders.
+- `src/pages/` holds what each route renders, composed from the pieces below.
+- `src/features/` holds one folder per domain (blog, projects, contact, quotes, home, sudoku, the navbar easter egg, the wedding countdown) with its components, hooks and data.
+- `src/components/` holds only what features share: `ui/` primitives, the `layout/` shell, and `content/` for rendering posts and projects.
 - `src/content/` holds everything authored: the posts, the projects, the drafts and templates, and the quotes.
 - `src/server/content.ts` reads the Markdown at build time with `import.meta.glob`, so the deployed function never touches the filesystem.
 - `src/server/functions.ts` exposes that content through server functions.
@@ -43,7 +46,7 @@ Other scripts: `yarn build` (production build into `.output/`), `yarn start` (se
 ### Storybook
 
 `yarn storybook` runs on [http://localhost:6006](http://localhost:6006); `yarn build-storybook` writes a static build to `storybook-static/`.
-Every component under `src/components/` has a story next to it (`*.stories.tsx`).
+Every component under `src/components/` and `src/features/` has a story next to it (`*.stories.tsx`), and the sidebar mirrors the folders.
 
 Stories render inside a real TanStack Router with an in-memory history, so `<Link>`, `useNavigate` and `useSearch` work without the app shell.
 The toolbar has a language switch that sets the same `?lang=` query the site uses.

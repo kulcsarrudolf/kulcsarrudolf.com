@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import PageShell from "./PageShell";
-import { Paragraph, Title } from "@/components/general/typography";
+import { Paragraph, Title } from "@/components/ui/typography";
 
 const meta = {
   title: "Layout/PageShell",

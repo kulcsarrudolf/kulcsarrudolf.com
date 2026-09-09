@@ -22,14 +22,14 @@
     // A file past 500 lines is doing more than one job. Split it into the
     // pieces it is already made of rather than raising this number.
     "max-lines": ["error", { "max": 500 }],
-    // Tailwind classes belong in a component under `src/components/`, so a
-    // route or a page composes components rather than styling markup itself.
-    // The override below is what makes that directory the one exception.
+    // Tailwind classes belong in a component under `src/components/` or
+    // `src/features/`, so a route or a page composes components rather than
+    // styling markup itself. The override below is what exempts those two.
     "boundary/no-tailwind": "error"
   },
   "overrides": [
     {
-      "files": ["src/components/**"],
+      "files": ["src/components/**", "src/features/**"],
       "rules": { "boundary/no-tailwind": "off" }
     }
   ],

@@ -1,6 +1,6 @@
-// Tailwind classes belong in a component under `src/components/`. This rule
-// holds that line for every other file, so a route or a page composes
-// components instead of styling markup itself.
+// Tailwind classes belong in a component under `src/components/` or
+// `src/features/`. This rule holds that line for every other file, so a route
+// or a page composes components instead of styling markup itself.
 //
 // Deciding whether `bg-surface` or `nav:hidden` is a Tailwind class is not
 // something a regular expression can answer: the theme, the custom
@@ -69,7 +69,8 @@ const rule = {
         if (name === "style") {
           context.report({
             node,
-            message: "Inline styles belong in a component under `src/components/`.",
+            message:
+              "Inline styles belong in a component under `src/components/` or `src/features/`.",
           });
           return;
         }
@@ -90,7 +91,7 @@ const rule = {
 
         context.report({
           node: literal,
-          message: `Tailwind belongs in a component under \`src/components/\`: ${found.join(" ")}`,
+          message: `Tailwind belongs in a component under \`src/components/\` or \`src/features/\`: ${found.join(" ")}`,
         });
       },
     };

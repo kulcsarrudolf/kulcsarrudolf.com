@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import Navbar from "@/components/navbar/Navbar";
+import Navbar from "@/components/layout/navbar/Navbar";
 
 interface PageShellProps {
   children: ReactNode;

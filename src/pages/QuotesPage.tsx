@@ -1,6 +1,6 @@
-import CardGrid from "@/components/general/CardGrid";
-import { Paragraph, Title } from "@/components/general/typography";
-import QuoteCard from "@/components/quote/QuoteCard";
+import CardGrid from "@/components/ui/CardGrid";
+import { Paragraph, Title } from "@/components/ui/typography";
+import QuoteCard from "@/features/quotes/QuoteCard";
 import quotes from "@/content/quotes";
 import { useTranslation } from "@/i18n/useTranslation";
 import type { Quote } from "@/types/quote";

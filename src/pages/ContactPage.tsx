@@ -1,8 +1,7 @@
-import ContactCallout from "@/components/contact/ContactCallout";
-import ContactForm from "@/components/contact/ContactForm";
-import Divider from "@/components/general/Divider";
-import { Paragraph, Title } from "@/components/general/typography";
-import Link from "@/components/general/typography/Link";
+import ContactCallout from "@/features/contact/ContactCallout";
+import ContactForm from "@/features/contact/ContactForm";
+import Divider from "@/components/ui/Divider";
+import { Link, Paragraph, Title } from "@/components/ui/typography";
 import { useTranslation } from "@/i18n/useTranslation";
 
 const linkedInLink = <Link href="https://www.linkedin.com/in/kulcsarrudolf">LinkedIn</Link>;

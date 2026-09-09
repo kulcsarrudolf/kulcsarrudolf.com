@@ -1,10 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import PostedOn from "@/components/general/PostedOn";
-import { Subtitle, Title } from "@/components/general/typography";
-import MarkdownBody from "@/components/markdown/MarkdownBody";
-import { SITE_NAME, SITE_URL } from "@/config/site";
+import { SITE_URL } from "@/config/site";
 import { pageHead } from "@/lib/seo";
+import PostPage from "@/pages/PostPage";
 import { fetchPost } from "@/server/functions";
 import type { BlogPost } from "@/types/blog-post";
 
@@ -68,19 +66,10 @@ export const Route = createFileRoute("/posts/$slug")({
       }),
     };
   },
-  component: PostPage,
+  component: PostRoute,
 });
 
-function PostPage() {
+function PostRoute() {
   const post = Route.useLoaderData();
-
-  return (
-    <article itemScope itemType="https://schema.org/BlogPosting">
-      <meta itemProp="publisher" content={SITE_NAME} />
-      <Title itemProp="headline">{post.title}</Title>
-      <Subtitle itemProp="description">{post.subtitle}</Subtitle>
-      <PostedOn date={post.date} />
-      <MarkdownBody content={post.content} itemProp="articleBody" />
-    </article>
-  );
+  return <PostPage post={post} />;
 }

@@ -11,5 +11,3 @@ export function useLangSearch() {
   const { lang } = useTranslation();
   return { lang: lang !== "en" ? lang : undefined };
 }
-
-export default useLangSearch;
