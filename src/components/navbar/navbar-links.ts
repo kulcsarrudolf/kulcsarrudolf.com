@@ -1,33 +1,36 @@
-import type NavbarElement from "@/types/navbar-element.type";
-import type SocialMediaLink from "@/types/social-media-link";
 import {
+  faGithub,
+  faInstagram,
   faLinkedin,
   faXTwitter,
-  faInstagram,
-  faGithub,
 } from "@fortawesome/free-brands-svg-icons";
+
+import type NavbarElement from "@/types/navbar-element.type";
+import type SocialMediaLink from "@/types/social-media-link";
 
 const NAVBAR_ELEMENTS: NavbarElement[] = [
   {
-    title: "Home",
+    labelKey: "nav.home",
     href: "/",
   },
   {
-    title: "Blog",
+    labelKey: "nav.blog",
     href: "/blog",
+    matchPrefixes: ["/posts"],
   },
   {
-    title: "Projects",
+    labelKey: "nav.projects",
     href: "/projects",
   },
   // {
-  //   title: "Résumé",
+  //   labelKey: "nav.resume",
   //   href: "https://cv.kulcsarrudolf.com",
   //   openInNewTab: true,
   // },
   {
-    title: "Contact",
+    labelKey: "nav.contact",
     href: "/contact",
+    cta: true,
   },
 ];
 

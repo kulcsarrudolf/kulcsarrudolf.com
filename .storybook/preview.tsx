@@ -98,7 +98,7 @@ const preview: Preview = {
   parameters: {
     backgrounds: {
       options: {
-        site: { name: "Site", value: "#E9EBEE" },
+        site: { name: "Site", value: "#e9ebee" },
         white: { name: "White", value: "#ffffff" },
         navbar: { name: "Navbar blue", value: "#4267b2" },
       },

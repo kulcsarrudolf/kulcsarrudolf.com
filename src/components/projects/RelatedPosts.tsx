@@ -27,7 +27,7 @@ const RelatedPosts = ({ posts }: RelatedPostsProps) => {
               // Negative margin cancels the padding so the arrow sits on the
               // heading's left edge, letting the icons read as list markers
               // while the padded hit area stays comfortably large.
-              className="group -ml-3 inline-flex items-start gap-2 rounded-md px-3 py-3 text-sm font-medium transition-colors hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4267b2]"
+              className="group -ml-3 inline-flex items-start gap-2 rounded-md px-3 py-3 text-sm font-medium transition-colors hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
               style={{ color: "#4267b2" }}
             >
               <svg

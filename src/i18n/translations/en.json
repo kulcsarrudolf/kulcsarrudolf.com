@@ -4,7 +4,10 @@
     "blog": "Blog",
     "projects": "Projects",
     "resume": "Résumé",
-    "contact": "Get In Touch"
+    "contact": "Get In Touch",
+    "menu": "Menu",
+    "close": "Close menu",
+    "openMenu": "Open main menu"
   },
   "home": {
     "title": "About Me",

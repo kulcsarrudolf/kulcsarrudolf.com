@@ -1,103 +1,100 @@
-import { useNavigate } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useRouterState } from "@tanstack/react-router";
+import { useCallback, useEffect, useState } from "react";
 
-import NavbarData from "./data";
+import { useTranslation } from "@/i18n/useTranslation";
+
+import Brand from "./Brand";
 import HamburgerButton from "./HamburgerButton";
 import MenuItems from "./MenuItems";
-import NavbarAvatar from "./NavbarAvatar";
+import NavSheet from "./NavSheet";
 import SocialMediaLinks from "./SocialMediaLinks";
 
+const MENU_ID = "primary-navigation";
+const DOCK_THRESHOLD = 100;
+
+/**
+ * One row, one rhythm. Identity is set a step quieter than the navigation so
+ * the links lead, the call to action is the brightest object, and the social
+ * icons sit behind a hairline as a footnote rather than as peers.
+ *
+ * What is visible depends on what fits, and the two breakpoints were measured:
+ *   below 546px  brand + menu button
+ *   546px+       adds the call to action, the divider and the social icons
+ *   706px+       adds the full link list, and the menu button retires
+ */
 const Navbar = () => {
-  const navigate = useNavigate();
-  const [isNavbarOpen, setIsNavbarOpen] = useState(false);
-  const [marginTop, setMarginTop] = useState(true);
+  const { t } = useTranslation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDocked, setIsDocked] = useState(false);
 
-  const toggleNavbar = () => {
-    setIsNavbarOpen((prev) => !prev);
-  };
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
 
-  const ref = useRef<HTMLDivElement>(null);
+  const closeMenu = useCallback(() => setIsMenuOpen(false), []);
+
+  // Navigating away closes the menu. This used to be spread across every link's
+  // onClick; one effect on the route is both shorter and harder to forget.
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const targetNode = event.target as Node | null;
-      if (ref.current && targetNode && !ref.current.contains(targetNode)) {
-        setIsNavbarOpen(false);
-      }
+    let frame: number | null = null;
+
+    const handleScroll = () => {
+      if (frame !== null) return;
+
+      frame = requestAnimationFrame(() => {
+        frame = null;
+        const docked = window.scrollY > DOCK_THRESHOLD;
+        setIsDocked(docked);
+        if (docked) setIsMenuOpen(false);
+      });
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [ref]);
-
-  useEffect(() => {
-    const scrollThreshold = 100;
-
-    function handleScroll() {
-      if (window.scrollY > scrollThreshold) {
-        setMarginTop(false);
-        setIsNavbarOpen(false);
-      }
-
-      if (window.scrollY < scrollThreshold) {
-        setMarginTop(true);
-      }
-    }
-
-    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      if (frame !== null) cancelAnimationFrame(frame);
     };
   }, []);
 
-  const mNavBarVisible = isNavbarOpen ? "" : "hidden";
-
-  const { title, logoSrc } = NavbarData;
-
   return (
-    <>
-      <nav
-        className={`fixed w-full z-20 top-0 left-0 ${
-          marginTop ? "mt-5" : "mt-0"
-        } px-2`}
-        ref={ref}
+    <nav
+      aria-label={t("nav.menu") as string}
+      className={`fixed left-0 top-0 z-20 w-full px-2 transition-[margin] duration-200 ${
+        isDocked ? "mt-0" : "mt-5"
+      }`}
+    >
+      <div
+        className={`mx-auto flex h-20 max-w-5xl items-center rounded-2xl bg-brand px-4 shadow-md ${
+          isDocked ? "rounded-t-none" : ""
+        }`}
       >
+        <Brand />
+
+        <div className="flex-1" />
+
+        <MenuItems variant="bar" />
+
         <div
-          className={`max-w-5xl flex flex-wrap items-center justify-between mx-auto p-4 rounded-2xl ${
-            marginTop ? "" : "rounded-t-none"
-          } shadow-md bg-[#4267b2]`}
-        >
-          <div
-            className="flex items-center cursor-pointer"
-            onClick={() => navigate({ to: "/" })}
-          >
-            <NavbarAvatar src={logoSrc} alt="Rudolf" />
-            <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
-              {title}
-            </span>
-          </div>
-          <div className="flex items-center md:order-2">
-            <div className="hidden min-[475px]:block">
-              <SocialMediaLinks />
-            </div>
-            <HamburgerButton onClick={toggleNavbar} />
-          </div>
-          <div
-            className={`flex-grow justify-end pt-6 md:pt-0 ${mNavBarVisible} w-full md:flex md:w-auto md:order-1 `}
-            id="navbar-sticky"
-          >
-            <MenuItems onClick={() => setIsNavbarOpen(false)} />
-            <div className="mt-4 flex gap-4 justify-center min-[475px]:hidden">
-              <SocialMediaLinks iconClassName="ml-0" />
-            </div>
-          </div>
-        </div>
-      </nav>
-    </>
+          className="mx-4 hidden h-6 w-px shrink-0 bg-white/25 socials:block"
+          aria-hidden="true"
+        />
+        <SocialMediaLinks size="sm" className="hidden socials:flex" />
+
+        <HamburgerButton
+          className="ml-3 nav:hidden"
+          isOpen={isMenuOpen}
+          controls={MENU_ID}
+          label={t("nav.openMenu") as string}
+          onClick={() => setIsMenuOpen((open) => !open)}
+        />
+      </div>
+
+      {isMenuOpen && <NavSheet id={MENU_ID} onClose={closeMenu} />}
+    </nav>
   );
 };
 

@@ -73,7 +73,7 @@ const WelcomeModal = ({ onClose }: WelcomeModalProps) => {
 
           <button
             onClick={handlePlaySudoku}
-            className="mt-6 px-6 py-3 bg-[#4267b2] text-white rounded-lg font-semibold hover:bg-[#365899] transition-colors"
+            className="mt-6 px-6 py-3 bg-brand text-white rounded-lg font-semibold hover:bg-brand-hover transition-colors"
           >
             {t("welcomeModal.playSudoku")}
           </button>

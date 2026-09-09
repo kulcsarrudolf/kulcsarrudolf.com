@@ -22,7 +22,7 @@ export default function QuotesPage() {
             >
               &ldquo;{quote.quote}&rdquo;
             </p>
-            <p className="text-[#3b64b8] font-semibold text-base tracking-wide">
+            <p className="text-brand-active font-semibold text-base tracking-wide">
               — {quote.author}
             </p>
           </div>

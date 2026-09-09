@@ -6,51 +6,62 @@ import WelcomeModal from "./WelcomeModal";
 interface NavbarAvatarProps {
   src: string;
   alt: string;
+  ringClassName?: string;
 }
 
-const NavbarAvatar = ({ src, alt }: NavbarAvatarProps) => {
+const DELAY_MS = 1000;
+const ANIMATION_DURATION_MS = 6000;
+
+const NavbarAvatar = ({
+  src,
+  alt,
+  ringClassName = "border-white",
+}: NavbarAvatarProps) => {
   const [progress, setProgress] = useState(0);
   const [showModal, setShowModal] = useState(false);
 
   const delayTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  const DELAY_MS = 1000;
-  const ANIMATION_DURATION_MS = 6000;
-  const UPDATE_INTERVAL_MS = 50;
+  const frameRef = useRef<number | null>(null);
+  // The avatar sits inside the brand link. Finishing the hold on a touch screen
+  // would otherwise fire the link's synthesized click and navigate home behind
+  // the modal, so the next click after the egg fires is swallowed.
+  const swallowNextClickRef = useRef(false);
 
   const resetState = useCallback(() => {
     if (delayTimerRef.current) {
       clearTimeout(delayTimerRef.current);
       delayTimerRef.current = null;
     }
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
+    if (frameRef.current) {
+      cancelAnimationFrame(frameRef.current);
+      frameRef.current = null;
     }
     setProgress(0);
   }, []);
 
   const startProgress = useCallback(() => {
-    if (showModal) return;
+    if (showModal || delayTimerRef.current || frameRef.current) return;
 
     delayTimerRef.current = setTimeout(() => {
+      delayTimerRef.current = null;
       const startTime = Date.now();
 
-      intervalRef.current = setInterval(() => {
+      const tick = () => {
         const elapsed = Date.now() - startTime;
-        const newProgress = Math.min((elapsed / ANIMATION_DURATION_MS) * 100, 100);
+        const next = Math.min((elapsed / ANIMATION_DURATION_MS) * 100, 100);
+        setProgress(next);
 
-        setProgress(newProgress);
-
-        if (newProgress >= 100) {
-          if (intervalRef.current) {
-            clearInterval(intervalRef.current);
-            intervalRef.current = null;
-          }
+        if (next >= 100) {
+          frameRef.current = null;
+          swallowNextClickRef.current = true;
           setShowModal(true);
+          return;
         }
-      }, UPDATE_INTERVAL_MS);
+
+        frameRef.current = requestAnimationFrame(tick);
+      };
+
+      frameRef.current = requestAnimationFrame(tick);
     }, DELAY_MS);
   }, [showModal]);
 
@@ -60,50 +71,49 @@ const NavbarAvatar = ({ src, alt }: NavbarAvatarProps) => {
     }
   }, [resetState, showModal]);
 
-  // Mouse events (desktop)
-  const handleMouseEnter = useCallback(() => startProgress(), [startProgress]);
-  const handleMouseLeave = useCallback(() => stopProgress(), [stopProgress]);
-
-  // Touch events (mobile - long press)
-  const handleTouchStart = useCallback(() => startProgress(), [startProgress]);
-  const handleTouchEnd = useCallback(() => stopProgress(), [stopProgress]);
-
-  // Prevent context menu on long press (mobile)
-  const handleContextMenu = useCallback((e: React.MouseEvent) => {
-    e.preventDefault();
-  }, []);
-
   const handleCloseModal = useCallback(() => {
     setShowModal(false);
     resetState();
   }, [resetState]);
 
-  useEffect(() => {
-    return () => {
-      if (delayTimerRef.current) clearTimeout(delayTimerRef.current);
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
+  const handleClickCapture = useCallback((event: React.MouseEvent) => {
+    if (!swallowNextClickRef.current) return;
+    swallowNextClickRef.current = false;
+    event.preventDefault();
+    event.stopPropagation();
   }, []);
+
+  useEffect(
+    () => () => {
+      if (delayTimerRef.current) clearTimeout(delayTimerRef.current);
+      if (frameRef.current) cancelAnimationFrame(frameRef.current);
+    },
+    [],
+  );
 
   return (
     <>
       <div
-        className="relative mr-3 w-[48px] h-[48px] flex items-center justify-center select-none touch-none"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-        onTouchCancel={handleTouchEnd}
-        onContextMenu={handleContextMenu}
+        className="relative mr-2.5 flex h-10 w-10 shrink-0 touch-none select-none items-center justify-center"
+        onMouseEnter={startProgress}
+        onMouseLeave={stopProgress}
+        onTouchStart={startProgress}
+        onTouchEnd={stopProgress}
+        onTouchCancel={stopProgress}
+        onClickCapture={handleClickCapture}
+        // Stops the long press raising the platform context menu on touch.
+        onContextMenu={(event) => event.preventDefault()}
       >
         <img
-          width={40}
-          height={40}
+          width={36}
+          height={36}
           src={src}
-          className="rounded-full shadow-md border-2 border-white p-0.5"
+          className={`h-9 w-9 rounded-full border-2 p-0.5 shadow-md ${ringClassName}`}
           alt={alt}
         />
-        {progress > 0 && <CircularProgress progress={progress} size={48} strokeWidth={3} />}
+        {progress > 0 && (
+          <CircularProgress progress={progress} size={40} strokeWidth={3} />
+        )}
       </div>
 
       {showModal && <WelcomeModal onClose={handleCloseModal} />}

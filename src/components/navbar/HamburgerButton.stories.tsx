@@ -8,11 +8,15 @@ const meta = {
   component: HamburgerButton,
   args: {
     onClick: fn(),
+    isOpen: false,
+    controls: "primary-navigation",
+    label: "Open main menu",
   },
   parameters: {
     docs: {
       description: {
-        component: "Only visible below the `md` breakpoint (it carries `md:hidden`), so the story uses a phone viewport.",
+        component:
+          "Opens the mobile menu sheet. It retires at the `nav` breakpoint (706px), where the whole link list fits in the bar. `aria-expanded` tracks the sheet, so screen readers know whether the menu is open.",
       },
     },
   },
@@ -32,4 +36,8 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Closed: Story = {};
+
+export const Open: Story = {
+  args: { isOpen: true, label: "Close menu" },
+};
