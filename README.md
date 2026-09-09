@@ -27,6 +27,8 @@ It serves as both a portfolio (projects, focus areas, and experience) and a blog
 - **Font Awesome** (`@fortawesome/*`): icons throughout the site.
 - **Fontsource**: self-hosted Inter, Great Vibes and Cormorant Garamond fonts.
 - **Vercel Analytics**: lightweight traffic analytics.
+- **Storybook**: a story next to every UI component, with docs and accessibility addons.
+- **oxlint**: linting, in place of ESLint.
 
 ## How It Is Put Together
 
@@ -63,6 +65,12 @@ Every UI component under `src/components/` has a story next to it (`*.stories.ts
 Stories render inside a real TanStack Router with an in-memory history, so `<Link>`, `useNavigate` and `useSearch` work without the app shell.
 The toolbar has a language switch that sets the same `?lang=` query the site uses, so translated components can be checked in both languages.
 Configuration lives in `.storybook/`; it uses its own small Vite config because the app's config carries the TanStack Start and Nitro plugins.
+
+### Linting
+
+`yarn lint` runs [oxlint](https://oxc.rs/docs/guide/usage/linter), which replaced ESLint and its plugins.
+The rules live in `.oxlintrc.json`: correctness rules as errors, rules-of-hooks and exhaustive-deps on, and unused variables allowed with a leading underscore.
+A full run takes well under a second.
 
 ### Environment variables
 
