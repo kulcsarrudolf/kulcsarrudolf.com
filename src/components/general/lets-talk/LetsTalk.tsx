@@ -63,6 +63,14 @@ const TeamIcon = () => (
   </svg>
 );
 
+const BriefcaseIcon = () => (
+  <svg {...strokeProps} className="h-[22px] w-[22px]" aria-hidden="true">
+    <rect x="2.75" y="7" width="18.5" height="13" rx="2" />
+    <path d="M8.5 7V5.5a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2V7" />
+    <path d="M10.5 13h3" />
+  </svg>
+);
+
 const CodeIcon = () => (
   <svg {...strokeProps} className="h-[22px] w-[22px]" aria-hidden="true">
     <path d="M9 7l-5 5 5 5" />
@@ -93,6 +101,7 @@ const REASONS = [
   { key: "stuck", Icon: GrowthIcon },
   { key: "ship", Icon: ShipIcon },
   { key: "team", Icon: TeamIcon },
+  { key: "hiring", Icon: BriefcaseIcon },
   { key: "projects", Icon: CodeIcon },
 ];
 
