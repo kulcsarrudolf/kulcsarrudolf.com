@@ -15,6 +15,16 @@
     "paragraph2": "Folyamatosan igyekszem fejleszteni a képességeimet, és nem habozok, amikor rájövök, hogy még mindig sok mindent kell tanulnom, ezért mindig nyitott vagyok új kihívásokra.",
     "paragraph3": "A legújabb projektjeimet megtalálod a {githubLink} profilomon. Valamint több infót a szakmai tapasztalatomról a {cvLink}-ben találsz.",
     "paragraph4": "Amikor nem programozok, akkor próbálok a barátaimmal és családommal lenni, ez nagyon feltölti az akkumulátoromat. Valamint minidg nyított vagyok egy jó társasozásra, bringázásra, futásra, legózásra és mindenre ami érdekes. A legjújabb hobbim a 3D puzzle.",
+    "letsTalk": {
+      "title": "Beszéljünk, ha...",
+      "idea": "Van egy ötleted, és kell valaki, aki olyan termékké alakítja, amit az emberek tényleg használnak.",
+      "stuck": "Már van szoftvered, de az új funkciók vagy a növekedés kezelése lassúvá és fájdalmassá vált.",
+      "ship": "Építettél valamit, ami sosem hagyta el a laptopodat, és szeretnéd élesben látni a weben vagy telefonon.",
+      "projects": "Láttad valamelyik projektemet, és beszélgetnél róla.",
+      "easterEgg": "Megtaláltad a rejtett dolgot ezen az oldalon.",
+      "message": "Írj nekem",
+      "scheduleCall": "Foglalj egy hívást"
+    },
     "currentFocus": {
       "title": "Jelenleg ezekre fókuszálok",
       "fullStack": {

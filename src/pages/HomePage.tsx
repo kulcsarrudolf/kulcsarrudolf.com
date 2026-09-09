@@ -5,6 +5,7 @@ import { useTranslation } from "@/i18n/useTranslation";
 import BlogPostListClient from "@/components/blog/BlogPostListClient";
 import type BlogPost from "@/types/blog-post.type";
 import CurrentFocus from "@/components/general/current-focus/CurrentFocus";
+import LetsTalk from "@/components/general/lets-talk/LetsTalk";
 
 interface HomePageContentProps {
   posts: BlogPost[];
@@ -48,6 +49,8 @@ export default function HomePageContent({ posts }: HomePageContentProps) {
 
       <Paragraph>{t("home.paragraph4")}</Paragraph>
 
+      <hr className="my-4" />
+      <LetsTalk />
       <hr className="my-4" />
       <CurrentFocus />
       <hr className="my-4" />

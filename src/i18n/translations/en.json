@@ -15,6 +15,16 @@
     "paragraph2": "I have constantly been trying to improve my skills and I don't hesitate when I realize that there is still a lot to learn, so I am always open to new challenges.",
     "paragraph3": "Check out my {githubLink} to explore my latest projects and my {cvLink} for a full breakdown of my professional journey.",
     "paragraph4": "Besides my profession I also love to relax and recharge my batteries with my friends and family and of course by doing my favourite hobbies.",
+    "letsTalk": {
+      "title": "Let's talk if...",
+      "idea": "You have an idea and need someone to turn it into a product people can actually use.",
+      "stuck": "You already have software, and adding features or handling growth has turned slow and painful.",
+      "ship": "You built something that never left your laptop, and you want it live on the web or on phones.",
+      "projects": "You saw one of my projects and want to talk about it.",
+      "easterEgg": "You found the hidden thing on this site.",
+      "message": "Send me a message",
+      "scheduleCall": "Schedule a call"
+    },
     "currentFocus": {
       "title": "Currently Focused On",
       "fullStack": {
