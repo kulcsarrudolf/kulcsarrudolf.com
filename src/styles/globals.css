@@ -35,6 +35,20 @@
     display: none;
   }
 
+  /* The current page's nav link goes semibold, and bold text is wider than
+     normal. Each label reserves the width of its own bold copy: an invisible,
+     zero-height duplicate that only the layout can see. Switching pages then
+     never nudges the links sideways. */
+  .nav-label::after {
+    content: attr(data-label);
+    display: block;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    font-weight: 600;
+    pointer-events: none;
+  }
+
   @keyframes shake {
     0%, 100% { transform: translateX(0); }
     10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
