@@ -4,7 +4,7 @@ import Link from "@/components/general/typography/Link";
 import { useTranslation } from "@/i18n/useTranslation";
 import BlogPostListClient from "@/components/blog/BlogPostListClient";
 import Divider from "@/components/general/Divider";
-import type BlogPost from "@/types/blog-post.type";
+import type { BlogPost } from "@/types/blog-post";
 import CurrentFocus from "@/components/general/current-focus/CurrentFocus";
 import LetsTalk from "@/components/general/lets-talk/LetsTalk";
 

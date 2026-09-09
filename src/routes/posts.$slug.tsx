@@ -6,7 +6,7 @@ import MarkdownBody from "@/components/markdown/MarkdownBody";
 import { SITE_NAME, SITE_URL } from "@/config/site";
 import { pageHead } from "@/lib/seo";
 import { fetchPost } from "@/server/functions";
-import type BlogPost from "@/types/blog-post.type";
+import type { BlogPost } from "@/types/blog-post";
 
 const describePost = (post: BlogPost): string =>
   post.description ||

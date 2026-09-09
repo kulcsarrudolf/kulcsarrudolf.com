@@ -1,5 +1,5 @@
-import type Quote from "@/types/quote.type";
-import quotes from "./quotes";
+import type { Quote } from "@/types/quote";
+import quotes from "@/content/quotes";
 
 const getRandomQuote = (): Quote => {
   const randomIndex = Math.floor(Math.random() * quotes.length);

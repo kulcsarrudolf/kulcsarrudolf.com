@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import CardGrid from "./CardGrid";
 import QuoteCard from "@/components/quote/QuoteCard";
-import quotes from "@/components/quote/quotes";
+import quotes from "@/content/quotes";
 
 const meta = {
   title: "General/CardGrid",

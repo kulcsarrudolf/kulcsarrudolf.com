@@ -4,7 +4,7 @@ import { AUTHOR_NAME, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/config/sit
 // defaults (og:image, icons, robots, ...); the router de-duplicates meta tags
 // by name/property, so anything returned here overrides the root value.
 
-export const TITLE_TEMPLATE = (title: string) => `${title} | Kulcsar Rudolf`;
+const titleTemplate = (title: string) => `${title} | Kulcsar Rudolf`;
 
 const TWITTER_HANDLE = "@kulcsarrudolf";
 
@@ -45,7 +45,7 @@ export const pageHead = ({
   structuredData,
   noindex = false,
 }: PageHeadOptions) => {
-  const fullTitle = absoluteTitle ? title : TITLE_TEMPLATE(title);
+  const fullTitle = absoluteTitle ? title : titleTemplate(title);
   const url = `${SITE_URL}${path}`;
 
   const meta: Array<Record<string, string>> = [

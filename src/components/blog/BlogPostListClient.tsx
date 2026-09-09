@@ -1,6 +1,6 @@
 import BlogPostPreview from "./BlogPostPreview";
 import Title from "../general/typography/Title";
-import type BlogPost from "@/types/blog-post.type";
+import type { BlogPost } from "@/types/blog-post";
 import { Fragment } from "react";
 
 interface BlogPostListClientProps {

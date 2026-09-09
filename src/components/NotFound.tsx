@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 
-import type BlogPost from "@/types/blog-post.type";
+import type { BlogPost } from "@/types/blog-post";
 
 type NotFoundProps = {
   recentPosts: BlogPost[];

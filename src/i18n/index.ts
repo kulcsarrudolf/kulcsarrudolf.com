@@ -16,17 +16,6 @@ export function getTranslation(lang: Language) {
   return translations[lang] || translations[defaultLanguage];
 }
 
-export function getLanguageFromQuery(searchParams: URLSearchParams | null): Language {
-  if (!searchParams) {
-    return defaultLanguage;
-  }
-  const lang = searchParams.get("lang");
-  if (lang === "hu" || lang === "en") {
-    return lang;
-  }
-  return defaultLanguage;
-}
-
 export function getLanguageFromString(lang: string | null | undefined): Language {
   if (lang === "hu" || lang === "en") {
     return lang;

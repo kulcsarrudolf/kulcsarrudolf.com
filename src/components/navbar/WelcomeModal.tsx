@@ -6,7 +6,7 @@ import getRandomQuote from "@/components/quote/getRandomQuote";
 import QuoteCard from "@/components/quote/QuoteCard";
 import SudokuModal from "@/components/sudoku/SudokuModal";
 import { useTranslation } from "@/i18n/useTranslation";
-import type QuoteType from "@/types/quote.type";
+import type { Quote as QuoteType } from "@/types/quote";
 
 interface WelcomeModalProps {
   onClose: () => void;

@@ -1,4 +1,4 @@
-export default interface Quote {
+export interface Quote {
   id: string;
   quote: string;
   author: string;

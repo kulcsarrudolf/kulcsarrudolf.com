@@ -1,9 +1,9 @@
-import type BlogPost from "@/types/blog-post.type";
-import type Project from "@/types/project.type";
-import type Quote from "@/types/quote.type";
+import type { BlogPost } from "@/types/blog-post";
+import type { Project } from "@/types/project";
+import type { Quote } from "@/types/quote";
 
 // Sample content for stories. Shapes mirror the frontmatter of real posts
-// and projects, but nothing here is loaded from src/posts or src/projects.
+// and projects, but nothing here is loaded from src/content.
 
 export const posts: BlogPost[] = [
   {

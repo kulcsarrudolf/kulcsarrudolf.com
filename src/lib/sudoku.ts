@@ -339,5 +339,4 @@ export const solvePuzzle = (board: Board): Board | null => {
   return solvepuzzle(board);
 };
 
-export { posfor };
 export type { Board };
