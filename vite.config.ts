@@ -1,3 +1,4 @@
+import tailwindcss from "@tailwindcss/vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
 import { nitro } from "nitro/vite";
@@ -14,6 +15,7 @@ export default defineConfig({
     tsconfigPaths: true,
   },
   plugins: [
+    tailwindcss(),
     tanstackStart(),
     // Nitro builds the server for the platform it runs on. On Vercel it
     // detects the provider automatically and emits the Build Output API.

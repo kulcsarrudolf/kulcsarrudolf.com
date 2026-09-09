@@ -20,9 +20,9 @@ const meta = {
   render: (args) => (
     <div className="relative h-32 bg-surface">
       <div className="flex h-full items-center gap-4 overflow-hidden">
-        <div className="h-24 w-40 shrink-0 rounded-lg border border-gray-200 bg-white shadow-sm" />
-        <div className="h-24 w-40 shrink-0 rounded-lg border border-gray-200 bg-white shadow-sm" />
-        <div className="h-24 w-40 shrink-0 rounded-lg border border-gray-200 bg-white shadow-sm" />
+        <div className="h-24 w-40 shrink-0 rounded-lg border border-gray-200 bg-white shadow-xs" />
+        <div className="h-24 w-40 shrink-0 rounded-lg border border-gray-200 bg-white shadow-xs" />
+        <div className="h-24 w-40 shrink-0 rounded-lg border border-gray-200 bg-white shadow-xs" />
       </div>
       <RailFade {...args} />
     </div>

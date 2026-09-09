@@ -9,7 +9,7 @@ interface FocusCardProps {
 /** One illustrated card on the Currently Focused On rail. */
 const FocusCard = ({ image, title, children }: FocusCardProps) => (
   <div
-    className="flex snap-start flex-col gap-2.5 rounded-lg border border-gray-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md"
+    className="flex snap-start flex-col gap-2.5 rounded-lg border border-gray-200 bg-white p-4 shadow-xs transition-shadow hover:shadow-md"
     // The cards share the row when all of them fit and hold 220px once they
     // don't, which is what turns the rail into a scroller.
     style={{ flex: "1 0 220px" }}

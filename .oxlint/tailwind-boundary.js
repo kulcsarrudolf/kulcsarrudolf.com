@@ -5,22 +5,25 @@
 // Deciding whether `bg-surface` or `nav:hidden` is a Tailwind class is not
 // something a regular expression can answer: the theme, the custom
 // breakpoints and arbitrary values like `w-[13px]` all change the answer. So
-// the rule asks Tailwind, through the same context the build uses. That means
-// reaching past the public API, which is why `tailwindcss` is pinned to an
-// exact version in package.json. If a future version moves these files the
-// import throws and the lint run fails loudly, rather than quietly deciding
+// the rule asks Tailwind, through the same design system the build uses.
+
+import { readFileSync } from "node:fs";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+
+import { __unstable__loadDesignSystem } from "@tailwindcss/node";
+
+// The design system is built from the same stylesheet the site loads, so the
+// theme, the custom breakpoints and the project's own `@utility` classes all
+// count. The function is marked unstable upstream (it is what the Tailwind
+// language server and the Prettier plugin use), which is why `tailwindcss`
+// and `@tailwindcss/node` are pinned to exact versions in package.json: a
+// change in its shape fails the lint run loudly rather than quietly deciding
 // nothing is Tailwind any more.
-
-import { createRequire } from "node:module";
-
-import twConfig from "../tailwind.config.js";
-
-const require = createRequire(import.meta.url);
-const resolveConfig = require("tailwindcss/resolveConfig");
-const { createContext } = require("tailwindcss/lib/lib/setupContextUtils.js");
-const { generateRules } = require("tailwindcss/lib/lib/generateRules.js");
-
-const tailwindContext = createContext(resolveConfig(twConfig));
+const stylesheet = resolve(dirname(fileURLToPath(import.meta.url)), "../src/styles/globals.css");
+const designSystem = await __unstable__loadDesignSystem(readFileSync(stylesheet, "utf8"), {
+  base: dirname(stylesheet),
+});
 
 // `group` and `peer` are the two classes Tailwind understands but generates no
 // CSS for: they mark an ancestor for `group-hover:` and friends to look at.
@@ -31,17 +34,15 @@ const answers = new Map();
 
 const isTailwind = (token) => {
   if (!answers.has(token)) {
-    answers.set(
-      token,
-      MARKERS.test(token) || generateRules(new Set([token]), tailwindContext).length > 0,
-    );
+    const [css] = designSystem.candidatesToCss([token]);
+    answers.set(token, MARKERS.test(token) || css !== null);
   }
 
   return answers.get(token);
 };
 
-// A `className` may hold classes this project defines itself, `hide-scrollbar`
-// and `nav-label` among them. Those are not Tailwind and are left alone.
+// The project's own utilities (`hide-scrollbar`, `nav-label`) are declared
+// with `@utility` in globals.css, so Tailwind knows them and they count too.
 const tailwindIn = (value) => value.split(/\s+/).filter(Boolean).filter(isTailwind);
 
 // `className="…"` and `className={"…"}` both reach here. `className={expr}`

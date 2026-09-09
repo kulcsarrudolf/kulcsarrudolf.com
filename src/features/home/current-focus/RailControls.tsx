@@ -17,7 +17,7 @@ interface RailControlsProps {
 // White with a grey hairline, the same treatment as the secondary button, so
 // the arrows stay chrome rather than reading as an action.
 const ARROW =
-  "flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gray-300 bg-white text-brand shadow-sm transition-colors enabled:hover:bg-gray-50 disabled:opacity-40";
+  "flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gray-300 bg-white text-brand shadow-xs transition-colors enabled:hover:bg-gray-50 disabled:opacity-40";
 
 /**
  * The counter and the two arrows that sit beside a rail's heading.

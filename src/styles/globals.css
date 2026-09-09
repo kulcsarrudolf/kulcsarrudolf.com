@@ -1,13 +1,72 @@
-@import "@fontsource-variable/inter";
-@import "@fortawesome/fontawesome-svg-core/styles.css";
+@import "@fontsource-variable/inter" layer(base);
+@import "@fortawesome/fontawesome-svg-core/styles.css" layer(base);
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@plugin '@tailwindcss/typography' {
+  target: "modern";
+}
+
+/* The theme. Colours are named here and nowhere else: `brand` is the bar,
+   headings and links; `brand-active` the current-page pill and hover on the
+   bar; `brand-hover` filled buttons on white; `surface` the page behind the
+   cards. The two extra breakpoints are the navbar's: `socials` is where the
+   call to action, the divider and the social icons fit beside the brand;
+   `nav` is where the whole link list fits and the menu button retires. Both
+   were measured in a browser with Inter loaded, not guessed. Tailwind sorts
+   breakpoints by value, so they slot in between the defaults. */
+@theme {
+  --breakpoint-socials: 546px;
+  --breakpoint-nav: 706px;
+
+  --color-brand: #4267b2;
+  --color-brand-active: #3b64b8;
+  --color-brand-hover: #365899;
+  --color-surface: #e9ebee;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+@utility hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility nav-label {
+  /* The current page's nav link goes semibold, and bold text is wider than
+     normal. Each label reserves the width of its own bold copy: an invisible,
+     zero-height duplicate that only the layout can see. Switching pages then
+     never nudges the links sideways. */
+  &::after {
+    content: attr(data-label);
+    display: block;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    font-weight: 600;
+    pointer-events: none;
+  }
+}
+
+@utility animate-shake {
+  animation: shake 0.5s ease-in-out;
+  background-color: rgb(254 202 202) !important;
+}
 
 @layer base {
   :root {
     --font-inter: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  }
+
+  /* Tailwind 4 stopped giving buttons a pointer cursor. Every button on the
+     site is clickable, so put it back. */
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
   }
 
   /* Always reserve room for the vertical scrollbar so the layout does not
@@ -26,29 +85,6 @@
 }
 
 @layer utilities {
-  .hide-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* The current page's nav link goes semibold, and bold text is wider than
-     normal. Each label reserves the width of its own bold copy: an invisible,
-     zero-height duplicate that only the layout can see. Switching pages then
-     never nudges the links sideways. */
-  .nav-label::after {
-    content: attr(data-label);
-    display: block;
-    height: 0;
-    overflow: hidden;
-    visibility: hidden;
-    font-weight: 600;
-    pointer-events: none;
-  }
-
   @keyframes shake {
     0%,
     100% {
@@ -67,10 +103,5 @@
     80% {
       transform: translateX(4px);
     }
-  }
-
-  .animate-shake {
-    animation: shake 0.5s ease-in-out;
-    background-color: rgb(254 202 202) !important;
   }
 }
