@@ -23,7 +23,7 @@ private: false
 
 ## Why
 
-This site ran on Next.js since 2019.
+This site started in 2020 on Create React App and moved to Next.js in 2023.
 I wanted to try [TanStack Start](https://tanstack.com/start) and had two conditions: every page stays server-rendered, and no URL changes.
 That includes the markdown twins of each post (`/posts/slug.md`), the `Accept: text/markdown` negotiation, `sitemap.xml`, `llms.txt`, a 301 from an old project page, and three aliases of the wedding countdown.
 
