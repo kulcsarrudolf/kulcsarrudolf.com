@@ -10,6 +10,12 @@
     --font-inter: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
   }
 
+  /* Always reserve room for the vertical scrollbar so the layout does not
+     shift sideways when navigating between pages that do and do not scroll. */
+  html {
+    scrollbar-gutter: stable;
+  }
+
   * {
     font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   }
