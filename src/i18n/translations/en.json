@@ -8,9 +8,7 @@
   },
   "home": {
     "title": "About Me",
-    "fullStackDeveloper": "full-stack software developer",
-    "experience": "over 8 years of experience in the industry",
-    "paragraph1": "I am a {age}-year-old {fullStackDeveloper} living in {clujLink}. I love to build software products. I have {experience}. Since I remember of my first experience, I have been a big fan of technology, and I try to keep up with all the news of its. The most groundbreaking experience of my life with coding was when I was 12 years old.",
+    "paragraph1": "Shipping software professionally since 2017, from {clujLink}, Romania, across multinationals, startups, and midsize companies. Currently at {innovatorSparkLink}, turning ideas into working products (designed, built, tested, deployed, and operated end to end) and putting new technology to work where it creates the most value for users and the business.",
     "paragraph2": "I have constantly been trying to improve my skills and I don't hesitate when I realize that there is still a lot to learn, so I am always open to new challenges.",
     "paragraph3": "Check out my {githubLink} to explore my latest projects and my {cvLink} for a full breakdown of my professional journey.",
     "paragraph4": "Besides my profession I also love to relax and recharge my batteries with my friends and family and of course by doing my favourite hobbies.",

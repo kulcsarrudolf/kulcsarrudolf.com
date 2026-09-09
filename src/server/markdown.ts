@@ -85,7 +85,7 @@ export const buildLlmsTxt = (): string => {
   return [
     `# ${SITE_NAME}`,
     "",
-    `> Personal website and blog of ${AUTHOR_NAME}, a full-stack software developer. Articles about software development, side projects, and the tools and ideas he works with every day.`,
+    `> Personal website and blog of ${AUTHOR_NAME}, a full-stack software engineer. Articles about software development, side projects, and the tools and ideas he works with every day.`,
     "",
     "Every blog post and project page is available as clean markdown: append `.md` to the URL, or request the URL with an `Accept: text/markdown` header.",
     "",
