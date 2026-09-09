@@ -27,19 +27,20 @@ const NUDGE = {
   back: "group-hover:-translate-x-0.5",
 } as const;
 
-type ArrowLinkProps = LinkProps & {
+// `className` is excluded rather than ignored: the router's own LinkProps
+// declares one, and a caller passing it would otherwise be overruled by the
+// class list below without ever being told.
+type ArrowLinkProps = Omit<LinkProps, "className"> & {
   direction?: keyof typeof PATHS;
   children: ReactNode;
-  className?: string;
 };
 
 const ArrowLink = ({
   direction = "forward",
   children,
-  className = "",
   ...linkProps
 }: ArrowLinkProps) => (
-  <Link {...linkProps} className={`${LINK} ${className}`.trim()}>
+  <Link {...linkProps} className={LINK}>
     <svg
       aria-hidden="true"
       viewBox="0 0 16 16"
