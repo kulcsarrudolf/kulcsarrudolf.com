@@ -1,6 +1,7 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
   "plugins": ["eslint", "typescript", "unicorn", "oxc", "react"],
+  "jsPlugins": ["./.oxlint/tailwind-boundary.js"],
   "env": {
     "browser": true,
     "node": true,
@@ -23,8 +24,18 @@
     ],
     // A file past 500 lines is doing more than one job. Split it into the
     // pieces it is already made of rather than raising this number.
-    "max-lines": ["error", { "max": 500 }]
+    "max-lines": ["error", { "max": 500 }],
+    // Tailwind classes belong in a component under `src/components/`, so a
+    // route or a page composes components rather than styling markup itself.
+    // The override below is what makes that directory the one exception.
+    "boundary/no-tailwind": "error"
   },
+  "overrides": [
+    {
+      "files": ["src/components/**"],
+      "rules": { "boundary/no-tailwind": "off" }
+    }
+  ],
   "ignorePatterns": [
     "node_modules",
     ".output",
