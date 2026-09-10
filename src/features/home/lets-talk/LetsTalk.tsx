@@ -4,8 +4,7 @@ import { buttonClasses } from "@/components/ui/Button";
 import { useLangSearch } from "@/i18n/useLangSearch";
 import { useTranslation } from "@/i18n/useTranslation";
 
-import Title from "@/components/ui/typography/Title";
-
+import ReasonItem from "./ReasonItem";
 import {
   BriefcaseIcon,
   CalendarIcon,
@@ -40,64 +39,67 @@ const CTA = "min-h-12 w-full sm:w-auto";
 /**
  * Reasons to get in touch, written as endings to the heading's sentence. Sits
  * between the About Me paragraphs and Currently Focused On.
+ *
+ * This is the one block on the page that asks the reader for something, and as
+ * a list of hairline rows it read exactly like the sections that only tell
+ * them things, so it was skipped. It is a filled brand band instead: the only
+ * saturated block in the page body, borrowing the navbar's blue so the page
+ * still holds together. The six sentences carry a short label each and sit two
+ * to a row from `sm`, which halves the height the band would otherwise take.
  */
 const LetsTalk = () => {
   const { t } = useTranslation();
   const langSearch = useLangSearch();
 
   return (
-    <div>
-      <Title>{t("home.letsTalk.title")}</Title>
+    <div className="rounded-xl bg-brand p-6 shadow-md sm:p-7">
+      <span className="mb-2 block text-[12.5px] font-semibold uppercase tracking-[0.09em] text-white/85">
+        {t("home.letsTalk.eyebrow")}
+      </span>
+      <h2 className="mb-5 text-2xl font-bold leading-[1.25] text-white sm:text-[30px]">
+        {t("home.letsTalk.title")}
+      </h2>
 
-      <div className="flex flex-col">
+      <div className="grid gap-x-8 sm:grid-cols-2">
         {REASONS.map(({ key, Icon }) => (
-          <div
-            key={key}
-            className="flex items-start gap-4 border-t border-gray-300 py-[15px] sm:items-center"
-          >
-            <span className="mt-0.5 shrink-0 text-brand sm:mt-0">
-              <Icon />
-            </span>
-            <span className="text-base leading-[1.6]" style={{ textWrap: "pretty" }}>
-              {t(`home.letsTalk.${key}`)}
-            </span>
-          </div>
+          <ReasonItem key={key} icon={<Icon />} label={t(`home.letsTalk.${key}.label`) as string}>
+            {t(`home.letsTalk.${key}.text`)}
+          </ReasonItem>
         ))}
-
-        {/* The joke, kept at the end and set a step back from the cases above
-            it by a dashed rule, quieter type, and an icon that stays the grey
-            of its own row rather than picking up the brand blue. */}
-        <div className="flex items-start gap-4 border-t border-dashed border-[#b9c1cc] py-[15px] sm:items-center">
-          <span className="mt-0.5 shrink-0 text-gray-500 sm:mt-0">
-            <EasterEggIcon />
-          </span>
-          <span className="text-[15px] leading-[1.6] text-gray-500" style={{ textWrap: "pretty" }}>
-            {t("home.letsTalk.easterEgg")}
-          </span>
-        </div>
       </div>
 
-      <div className="mt-7 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
-        <Link
-          to="/contact"
-          search={langSearch}
-          className={buttonClasses("primary", CTA)}
-          activeProps={{}}
-          inactiveProps={{}}
-        >
-          <EnvelopeIcon />
-          {t("home.letsTalk.message")}
-        </Link>
+      <div className="mt-6 flex flex-col gap-5 border-t border-white/20 pt-5 sm:flex-row sm:items-center sm:gap-6">
+        {/* The joke, kept at the end and set a step back from the cases above
+            it by smaller type and an icon that stays a shade quieter. */}
+        <p className="flex items-center gap-2.5 text-[13.5px] text-white/85">
+          <span className="shrink-0 text-white/70">
+            <EasterEggIcon />
+          </span>
+          {t("home.letsTalk.easterEgg")}
+        </p>
 
-        <a
-          href={CALENDAR_BOOKING_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={buttonClasses("secondary", CTA)}
-        >
-          <CalendarIcon />
-          {t("home.letsTalk.scheduleCall")}
-        </a>
+        <div className="flex flex-col gap-2.5 sm:ml-auto sm:shrink-0 sm:flex-row sm:gap-3">
+          <Link
+            to="/contact"
+            search={langSearch}
+            className={buttonClasses("onBrand", CTA)}
+            activeProps={{}}
+            inactiveProps={{}}
+          >
+            <EnvelopeIcon />
+            {t("home.letsTalk.message")}
+          </Link>
+
+          <a
+            href={CALENDAR_BOOKING_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={buttonClasses("onBrandOutline", CTA)}
+          >
+            <CalendarIcon />
+            {t("home.letsTalk.scheduleCall")}
+          </a>
+        </div>
       </div>
     </div>
   );
