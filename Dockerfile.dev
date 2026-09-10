@@ -35,12 +35,13 @@ RUN --mount=type=cache,target=/home/node/.yarn-cache,uid=1000,gid=1000 \
 # outside /app because the bind mount replaces that directory wholesale.
 COPY --chown=root:root --chmod=0755 docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 
-# 3000 is the dev server, 6006 Storybook.
-EXPOSE 3000 6006
+# 443 is the dev server, 80 its redirect to https, 6006 Storybook. Docker lets
+# the unprivileged node user bind the two low ports.
+EXPOSE 80 443 6006
 
 ENTRYPOINT ["entrypoint.sh"]
 
-# --host is required: vite.config.ts sets a port but no host, so the default
-# binding is localhost and a published port would reach nothing. compose.yaml
-# overrides this for the storybook service.
+# vite.config.ts already binds every interface, which the published ports
+# need; --host spells it out so a later change there cannot quietly leave the
+# container unreachable. compose.yaml overrides this for the storybook service.
 CMD ["yarn", "dev", "--host", "0.0.0.0"]

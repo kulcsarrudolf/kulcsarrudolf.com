@@ -22,6 +22,9 @@
 .DS_Store
 *.pem
 
+# local dev certificate, written by `yarn dev:setup`
+/.certs/
+
 # debug
 npm-debug.log*
 yarn-debug.log*

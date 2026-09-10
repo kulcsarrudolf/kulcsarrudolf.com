@@ -1,5 +1,7 @@
 import type { StorybookConfig } from "@storybook/react-vite";
 
+import { HOST } from "../scripts/local-dev.ts";
+
 const config: StorybookConfig = {
   stories: ["./Introduction.mdx", "../src/**/*.stories.@(ts|tsx)"],
   addons: ["@storybook/addon-docs", "@storybook/addon-a11y"],
@@ -18,6 +20,9 @@ const config: StorybookConfig = {
   staticDirs: ["../public"],
   core: {
     disableTelemetry: true,
+    // Storybook checks the Host header the way Vite does, and only localhost
+    // and IP addresses pass by default.
+    allowedHosts: [HOST],
   },
 };
 
