@@ -3,17 +3,11 @@
   "configurations": [
     {
       "name": "dev",
-      "runtimeExecutable": "yarn",
-      "runtimeArgs": ["dev"],
-      "port": 3000,
-      "autoPort": true
+      "url": "https://kulcsarrudolf.local"
     },
     {
       "name": "storybook",
-      "runtimeExecutable": "yarn",
-      "runtimeArgs": ["storybook", "--no-open"],
-      "port": 6006,
-      "autoPort": true
+      "url": "https://kulcsarrudolf.local:6006"
     }
   ]
 }
