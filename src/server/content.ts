@@ -3,6 +3,8 @@ import matter from "gray-matter";
 import type { BlogPost } from "@/types/blog-post";
 import type { Project } from "@/types/project";
 
+import { slugFromPath, toPost, toProject } from "./frontmatter";
+
 // The markdown sources are bundled into the server build at compile time, so
 // reading them never depends on the working directory of the deployed
 // function. Only top-level files are matched: drafts and templates live in
@@ -34,37 +36,9 @@ assertMatched(projectFiles, "src/content/projects/*.md");
 // be previewed, but stays hidden in the production build.
 export const shouldShowPrivateContent = (): boolean => import.meta.env.DEV;
 
-const slugFromPath = (path: string): string =>
-  path.slice(path.lastIndexOf("/") + 1).replace(/\.md$/, "");
-
-// Frontmatter list fields accept either a YAML list or a comma separated string.
-const toStringArray = (value: unknown): string[] | undefined => {
-  if (Array.isArray(value)) {
-    return value.map((item) => String(item).trim());
-  }
-
-  if (typeof value === "string" && value.trim() !== "") {
-    return value.split(",").map((item) => item.trim());
-  }
-
-  return undefined;
-};
-
 /* ---------------------------------- Posts --------------------------------- */
 
 export type PostContent = BlogPost & { content: string };
-
-const toPost = (slug: string, data: Record<string, any>): BlogPost => ({
-  title: data.title,
-  date: data.date,
-  subtitle: data.subtitle,
-  author: data.author,
-  slug,
-  lang: data.lang === "hu" ? "hu" : "en",
-  description: data.description,
-  keywords: toStringArray(data.keywords),
-  private: data.private === true,
-});
 
 const readPost = (path: string): PostContent => {
   const { data, content } = matter(postFiles[path]);
@@ -98,28 +72,6 @@ export const getPostContent = (slug: string): PostContent | null => {
 /* -------------------------------- Projects -------------------------------- */
 
 export type ProjectContent = Project & { content: string };
-
-const DEFAULT_ORDER = 100;
-
-const toProject = (slug: string, data: Record<string, any>): Project => ({
-  title: data.title,
-  subtitle: data.subtitle,
-  slug,
-  order: typeof data.order === "number" ? data.order : DEFAULT_ORDER,
-  lang: data.lang === "hu" ? "hu" : "en",
-  schemaType: data.schemaType === "WebApplication" ? "WebApplication" : "SoftwareSourceCode",
-  date: data.date || undefined,
-  updated: data.updated || undefined,
-  description: data.description,
-  keywords: toStringArray(data.keywords),
-  github: data.github || undefined,
-  npm: data.npm || undefined,
-  website: data.website || undefined,
-  tech: toStringArray(data.tech),
-  relatedPosts: toStringArray(data.relatedPosts),
-  featured: data.featured === true,
-  private: data.private === true,
-});
 
 const readProject = (path: string): ProjectContent => {
   const { data, content } = matter(projectFiles[path]);

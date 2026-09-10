@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { SITE_URL } from "@/config/site";
+import { SITE_URL, postImagePath } from "@/config/site";
 import { pageHead } from "@/lib/seo";
 import PostPage from "@/pages/PostPage";
 import { fetchPost } from "@/server/functions";
@@ -16,7 +16,7 @@ const buildStructuredData = (post: BlogPost, url: string) => ({
   "@type": "BlogPosting",
   headline: post.title,
   description: describePost(post),
-  image: `${SITE_URL}/images/me-logo.png`,
+  image: `${SITE_URL}${postImagePath(post.slug)}`,
   datePublished: post.date,
   dateModified: post.date,
   author: {
@@ -62,6 +62,7 @@ export const Route = createFileRoute("/posts/$slug")({
           authors: [post.author],
           tags: post.keywords,
         },
+        image: { path: postImagePath(params.slug), alt: post.title },
         structuredData: buildStructuredData(post, `${SITE_URL}${path}`),
       }),
     };

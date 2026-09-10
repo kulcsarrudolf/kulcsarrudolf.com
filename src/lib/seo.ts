@@ -1,4 +1,13 @@
-import { AUTHOR_NAME, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/config/site";
+import {
+  AUTHOR_NAME,
+  FEED_PATH,
+  OG_IMAGE_HEIGHT,
+  OG_IMAGE_WIDTH,
+  OG_SITE_IMAGE_PATH,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_URL,
+} from "@/config/site";
 
 // Builds the per-page <head> entries. The root route declares the site-wide
 // defaults (og:image, icons, robots, ...); the router de-duplicates meta tags
@@ -7,6 +16,21 @@ import { AUTHOR_NAME, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/config/sit
 const titleTemplate = (title: string) => `${title} | Kulcsar Rudolf`;
 
 const TWITTER_HANDLE = "@kulcsarrudolf";
+
+/** A preview card under public/og/, always at the Open Graph size. */
+export type PageImage = {
+  path: string;
+  alt: string;
+};
+
+const imageMeta = (image: PageImage): Array<Record<string, string>> => [
+  { property: "og:image", content: `${SITE_URL}${image.path}` },
+  { property: "og:image:width", content: String(OG_IMAGE_WIDTH) },
+  { property: "og:image:height", content: String(OG_IMAGE_HEIGHT) },
+  { property: "og:image:alt", content: image.alt },
+  { name: "twitter:image", content: `${SITE_URL}${image.path}` },
+  { name: "twitter:image:alt", content: image.alt },
+];
 
 type ArticleMeta = {
   publishedTime?: string;
@@ -27,6 +51,8 @@ export type PageHeadOptions = {
   locale?: string;
   author?: string;
   article?: ArticleMeta;
+  /** The page's own preview card. Without one, the site-wide card is shown. */
+  image?: PageImage;
   /** Serialised as an application/ld+json script in the head. */
   structuredData?: object;
   noindex?: boolean;
@@ -42,6 +68,7 @@ export const pageHead = ({
   locale,
   author,
   article,
+  image,
   structuredData,
   noindex = false,
 }: PageHeadOptions) => {
@@ -72,6 +99,7 @@ export const pageHead = ({
       property: "article:tag",
       content: tag,
     })),
+    ...(image ? imageMeta(image) : []),
     { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: fullTitle },
     { name: "twitter:description", content: description },
@@ -123,18 +151,20 @@ export const siteHead = (stylesheetHref: string) => ({
     { property: "og:url", content: SITE_URL },
     { property: "og:title", content: SITE_NAME },
     { property: "og:description", content: SITE_DESCRIPTION },
-    { property: "og:image", content: `${SITE_URL}/images/me-logo.png` },
-    { property: "og:image:width", content: "512" },
-    { property: "og:image:height", content: "512" },
-    { property: "og:image:alt", content: AUTHOR_NAME },
+    ...imageMeta({ path: OG_SITE_IMAGE_PATH, alt: AUTHOR_NAME }),
     { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: SITE_NAME },
     { name: "twitter:description", content: SITE_DESCRIPTION },
     { name: "twitter:creator", content: TWITTER_HANDLE },
-    { name: "twitter:image", content: `${SITE_URL}/images/me-logo.png` },
   ],
   links: [
     { rel: "stylesheet", href: stylesheetHref },
+    {
+      rel: "alternate",
+      type: "application/rss+xml",
+      title: SITE_NAME,
+      href: `${SITE_URL}${FEED_PATH}`,
+    },
     {
       rel: "icon",
       href: "/favicon/favicon-16x16.png",

@@ -48,3 +48,6 @@ yarn-error.log*
 
 # design canvas scratch
 /.design/
+
+# social preview cards, rendered by `yarn og` before dev and build
+/public/og/
