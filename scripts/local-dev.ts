@@ -61,6 +61,33 @@ export function httpsRedirect(): Plugin {
         res.writeHead(308, { Location: `https://${host}${req.url ?? "/"}` });
         res.end();
       });
+      // A listening server holds the event loop open by itself, and this one
+      // outlives the https server it redirects to: without the unref, a dev
+      // server whose Vite side has gone away lingers here forever, still
+      // holding port 80, and the next `yarn dev` collides with a process
+      // nothing is watching any more. Vite's own listener keeps the process
+      // alive while there is a site to serve.
+      redirect.unref();
+      // The reasoning behind `strictPort` on 443 in vite.config.ts, applied to
+      // the other port: a busy 80 is a second dev server, and serving https
+      // without the redirect would hide it behind an origin that works.
+      redirect.on("error", (error: NodeJS.ErrnoException) => {
+        const message =
+          error.code === "EADDRINUSE"
+            ? [
+                `\nPort ${HTTP_PORT} is already in use, so http://${HOST} cannot redirect to https.`,
+                `Another dev server is still running; \`lsof -nP -iTCP:${HTTP_PORT} -sTCP:LISTEN\` names it.`,
+              ].join("\n")
+            : `\nThe redirect from port ${HTTP_PORT} to https failed: ${error.message}`;
+        // Printed after the shutdown, not before it: Vite prints its "ready"
+        // banner from the listen it has already finished, and a message that
+        // goes out first ends up above a list of urls that never served
+        // anything.
+        void server.close().finally(() => {
+          console.error(message);
+          process.exit(1);
+        });
+      });
       const host =
         typeof server.config.server.host === "string" ? server.config.server.host : undefined;
       server.httpServer?.once("listening", () => {
