@@ -8,11 +8,16 @@ services:
       dockerfile: Dockerfile.dev
     init: true
     ports:
-      # The HMR websocket rides the same port as the page, so this one mapping
-      # covers both. The two numbers have to match or the client dials a port
+      # 443 is the site, 80 the redirect to it. Each is the same number inside
+      # and out because the HMR websocket rides the page's port: a container
+      # port published under another number would have the client dial one
       # that is not published.
-      - "3000:3000"
+      - "80:80"
+      - "443:443"
     environment:
+      # The certificate in .certs/ comes from mkcert on the host, and the
+      # healthcheck below validates it, so Node has to trust that CA.
+      NODE_EXTRA_CA_CERTS: /app/.certs/rootCA.pem
       # Docker Desktop on macOS does not reliably forward inotify events across
       # the VirtioFS boundary, so without this the watcher never fires and hot
       # reload silently does nothing. Vite bundles chokidar and chokidar reads
@@ -32,11 +37,12 @@ services:
     healthcheck:
       # Rendering the home page proves more than a static file would: it
       # exercises SSR, so an unhealthy container means something real is broken.
+      # 127.0.0.1 is one of the certificate's names, so this validates it too.
       test:
         - CMD
         - node
         - -e
-        - "fetch('http://127.0.0.1:3000/').then((r) => process.exit(r.ok ? 0 : 1), () => process.exit(1))"
+        - "fetch('https://127.0.0.1/').then((r) => process.exit(r.ok ? 0 : 1), () => process.exit(1))"
       interval: 5s
       timeout: 5s
       retries: 20
@@ -52,7 +58,8 @@ services:
       context: .
       dockerfile: Dockerfile.dev
     init: true
-    # --no-open because there is no browser in here to open.
+    # The https flags come from the `storybook` script in package.json; this
+    # only adds --host, and --no-open because there is no browser in here.
     command: ["yarn", "storybook", "--host", "0.0.0.0", "--no-open"]
     ports:
       - "6006:6006"

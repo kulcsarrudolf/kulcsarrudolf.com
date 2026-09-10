@@ -38,14 +38,34 @@ This project uses Yarn; a `preinstall` check makes npm and pnpm fail.
 ```bash
 git clone https://github.com/kulcsarrudolf/kulcsarrudolf.com.git
 yarn install
+yarn dev:setup
 yarn dev
 ```
 
+The dev server answers on [https://kulcsarrudolf.local](https://kulcsarrudolf.local); `yarn dev:setup` is what makes that name and that certificate work, see below.
+
 Other scripts: `yarn build` (production build into `.output/`), `yarn start` (serve the built app with Node), `yarn typecheck`, `yarn lint`, `yarn format`, `yarn test`, `yarn deploy` (fast-forward `master` to `develop` and push).
+
+### Local hostname and HTTPS
+
+The dev server serves `https://kulcsarrudolf.local`, no port, with a certificate the browser trusts, and refuses to start until the machine is prepared for that.
+`yarn dev:setup` does the preparing, once, and every step of it is safe to run again:
+
+- installs `mkcert` and `nss` through Homebrew (`nss` is what lets mkcert reach Firefox's trust store);
+- runs `mkcert -install`, which puts a local root CA in the system keychain and in Firefox, asking for your password on the way;
+- writes a certificate for `kulcsarrudolf.local`, `localhost`, `127.0.0.1` and `::1` into `.certs/`, which is gitignored, with a copy of the root CA next to it;
+- adds two lines to `/etc/hosts`, mapping `kulcsarrudolf.local` to `127.0.0.1` and `::1`, marked with a comment and written through `sudo cp`.
+
+The hostname, the ports and the certificate paths are declared once, in [scripts/local-dev.ts](./scripts/local-dev.ts), and `vite.config.ts`, `.storybook/main.ts` and the setup script read them from there.
+Plain `http://kulcsarrudolf.local` redirects to https, and `https://localhost` works too.
+Vite only reads the certificate for the dev server, so `yarn build` on CI and on Vercel does not need it.
+
+`yarn dev:setup --remove` takes the hosts lines and `.certs/` away again.
+It leaves the root CA and the two packages, since other projects may share them; `mkcert -uninstall` and `brew uninstall mkcert nss` remove those.
 
 ### Storybook
 
-`yarn storybook` runs on [http://localhost:6006](http://localhost:6006); `yarn build-storybook` writes a static build to `storybook-static/`.
+`yarn storybook` runs on [https://kulcsarrudolf.local:6006](https://kulcsarrudolf.local:6006), on the same certificate as the dev server; `yarn build-storybook` writes a static build to `storybook-static/`.
 Every component under `src/components/` and `src/features/` has a story next to it (`*.stories.tsx`), and the sidebar mirrors the folders.
 
 Stories render inside a real TanStack Router with an in-memory history, so `<Link>`, `useNavigate` and `useSearch` work without the app shell.
@@ -61,8 +81,9 @@ Vercel still builds from the repository, and no config file in the repo knows Do
 yarn docker:dev
 ```
 
-That is `docker compose up`, and it serves the dev server on [http://localhost:3000](http://localhost:3000) with hot reload.
-Edits on the host reach the container through a bind mount of the project, and `.env.local` is read from it exactly as it is on the host.
+That is `docker compose up`, and it serves the dev server on [https://kulcsarrudolf.local](https://kulcsarrudolf.local) with hot reload, on ports 443 and 80 like the host server.
+It needs the same `yarn dev:setup` first: the container reads the certificate from `.certs/` through the bind mount, and the hostname resolves on the host, where the browser runs.
+Edits on the host reach the container through that bind mount of the project, and `.env.local` is read from it exactly as it is on the host.
 The first run installs dependencies inside the container and takes a few minutes; later runs start in seconds.
 
 `node_modules` lives in a Docker volume rather than in that bind mount, because the host's copy is built for macOS and the container needs the Linux builds of `@tailwindcss/oxide`, `lightningcss` and `rolldown`.
@@ -74,11 +95,12 @@ File watching polls, every 300 ms, because Docker Desktop on macOS does not reli
 `CHOKIDAR_USEPOLLING` and `CHOKIDAR_INTERVAL` in [compose.yaml](./compose.yaml) control it.
 Vite bundles the watcher that reads them, so this stays out of `vite.config.ts` and a plain `yarn dev` on the host is unaffected.
 
-If `yarn dev` is already running on the host, leave one of the two stopped.
-Both can hold port 3000 at once, because the host server binds only `::1` while Docker binds every interface, and `localhost` resolves to `::1` first.
-The browser then quietly gets the host server; reach the container at [http://127.0.0.1:3000](http://127.0.0.1:3000) to tell them apart.
+Run one of `yarn dev` and `yarn docker:dev` at a time.
+They want the same two ports, and the second one to start fails to bind 443 rather than quietly serving from somewhere else.
 
-`yarn docker:storybook` adds Storybook on [http://localhost:6006](http://localhost:6006), on the same bind mount and the same dependencies.
+The healthcheck fetches `https://127.0.0.1/` inside the container with certificate validation on; `NODE_EXTRA_CA_CERTS` in [compose.yaml](./compose.yaml) points Node at the root CA copy in `.certs/` for that.
+
+`yarn docker:storybook` adds Storybook on [https://kulcsarrudolf.local:6006](https://kulcsarrudolf.local:6006), on the same bind mount and the same dependencies.
 It waits for the dev server to come up first, so the two never install over each other.
 
 To build and run what production runs:

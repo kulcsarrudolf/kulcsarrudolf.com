@@ -19,11 +19,12 @@ storybook-static
 .github
 .husky
 
-# Local secrets stay local. The dev container reads .env.local through the
-# bind mount, not through the build context.
+# Local secrets stay local. The dev container reads .env.local and the
+# certificate in .certs/ through the bind mount, not through the build context.
 .env
 .env.*
 !.env.example
+.certs
 
 # Deployment and editor state.
 .vercel
