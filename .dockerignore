@@ -1,0 +1,49 @@
+# Everything the image installs or builds for itself.
+node_modules
+.output
+.nitro
+.tanstack
+dist
+coverage
+storybook-static
+
+# History and CI. Leaving .git out also keeps the `prepare` script quiet,
+# alongside HUSKY=0.
+#
+# .gitignore stays, and has to. Tailwind 4 detects its own sources by walking the
+# project and skipping whatever .gitignore lists. Without the file it also scans
+# .output/, which the client half of `vite build` has already written by the time
+# the SSR half runs, so the two halves generate different CSS and the server ends
+# up referencing a stylesheet hash the client never emitted.
+.git
+.github
+.husky
+
+# Local secrets stay local. The dev container reads .env.local through the
+# bind mount, not through the build context.
+.env
+.env.*
+!.env.example
+
+# Deployment and editor state.
+.vercel
+.claude
+.cursor
+.design
+
+# Platform and log noise.
+.DS_Store
+*.pem
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*storybook.log
+*.tsbuildinfo
+
+# Docker's own files, so editing one does not invalidate a dependency layer.
+Dockerfile.dev
+compose.yaml
+.dockerignore
+
+# Keeps a Dockerfile edit from invalidating the source layer.
+Dockerfile

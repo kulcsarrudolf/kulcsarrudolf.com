@@ -52,6 +52,55 @@ Stories render inside a real TanStack Router with an in-memory history, so `<Lin
 The toolbar has a language switch that sets the same `?lang=` query the site uses.
 Configuration lives in `.storybook/`, on its own small Vite config, because the app's config carries the TanStack Start and Nitro plugins.
 
+### Docker
+
+The container is an alternative to running Node on the host, not a change to how the app is built or deployed.
+Vercel still builds from the repository, and no config file in the repo knows Docker exists.
+
+```bash
+yarn docker:dev
+```
+
+That is `docker compose up`, and it serves the dev server on [http://localhost:3000](http://localhost:3000) with hot reload.
+Edits on the host reach the container through a bind mount of the project, and `.env.local` is read from it exactly as it is on the host.
+The first run installs dependencies inside the container and takes a few minutes; later runs start in seconds.
+
+`node_modules` lives in a Docker volume rather than in that bind mount, because the host's copy is built for macOS and the container needs the Linux builds of `@tailwindcss/oxide`, `lightningcss` and `rolldown`.
+That volume is created once and outlives image rebuilds, so [docker/entrypoint.sh](./docker/entrypoint.sh) reconciles it against `yarn.lock` on every start, files included.
+A dependency change therefore needs no extra step and no `docker compose down -v`, and a volume left half written by an interrupted install repairs itself.
+The check costs about two seconds when there is nothing to do.
+
+File watching polls, every 300 ms, because Docker Desktop on macOS does not reliably deliver filesystem events into a container.
+`CHOKIDAR_USEPOLLING` and `CHOKIDAR_INTERVAL` in [compose.yaml](./compose.yaml) control it.
+Vite bundles the watcher that reads them, so this stays out of `vite.config.ts` and a plain `yarn dev` on the host is unaffected.
+
+If `yarn dev` is already running on the host, leave one of the two stopped.
+Both can hold port 3000 at once, because the host server binds only `::1` while Docker binds every interface, and `localhost` resolves to `::1` first.
+The browser then quietly gets the host server; reach the container at [http://127.0.0.1:3000](http://127.0.0.1:3000) to tell them apart.
+
+`yarn docker:storybook` adds Storybook on [http://localhost:6006](http://localhost:6006), on the same bind mount and the same dependencies.
+It waits for the dev server to come up first, so the two never install over each other.
+
+To build and run what production runs:
+
+```bash
+yarn docker:prod
+```
+
+That is `docker compose --profile prod up app --build`, and it serves the built app on [http://localhost:8080](http://localhost:8080), so it can run next to the dev server rather than fighting it for a port.
+Vercel is still what deploys the site; the image is here for checking the real build locally, and for running it somewhere else if that ever comes up.
+
+[Dockerfile](./Dockerfile) builds in three stages and the last one holds `.output/` on a bare Node image, no `node_modules` and no package manager, running as a non-root user.
+That works because the server bundle Nitro emits imports nothing but Node builtins, and serves `.output/public` itself, so nothing needs to sit in front of it.
+
+The `VITE_` variables are inlined into the bundle during `vite build`, so they are build arguments rather than runtime environment.
+Setting one on the running container does nothing; change one and the image has to be built again.
+`docker compose --profile prod --env-file .env.local build app` passes them through from a file.
+Leave `VITE_ENV` unset outside Vercel, because all it does is switch on Vercel Analytics.
+
+The image tracks the Node version in `.nvmrc` through its `node:24-bookworm-slim` tag, which also ships the Yarn version in `packageManager`.
+Bumping one means checking the other two.
+
 ### Linting and formatting
 
 `yarn lint` runs [oxlint](https://oxc.rs/docs/guide/usage/linter).

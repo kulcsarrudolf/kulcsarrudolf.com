@@ -1,0 +1,94 @@
+name: kulcsarrudolf-com
+
+services:
+  # `docker compose up` runs this one on its own.
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    init: true
+    ports:
+      # The HMR websocket rides the same port as the page, so this one mapping
+      # covers both. The two numbers have to match or the client dials a port
+      # that is not published.
+      - "3000:3000"
+    environment:
+      # Docker Desktop on macOS does not reliably forward inotify events across
+      # the VirtioFS boundary, so without this the watcher never fires and hot
+      # reload silently does nothing. Vite bundles chokidar and chokidar reads
+      # these two itself, which is why vite.config.ts needs no Docker branch.
+      #
+      # Set CHOKIDAR_USEPOLLING=false if your Docker Desktop does forward events
+      # and you would rather have the CPU back.
+      CHOKIDAR_USEPOLLING: "true"
+      CHOKIDAR_INTERVAL: "300"
+    volumes:
+      # The whole project, so config, content and source all reload alike.
+      - .:/app
+      # Masks the host's darwin-arm64 node_modules. Letting it show through
+      # would hand Linux the wrong @tailwindcss/oxide and lightningcss binaries.
+      - node_modules:/app/node_modules
+      - yarn_cache:/home/node/.yarn-cache
+    healthcheck:
+      # Rendering the home page proves more than a static file would: it
+      # exercises SSR, so an unhealthy container means something real is broken.
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://127.0.0.1:3000/').then((r) => process.exit(r.ok ? 0 : 1), () => process.exit(1))"
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      # Generous, because the first start installs dependencies. Succeeding
+      # inside the start period marks the container healthy immediately.
+      start_period: 300s
+
+  # Off by default. `docker compose --profile storybook up` starts it, and the
+  # dev service alongside it.
+  storybook:
+    profiles: [storybook]
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    init: true
+    # --no-open because there is no browser in here to open.
+    command: ["yarn", "storybook", "--host", "0.0.0.0", "--no-open"]
+    ports:
+      - "6006:6006"
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+      CHOKIDAR_INTERVAL: "300"
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+      - yarn_cache:/home/node/.yarn-cache
+    depends_on:
+      dev:
+        # Waiting means the two do not run yarn install over the shared
+        # node_modules volume at the same time.
+        condition: service_healthy
+
+  # Off by default. `docker compose --profile prod up app` builds and runs what
+  # Vercel runs, for checking the real build locally. It shares nothing with the
+  # dev service: its own image, its own port, no bind mount, no volumes.
+  app:
+    profiles: [prod]
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # VITE_ values are inlined at build time, so they come from the shell or
+        # from --env-file at build, never from the running container.
+        VITE_ENV: "${VITE_ENV:-}"
+        VITE_WEB3FORMS_ACCESS_KEY: "${VITE_WEB3FORMS_ACCESS_KEY:-}"
+    init: true
+    ports:
+      # 3000 inside either way. Publishing on 8080 lets this run next to the dev
+      # server when you want to compare the two.
+      - "8080:3000"
+    restart: unless-stopped
+
+volumes:
+  node_modules:
+  yarn_cache:
