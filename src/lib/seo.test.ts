@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { SITE_NAME, SITE_URL } from "@/config/site";
+import { FEED_PATH, OG_SITE_IMAGE_PATH, SITE_NAME, SITE_URL } from "@/config/site";
 
 import { pageHead, siteHead } from "./seo";
 
@@ -37,6 +37,18 @@ describe("pageHead", () => {
     expect(find(pageHead(base).meta, "property", "article:published_time")).toBeUndefined();
   });
 
+  it("describes the page's preview card only when it has one", () => {
+    expect(find(pageHead(base).meta, "property", "og:image")).toBeUndefined();
+
+    const head = pageHead({ ...base, image: { path: "/og/posts/hello.png", alt: "Hello" } });
+
+    expect(find(head.meta, "property", "og:image")).toBe(`${SITE_URL}/og/posts/hello.png`);
+    expect(find(head.meta, "property", "og:image:width")).toBe("1200");
+    expect(find(head.meta, "property", "og:image:height")).toBe("630");
+    expect(find(head.meta, "property", "og:image:alt")).toBe("Hello");
+    expect(find(head.meta, "name", "twitter:image")).toBe(`${SITE_URL}/og/posts/hello.png`);
+  });
+
   it("asks robots to stay away when noindex is set", () => {
     expect(find(pageHead(base).meta, "name", "robots")).toBeUndefined();
     expect(find(pageHead({ ...base, noindex: true }).meta, "name", "robots")).toBe(
@@ -60,6 +72,12 @@ describe("siteHead", () => {
 
     expect(head.links[0]).toEqual({ rel: "stylesheet", href: "/assets/globals.css" });
     expect(head.meta).toContainEqual({ title: SITE_NAME });
-    expect(find(head.meta, "property", "og:image")).toBe(`${SITE_URL}/images/me-logo.png`);
+    expect(find(head.meta, "property", "og:image")).toBe(`${SITE_URL}${OG_SITE_IMAGE_PATH}`);
+    expect(head.links).toContainEqual({
+      rel: "alternate",
+      type: "application/rss+xml",
+      title: SITE_NAME,
+      href: `${SITE_URL}${FEED_PATH}`,
+    });
   });
 });

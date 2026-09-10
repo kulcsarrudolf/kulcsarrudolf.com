@@ -16,6 +16,7 @@ import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
 import { Route as NrRouteImport } from './routes/nr'
 import { Route as QuotesRouteImport } from './routes/quotes'
 import { Route as RnRouteImport } from './routes/rn'
+import { Route as RssDotxmlRouteImport } from './routes/rss[.]xml'
 import { Route as RudolfAndNoraRouteImport } from './routes/rudolf-and-nora'
 import { Route as RudolfEsNoraRouteImport } from './routes/rudolf-es-nora'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
@@ -57,6 +58,11 @@ const QuotesRoute = QuotesRouteImport.update({
 const RnRoute = RnRouteImport.update({
   id: '/rn',
   path: '/rn',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RssDotxmlRoute = RssDotxmlRouteImport.update({
+  id: '/rss.xml',
+  path: '/rss.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RudolfAndNoraRoute = RudolfAndNoraRouteImport.update({
@@ -103,6 +109,7 @@ export interface FileRoutesByFullPath {
   '/nr': typeof NrRoute
   '/quotes': typeof QuotesRoute
   '/rn': typeof RnRoute
+  '/rss.xml': typeof RssDotxmlRoute
   '/rudolf-and-nora': typeof RudolfAndNoraRoute
   '/rudolf-es-nora': typeof RudolfEsNoraRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -119,6 +126,7 @@ export interface FileRoutesByTo {
   '/nr': typeof NrRoute
   '/quotes': typeof QuotesRoute
   '/rn': typeof RnRoute
+  '/rss.xml': typeof RssDotxmlRoute
   '/rudolf-and-nora': typeof RudolfAndNoraRoute
   '/rudolf-es-nora': typeof RudolfEsNoraRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -136,6 +144,7 @@ export interface FileRoutesById {
   '/nr': typeof NrRoute
   '/quotes': typeof QuotesRoute
   '/rn': typeof RnRoute
+  '/rss.xml': typeof RssDotxmlRoute
   '/rudolf-and-nora': typeof RudolfAndNoraRoute
   '/rudolf-es-nora': typeof RudolfEsNoraRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -154,6 +163,7 @@ export interface FileRouteTypes {
     | '/nr'
     | '/quotes'
     | '/rn'
+    | '/rss.xml'
     | '/rudolf-and-nora'
     | '/rudolf-es-nora'
     | '/sitemap.xml'
@@ -170,6 +180,7 @@ export interface FileRouteTypes {
     | '/nr'
     | '/quotes'
     | '/rn'
+    | '/rss.xml'
     | '/rudolf-and-nora'
     | '/rudolf-es-nora'
     | '/sitemap.xml'
@@ -186,6 +197,7 @@ export interface FileRouteTypes {
     | '/nr'
     | '/quotes'
     | '/rn'
+    | '/rss.xml'
     | '/rudolf-and-nora'
     | '/rudolf-es-nora'
     | '/sitemap.xml'
@@ -203,6 +215,7 @@ export interface RootRouteChildren {
   NrRoute: typeof NrRoute
   QuotesRoute: typeof QuotesRoute
   RnRoute: typeof RnRoute
+  RssDotxmlRoute: typeof RssDotxmlRoute
   RudolfAndNoraRoute: typeof RudolfAndNoraRoute
   RudolfEsNoraRoute: typeof RudolfEsNoraRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -261,6 +274,13 @@ declare module '@tanstack/react-router' {
       path: '/rn'
       fullPath: '/rn'
       preLoaderRoute: typeof RnRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rss.xml': {
+      id: '/rss.xml'
+      path: '/rss.xml'
+      fullPath: '/rss.xml'
+      preLoaderRoute: typeof RssDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/rudolf-and-nora': {
@@ -323,6 +343,7 @@ const rootRouteChildren: RootRouteChildren = {
   NrRoute: NrRoute,
   QuotesRoute: QuotesRoute,
   RnRoute: RnRoute,
+  RssDotxmlRoute: RssDotxmlRoute,
   RudolfAndNoraRoute: RudolfAndNoraRoute,
   RudolfEsNoraRoute: RudolfEsNoraRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,

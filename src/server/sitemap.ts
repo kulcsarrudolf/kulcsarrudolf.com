@@ -1,17 +1,10 @@
 import { SITE_URL } from "@/config/site";
 
 import { getPostMetadata, getProjectMetadata } from "./content";
+import { escapeXml } from "./xml";
 
 // The XML sitemap: the static pages plus every published post and project.
 type SitemapEntry = { url: string; lastModified?: string };
-
-const escapeXml = (value: string): string =>
-  value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&apos;");
 
 // `date` is optional on projects, so only send lastmod when we actually have
 // a valid one. An Invalid Date would break the generated XML.
