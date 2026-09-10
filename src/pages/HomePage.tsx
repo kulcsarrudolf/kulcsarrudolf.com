@@ -1,7 +1,7 @@
 import { Link, Paragraph, Title } from "@/components/ui/typography";
 import { useTranslation } from "@/i18n/useTranslation";
 import BlogPostList from "@/features/blog/BlogPostList";
-import Divider from "@/components/ui/Divider";
+import SectionStack from "@/components/ui/SectionStack";
 import type { BlogPost } from "@/types/blog-post";
 import CurrentFocus from "@/features/home/current-focus/CurrentFocus";
 import LetsTalk from "@/features/home/lets-talk/LetsTalk";
@@ -24,37 +24,39 @@ export default function HomePageContent({ posts }: HomePageContentProps) {
   );
 
   return (
-    <div>
-      <Title>{t("home.title")}</Title>
-      <Paragraph>
-        {t("home.paragraph1", {
-          clujLink,
-          innovatorSparkLink,
-        })}
-      </Paragraph>
+    <SectionStack>
+      <div>
+        <Title>{t("home.title")}</Title>
+        <Paragraph>
+          {t("home.paragraph1", {
+            clujLink,
+            innovatorSparkLink,
+          })}
+        </Paragraph>
 
-      <Paragraph>{t("home.paragraph2")}</Paragraph>
+        <Paragraph>{t("home.paragraph2")}</Paragraph>
 
-      <Paragraph>
-        {t("home.paragraph3", {
-          githubLink: gitHubLink,
-          cvLink,
-        })}
-      </Paragraph>
+        <Paragraph>
+          {t("home.paragraph3", {
+            githubLink: gitHubLink,
+            cvLink,
+          })}
+        </Paragraph>
 
-      <Paragraph>{t("home.paragraph4")}</Paragraph>
+        <Paragraph>{t("home.paragraph4")}</Paragraph>
+      </div>
 
-      <Divider />
+      {/* No rules between the sections: Let's Talk is a solid band of brand
+          blue and separates itself, so a hairline against its edge only reads
+          as a second, weaker border. SectionStack carries the rhythm. */}
       <LetsTalk />
-      <Divider />
       <CurrentFocus />
-      <Divider />
       <BlogPostList
         title={String(t("home.latestBlogs")) as string}
         posts={posts}
         noOfElements={3}
         compact
       />
-    </div>
+    </SectionStack>
   );
 }

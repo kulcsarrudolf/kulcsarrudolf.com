@@ -12,13 +12,16 @@ const meta = {
     onClick: fn(),
   },
   argTypes: {
-    variant: { control: "inline-radio", options: ["primary", "secondary"] },
+    variant: {
+      control: "inline-radio",
+      options: ["primary", "secondary", "onBrand", "onBrandOutline"],
+    },
   },
   parameters: {
     docs: {
       description: {
         component:
-          "The site has two buttons. `primary` is the filled brand one and there is only ever one of them in view; `secondary` is white with a grey hairline. Anchors and router links that have to read as buttons use the `buttonClasses` helper instead.",
+          "The site has two buttons, and the same pair inverted for brand blue. `primary` is the filled brand one and there is only ever one of them in view; `secondary` is white with a grey hairline. `onBrand` and `onBrandOutline` are the pair the Let's Talk band uses, where the background is already blue. Anchors and router links that have to read as buttons use the `buttonClasses` helper instead.",
       },
     },
   },
@@ -38,6 +41,26 @@ export const SideBySide: Story = {
     <div className="flex flex-col gap-2.5 sm:flex-row sm:gap-3">
       <Button {...args} />
       <Button {...args} variant="secondary">
+        Schedule a call
+      </Button>
+    </div>
+  ),
+};
+
+export const OnBrand: Story = {
+  args: { variant: "onBrand" },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "The inverted pair, drawn on the blue they are meant for. Anywhere else they are invisible.",
+      },
+    },
+  },
+  render: (args) => (
+    <div className="flex flex-col gap-2.5 rounded-xl bg-brand p-6 sm:flex-row sm:gap-3">
+      <Button {...args} />
+      <Button {...args} variant="onBrandOutline">
         Schedule a call
       </Button>
     </div>

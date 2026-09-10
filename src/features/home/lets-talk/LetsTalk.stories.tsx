@@ -9,7 +9,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Reasons to get in touch, written as endings to the heading's sentence. Four cases with an icon, then the easter egg set apart under a dashed rule, then two actions: the contact form and the calendar booking page. The copy comes from the translation files, so use the language toolbar to see the Hungarian version.",
+          "Reasons to get in touch, written as endings to the heading's sentence. A filled brand band: six cases two to a row, each with a short label, then the easter egg and the two actions along the foot. It is the only saturated block in the page body, which is what keeps it from being scrolled past. The copy comes from the translation files, so use the language toolbar to see the Hungarian version.",
       },
     },
   },
@@ -25,7 +25,7 @@ export const Narrow: Story = {
     docs: {
       description: {
         story:
-          "Constrained to a phone-sized width, where the rows wrap to several lines and the two buttons stack full width.",
+          "Constrained to a phone-sized width, where the cases fall back to one column and the two buttons stack full width under the easter egg.",
       },
     },
   },

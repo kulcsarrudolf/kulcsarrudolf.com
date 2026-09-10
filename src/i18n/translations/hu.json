@@ -17,12 +17,31 @@
     "paragraph4": "Amikor nem programozok, akkor próbálok a barátaimmal és családommal lenni, ez nagyon feltölti az akkumulátoromat. Valamint minidg nyított vagyok egy jó társasozásra, bringázásra, futásra, legózásra és mindenre ami érdekes. A legjújabb hobbim a 3D puzzle.",
     "letsTalk": {
       "title": "Beszéljünk, ha...",
-      "idea": "Van egy ötleted, és kell valaki, aki olyan terméket épít belőle, amit tényleg használnak.",
-      "stuck": "Már működik a szoftvered, de az új funkciók fejlesztése vagy a skálázás lassúvá és fájdalmassá vált.",
-      "ship": "Építettél valamit, ami eddig nem jutott túl a laptopodon, és szeretnéd élesben látni a weben vagy mobilon.",
-      "team": "A csapatodnak jobb fejlesztői élményre van szüksége, és modern eszközökkel, AI-val érnéd el, kompromisszumok nélkül.",
-      "hiring": "A csapatodnak senior szoftverfejlesztőre van szüksége, aki igazi csapatjátékos.",
-      "projects": "Láttad valamelyik projektemet, és szívesen beszélgetnél róla.",
+      "eyebrow": "Dolgozzunk együtt",
+      "idea": {
+        "label": "Új ötlet",
+        "text": "Van egy ötleted, és kell valaki, aki olyan terméket épít belőle, amit tényleg használnak."
+      },
+      "stuck": {
+        "label": "Nehézkes fejlesztés",
+        "text": "Már működik a szoftvered, de az új funkciók fejlesztése vagy a skálázás lassúvá és fájdalmassá vált."
+      },
+      "ship": {
+        "label": "Fiókban maradt",
+        "text": "Építettél valamit, ami eddig nem jutott túl a laptopodon, és szeretnéd élesben látni a weben vagy mobilon."
+      },
+      "team": {
+        "label": "Jobb eszközök",
+        "text": "A csapatodnak jobb fejlesztői élményre van szüksége, és modern eszközökkel, AI-val érnéd el, kompromisszumok nélkül."
+      },
+      "hiring": {
+        "label": "Toborzás",
+        "text": "A csapatodnak senior szoftverfejlesztőre van szüksége, aki igazi csapatjátékos."
+      },
+      "projects": {
+        "label": "Valamelyik projektem",
+        "text": "Láttad valamelyik projektemet, és szívesen beszélgetnél róla."
+      },
       "easterEgg": "Megtaláltad az oldal easter eggjét.",
       "message": "Írj nekem",
       "scheduleCall": "Foglalj időpontot"
