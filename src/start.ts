@@ -1,4 +1,4 @@
-import { createMiddleware, createStart } from "@tanstack/react-start";
+import { createCsrfMiddleware, createMiddleware, createStart } from "@tanstack/react-start";
 
 import { MARKDOWN_HEADERS, buildPostMarkdown, buildProjectMarkdown } from "@/server/markdown";
 
@@ -51,6 +51,11 @@ const markdownMiddleware = createMiddleware({ type: "request" }).server(
   },
 );
 
+// Server functions are same-origin RPC endpoints; refuse cross-site calls.
+const csrfMiddleware = createCsrfMiddleware({
+  filter: (ctx) => ctx.handlerType === "serverFn",
+});
+
 export const startInstance = createStart(() => ({
-  requestMiddleware: [markdownMiddleware],
+  requestMiddleware: [csrfMiddleware, markdownMiddleware],
 }));
