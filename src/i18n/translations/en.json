@@ -19,27 +19,21 @@
       "title": "Let's talk if...",
       "eyebrow": "Work with me",
       "idea": {
-        "label": "A new idea",
         "text": "You have an idea and need someone to turn it into a product people can actually use."
       },
       "stuck": {
-        "label": "Growth hurts",
         "text": "You already have software, and adding features or handling growth has turned slow and painful."
       },
       "ship": {
-        "label": "Never shipped",
         "text": "You built something that never left your laptop, and you want it live on the web or on phones."
       },
       "team": {
-        "label": "Better tooling",
         "text": "Your team needs a better developer experience, and you want modern tooling and AI to get there without cutting corners."
       },
       "hiring": {
-        "label": "Hiring",
         "text": "Your team needs a senior software engineer who is a real team player."
       },
       "projects": {
-        "label": "One of my projects",
         "text": "You saw one of my projects and want to talk about it."
       },
       "easterEgg": "You found the easter egg on this site.",

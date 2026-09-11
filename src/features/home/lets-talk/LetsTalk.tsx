@@ -44,8 +44,8 @@ const CTA = "min-h-12 w-full sm:w-auto";
  * a list of hairline rows it read exactly like the sections that only tell
  * them things, so it was skipped. It is a filled brand band instead: the only
  * saturated block in the page body, borrowing the navbar's blue so the page
- * still holds together. The six sentences carry a short label each and sit two
- * to a row from `sm`, which halves the height the band would otherwise take.
+ * still holds together. The six sentences sit two to a row from `sm`, which
+ * halves the height the band would otherwise take.
  */
 const LetsTalk = () => {
   const { t } = useTranslation();
@@ -62,7 +62,7 @@ const LetsTalk = () => {
 
       <div className="grid gap-x-8 sm:grid-cols-2">
         {REASONS.map(({ key, Icon }) => (
-          <ReasonItem key={key} icon={<Icon />} label={t(`home.letsTalk.${key}.label`) as string}>
+          <ReasonItem key={key} icon={<Icon />}>
             {t(`home.letsTalk.${key}.text`)}
           </ReasonItem>
         ))}
