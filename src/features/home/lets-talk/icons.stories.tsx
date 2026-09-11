@@ -30,7 +30,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "The Let's Talk row icons, drawn by hand rather than pulled from Font Awesome: the free set is solid only, and solid glyphs at 22px read heavier than the hairline rules they sit between. The last two are the smaller pair that goes inside the buttons.",
+          "The Let's Talk row icons, drawn by hand rather than pulled from Font Awesome: the free set is solid only, and solid glyphs read heavier than the hairline rules they sit between. The first six are the 32px case icons, the easter egg sits a step quieter at 22px, and the last two are the 18px pair that goes inside the buttons.",
       },
     },
   },

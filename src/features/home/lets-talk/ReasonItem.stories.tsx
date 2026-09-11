@@ -8,7 +8,6 @@ const meta = {
   component: ReasonItem,
   args: {
     icon: <IdeaIcon />,
-    label: "A new idea",
     children:
       "You have an idea and need someone to turn it into a product people can actually use.",
   },
@@ -16,7 +15,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "One case inside the Let's Talk band: an icon, a short label, and the sentence. It only ever sits on brand blue, so every story here is drawn on that background.",
+          "One case inside the Let's Talk band: an icon centred against its sentence. It only ever sits on brand blue, so every story here is drawn on that background.",
       },
     },
   },
@@ -46,7 +45,7 @@ export const Pair: Story = {
   render: (args) => (
     <div className="grid gap-x-8 sm:grid-cols-2">
       <ReasonItem {...args} />
-      <ReasonItem icon={<GrowthIcon />} label="Growth hurts">
+      <ReasonItem icon={<GrowthIcon />}>
         You already have software, and adding features or handling growth has turned slow and
         painful.
       </ReasonItem>
@@ -58,7 +57,8 @@ export const Narrow: Story = {
   parameters: {
     docs: {
       description: {
-        story: "At a phone width, where the sentence wraps to several lines under its label.",
+        story:
+          "At a phone width, where the sentence wraps to several lines and the icon stays centred against them.",
       },
     },
   },
