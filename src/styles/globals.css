@@ -69,6 +69,16 @@
     cursor: pointer;
   }
 
+  /* Tailwind 4 changed the default border colour from gray-200 to
+     currentColor, which turned every <hr> black. Put v3's default back. */
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+
   /* Always reserve room for the vertical scrollbar so the layout does not
      shift sideways when navigating between pages that do and do not scroll. */
   html {
