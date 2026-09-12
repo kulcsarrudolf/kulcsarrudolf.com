@@ -43,13 +43,13 @@ const WeddingLine = ({ onStop }: WeddingLineProps) => {
     return () => clearInterval(interval);
   }, []);
 
-  // Only the units that have something left in them, so the line does not
-  // carry an empty "00 hours" through the months of waiting.
+  // Only the units that have something left in them, counted plainly: the
+  // line reads "77 days · 45 min · 5 sec" rather than carrying an empty
+  // "00 hours" through the months of waiting or padding "5" out to "05".
   const parts =
     timeLeft &&
     getCountdownUnits(timeLeft).map(
-      ({ unit, value }) =>
-        `${String(value).padStart(2, "0")} ${unitLabel(content.labels[unit], value)}`,
+      ({ unit, value }) => `${value} ${unitLabel(content.labels[unit], value)}`,
     );
 
   return (
