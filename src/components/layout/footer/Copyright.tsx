@@ -5,7 +5,9 @@ const Copyright = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <div className="text-gray-600">{t("footer.copyright", { year: currentYear.toString() })}</div>
+    <div className="text-gray-600 dark:text-gray-400">
+      {t("footer.copyright", { year: currentYear.toString() })}
+    </div>
   );
 };
 

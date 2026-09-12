@@ -5,6 +5,8 @@ interface NoteProps {
 }
 
 /** Small muted print for a parting aside, rather than body copy. */
-const Note = ({ children }: NoteProps) => <p className="text-gray-600 text-sm">{children}</p>;
+const Note = ({ children }: NoteProps) => (
+  <p className="text-gray-600 text-sm dark:text-gray-400">{children}</p>
+);
 
 export default Note;

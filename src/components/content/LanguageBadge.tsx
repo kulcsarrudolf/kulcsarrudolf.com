@@ -13,7 +13,7 @@ const LanguageBadge = ({ lang }: LanguageBadgeProps) => {
     return null;
   }
 
-  return <span className="mr-1 text-brand">[HU]</span>;
+  return <span className="mr-1 text-brand dark:text-brand-on-dark">[HU]</span>;
 };
 
 export default LanguageBadge;

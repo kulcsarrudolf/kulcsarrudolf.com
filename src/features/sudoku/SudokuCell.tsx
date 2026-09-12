@@ -21,8 +21,8 @@ const SudokuCell = ({
 }: SudokuCellProps) => {
   const displayValue = value !== null ? value + 1 : "";
 
-  let bgColor = "bg-white";
-  let textColor = "text-gray-800";
+  let bgColor = "bg-white dark:bg-card-dark";
+  let textColor = "text-gray-800 dark:text-gray-200";
 
   // Background priority: selected > same number > highlighted > default
   if (isSelected) {
@@ -35,19 +35,19 @@ const SudokuCell = ({
 
   // Text color
   if (isOriginal) {
-    textColor = "text-gray-900 font-bold";
+    textColor = "text-gray-900 font-bold dark:text-gray-100";
   } else if (value !== null) {
-    textColor = "text-brand";
+    textColor = "text-brand dark:text-brand-on-dark";
   }
 
   if (isRevealed && !isOriginal) {
-    textColor = "text-green-600";
-    bgColor = "bg-green-50";
+    textColor = "text-green-600 dark:text-green-400";
+    bgColor = "bg-green-50 dark:bg-green-950/40";
   }
 
   return (
     <button
-      className={`w-8 h-8 sm:w-10 sm:h-10 border border-gray-300 flex items-center justify-center text-sm sm:text-base transition-colors ${bgColor} ${textColor} ${
+      className={`w-8 h-8 sm:w-10 sm:h-10 border border-gray-300 dark:border-line-dark flex items-center justify-center text-sm sm:text-base transition-colors ${bgColor} ${textColor} ${
         !isRevealed ? "cursor-pointer" : ""
       } ${isShaking ? "animate-shake" : ""}`}
       onClick={onClick}

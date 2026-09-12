@@ -28,7 +28,7 @@ const ProjectLinks = ({ project }: ProjectLinksProps) => {
       {project.tech?.map((tech) => (
         <span
           key={tech}
-          className="text-xs text-gray-600 bg-gray-100 border border-gray-200 rounded-full px-2 py-0.5"
+          className="text-xs text-gray-600 bg-gray-100 border border-gray-200 rounded-full px-2 py-0.5 dark:text-gray-400 dark:bg-fill-dark dark:border-line-dark"
         >
           {tech}
         </span>

@@ -20,7 +20,7 @@ interface ModalProps {
 
 // Full bleed on a phone, a centred card from `md` up.
 const PANEL =
-  "relative flex h-full w-full transform flex-col justify-center bg-white shadow-2xl transition-all duration-200 md:mx-4 md:h-auto md:w-auto md:rounded-2xl";
+  "relative flex h-full w-full transform flex-col justify-center bg-white shadow-2xl transition-all duration-200 md:mx-4 md:h-auto md:w-auto md:rounded-2xl dark:bg-card-dark dark:ring-1 dark:ring-line-dark";
 
 /**
  * A dialog over a dimmed backdrop, fading and scaling in on mount and back out
@@ -36,7 +36,7 @@ const Modal = ({ onClose, children, panelClassName = "p-6", closeLabel }: ModalP
       }`}
       onClick={close}
     >
-      <div className="absolute inset-0 bg-black/50" />
+      <div className="absolute inset-0 bg-black/50 dark:bg-black/70" />
 
       <div
         role="dialog"

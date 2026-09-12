@@ -42,8 +42,10 @@ const LangSelector = ({ className = "", onSelect }: LangSelectorProps) => {
           type="button"
           onClick={() => changeLanguage(language)}
           aria-current={lang === language ? "true" : undefined}
-          className={`rounded px-1 hover:underline focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand ${
-            lang === language ? "font-semibold text-brand" : "text-gray-600"
+          className={`rounded px-1 hover:underline focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand dark:focus-visible:ring-brand-on-dark ${
+            lang === language
+              ? "font-semibold text-brand dark:text-brand-on-dark"
+              : "text-gray-600 dark:text-gray-400"
           }`}
         >
           {LABELS[language]}

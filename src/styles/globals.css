@@ -7,6 +7,12 @@
   target: "modern";
 }
 
+/* Dark mode is a class on <html>, not the OS setting: the site opens light
+   every time, and the bulb in the navbar is the one way to switch. The class
+   is put there before the first paint by the inline script in RootDocument,
+   read back from localStorage by src/lib/theme.ts. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* The theme. Colours are named here and nowhere else: `brand` is the bar,
    headings and links; `brand-active` the current-page pill and hover on the
    bar; `brand-hover` filled buttons on white; `brand-on-dark` the same hue
@@ -25,6 +31,18 @@
   --color-brand-active: #3b64b8;
   --color-brand-hover: #365899;
   --color-surface: #e9ebee;
+
+  /* The dark palette, reached through the `dark:` variant. Four surfaces do
+     the whole job: the page, the blocks that are white by day, the hairline
+     between things and the fill under a hovered row. They are cool greys on
+     the brand's own hue rather than steps of Tailwind's scale, so the page
+     never goes pure black and a card still reads as a step above it. Text
+     on them uses Tailwind's greys: 200 for copy, 400 for what is muted, 500
+     for what is only decoration; brand as text becomes `brand-on-dark`. */
+  --color-surface-dark: #0f131a;
+  --color-card-dark: #181d26;
+  --color-line-dark: #2c3441;
+  --color-fill-dark: #222936;
 
   /* The terminal runs on gray-800, and `brand` on that is 2.7:1 — unreadable.
      This is the same hue (220deg) lightened until it clears AAA at 7.4:1, so
@@ -67,7 +85,11 @@
 
 @utility animate-shake {
   animation: shake 0.5s ease-in-out;
-  background-color: rgb(254 202 202) !important;
+  background-color: var(--color-red-200) !important;
+
+  .dark & {
+    background-color: var(--color-red-900) !important;
+  }
 }
 
 @utility animate-blink {
@@ -78,6 +100,13 @@
 @layer base {
   :root {
     --font-inter: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+    color-scheme: light;
+  }
+
+  /* Native controls, scrollbars and the like follow the page rather than the
+     OS, so a dark page never gets a white scrollbar down its side. */
+  .dark {
+    color-scheme: dark;
   }
 
   /* Tailwind 4 stopped giving buttons a pointer cursor. Every button on the
@@ -95,6 +124,16 @@
   ::backdrop,
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
+  }
+
+  /* The same default, for the dark page: a bare <hr> follows the theme
+     without every one of them carrying a class. */
+  .dark *,
+  .dark ::after,
+  .dark ::before,
+  .dark ::backdrop,
+  .dark ::file-selector-button {
+    border-color: var(--color-line-dark);
   }
 
   /* Always reserve room for the vertical scrollbar so the layout does not

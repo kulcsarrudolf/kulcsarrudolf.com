@@ -32,7 +32,10 @@ export default function ContactForm() {
         </div>
 
         <div className="flex flex-col h-full">
-          <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="message"
+            className="block text-sm font-medium text-gray-700 mb-2 dark:text-gray-300"
+          >
             {t("contact.form.message")}
           </label>
           <textarea
@@ -51,7 +54,7 @@ export default function ContactForm() {
         <Button
           type="submit"
           disabled={isSubmitting}
-          className="w-full focus:outline-hidden focus:ring-2 focus:ring-brand focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full focus:outline-hidden focus:ring-2 focus:ring-brand focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed dark:focus:ring-brand-on-dark dark:focus:ring-offset-surface-dark"
         >
           {isSubmitting ? t("contact.form.submitting") : t("contact.form.submit")}
         </Button>
@@ -61,8 +64,8 @@ export default function ContactForm() {
         <div
           className={`mt-4 p-4 rounded-lg text-center ${
             result === t("contact.form.success")
-              ? "bg-green-50 text-green-800 border border-green-200"
-              : "bg-red-50 text-red-800 border border-red-200"
+              ? "bg-green-50 text-green-800 border border-green-200 dark:bg-green-950/40 dark:text-green-300 dark:border-green-900"
+              : "bg-red-50 text-red-800 border border-red-200 dark:bg-red-950/40 dark:text-red-300 dark:border-red-900"
           }`}
         >
           {result}

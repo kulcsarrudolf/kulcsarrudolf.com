@@ -36,7 +36,7 @@ const QuoteCard = ({
 
   return (
     <div
-      className={`border border-gray-300 p-6 rounded-xl shadow-md ${
+      className={`border border-gray-300 p-6 rounded-xl shadow-md dark:border-line-dark ${
         centered ? "text-center" : ""
       } ${interactive ? "hover:shadow-lg transition-shadow" : ""} ${
         onClick ? "cursor-pointer" : ""
@@ -49,7 +49,9 @@ const QuoteCard = ({
       >
         &ldquo;{quote.quote}&rdquo;
       </p>
-      <p className={`text-brand-active font-semibold tracking-wide ${style.author}`}>
+      <p
+        className={`text-brand-active font-semibold tracking-wide dark:text-brand-on-dark ${style.author}`}
+      >
         &mdash; {quote.author}
       </p>
     </div>

@@ -18,8 +18,9 @@ interface SudokuBoardProps {
 const boxBorders = (index: number) => {
   const row = Math.floor(index / SIZE);
   const col = index % SIZE;
-  const right = col === 2 || col === 5 ? "border-r-2 border-r-gray-800" : "";
-  const bottom = row === 2 || row === 5 ? "border-b-2 border-b-gray-800" : "";
+  const right = col === 2 || col === 5 ? "border-r-2 border-r-gray-800 dark:border-r-gray-400" : "";
+  const bottom =
+    row === 2 || row === 5 ? "border-b-2 border-b-gray-800 dark:border-b-gray-400" : "";
   return `${right} ${bottom}`;
 };
 
@@ -32,7 +33,7 @@ const SudokuBoard = ({
   highlightingFor,
   onSelect,
 }: SudokuBoardProps) => (
-  <div className="grid grid-cols-9 gap-0 border-2 border-gray-800">
+  <div className="grid grid-cols-9 gap-0 border-2 border-gray-800 dark:border-gray-400">
     {board.map((value, index) => {
       const { isHighlighted, isSameNumber } = highlightingFor(index);
 
