@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 
 import SudokuModal from "@/features/sudoku/SudokuModal";
+import LovingAtmosphere from "@/features/wedding/LovingAtmosphere";
 import { useTranslation } from "@/i18n/useTranslation";
 
 import Prompt from "./Prompt";
@@ -15,9 +16,11 @@ import { MAX_HEIGHT, MIN_HEIGHT, useTerminalHeight } from "./useTerminalHeight";
  * that actually takes commands. Return runs the line; `help` lists what
  * works, and a page name opens that page. Two commands are missing from that
  * list on purpose: one counts down to the wedding, the other opens the
- * sudoku, and both are there to be found rather than advertised. The body has a floor, so `clear`
- * leaves a window rather than a strip, and a ceiling past which the history
- * scrolls; the strip along the bottom drags it taller or shorter.
+ * sudoku, and both are there to be found rather than advertised; the wedding
+ * one also floats hearts over the whole page for half a minute. The body has a
+ * floor, so `clear` leaves a window rather than a strip, and a ceiling past
+ * which the history scrolls; the strip along the bottom drags it taller or
+ * shorter.
  *
  * Sits between the navbar and About Me. It is the one dark object on the page,
  * a counterweight to the brand-blue Let's Talk band further down, and it says
@@ -26,8 +29,18 @@ import { MAX_HEIGHT, MIN_HEIGHT, useTerminalHeight } from "./useTerminalHeight";
  */
 const TerminalIntro = () => {
   const { t } = useTranslation();
-  const { entries, input, inputRef, sudokuOpen, closeSudoku, focusPrompt, onSubmit, inputProps } =
-    useTerminal();
+  const {
+    entries,
+    input,
+    inputRef,
+    atmosphere,
+    atmosphereEntryId,
+    sudokuOpen,
+    closeSudoku,
+    focusPrompt,
+    onSubmit,
+    inputProps,
+  } = useTerminal();
   const { bodyRef, measured, bodyStyle, handleProps } = useTerminalHeight();
 
   // Once the history is taller than the window, a new line lands out of
@@ -63,7 +76,12 @@ const TerminalIntro = () => {
       >
         <div className="flex flex-col gap-2.5" aria-live="polite">
           {entries.map(({ id, command, result }) => (
-            <TerminalEntry key={id} command={command} result={result} />
+            <TerminalEntry
+              key={id}
+              command={command}
+              result={result}
+              onStopAtmosphere={id === atmosphereEntryId ? atmosphere.stop : undefined}
+            />
           ))}
         </div>
 
@@ -102,6 +120,10 @@ const TerminalIntro = () => {
       </div>
 
       {sudokuOpen && <SudokuModal onClose={closeSudoku} />}
+
+      {atmosphere.running && (
+        <LovingAtmosphere fading={atmosphere.fading} fadeMs={atmosphere.fadeMs} />
+      )}
 
       <ResizeHandle
         label={t("home.terminalIntro.resize") as string}

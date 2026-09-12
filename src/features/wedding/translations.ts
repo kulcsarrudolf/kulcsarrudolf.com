@@ -26,6 +26,8 @@ interface NrContent {
   };
   quote: string;
   quoteReference: string;
+  /** The control that ends the loving atmosphere the terminal puts over the page. */
+  stopAtmosphere: string;
 }
 
 export const nrTranslations: Record<NrLanguage, NrContent> = {
@@ -42,6 +44,7 @@ export const nrTranslations: Record<NrLanguage, NrContent> = {
     },
     quote: "„Megtaláltam azt, akit szeret a lelkem.”",
     quoteReference: "Énekek éneke 3:4",
+    stopAtmosphere: "esc a leállításhoz",
   },
   ro: {
     names: "Rudolf și Nóra",
@@ -56,6 +59,7 @@ export const nrTranslations: Record<NrLanguage, NrContent> = {
     },
     quote: "„Am găsit pe cel ce-l iubește sufletul meu.”",
     quoteReference: "Cântarea Cântărilor 3:4",
+    stopAtmosphere: "esc pentru oprire",
   },
   en: {
     names: "Rudolf and Nóra",
@@ -70,6 +74,7 @@ export const nrTranslations: Record<NrLanguage, NrContent> = {
     },
     quote: "“I have found the one whom my soul loves.”",
     quoteReference: "Song of Songs 3:4",
+    stopAtmosphere: "esc to stop",
   },
 };
 

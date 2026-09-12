@@ -9,6 +9,7 @@ import {
   useState,
 } from "react";
 
+import { useLovingAtmosphere } from "@/features/wedding/useLovingAtmosphere";
 import { useLangSearch } from "@/i18n/useLangSearch";
 
 import { type CommandResult, runCommand } from "./commands";
@@ -32,7 +33,8 @@ const OPENING_ENTRY: TerminalEntry = { id: 0, command: "./intro.sh", result: { k
  * so the terminal answers the key the way a real one does. `clear` empties
  * the history, and a page name navigates with the visitor's language kept.
  * One command opens the sudoku over the page, so the window it belongs to
- * is held here alongside the history.
+ * is held here alongside the history. The wedding commands put the loving
+ * atmosphere over it, which any other command takes back down again.
  */
 export function useTerminal() {
   const navigate = useNavigate();
@@ -42,6 +44,12 @@ export function useTerminal() {
   const [input, setInput] = useState("");
   const [sudokuOpen, setSudokuOpen] = useState(false);
 
+  // Which entry printed the atmosphere that is up. Only that one shows the way
+  // out of it, so the older wedding blocks in the scrollback stay inert.
+  const [atmosphereEntryId, setAtmosphereEntryId] = useState<number | null>(null);
+  const atmosphere = useLovingAtmosphere();
+  const { start: startAtmosphere, stop: stopAtmosphere } = atmosphere;
+
   const inputRef = useRef<HTMLInputElement>(null);
   const nextIdRef = useRef(1);
 
@@ -49,14 +57,27 @@ export function useTerminal() {
     const result = runCommand(input);
     setInput("");
 
+    // `clear` takes the wedding line away with the rest of the history, so it
+    // has to take the hearts too rather than leave them up with no way out.
     if (result.kind === "clear") {
       setEntries([]);
+      stopAtmosphere();
       return;
     }
 
-    setEntries((previous) =>
-      [...previous, { id: nextIdRef.current++, command: input, result }].slice(-MAX_ENTRIES),
-    );
+    const id = nextIdRef.current++;
+    setEntries((previous) => [...previous, { id, command: input, result }].slice(-MAX_ENTRIES));
+
+    // A wedding command starts the hearts, or restarts the clock on the ones
+    // already flying. Anything else typed at the prompt takes them down, which
+    // is the way out for a visitor with no escape key in reach. A bare Return
+    // is not a command, so it leaves them alone.
+    if (result.kind === "wedding") {
+      setAtmosphereEntryId(id);
+      startAtmosphere();
+    } else if (result.kind !== "empty") {
+      stopAtmosphere();
+    }
 
     // The sudoku reads the number keys off the window, so the prompt lets go
     // of the caret while the game is up rather than collecting what is typed
@@ -69,7 +90,7 @@ export function useTerminal() {
     if (result.kind === "navigate") {
       navigate({ to: result.destination.to, search: langSearch });
     }
-  }, [input, langSearch, navigate]);
+  }, [input, langSearch, navigate, startAtmosphere, stopAtmosphere]);
 
   // Closing the sudoku hands the caret back, so the next command can be
   // typed without reaching for the mouse.
@@ -105,6 +126,9 @@ export function useTerminal() {
     entries,
     input,
     inputRef,
+    atmosphere,
+    /** Null unless the atmosphere is running, so a finished one shows nothing. */
+    atmosphereEntryId: atmosphere.running ? atmosphereEntryId : null,
     sudokuOpen,
     closeSudoku,
     focusPrompt,

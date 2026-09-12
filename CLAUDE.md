@@ -33,7 +33,7 @@ There are three exceptions, and adding a fourth means writing it down here:
 
 - `components/layout/navbar/Brand` renders `features/easter-egg/WelcomeModal` once the avatar ring fills: the modal has to sit outside the brand link, so the wiring lives there.
 - `features/easter-egg/WelcomeModal` renders a quote from `features/quotes` and opens `features/sudoku`, which is what the modal is for.
-- `features/home/terminal-intro` reads the wedding date from `features/wedding/countdown` and opens `features/sudoku`, for the two commands `help` does not list.
+- `features/home/terminal-intro` reads the wedding date from `features/wedding/countdown`, floats `features/wedding/LovingAtmosphere` over the page, and opens `features/sudoku`, for the two commands `help` does not list.
 
 Imports use `./` inside a folder and `@/` everywhere else.
 A component file exports its component as the default; hooks, data and helpers export names only.
@@ -99,10 +99,12 @@ Call `useLangSearch()` from `@/i18n/useLangSearch` and spread the result into a 
 Every component under `src/components/` and `src/features/` has a `*.stories.tsx` next to it, titled after its folder (`UI/Button`, `Layout/Navbar/Brand`, `Blog/PostedOn`), so the Storybook sidebar mirrors the tree.
 A new component file means a new story file in the same commit.
 
-Two files are exempt.
+Three files are exempt.
 `components/layout/RootDocument` renders `<html>` and `<body>`; Storybook draws every story inside a document of its own, so a second one nested in it shows nothing worth looking at.
 The part that can be looked at is `PageShell`, and that has a story.
 `components/layout/SpeedInsights` renders nothing outside production.
+`features/wedding/LovingAtmosphere` ends itself thirty seconds after it mounts, so a story would show an empty canvas from the thirty-first second on.
+The part that can be looked at is `FloatingHearts`, and that has a story covering both of the tunings it is given.
 
 ## Commits and branches
 
