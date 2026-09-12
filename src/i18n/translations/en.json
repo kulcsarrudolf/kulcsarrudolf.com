@@ -19,7 +19,15 @@
       "notFound": "command not found: {command}. Type help to see what works.",
       "opening": "Opening {page}",
       "sudoku": "Starting sudoku. Good luck.",
-      "resize": "Terminal height"
+      "resize": "Terminal height",
+      "resizeWindow": "Terminal width and height",
+      "close": "Close the terminal",
+      "shade": "Roll the terminal up",
+      "unshade": "Roll the terminal down",
+      "float": "Float the terminal over the page",
+      "dock": "Put the terminal back on the page",
+      "move": "Move the terminal",
+      "open": "Open the terminal"
     },
     "title": "About Me",
     "paragraph1": "Shipping software professionally since 2017, across multinationals, startups, and midsize companies. Currently at {innovatorSparkLink}, turning ideas into working products (designed, built, tested, deployed, and operated end to end) and putting new technology to work where it creates the most value for users and the business.",

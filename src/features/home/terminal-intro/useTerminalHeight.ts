@@ -25,10 +25,23 @@ const clamp = (height: number) => Math.min(MAX_HEIGHT, Math.max(MIN_HEIGHT, Math
  * the ceiling the history scrolls. Dragging the handle under it (or the arrow
  * keys on it, Home and End for the limits) sets a fixed height instead;
  * a double-click hands it back to the content.
+ *
+ * `fill` is for the window that has come off the page: there the frame owns
+ * the height and the body takes what is left under the title bar, so the body
+ * holds no height of its own until the window is set back down, which still
+ * has the one it was dragged to.
  */
-export function useTerminalHeight() {
-  const bodyRef = useRef<HTMLDivElement>(null);
+export function useTerminalHeight(fill: boolean) {
   const dragRef = useRef<{ startY: number; startHeight: number } | null>(null);
+
+  // The body is held in state rather than a ref alone: closing the window and
+  // floating it both build it again, and the observer has to follow it there.
+  const bodyRef = useRef<HTMLDivElement | null>(null);
+  const [body, setBody] = useState<HTMLDivElement | null>(null);
+  const attachBody = useCallback((node: HTMLDivElement | null) => {
+    bodyRef.current = node;
+    setBody(node);
+  }, []);
 
   // `null` is the content-sized state.
   const [height, setHeight] = useState<number | null>(null);
@@ -36,13 +49,12 @@ export function useTerminalHeight() {
   const [measured, setMeasured] = useState(MIN_HEIGHT);
 
   useEffect(() => {
-    const body = bodyRef.current;
     if (!body) return;
 
     const observer = new ResizeObserver(() => setMeasured(Math.round(body.offsetHeight)));
     observer.observe(body);
     return () => observer.disconnect();
-  }, []);
+  }, [body]);
 
   const onPointerDown = useCallback((event: PointerEvent<HTMLElement>) => {
     // Stops the drag selecting text on the page underneath.
@@ -85,12 +97,26 @@ export function useTerminalHeight() {
 
   const reset = useCallback(() => setHeight(null), []);
 
+  /**
+   * Puts the bottom of the history in view. Once it is taller than the window
+   * a new line lands out of sight, and a terminal follows its output down.
+   */
+  const scrollToLatest = useCallback(() => {
+    const node = bodyRef.current;
+    if (node) node.scrollTop = node.scrollHeight;
+  }, []);
+
+  const contentSized = { minHeight: MIN_HEIGHT, maxHeight: MAX_AUTO_HEIGHT };
+
   return {
-    bodyRef,
+    attachBody,
+    body,
+    scrollToLatest,
     measured,
-    bodyStyle:
-      height === null
-        ? { minHeight: MIN_HEIGHT, maxHeight: MAX_AUTO_HEIGHT }
+    bodyStyle: fill
+      ? undefined
+      : height === null
+        ? contentSized
         : { height, minHeight: MIN_HEIGHT },
     handleProps: {
       onPointerDown,
