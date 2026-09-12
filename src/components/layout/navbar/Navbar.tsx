@@ -93,7 +93,7 @@ const Navbar = () => {
       } ${isDocked ? "mt-0" : "mt-3 sm:mt-5"}`}
     >
       <div
-        className={`mx-auto flex h-14 max-w-5xl items-center rounded-2xl bg-brand px-3 shadow-md sm:h-20 sm:px-4 ${
+        className={`mx-auto flex h-14 max-w-5xl items-center rounded-2xl bg-brand px-3 shadow-md sm:h-20 sm:px-4 dark:bg-brand-dark ${
           isAnimated ? "transition-[border-radius] duration-200 motion-reduce:transition-none" : ""
         } ${isDocked ? "rounded-t-none" : ""}`}
       >

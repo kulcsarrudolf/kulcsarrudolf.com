@@ -42,7 +42,7 @@ const isCurrent = (element: NavbarElement, pathname: string) => {
 // and `nav-label` reserves the width of the bold text, so only colour and
 // weight react to `data-status` and the row never shifts on navigation.
 const BAR_LINK =
-  "flex min-h-11 items-center rounded-md px-3 py-1 text-white transition-colors hover:text-white/75 data-[status=active]:bg-brand-active data-[status=active]:font-semibold data-[status=active]:text-white data-[status=active]:hover:text-white";
+  "flex min-h-11 items-center rounded-md px-3 py-1 text-white transition-colors hover:text-white/75 data-[status=active]:bg-brand-active data-[status=active]:font-semibold data-[status=active]:text-white data-[status=active]:hover:text-white dark:data-[status=active]:bg-brand-dark-active";
 
 const BAR_CTA =
   "flex min-h-11 items-center rounded-md bg-white px-3 py-1 font-medium text-brand transition-colors hover:bg-white/90";
@@ -50,10 +50,10 @@ const BAR_CTA =
 // 48px keeps the row above the 44px target floor while reading tighter than
 // the 56px it started at.
 const SHEET_LINK =
-  "flex min-h-12 w-full items-center rounded-lg px-3 text-base font-semibold text-gray-800 transition-colors hover:bg-gray-100 data-[status=active]:bg-brand data-[status=active]:text-white data-[status=active]:hover:bg-brand dark:text-gray-100 dark:hover:bg-fill-dark dark:data-[status=active]:bg-brand";
+  "flex min-h-12 w-full items-center rounded-lg px-3 text-base font-semibold text-gray-800 transition-colors hover:bg-gray-100 data-[status=active]:bg-brand data-[status=active]:text-white data-[status=active]:hover:bg-brand dark:text-gray-100 dark:hover:bg-fill-dark dark:data-[status=active]:bg-brand-dark dark:data-[status=active]:hover:bg-brand-dark";
 
 const SHEET_CTA =
-  "flex min-h-12 w-full items-center justify-center rounded-lg bg-brand px-3 text-base font-semibold text-white transition-colors hover:bg-brand-hover";
+  "flex min-h-12 w-full items-center justify-center rounded-lg bg-brand px-3 text-base font-semibold text-white transition-colors hover:bg-brand-hover dark:bg-brand-dark dark:hover:bg-brand-dark-active";
 
 const MenuItems = ({ variant = "bar", onNavigate }: MenuItemsProps) => {
   const { t } = useTranslation();

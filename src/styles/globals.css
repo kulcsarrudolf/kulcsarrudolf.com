@@ -44,6 +44,15 @@
   --color-line-dark: #2c3441;
   --color-fill-dark: #222936;
 
+  /* The brand fills by night. `brand` itself is tuned for a light page and
+     glares on a dark one, so the navbar, the Let's Talk band and the filled
+     buttons step down to the same hue at half the chroma: `brand-dark` is
+     the fill, `brand-dark-active` the current-page pill and hover on it.
+     White text clears 9:1 on the first and 6.7:1 on the second. Not to be
+     confused with `brand-on-dark`, which is the brand as text. */
+  --color-brand-dark: #27467f;
+  --color-brand-dark-active: #345a9e;
+
   /* The terminal runs on gray-800, and `brand` on that is 2.7:1 — unreadable.
      This is the same hue (220deg) lightened until it clears AAA at 7.4:1, so
      the terminal reads as the site's blue rather than borrowing a stock one. */
