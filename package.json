@@ -36,7 +36,7 @@
     "@tanstack/react-start": "^1.168.50",
     "@vercel/analytics": "^2.0.1",
     "gray-matter": "^4.0.3",
-    "markdown-to-jsx": "^7.2.1",
+    "markdown-to-jsx": "^9.10.2",
     "nitro": "3.0.260903-beta",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
