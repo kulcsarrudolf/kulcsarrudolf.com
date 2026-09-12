@@ -10,6 +10,11 @@
     "openMenu": "Open main menu"
   },
   "home": {
+    "terminalIntro": {
+      "intro": "Hi, I'm Rudolf, a Senior Full-Stack AI Engineer from Cluj-Napoca, Romania.",
+      "whereNext": "Where next?",
+      "label": "Introduction"
+    },
     "title": "About Me",
     "paragraph1": "Shipping software professionally since 2017, from {clujLink}, Romania, across multinationals, startups, and midsize companies. Currently at {innovatorSparkLink}, turning ideas into working products (designed, built, tested, deployed, and operated end to end) and putting new technology to work where it creates the most value for users and the business.",
     "paragraph2": "I have constantly been trying to improve my skills and I don't hesitate when I realize that there is still a lot to learn, so I am always open to new challenges.",

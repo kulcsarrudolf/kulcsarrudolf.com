@@ -57,6 +57,11 @@
   background-color: rgb(254 202 202) !important;
 }
 
+@utility animate-blink {
+  /* The terminal cursor on the home page: a hard on/off, not a fade. */
+  animation: blink 1.1s steps(1) infinite;
+}
+
 @layer base {
   :root {
     --font-inter: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
@@ -95,6 +100,17 @@
 }
 
 @layer utilities {
+  @keyframes blink {
+    0%,
+    49% {
+      opacity: 1;
+    }
+    50%,
+    100% {
+      opacity: 0;
+    }
+  }
+
   @keyframes shake {
     0%,
     100% {
