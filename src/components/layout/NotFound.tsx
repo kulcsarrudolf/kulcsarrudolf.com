@@ -10,14 +10,14 @@ const NotFound = ({ recentPosts }: NotFoundProps) => {
   return (
     <div className="flex flex-col items-center py-12 px-4 text-center">
       <p
-        className="text-8xl font-bold tracking-tight text-brand dark:text-brand-on-dark"
+        className="text-8xl font-bold tracking-tight text-brand dark:text-brand-dark-accent"
         style={{ opacity: 0.15 }}
         aria-hidden="true"
       >
         404
       </p>
 
-      <h1 className="text-2xl font-bold mt-2 mb-3 text-brand dark:text-brand-on-dark">
+      <h1 className="text-2xl font-bold mt-2 mb-3 text-brand dark:text-brand-dark-accent">
         This page could not be found
       </h1>
 
@@ -27,7 +27,7 @@ const NotFound = ({ recentPosts }: NotFoundProps) => {
       </p>
 
       <div className="mb-12">
-        <Link to="/" className="font-medium text-brand hover:underline dark:text-brand-on-dark">
+        <Link to="/" className="font-medium text-brand hover:underline dark:text-brand-dark-accent">
           &larr; Back to home
         </Link>
       </div>
@@ -45,7 +45,7 @@ const NotFound = ({ recentPosts }: NotFoundProps) => {
                   params={{ slug: post.slug }}
                   className="block px-4 py-3 transition-colors hover:bg-gray-50 dark:hover:bg-fill-dark"
                 >
-                  <span className="block font-medium text-brand dark:text-brand-on-dark">
+                  <span className="block font-medium text-brand dark:text-brand-dark-accent">
                     {post.title}
                   </span>
                   <span className="block text-sm text-gray-500 mt-0.5 dark:text-gray-400">

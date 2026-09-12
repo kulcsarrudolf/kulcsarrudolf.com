@@ -32,7 +32,7 @@ const SocialMediaLinks = ({
         title={socialMedia.title}
         className={`flex items-center justify-center rounded transition-opacity hover:opacity-75 ${
           padded ? "h-11 w-11" : ""
-        } ${tone === "onBrand" ? "text-white" : "text-brand dark:text-brand-on-dark"}`}
+        } ${tone === "onBrand" ? "text-white" : "text-brand dark:text-brand-dark-accent"}`}
       >
         <FontAwesomeIcon
           icon={socialMedia.icon}

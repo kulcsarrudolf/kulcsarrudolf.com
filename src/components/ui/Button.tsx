@@ -24,7 +24,7 @@ const VARIANTS: Record<ButtonVariant, string> = {
   primary:
     "border-transparent bg-brand text-white hover:bg-brand-hover dark:bg-brand-dark dark:hover:bg-brand-dark-active",
   secondary:
-    "border-gray-300 bg-white text-brand shadow-xs hover:bg-gray-50 dark:border-line-dark dark:bg-card-dark dark:text-brand-on-dark dark:hover:bg-fill-dark",
+    "border-gray-300 bg-white text-brand shadow-xs hover:bg-gray-50 dark:border-line-dark dark:bg-card-dark dark:text-brand-dark-accent dark:hover:bg-fill-dark",
   onBrand: "border-transparent bg-white text-brand hover:bg-gray-50",
   onBrandOutline: "border-white/55 bg-transparent text-white hover:bg-white/10",
 };

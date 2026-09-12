@@ -22,7 +22,7 @@ const FocusCard = ({ image, title, children }: FocusCardProps) => (
       className="mx-auto"
       style={{ width: 96, height: 96, objectFit: "contain" }}
     />
-    <h3 className="text-base font-semibold text-brand dark:text-brand-on-dark">{title}</h3>
+    <h3 className="text-base font-semibold text-brand dark:text-brand-dark-accent">{title}</h3>
     <p
       className="text-sm leading-relaxed text-gray-700 sm:text-[13.5px] dark:text-gray-300"
       style={{ textWrap: "pretty" }}

@@ -26,18 +26,18 @@ const SudokuCell = ({
 
   // Background priority: selected > same number > highlighted > default
   if (isSelected) {
-    bgColor = "bg-brand/40 dark:bg-brand-on-dark/35";
+    bgColor = "bg-brand/40 dark:bg-brand-dark-accent/35";
   } else if (isSameNumber) {
-    bgColor = "bg-brand/25 dark:bg-brand-on-dark/20";
+    bgColor = "bg-brand/25 dark:bg-brand-dark-accent/20";
   } else if (isHighlighted) {
-    bgColor = "bg-brand/5 dark:bg-brand-on-dark/10";
+    bgColor = "bg-brand/5 dark:bg-brand-dark-accent/10";
   }
 
   // Text color
   if (isOriginal) {
     textColor = "text-gray-900 font-bold dark:text-gray-100";
   } else if (value !== null) {
-    textColor = "text-brand dark:text-brand-on-dark";
+    textColor = "text-brand dark:text-brand-dark-accent";
   }
 
   if (isRevealed && !isOriginal) {
