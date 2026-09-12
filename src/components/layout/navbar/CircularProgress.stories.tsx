@@ -49,3 +49,6 @@ export const Empty: Story = { args: { progress: 0 } };
 export const Complete: Story = { args: { progress: 100 } };
 
 export const Large: Story = { args: { size: 120, strokeWidth: 6 } };
+
+/** The ring as the avatar shows it: empty, then filling on its own over six seconds. */
+export const Filling: Story = { args: { progress: 0, fillDurationMs: 6000 } };

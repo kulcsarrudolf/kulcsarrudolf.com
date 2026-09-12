@@ -179,6 +179,15 @@
     }
   }
 
+  /* The ring around the navbar avatar. It starts from whatever offset the
+     element has (the empty ring) and runs on the animation clock rather than
+     on JS frame callbacks, which pause in an embedded or covered page. */
+  @keyframes ring-fill {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
   @keyframes shake {
     0%,
     100% {

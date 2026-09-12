@@ -2,9 +2,20 @@ interface CircularProgressProps {
   progress: number;
   size?: number;
   strokeWidth?: number;
+  /**
+   * Given, the ring starts at `progress` and fills to full over this many
+   * milliseconds on the CSS animation clock, so it keeps time even where the
+   * page gets no frame callbacks (an embedded or covered tab).
+   */
+  fillDurationMs?: number;
 }
 
-const CircularProgress = ({ progress, size = 48, strokeWidth = 3 }: CircularProgressProps) => {
+const CircularProgress = ({
+  progress,
+  size = 48,
+  strokeWidth = 3,
+  fillDurationMs,
+}: CircularProgressProps) => {
   const radius = (size - strokeWidth) / 2;
   const circumference = radius * 2 * Math.PI;
   const offset = circumference - (progress / 100) * circumference;
@@ -27,7 +38,11 @@ const CircularProgress = ({ progress, size = 48, strokeWidth = 3 }: CircularProg
         strokeLinecap="round"
         strokeDasharray={circumference}
         strokeDashoffset={offset}
-        style={{ transition: "stroke-dashoffset 50ms linear" }}
+        style={
+          fillDurationMs === undefined
+            ? { transition: "stroke-dashoffset 50ms linear" }
+            : { animation: `ring-fill ${fillDurationMs}ms linear forwards` }
+        }
       />
     </svg>
   );
