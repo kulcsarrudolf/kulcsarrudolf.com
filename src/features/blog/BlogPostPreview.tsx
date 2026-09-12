@@ -25,7 +25,7 @@ const BlogPostPreview = ({ post, compact = false }: BlogPostPreviewProps) => {
         <Link {...linkProps}>
           {/* Flex so the arrow keeps its gap and wrapped titles hang under
               the title, not under the arrow. */}
-          <p className="hover:text-blue-500 font-bold flex items-baseline gap-2">
+          <p className="hover:text-brand font-bold flex items-baseline gap-2">
             <span aria-hidden="true" className="shrink-0">
               ➡️
             </span>
@@ -42,7 +42,7 @@ const BlogPostPreview = ({ post, compact = false }: BlogPostPreviewProps) => {
   return (
     <div key={post.title} className="mb-2">
       <Link {...linkProps} className="group">
-        <p className="font-bold group-hover:text-blue-500">
+        <p className="font-bold group-hover:text-brand">
           <LanguageBadge lang={post.lang} />
           {post.title}
         </p>

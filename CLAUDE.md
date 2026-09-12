@@ -84,7 +84,8 @@ The reason is not optional, and there are none in the codebase today.
 ## Colour
 
 Colours come from the `@theme` block in `src/styles/globals.css`, never from a hex literal in a component:
-`brand`, `brand-active`, `brand-hover` and `surface`, as `text-brand`, `bg-brand`, `bg-surface` and so on.
+`brand`, `brand-active`, `brand-hover`, `brand-on-dark` and `surface`, as `text-brand`, `bg-brand`, `bg-surface` and so on.
+`brand-on-dark` is the one to reach for on a dark surface such as the terminal, where `brand` itself drops to 2.7:1 against the background.
 The two navbar breakpoints, `socials` and `nav`, are declared there too.
 
 The one exception is a colour that has to be interpolated into a gradient or an inline `style`, and those are named constants at the top of the file that needs them.

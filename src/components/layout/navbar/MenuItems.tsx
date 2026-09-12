@@ -45,7 +45,7 @@ const BAR_LINK =
   "flex min-h-11 items-center rounded-md px-3 py-1 text-white transition-colors hover:text-white/75 data-[status=active]:bg-brand-active data-[status=active]:font-semibold data-[status=active]:text-white data-[status=active]:hover:text-white";
 
 const BAR_CTA =
-  "flex min-h-11 items-center rounded-md bg-white px-3 py-1 font-medium text-blue-600 transition-colors hover:bg-white/90";
+  "flex min-h-11 items-center rounded-md bg-white px-3 py-1 font-medium text-brand transition-colors hover:bg-white/90";
 
 // 48px keeps the row above the 44px target floor while reading tighter than
 // the 56px it started at.

@@ -24,7 +24,7 @@ const WhereNext = () => {
             <Link
               to={to}
               search={langSearch}
-              className="inline-flex min-h-11 items-center gap-1.5 text-blue-300 underline underline-offset-[3px] transition-colors hover:text-white"
+              className="inline-flex min-h-11 items-center gap-1.5 text-brand-on-dark underline underline-offset-[3px] transition-colors hover:text-white"
               activeProps={{}}
               inactiveProps={{}}
             >

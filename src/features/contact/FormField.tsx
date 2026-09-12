@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 /** Shared by the inputs and the message textarea, so they focus alike. */
 export const FIELD_CONTROL =
-  "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-hidden transition-all";
+  "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent outline-hidden transition-all";
 
 interface FormFieldProps {
   /** Doubles as the control's `name`, so the payload keys match the labels. */
