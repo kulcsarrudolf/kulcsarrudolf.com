@@ -13,7 +13,11 @@
     "terminalIntro": {
       "intro": "Hi, I'm Rudolf, a Senior Full-Stack AI Engineer from Cluj-Napoca, Romania.",
       "whereNext": "Where next?",
-      "label": "Introduction"
+      "label": "Introduction",
+      "inputLabel": "Type a command",
+      "help": "Commands: help, ls, ./intro.sh, clear. Type blog, projects or contact to open a page.",
+      "notFound": "command not found: {command}. Type help to see what works.",
+      "opening": "Opening {page}"
     },
     "title": "About Me",
     "paragraph1": "Shipping software professionally since 2017, across multinationals, startups, and midsize companies. Currently at {innovatorSparkLink}, turning ideas into working products (designed, built, tested, deployed, and operated end to end) and putting new technology to work where it creates the most value for users and the business.",

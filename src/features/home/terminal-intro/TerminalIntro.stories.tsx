@@ -9,7 +9,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "The block that opens the home page: a terminal window in which `./intro.sh` has just printed who I am and where to go next, with the cursor blinking on the prompt below. The one dark object on the page, a counterweight to the Let's Talk band. The copy comes from the translation files, so use the language toolbar to see the Hungarian version.",
+          "The block that opens the home page: a terminal window in which `./intro.sh` has just printed who I am and where to go next, with a working prompt underneath. Click into it and type: Return runs the line, `help` lists what works, `ls` reprints the links, `clear` empties the history, and a page name (`blog`, `projects`, `contact`) opens that page. The one dark object on the page, a counterweight to the Let's Talk band. The copy comes from the translation files, so use the language toolbar to see the Hungarian version.",
       },
     },
   },
@@ -25,7 +25,7 @@ export const Narrow: Story = {
     docs: {
       description: {
         story:
-          "Constrained to a phone-sized width, where the intro sentence wraps and the three links fall onto their own rows.",
+          "Constrained to a phone-sized width, where the intro sentence wraps and the three links fall onto their own row.",
       },
     },
   },
