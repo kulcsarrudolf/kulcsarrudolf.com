@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 
+import SudokuModal from "@/features/sudoku/SudokuModal";
 import { useTranslation } from "@/i18n/useTranslation";
 
 import Prompt from "./Prompt";
@@ -12,7 +13,9 @@ import { MAX_HEIGHT, MIN_HEIGHT, useTerminalHeight } from "./useTerminalHeight";
  * The block that opens the home page: a terminal window in which `./intro.sh`
  * has just printed who I am and where to go next, with a prompt underneath
  * that actually takes commands. Return runs the line; `help` lists what
- * works, and a page name opens that page. The body has a floor, so `clear`
+ * works, and a page name opens that page. Two commands are missing from that
+ * list on purpose: one counts down to the wedding, the other opens the
+ * sudoku, and both are there to be found rather than advertised. The body has a floor, so `clear`
  * leaves a window rather than a strip, and a ceiling past which the history
  * scrolls; the strip along the bottom drags it taller or shorter.
  *
@@ -23,7 +26,8 @@ import { MAX_HEIGHT, MIN_HEIGHT, useTerminalHeight } from "./useTerminalHeight";
  */
 const TerminalIntro = () => {
   const { t } = useTranslation();
-  const { entries, input, inputRef, focusPrompt, onSubmit, inputProps } = useTerminal();
+  const { entries, input, inputRef, sudokuOpen, closeSudoku, focusPrompt, onSubmit, inputProps } =
+    useTerminal();
   const { bodyRef, measured, bodyStyle, handleProps } = useTerminalHeight();
 
   // Once the history is taller than the window, a new line lands out of
@@ -96,6 +100,8 @@ const TerminalIntro = () => {
           </span>
         </form>
       </div>
+
+      {sudokuOpen && <SudokuModal onClose={closeSudoku} />}
 
       <ResizeHandle
         label={t("home.terminalIntro.resize") as string}

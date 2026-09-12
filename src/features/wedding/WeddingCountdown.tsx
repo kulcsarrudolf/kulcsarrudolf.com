@@ -4,6 +4,8 @@ import "@fontsource/cormorant-garamond/500.css";
 import "@fontsource/cormorant-garamond/600.css";
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
+
+import { type TimeLeft, getTimeLeft } from "./countdown";
 import { NR_DEFAULT_LANGUAGE, getNrContent, type NrLanguage } from "./translations";
 
 // The fonts are self-hosted through Fontsource; the variables keep the
@@ -12,30 +14,6 @@ const FONT_VARIABLES = {
   "--font-great-vibes": '"Great Vibes"',
   "--font-cormorant": '"Cormorant Garamond"',
 } as CSSProperties;
-
-const WEDDING_DATE = new Date(2026, 10, 28, 10, 0, 0);
-
-interface TimeLeft {
-  days: number;
-  hours: number;
-  minutes: number;
-  seconds: number;
-}
-
-const getTimeLeft = (): TimeLeft | null => {
-  const diff = WEDDING_DATE.getTime() - Date.now();
-
-  if (diff <= 0) {
-    return null;
-  }
-
-  return {
-    days: Math.floor(diff / (1000 * 60 * 60 * 24)),
-    hours: Math.floor(diff / (1000 * 60 * 60)) % 24,
-    minutes: Math.floor(diff / (1000 * 60)) % 60,
-    seconds: Math.floor(diff / 1000) % 60,
-  };
-};
 
 const FLOATING_HEARTS = [
   { left: "8%", size: "1.4rem", duration: "11s", delay: "0s" },

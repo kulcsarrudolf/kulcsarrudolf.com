@@ -18,6 +18,7 @@
       "help": "Commands: help, ls, ./intro.sh, clear. Type blog, projects or contact to open a page.",
       "notFound": "command not found: {command}. Type help to see what works.",
       "opening": "Opening {page}",
+      "sudoku": "Starting sudoku. Good luck.",
       "resize": "Terminal height"
     },
     "title": "About Me",

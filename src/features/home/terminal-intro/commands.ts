@@ -22,6 +22,10 @@ export type CommandResult =
   | { kind: "list" }
   | { kind: "help" }
   | { kind: "clear" }
+  /** The countdown to the wedding, printed in the window. */
+  | { kind: "wedding" }
+  /** The sudoku, opened over the page. */
+  | { kind: "sudoku" }
   | { kind: "navigate"; destination: Destination }
   | { kind: "notFound"; command: string };
 
@@ -30,13 +34,23 @@ const LIST = new Set(["ls", "ls -la", "ls -l", "ll", "dir"]);
 const HELP = new Set(["help", "?", "--help", "-h", "man"]);
 const CLEAR = new Set(["clear", "cls"]);
 
+// Two things `help` does not mention, because finding them is the point.
+const WEDDING = new Set([
+  "nr",
+  "rn",
+  "nr-wedding",
+  "rn-wedding",
+  "rudolf-and-nora",
+  "rudolf-es-nora",
+  "rudolf-és-nóra",
+]);
+const SUDOKU = new Set(["sudoku", "./sudoku.sh", "sudoku.sh", "sh sudoku.sh", "bash sudoku.sh"]);
+
 // `blog`, `blog/`, `cd blog`, `open blog/`, `cat blog` all open the page.
 const NAVIGATE_PREFIXES = ["cd ", "open ", "cat ", "go "];
 
-const findDestination = (word: string): Destination | undefined => {
-  const name = word.replace(/\/+$/, "");
-  return DESTINATIONS.find(({ to }) => to === `/${name}`);
-};
+const findDestination = (name: string): Destination | undefined =>
+  DESTINATIONS.find(({ to }) => to === `/${name}`);
 
 /** Turns the typed line into what the terminal should do about it. */
 export function runCommand(line: string): CommandResult {
@@ -50,10 +64,15 @@ export function runCommand(line: string): CommandResult {
   if (LIST.has(lower)) return { kind: "list" };
   if (HELP.has(lower)) return { kind: "help" };
   if (CLEAR.has(lower)) return { kind: "clear" };
+  if (SUDOKU.has(lower)) return { kind: "sudoku" };
 
   const prefix = NAVIGATE_PREFIXES.find((candidate) => lower.startsWith(candidate));
   const target = prefix ? lower.slice(prefix.length) : lower;
-  const destination = findDestination(target);
+  const name = target.replace(/\/+$/, "");
+
+  if (WEDDING.has(name)) return { kind: "wedding" };
+
+  const destination = findDestination(name);
   if (destination) return { kind: "navigate", destination };
 
   return { kind: "notFound", command };
