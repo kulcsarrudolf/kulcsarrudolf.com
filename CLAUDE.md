@@ -90,6 +90,31 @@ The two navbar breakpoints, `socials` and `nav`, are declared there too.
 
 The one exception is a colour that has to be interpolated into a gradient or an inline `style`, and those are named constants at the top of the file that needs them.
 
+### Dark mode
+
+Dark mode is the `dark` class on `<html>`, declared as `@custom-variant dark` in `globals.css`, and it is the visitor's choice, never the OS setting: every visit opens light, and the bulb in the navbar (`components/layout/navbar/ThemeToggle`) is the one way to switch.
+`lib/theme.ts` owns the stored choice and the inline script `RootDocument` runs before the first paint, so a dark page never flashes light on the way in.
+
+Every colour class gets a `dark:` partner on the same element, and the light class is never changed to make room for it:
+
+| Light                                   | Dark partner                                  |
+| --------------------------------------- | --------------------------------------------- |
+| `bg-surface` (the page)                 | `dark:bg-surface-dark`                        |
+| `bg-white` (a raised block)             | `dark:bg-card-dark`                           |
+| `border-gray-200`, `border-gray-300`    | `dark:border-line-dark`                       |
+| `hover:bg-gray-50`, `hover:bg-gray-100` | `dark:hover:bg-fill-dark`                     |
+| `text-gray-800`, `text-gray-900`        | `dark:text-gray-100`                          |
+| `text-gray-700`                         | `dark:text-gray-300`                          |
+| `text-gray-500`, `text-gray-600`        | `dark:text-gray-400`                          |
+| `text-brand` (the brand as text)        | `dark:text-brand-on-dark`                     |
+| `focus-visible:ring-offset-2`           | `dark:focus-visible:ring-offset-surface-dark` |
+| `prose`                                 | `dark:prose-invert`                           |
+
+The four `*-dark` surfaces are declared in the `@theme` block next to `surface`; nothing else is added for dark mode, and Tailwind's own greys carry the text.
+`bg-brand` fills (the navbar, the buttons, the Let's Talk band) and everything on them are the same in both modes: white on brand blue reads on either ground.
+A bare `<hr>` needs nothing, since the default border colour flips with the theme in `globals.css`.
+Storybook has a Theme toolbar that sets the same class on the story document.
+
 ## Keeping the language across navigation
 
 Internal links carry the visitor's `?lang`.

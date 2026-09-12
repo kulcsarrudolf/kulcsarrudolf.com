@@ -34,10 +34,12 @@ type MarkdownBodyProps = {
  * A rendered markdown document, in the typography plugin's `prose` styling.
  * The wrapper belongs here rather than at each call site: every caller wants
  * the same one, and the styling is part of what rendering markdown means.
+ * `prose-invert` is the plugin's own dark palette, which covers the code
+ * blocks, quotes and tables a post can carry in one go.
  */
 const MarkdownBody = ({ content, itemProp }: MarkdownBodyProps) => {
   return (
-    <div className="prose container mx-auto max-w-none" itemProp={itemProp}>
+    <div className="prose container mx-auto max-w-none dark:prose-invert" itemProp={itemProp}>
       <Markdown
         options={{
           overrides: {

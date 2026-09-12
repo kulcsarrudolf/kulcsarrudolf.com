@@ -34,10 +34,10 @@ const SudokuNumberPad = ({
           disabled={!hasSelection || isComplete}
           className={`${KEY} font-bold ${
             isComplete
-              ? "bg-green-200 text-green-600 opacity-50"
+              ? "bg-green-200 text-green-600 opacity-50 dark:bg-green-900/50 dark:text-green-400"
               : hasSelection
                 ? "bg-brand text-white hover:bg-brand-hover"
-                : "bg-gray-300 text-gray-500"
+                : "bg-gray-300 text-gray-500 dark:bg-fill-dark dark:text-gray-500"
           }`}
         >
           {num + 1}
@@ -47,7 +47,7 @@ const SudokuNumberPad = ({
     <button
       onClick={onClear}
       disabled={!hasSelection}
-      className={`${KEY} bg-gray-500 text-white text-xs hover:bg-gray-600 disabled:bg-gray-300`}
+      className={`${KEY} bg-gray-500 text-white text-xs hover:bg-gray-600 disabled:bg-gray-300 dark:disabled:bg-fill-dark`}
     >
       {clearLabel}
     </button>

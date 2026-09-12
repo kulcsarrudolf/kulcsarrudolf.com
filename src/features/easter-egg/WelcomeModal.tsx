@@ -25,8 +25,10 @@ const WelcomeModal = ({ onClose }: WelcomeModalProps) => {
     <Modal onClose={onClose} panelClassName="p-8 md:max-w-sm" closeLabel={t("nav.close") as string}>
       <div className="text-center">
         <div className="text-4xl mb-4">🎉</div>
-        <h2 className="text-xl font-bold text-gray-800 mb-2">{t("welcomeModal.title")}</h2>
-        <p className="text-gray-600 mb-6">{t("welcomeModal.message")}</p>
+        <h2 className="text-xl font-bold text-gray-800 mb-2 dark:text-gray-100">
+          {t("welcomeModal.title")}
+        </h2>
+        <p className="text-gray-600 mb-6 dark:text-gray-400">{t("welcomeModal.message")}</p>
 
         <QuoteCard quote={quote} centered className="shadow-none" />
 

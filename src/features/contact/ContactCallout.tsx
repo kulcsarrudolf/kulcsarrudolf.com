@@ -10,7 +10,7 @@ interface ContactCalloutProps {
  */
 const ContactCallout = ({ children }: ContactCalloutProps) => (
   <div className="text-center my-6">
-    <p className="text-lg font-semibold text-gray-800">{children}</p>
+    <p className="text-lg font-semibold text-gray-800 dark:text-gray-100">{children}</p>
   </div>
 );
 

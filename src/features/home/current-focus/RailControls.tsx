@@ -17,7 +17,7 @@ interface RailControlsProps {
 // White with a grey hairline, the same treatment as the secondary button, so
 // the arrows stay chrome rather than reading as an action.
 const ARROW =
-  "flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gray-300 bg-white text-brand shadow-xs transition-colors enabled:hover:bg-gray-50 disabled:opacity-40";
+  "flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gray-300 bg-white text-brand shadow-xs transition-colors enabled:hover:bg-gray-50 disabled:opacity-40 dark:border-line-dark dark:bg-card-dark dark:text-brand-on-dark dark:enabled:hover:bg-fill-dark";
 
 /**
  * The counter and the two arrows that sit beside a rail's heading.
@@ -40,7 +40,9 @@ const RailControls = ({
     // Hidden rather than unmounted, so the heading keeps its height.
     style={{ visibility: isScrollable ? "visible" : "hidden" }}
   >
-    <span className="mr-1 whitespace-nowrap text-xs text-gray-500">{counter}</span>
+    <span className="mr-1 whitespace-nowrap text-xs text-gray-500 dark:text-gray-400">
+      {counter}
+    </span>
     <button
       type="button"
       aria-label={previousLabel}

@@ -13,8 +13,8 @@ const RelatedPosts = ({ posts }: RelatedPostsProps) => {
   }
 
   return (
-    <div className="mt-8 pt-6 border-t border-gray-200">
-      <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
+    <div className="mt-8 pt-6 border-t border-gray-200 dark:border-line-dark">
+      <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3 dark:text-gray-400">
         Related reading
       </h2>
       <ul className="flex flex-col gap-0.5">

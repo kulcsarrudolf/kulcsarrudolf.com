@@ -21,7 +21,7 @@ const TerminalDock = ({ onOpen, label }: TerminalDockProps) => (
     onClick={onOpen}
     aria-label={label}
     title={label}
-    className="fixed bottom-5 right-5 z-40 flex h-11 w-11 items-center justify-center rounded-xl bg-gray-800 text-gray-300 shadow-lg outline-hidden transition-colors hover:bg-gray-700 hover:text-white focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
+    className="fixed bottom-5 right-5 z-40 flex h-11 w-11 items-center justify-center rounded-xl bg-gray-800 text-gray-300 shadow-lg outline-hidden transition-colors hover:bg-gray-700 hover:text-white focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 dark:bg-gray-700 dark:ring-1 dark:ring-white/10 dark:hover:bg-gray-600 dark:focus-visible:ring-2 dark:focus-visible:ring-brand-on-dark dark:focus-visible:ring-offset-surface-dark"
   >
     <TerminalIcon />
   </button>

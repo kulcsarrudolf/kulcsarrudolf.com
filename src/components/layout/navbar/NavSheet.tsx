@@ -7,6 +7,7 @@ import { useTranslation } from "@/i18n/useTranslation";
 import Brand from "./Brand";
 import MenuItems from "./MenuItems";
 import SocialMediaLinks from "./SocialMediaLinks";
+import ThemeToggle from "./ThemeToggle";
 
 interface NavSheetProps {
   id: string;
@@ -74,9 +75,12 @@ const NavSheet = ({ id, onClose }: NavSheetProps) => {
         role="dialog"
         aria-modal="true"
         aria-label={t("nav.menu") as string}
-        className="absolute inset-0 flex flex-col bg-white px-5 py-8"
+        className="absolute inset-0 flex flex-col bg-white px-5 py-8 dark:bg-card-dark"
       >
         <CloseButton ref={closeRef} onClick={onClose} label={t("nav.close") as string} />
+        {/* The bar's switch is under the sheet while it is open, so the sheet
+            carries one of its own, beside the × where the bar keeps it. */}
+        <ThemeToggle tone="onSurface" className="absolute right-16 top-3" />
 
         <div className="mb-5 px-4">
           <Brand tone="onSurface" onNavigate={onClose} />

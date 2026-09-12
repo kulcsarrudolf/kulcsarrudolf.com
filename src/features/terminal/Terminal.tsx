@@ -45,7 +45,8 @@ interface TerminalProps {
  *
  * On the home page it opens the page, between the navbar and About Me: the one
  * dark object there, a counterweight to the brand-blue Let's Talk band further
- * down, saying "developer" before a single paragraph is read. Everywhere else
+ * down, saying "developer" before a single paragraph is read. On the dark page
+ * it is a window among dark things, so a hairline ring marks its edge. Everywhere else
  * it is the `launcher`, waiting behind the button in the corner. Everything in
  * it is text, so the copy lives in the translation files with the pages.
  */
@@ -96,7 +97,7 @@ const Terminal = ({ launcher = false }: TerminalProps) => {
   const terminalWindow = (
     <section
       aria-label={t("terminal.label") as string}
-      className={`flex flex-col overflow-hidden rounded-xl bg-gray-800 ${
+      className={`flex flex-col overflow-hidden rounded-xl bg-gray-800 dark:ring-1 dark:ring-inset dark:ring-white/10 ${
         floating ? "h-full" : "shadow-md"
       }`}
     >

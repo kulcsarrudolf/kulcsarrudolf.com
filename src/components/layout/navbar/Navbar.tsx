@@ -8,6 +8,7 @@ import HamburgerButton from "./HamburgerButton";
 import MenuItems from "./MenuItems";
 import NavSheet from "./NavSheet";
 import SocialMediaLinks from "./SocialMediaLinks";
+import ThemeToggle from "./ThemeToggle";
 
 const MENU_ID = "primary-navigation";
 const DOCK_THRESHOLD = 100;
@@ -18,9 +19,12 @@ const DOCK_THRESHOLD = 100;
  * icons sit behind a hairline as a footnote rather than as peers.
  *
  * What is visible depends on what fits, and the two breakpoints were measured:
- *   below 546px  brand + menu button
+ *   below 546px  brand + light switch + menu button
  *   546px+       adds the call to action, the divider and the social icons
  *   706px+       adds the full link list, and the menu button retires
+ *
+ * The light switch is the one control that never leaves the bar: it is the
+ * only way to a dark page, so it has to be in reach at every width.
  *
  * The bar itself is 56px on phones and 80px from 640px up, since below that it
  * is mostly carrying whitespace. `body`'s top margin in __root.tsx clears the
@@ -104,6 +108,8 @@ const Navbar = () => {
           aria-hidden="true"
         />
         <SocialMediaLinks size="sm" className="hidden socials:flex" />
+
+        <ThemeToggle className="ml-2 socials:ml-3" />
 
         <HamburgerButton
           className="ml-2 nav:hidden sm:ml-3"

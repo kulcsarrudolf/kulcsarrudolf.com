@@ -24,7 +24,7 @@ const RailDots = ({ count, range, hidden = false }: RailDotsProps) => (
         <span
           key={index}
           className={`h-1.5 rounded-full transition-all ${
-            isActive ? "w-5 bg-brand" : "w-1.5 bg-[#c3cad6]"
+            isActive ? "w-5 bg-brand dark:bg-brand-on-dark" : "w-1.5 bg-[#c3cad6] dark:bg-line-dark"
           }`}
         />
       );

@@ -7,8 +7,9 @@ import {
   createRoute,
   createRouter,
 } from "@tanstack/react-router";
-import { createContext, useContext, useMemo, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useMemo, type ReactNode } from "react";
 
+import { DARK_CLASS } from "@/lib/theme";
 import "@/styles/globals.css";
 
 // globals.css already includes Font Awesome's stylesheet (same as the app).
@@ -69,9 +70,39 @@ const withRouter: Decorator = (Story, context) => (
   </RouterDecorator>
 );
 
+// The site's dark mode is the `dark` class on <html>, so the toolbar puts it
+// on the story document the same way the site's own switch does. The canvas
+// background is a separate global: pick "Dark" there to see a component on
+// the page it would sit on.
+function ThemeDecorator({ theme, children }: { theme: string; children: ReactNode }) {
+  useEffect(() => {
+    document.documentElement.classList.toggle(DARK_CLASS, theme === "dark");
+  }, [theme]);
+
+  return children;
+}
+
+const withTheme: Decorator = (Story, context) => (
+  <ThemeDecorator theme={String(context.globals.theme ?? "light")}>
+    <Story />
+  </ThemeDecorator>
+);
+
 const preview: Preview = {
-  decorators: [withRouter],
+  decorators: [withRouter, withTheme],
   globalTypes: {
+    theme: {
+      description: "Light or dark, as the `dark` class on <html>",
+      toolbar: {
+        title: "Theme",
+        icon: "sun",
+        items: [
+          { value: "light", title: "Light", icon: "sun" },
+          { value: "dark", title: "Dark", icon: "moon" },
+        ],
+        dynamicTitle: true,
+      },
+    },
     lang: {
       description: "UI language passed as the `?lang=` query parameter",
       toolbar: {
@@ -86,6 +117,7 @@ const preview: Preview = {
     },
   },
   initialGlobals: {
+    theme: "light",
     lang: "en",
     backgrounds: { value: "site" },
   },
@@ -95,6 +127,8 @@ const preview: Preview = {
         site: { name: "Site", value: "#e9ebee" },
         white: { name: "White", value: "#ffffff" },
         navbar: { name: "Navbar blue", value: "#4267b2" },
+        dark: { name: "Dark", value: "#0f131a" },
+        card: { name: "Dark card", value: "#181d26" },
       },
     },
     controls: {

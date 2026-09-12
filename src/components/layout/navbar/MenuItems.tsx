@@ -50,7 +50,7 @@ const BAR_CTA =
 // 48px keeps the row above the 44px target floor while reading tighter than
 // the 56px it started at.
 const SHEET_LINK =
-  "flex min-h-12 w-full items-center rounded-lg px-3 text-base font-semibold text-gray-800 transition-colors hover:bg-gray-100 data-[status=active]:bg-brand data-[status=active]:text-white data-[status=active]:hover:bg-brand";
+  "flex min-h-12 w-full items-center rounded-lg px-3 text-base font-semibold text-gray-800 transition-colors hover:bg-gray-100 data-[status=active]:bg-brand data-[status=active]:text-white data-[status=active]:hover:bg-brand dark:text-gray-100 dark:hover:bg-fill-dark dark:data-[status=active]:bg-brand";
 
 const SHEET_CTA =
   "flex min-h-12 w-full items-center justify-center rounded-lg bg-brand px-3 text-base font-semibold text-white transition-colors hover:bg-brand-hover";
@@ -73,7 +73,9 @@ const MenuItems = ({ variant = "bar", onNavigate }: MenuItemsProps) => {
     if (variant === "sheet") {
       // A hairline separates the call to action from the navigation above it,
       // so it reads as a button rather than a fourth destination.
-      return element.cta ? "mt-5 w-full border-t border-gray-200 pt-5" : "w-full";
+      return element.cta
+        ? "mt-5 w-full border-t border-gray-200 pt-5 dark:border-line-dark"
+        : "w-full";
     }
     // The call to action carries its own padding, so it needs a little more
     // room than the tightened gap gives it to clear the active pill.

@@ -24,7 +24,7 @@ const Sudoku = ({ onClose }: SudokuProps) => {
   if (!game.ready) {
     return (
       <div className="flex items-center justify-center p-8">
-        <div className="text-gray-600">{t("sudoku.loading")}</div>
+        <div className="text-gray-600 dark:text-gray-400">{t("sudoku.loading")}</div>
       </div>
     );
   }
@@ -32,17 +32,25 @@ const Sudoku = ({ onClose }: SudokuProps) => {
   return (
     <div className="flex flex-col items-center gap-4">
       <div className="flex items-center justify-between w-full">
-        <div className="text-sm text-gray-600">
+        <div className="text-sm text-gray-600 dark:text-gray-400">
           {t("sudoku.mistakes")}:{" "}
-          <span className={game.mistakes >= MAX_MISTAKES ? "text-red-500 font-bold" : ""}>
+          <span
+            className={
+              game.mistakes >= MAX_MISTAKES ? "text-red-500 font-bold dark:text-red-400" : ""
+            }
+          >
             {game.mistakes}/{MAX_MISTAKES}
           </span>
         </div>
-        <div className="text-sm text-gray-600 font-mono">{formatTime(game.elapsedSeconds)}</div>
+        <div className="text-sm text-gray-600 font-mono dark:text-gray-400">
+          {formatTime(game.elapsedSeconds)}
+        </div>
       </div>
 
       {game.gameOver && (
-        <div className={`text-center font-bold ${game.won ? "text-green-600" : "text-red-500"}`}>
+        <div
+          className={`text-center font-bold ${game.won ? "text-green-600 dark:text-green-400" : "text-red-500 dark:text-red-400"}`}
+        >
           {game.won ? t("sudoku.won") : t("sudoku.lost")}
         </div>
       )}

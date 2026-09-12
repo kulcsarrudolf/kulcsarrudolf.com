@@ -10,7 +10,9 @@ interface PageShellProps {
 const PageShell = ({ children }: PageShellProps) => (
   <div className="mx-auto max-w-5xl">
     <Navbar />
-    <div className="border border-gray-300 p-4 rounded-xl shadow-md">{children}</div>
+    <div className="border border-gray-300 p-4 rounded-xl shadow-md dark:border-line-dark">
+      {children}
+    </div>
   </div>
 );
 

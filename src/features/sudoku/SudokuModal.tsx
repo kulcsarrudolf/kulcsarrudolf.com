@@ -14,7 +14,9 @@ const SudokuModal = ({ onClose }: SudokuModalProps) => {
     <Modal onClose={onClose}>
       {(close) => (
         <>
-          <h2 className="text-xl font-bold text-gray-800 mb-4 text-center">{t("sudoku.title")}</h2>
+          <h2 className="text-xl font-bold text-gray-800 mb-4 text-center dark:text-gray-100">
+            {t("sudoku.title")}
+          </h2>
           <Sudoku onClose={close} />
         </>
       )}

@@ -43,13 +43,15 @@ const Brand = ({ tone = "onBrand", onNavigate }: BrandProps) => {
         <NavbarAvatar
           src={logoSrc}
           alt={title}
-          ringClassName={tone === "onBrand" ? "border-white" : "border-brand"}
+          ringClassName={
+            tone === "onBrand" ? "border-white" : "border-brand dark:border-brand-on-dark"
+          }
           isRevealed={isEggOpen}
           onReveal={openEgg}
         />
         <span
           className={`whitespace-nowrap text-base font-semibold sm:text-lg ${
-            tone === "onBrand" ? "text-white" : "text-gray-800"
+            tone === "onBrand" ? "text-white" : "text-gray-800 dark:text-gray-100"
           }`}
         >
           {title}

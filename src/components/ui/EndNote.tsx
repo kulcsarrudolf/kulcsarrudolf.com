@@ -11,7 +11,9 @@ interface EndNoteProps {
  * parting note or a link back.
  */
 const EndNote = ({ children, centered = false }: EndNoteProps) => (
-  <div className={`mt-8 pt-6 border-t border-gray-200 ${centered ? "text-center" : ""}`.trim()}>
+  <div
+    className={`mt-8 pt-6 border-t border-gray-200 dark:border-line-dark ${centered ? "text-center" : ""}`.trim()}
+  >
     {children}
   </div>
 );
