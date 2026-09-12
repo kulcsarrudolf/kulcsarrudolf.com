@@ -16,7 +16,7 @@
       "label": "Bemutatkozás"
     },
     "title": "Rólam",
-    "paragraph1": "2017 óta fejlesztek szoftvert professzionálisan, {clujLink} élve, multinacionális cégeknél, startupoknál és középvállalatoknál. Jelenleg az {innovatorSparkLink} csapatában dolgozom: ötletekből működő termékeket készítek (tervezés, fejlesztés, tesztelés, telepítés és üzemeltetés, elejétől a végéig), és az új technológiákat ott alkalmazom, ahol a legtöbb értéket teremtik a felhasználóknak és az üzletnek.",
+    "paragraph1": "2017 óta fejlesztek szoftvert professzionálisan, multinacionális cégeknél, startupoknál és középvállalatoknál. Jelenleg az {innovatorSparkLink} csapatában dolgozom: ötletekből működő termékeket készítek (tervezés, fejlesztés, tesztelés, telepítés és üzemeltetés, elejétől a végéig), és az új technológiákat ott alkalmazom, ahol a legtöbb értéket teremtik a felhasználóknak és az üzletnek.",
     "paragraph2": "Folyamatosan igyekszem fejleszteni a képességeimet, és nem habozok, amikor rájövök, hogy még mindig sok mindent kell tanulnom, ezért mindig nyitott vagyok új kihívásokra.",
     "paragraph3": "A legújabb projektjeimet megtalálod a {githubLink} profilomon. Valamint több infót a szakmai tapasztalatomról a {cvLink}-ben találsz.",
     "paragraph4": "Amikor nem programozok, akkor próbálok a barátaimmal és családommal lenni, ez nagyon feltölti az akkumulátoromat. Valamint minidg nyított vagyok egy jó társasozásra, bringázásra, futásra, legózásra és mindenre ami érdekes. A legjújabb hobbim a 3D puzzle.",
@@ -68,8 +68,7 @@
       "counter": "{first}-{last} / {total}",
       "counterSingle": "{first} / {total}"
     },
-    "latestBlogs": "Legfrissebb Blogok",
-    "clujNapoca": "Kolozsváron"
+    "latestBlogs": "Legfrissebb Blogok"
   },
   "blog": {
     "title": "Blog",

@@ -16,7 +16,7 @@
       "label": "Introduction"
     },
     "title": "About Me",
-    "paragraph1": "Shipping software professionally since 2017, from {clujLink}, Romania, across multinationals, startups, and midsize companies. Currently at {innovatorSparkLink}, turning ideas into working products (designed, built, tested, deployed, and operated end to end) and putting new technology to work where it creates the most value for users and the business.",
+    "paragraph1": "Shipping software professionally since 2017, across multinationals, startups, and midsize companies. Currently at {innovatorSparkLink}, turning ideas into working products (designed, built, tested, deployed, and operated end to end) and putting new technology to work where it creates the most value for users and the business.",
     "paragraph2": "I have constantly been trying to improve my skills and I don't hesitate when I realize that there is still a lot to learn, so I am always open to new challenges.",
     "paragraph3": "Check out my {githubLink} to explore my latest projects and my {cvLink} for a full breakdown of my professional journey.",
     "paragraph4": "Besides my profession I also love to relax and recharge my batteries with my friends and family and of course by doing my favourite hobbies.",
@@ -68,8 +68,7 @@
       "counter": "{first}-{last} of {total}",
       "counterSingle": "{first} of {total}"
     },
-    "latestBlogs": "Latest Blogs",
-    "clujNapoca": "Cluj-Napoca"
+    "latestBlogs": "Latest Blogs"
   },
   "blog": {
     "title": "My Blog",
