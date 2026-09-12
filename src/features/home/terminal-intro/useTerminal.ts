@@ -26,9 +26,7 @@ const MAX_ENTRIES = 30;
 const OPENING_ENTRY: TerminalEntry = { id: 0, command: "./intro.sh", result: { kind: "intro" } };
 
 /**
- * The terminal's state: what has been run so far, what is being typed, and
- * whether the prompt has focus (which decides whether the block cursor blinks
- * or the input's own caret shows).
+ * The terminal's state: what has been run so far and what is being typed.
  *
  * Return runs the line. An empty line still adds a fresh prompt underneath,
  * so the terminal answers the key the way a real one does. `clear` empties
@@ -40,7 +38,6 @@ export function useTerminal() {
 
   const [entries, setEntries] = useState<TerminalEntry[]>([OPENING_ENTRY]);
   const [input, setInput] = useState("");
-  const [isFocused, setIsFocused] = useState(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const nextIdRef = useRef(1);
@@ -89,7 +86,6 @@ export function useTerminal() {
   return {
     entries,
     input,
-    isFocused,
     inputRef,
     focusPrompt,
     onSubmit,
@@ -97,8 +93,6 @@ export function useTerminal() {
       value: input,
       onChange,
       onKeyDown,
-      onFocus: () => setIsFocused(true),
-      onBlur: () => setIsFocused(false),
     },
   };
 }

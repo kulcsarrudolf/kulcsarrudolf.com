@@ -17,11 +17,7 @@ import { useTerminal } from "./useTerminal";
  */
 const TerminalIntro = () => {
   const { t } = useTranslation();
-  const { entries, input, isFocused, inputRef, focusPrompt, onSubmit, inputProps } = useTerminal();
-
-  // The block cursor blinks while the prompt is idle. Once it has focus the
-  // input's own caret takes over, so the two never show at once.
-  const showBlockCursor = !isFocused && input === "";
+  const { entries, input, inputRef, focusPrompt, onSubmit, inputProps } = useTerminal();
 
   return (
     <section
@@ -56,25 +52,30 @@ const TerminalIntro = () => {
           <label className="sr-only" htmlFor="terminal-intro-input">
             {t("home.terminalIntro.inputLabel")}
           </label>
-          <span className="relative flex min-w-0 flex-1 items-center">
-            {showBlockCursor && (
-              <span
-                className="pointer-events-none absolute left-0 h-[18px] w-[9px] bg-white animate-blink motion-reduce:animate-none"
-                aria-hidden="true"
-              />
-            )}
-            {/* 16px on phones: below that iOS zooms the page in on focus. */}
+          {/* The block cursor is the only caret: the input's own is hidden and
+              the input is sized to its text in `ch`, exact in a mono font, so
+              the block always sits right after the last typed character. */}
+          <span className="flex min-w-0 flex-1 items-center">
+            {/* `font-mono` on the input itself: the global font rule reaches
+                inputs directly, so it would not inherit it from the window.
+                16px on phones: below that iOS zooms the page in on focus. */}
             <input
               ref={inputRef}
               id="terminal-intro-input"
               type="text"
-              className="w-full min-w-0 bg-transparent text-base text-white caret-white outline-hidden sm:text-[15px]"
+              size={1}
+              className="min-w-0 max-w-full shrink bg-transparent font-mono text-base text-white caret-transparent outline-hidden sm:text-[15px]"
+              style={{ width: `${input.length}ch` }}
               autoComplete="off"
               autoCapitalize="off"
               autoCorrect="off"
               spellCheck={false}
               enterKeyHint="enter"
               {...inputProps}
+            />
+            <span
+              className="h-[18px] w-[9px] shrink-0 bg-white animate-blink motion-reduce:animate-none"
+              aria-hidden="true"
             />
           </span>
         </form>
