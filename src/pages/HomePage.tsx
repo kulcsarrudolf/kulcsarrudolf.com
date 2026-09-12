@@ -20,10 +20,6 @@ const innovatorSparkLink = <Link href="https://innovatorspark.com/">InnovatorSpa
 export default function HomePageContent({ posts }: HomePageContentProps) {
   const { t } = useTranslation();
 
-  const clujLink = (
-    <Link href="https://en.wikipedia.org/wiki/Cluj-Napoca">{t("home.clujNapoca")}</Link>
-  );
-
   return (
     <SectionStack>
       <TerminalIntro />
@@ -32,7 +28,6 @@ export default function HomePageContent({ posts }: HomePageContentProps) {
         <Title>{t("home.title")}</Title>
         <Paragraph>
           {t("home.paragraph1", {
-            clujLink,
             innovatorSparkLink,
           })}
         </Paragraph>
