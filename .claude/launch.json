@@ -3,11 +3,13 @@
   "configurations": [
     {
       "name": "dev",
-      "url": "https://kulcsarrudolf.local"
+      "port": 443,
+      "url": "https://localhost"
     },
     {
       "name": "storybook",
-      "url": "https://kulcsarrudolf.local:6006"
+      "port": 6006,
+      "url": "https://localhost:6006"
     }
   ]
 }
