@@ -29,8 +29,11 @@ When a file approaches the limit, split it along the seams it already has rather
 | `i18n/`, `lib/`, `types/`, `config/` | Leaves                                                                                                                           | each other                                                |
 
 A feature never imports another feature, and a component never imports a feature.
-The one exception is `components/layout/navbar/Brand`, which renders `features/easter-egg/WelcomeModal` once the avatar ring fills: the modal has to sit outside the brand link, so the wiring lives there.
-Adding a second exception means writing it down here.
+There are three exceptions, and adding a fourth means writing it down here:
+
+- `components/layout/navbar/Brand` renders `features/easter-egg/WelcomeModal` once the avatar ring fills: the modal has to sit outside the brand link, so the wiring lives there.
+- `features/easter-egg/WelcomeModal` renders a quote from `features/quotes` and opens `features/sudoku`, which is what the modal is for.
+- `features/home/terminal-intro` reads the wedding date from `features/wedding/countdown` and opens `features/sudoku`, for the two commands `help` does not list.
 
 Imports use `./` inside a folder and `@/` everywhere else.
 A component file exports its component as the default; hooks, data and helpers export names only.

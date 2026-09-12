@@ -18,6 +18,7 @@
       "help": "Parancsok: help, ls, ./intro.sh, clear. Írd be, hogy blog, projects vagy contact, és megnyílik az oldal.",
       "notFound": "a parancs nem található: {command}. Írd be, hogy help, és megmutatom, mi működik.",
       "opening": "{page} megnyitása",
+      "sudoku": "Sudoku indul. Sok sikert!",
       "resize": "A terminál magassága"
     },
     "title": "Rólam",

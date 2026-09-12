@@ -40,6 +40,18 @@ describe("runCommand", () => {
     });
   });
 
+  it("counts down to the wedding for the names it is known by", () => {
+    for (const line of ["nr", "RN", "nr-wedding", "rn-wedding", "rudolf-and-nora", "cd nr/"]) {
+      expect(runCommand(line)).toEqual({ kind: "wedding" });
+    }
+  });
+
+  it("opens the sudoku for sudoku and its script", () => {
+    expect(runCommand("sudoku")).toEqual({ kind: "sudoku" });
+    expect(runCommand("./sudoku.sh")).toEqual({ kind: "sudoku" });
+    expect(runCommand("  sh   sudoku.sh ")).toEqual({ kind: "sudoku" });
+  });
+
   it("reports anything else as not found, keeping what was typed", () => {
     expect(runCommand("rm -rf /")).toEqual({ kind: "notFound", command: "rm -rf /" });
     expect(runCommand("cd nowhere")).toEqual({ kind: "notFound", command: "cd nowhere" });

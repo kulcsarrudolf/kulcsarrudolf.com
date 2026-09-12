@@ -31,6 +31,8 @@ const OPENING_ENTRY: TerminalEntry = { id: 0, command: "./intro.sh", result: { k
  * Return runs the line. An empty line still adds a fresh prompt underneath,
  * so the terminal answers the key the way a real one does. `clear` empties
  * the history, and a page name navigates with the visitor's language kept.
+ * One command opens the sudoku over the page, so the window it belongs to
+ * is held here alongside the history.
  */
 export function useTerminal() {
   const navigate = useNavigate();
@@ -38,6 +40,7 @@ export function useTerminal() {
 
   const [entries, setEntries] = useState<TerminalEntry[]>([OPENING_ENTRY]);
   const [input, setInput] = useState("");
+  const [sudokuOpen, setSudokuOpen] = useState(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const nextIdRef = useRef(1);
@@ -55,10 +58,25 @@ export function useTerminal() {
       [...previous, { id: nextIdRef.current++, command: input, result }].slice(-MAX_ENTRIES),
     );
 
+    // The sudoku reads the number keys off the window, so the prompt lets go
+    // of the caret while the game is up rather than collecting what is typed
+    // into it from behind the dialog.
+    if (result.kind === "sudoku") {
+      setSudokuOpen(true);
+      inputRef.current?.blur();
+    }
+
     if (result.kind === "navigate") {
       navigate({ to: result.destination.to, search: langSearch });
     }
   }, [input, langSearch, navigate]);
+
+  // Closing the sudoku hands the caret back, so the next command can be
+  // typed without reaching for the mouse.
+  const closeSudoku = useCallback(() => {
+    setSudokuOpen(false);
+    inputRef.current?.focus();
+  }, []);
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => setInput(event.target.value);
 
@@ -87,6 +105,8 @@ export function useTerminal() {
     entries,
     input,
     inputRef,
+    sudokuOpen,
+    closeSudoku,
     focusPrompt,
     onSubmit,
     inputProps: {

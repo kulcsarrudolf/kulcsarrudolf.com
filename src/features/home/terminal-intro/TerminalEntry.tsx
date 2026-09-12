@@ -2,6 +2,7 @@ import { useTranslation } from "@/i18n/useTranslation";
 
 import type { CommandResult } from "./commands";
 import Prompt from "./Prompt";
+import WeddingLine from "./WeddingLine";
 import WhereNext from "./WhereNext";
 
 interface TerminalEntryProps {
@@ -39,6 +40,8 @@ const TerminalEntry = ({ command, result }: TerminalEntryProps) => {
         </>
       )}
       {result.kind === "list" && <WhereNext />}
+      {result.kind === "wedding" && <WeddingLine />}
+      {result.kind === "sudoku" && <Output>{t("home.terminalIntro.sudoku")}</Output>}
       {result.kind === "help" && <Output>{t("home.terminalIntro.help")}</Output>}
       {result.kind === "navigate" && (
         <Output>{t("home.terminalIntro.opening", { page: result.destination.label })}</Output>
