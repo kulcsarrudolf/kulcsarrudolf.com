@@ -1,3 +1,5 @@
+import { type UnitLabel } from "./countdown";
+
 export type NrLanguage = "hu" | "ro" | "en";
 
 export const NR_LANGUAGES: NrLanguage[] = ["hu", "ro", "en"];
@@ -19,10 +21,10 @@ interface NrContent {
   date: string;
   weddingDay: string;
   labels: {
-    days: string;
-    hours: string;
-    minutes: string;
-    seconds: string;
+    days: UnitLabel;
+    hours: UnitLabel;
+    minutes: UnitLabel;
+    seconds: UnitLabel;
   };
   quote: string;
   quoteReference: string;
@@ -37,10 +39,10 @@ export const nrTranslations: Record<NrLanguage, NrContent> = {
     date: "2026. november 28. · 10:00",
     weddingDay: "Eljött a nagy nap! ♥",
     labels: {
-      days: "nap",
-      hours: "óra",
-      minutes: "perc",
-      seconds: "mp",
+      days: { one: "nap", other: "nap" },
+      hours: { one: "óra", other: "óra" },
+      minutes: { one: "perc", other: "perc" },
+      seconds: { one: "mp", other: "mp" },
     },
     quote: "„Megtaláltam azt, akit szeret a lelkem.”",
     quoteReference: "Énekek éneke 3:4",
@@ -52,10 +54,10 @@ export const nrTranslations: Record<NrLanguage, NrContent> = {
     date: "28 noiembrie 2026 · 10:00",
     weddingDay: "A sosit ziua cea mare! ♥",
     labels: {
-      days: "zile",
-      hours: "ore",
-      minutes: "min",
-      seconds: "sec",
+      days: { one: "zi", other: "zile" },
+      hours: { one: "oră", other: "ore" },
+      minutes: { one: "min", other: "min" },
+      seconds: { one: "sec", other: "sec" },
     },
     quote: "„Am găsit pe cel ce-l iubește sufletul meu.”",
     quoteReference: "Cântarea Cântărilor 3:4",
@@ -67,10 +69,10 @@ export const nrTranslations: Record<NrLanguage, NrContent> = {
     date: "November 28, 2026 · 10:00",
     weddingDay: "The big day is here! ♥",
     labels: {
-      days: "days",
-      hours: "hours",
-      minutes: "min",
-      seconds: "sec",
+      days: { one: "day", other: "days" },
+      hours: { one: "hour", other: "hours" },
+      minutes: { one: "min", other: "min" },
+      seconds: { one: "sec", other: "sec" },
     },
     quote: "“I have found the one whom my soul loves.”",
     quoteReference: "Song of Songs 3:4",
