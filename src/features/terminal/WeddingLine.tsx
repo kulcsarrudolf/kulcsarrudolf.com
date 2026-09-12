@@ -59,7 +59,7 @@ const WeddingLine = ({ onStop }: WeddingLineProps) => {
       </p>
       <p>{content.date}</p>
       {parts ? (
-        <p className="tabular-nums text-blue-300">{parts.join("  ·  ")}</p>
+        <p className="tabular-nums text-brand-on-dark">{parts.join("  ·  ")}</p>
       ) : (
         ticked && <p className="text-rose-300">{content.weddingDay}</p>
       )}

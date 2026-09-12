@@ -27,7 +27,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
     <Link
       to="/projects/$slug"
       params={{ slug: project.slug }}
-      className="group flex h-full flex-col rounded-xl border border-gray-200 bg-white p-5 shadow-xs transition duration-200 hover:-translate-y-0.5 hover:border-blue-400 hover:shadow-lg focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2"
+      className="group flex h-full flex-col rounded-xl border border-gray-200 bg-white p-5 shadow-xs transition duration-200 hover:-translate-y-0.5 hover:border-brand hover:shadow-lg focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
     >
       {/* The body grows so the footer sits on the same line in every card of a row. */}
       <div className="flex-1">
@@ -43,7 +43,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
             {project.tech.map((tech) => (
               <span
                 key={tech}
-                className="rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-200 transition-colors group-hover:bg-blue-50 group-hover:text-blue-700 group-hover:ring-blue-200"
+                className="rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-200 transition-colors group-hover:bg-brand/5 group-hover:text-brand group-hover:ring-brand/20"
               >
                 {tech}
               </span>

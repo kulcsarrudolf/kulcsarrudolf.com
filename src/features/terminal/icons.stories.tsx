@@ -19,7 +19,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: () => (
-    <div className="flex flex-col gap-3 rounded-xl bg-gray-800 p-6 font-mono text-[15px] text-blue-300">
+    <div className="flex flex-col gap-3 rounded-xl bg-gray-800 p-6 font-mono text-[15px] text-brand-on-dark">
       <div className="flex items-center gap-3">
         <ArrowIcon />
         <span>ArrowIcon</span>
