@@ -37,19 +37,19 @@ const TerminalEntry = ({ command, result, onStopAtmosphere }: TerminalEntryProps
 
       {result.kind === "intro" && (
         <>
-          <Output>{t("home.terminalIntro.intro")}</Output>
+          <Output>{t("terminal.intro")}</Output>
           <WhereNext />
         </>
       )}
       {result.kind === "list" && <WhereNext />}
       {result.kind === "wedding" && <WeddingLine onStop={onStopAtmosphere} />}
-      {result.kind === "sudoku" && <Output>{t("home.terminalIntro.sudoku")}</Output>}
-      {result.kind === "help" && <Output>{t("home.terminalIntro.help")}</Output>}
+      {result.kind === "sudoku" && <Output>{t("terminal.sudoku")}</Output>}
+      {result.kind === "help" && <Output>{t("terminal.help")}</Output>}
       {result.kind === "navigate" && (
-        <Output>{t("home.terminalIntro.opening", { page: result.destination.label })}</Output>
+        <Output>{t("terminal.opening", { page: result.destination.label })}</Output>
       )}
       {result.kind === "notFound" && (
-        <Output>{t("home.terminalIntro.notFound", { command: result.command })}</Output>
+        <Output>{t("terminal.notFound", { command: result.command })}</Output>
       )}
     </div>
   );

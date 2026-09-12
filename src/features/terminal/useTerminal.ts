@@ -37,7 +37,7 @@ const OPENING_ENTRY: TerminalEntry = { id: 0, command: "./intro.sh", result: { k
  * is held here alongside the history. The wedding commands put the loving
  * atmosphere over it, which any other command takes back down again.
  */
-export function useTerminal() {
+export function useTerminal(autoFocus: boolean) {
   const navigate = useNavigate();
   const langSearch = useLangSearch();
 
@@ -59,11 +59,12 @@ export function useTerminal() {
   // first. Only where there is a real pointer: on a touch screen the same
   // focus throws the on-screen keyboard up over a page nobody has read yet.
   // The page must not scroll to the prompt either, since the intro above it
-  // is what a visitor is meant to land on.
+  // is what a visitor is meant to land on. A terminal that is not on screen
+  // takes nothing: the button in the corner hands it the caret when pressed.
   useEffect(() => {
-    if (!window.matchMedia("(pointer: fine)").matches) return;
+    if (!autoFocus || !window.matchMedia("(pointer: fine)").matches) return;
     inputRef.current?.focus({ preventScroll: true });
-  }, []);
+  }, [autoFocus]);
 
   const submit = useCallback(() => {
     const result = runCommand(input);

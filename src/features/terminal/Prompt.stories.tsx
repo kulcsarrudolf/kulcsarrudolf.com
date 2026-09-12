@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import Prompt from "./Prompt";
 
 const meta = {
-  title: "Home/Terminal intro/Prompt",
+  title: "Terminal/Prompt",
   component: Prompt,
   parameters: {
     docs: {

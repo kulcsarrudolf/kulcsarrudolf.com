@@ -6,7 +6,8 @@ interface TrafficLightsProps {
   /** Lifts the window over the page, or puts it back in it. */
   onZoom: () => void;
   shaded: boolean;
-  floating: boolean;
+  /** Whether green is engaged: lifted off the page, or filling the screen. */
+  pressed: boolean;
   labels: {
     close: string;
     shade: string;
@@ -25,8 +26,8 @@ const GLYPH =
 /**
  * The three dots in the terminal's title bar, and on this window they are
  * buttons rather than decoration: red closes it, amber rolls it up to the bar,
- * green lifts it over the page as a window that drags and resizes, and green
- * again sets it back down where it came from.
+ * and green either lifts it over the page it belongs to or fills the screen
+ * with it, with a second press undoing whichever of those it was.
  *
  * Like the ones on a Mac, they carry their glyphs only while the pointer is
  * over the group, so the bar stays three quiet dots until someone reaches for
@@ -37,7 +38,7 @@ const TrafficLights = ({
   onShade,
   onZoom,
   shaded,
-  floating,
+  pressed,
   labels,
 }: TrafficLightsProps) => (
   // A double-click on the bar rolls the window up; on the dots themselves it
@@ -72,12 +73,12 @@ const TrafficLights = ({
     <button
       type="button"
       onClick={onZoom}
-      aria-label={floating ? labels.dock : labels.float}
-      aria-pressed={floating}
+      aria-label={pressed ? labels.dock : labels.float}
+      aria-pressed={pressed}
       className={`${DOT} bg-traffic-zoom`}
     >
       <span className={GLYPH} aria-hidden="true">
-        {floating ? "▾" : "▴"}
+        {pressed ? "▾" : "▴"}
       </span>
     </button>
   </div>

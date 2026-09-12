@@ -10,25 +10,6 @@
     "openMenu": "Open main menu"
   },
   "home": {
-    "terminalIntro": {
-      "intro": "Hi, I'm Rudolf, a Senior Full-Stack AI Engineer from Cluj-Napoca, Romania.",
-      "whereNext": "Where next?",
-      "label": "Introduction",
-      "inputLabel": "Type a command",
-      "help": "Commands: help, ls, ./intro.sh, clear. Type blog, projects or contact to open a page.",
-      "notFound": "command not found: {command}. Type help to see what works.",
-      "opening": "Opening {page}",
-      "sudoku": "Starting sudoku. Good luck.",
-      "resize": "Terminal height",
-      "resizeWindow": "Terminal width and height",
-      "close": "Close the terminal",
-      "shade": "Roll the terminal up",
-      "unshade": "Roll the terminal down",
-      "float": "Float the terminal over the page",
-      "dock": "Put the terminal back on the page",
-      "move": "Move the terminal",
-      "open": "Open the terminal"
-    },
     "title": "About Me",
     "paragraph1": "Shipping software professionally since 2017, across multinationals, startups, and midsize companies. Currently at {innovatorSparkLink}, turning ideas into working products (designed, built, tested, deployed, and operated end to end) and putting new technology to work where it creates the most value for users and the business.",
     "paragraph2": "I have constantly been trying to improve my skills and I don't hesitate when I realize that there is still a lot to learn, so I am always open to new challenges.",
@@ -83,6 +64,27 @@
       "counterSingle": "{first} of {total}"
     },
     "latestBlogs": "Latest Blogs"
+  },
+  "terminal": {
+    "intro": "Hi, I'm Rudolf, a Senior Full-Stack AI Engineer from Cluj-Napoca, Romania.",
+    "whereNext": "Where next?",
+    "label": "Introduction",
+    "inputLabel": "Type a command",
+    "help": "Commands: help, ls, ./intro.sh, clear. Type blog, projects or contact to open a page.",
+    "notFound": "command not found: {command}. Type help to see what works.",
+    "opening": "Opening {page}",
+    "sudoku": "Starting sudoku. Good luck.",
+    "resize": "Terminal height",
+    "resizeWindow": "Terminal width and height",
+    "close": "Close the terminal",
+    "shade": "Roll the terminal up",
+    "unshade": "Roll the terminal down",
+    "float": "Float the terminal over the page",
+    "dock": "Put the terminal back on the page",
+    "move": "Move the terminal",
+    "open": "Open the terminal",
+    "zoom": "Fill the screen with the terminal",
+    "unzoom": "Give the terminal its size back"
   },
   "blog": {
     "title": "My Blog",

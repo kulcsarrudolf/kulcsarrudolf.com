@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import TitleBar from "./TitleBar";
 
 const meta = {
-  title: "Home/Terminal intro/TitleBar",
+  title: "Terminal/TitleBar",
   component: TitleBar,
   parameters: {
     docs: {
@@ -19,7 +19,7 @@ const meta = {
     onZoom: () => {},
     path: "~/kulcsarrudolf.com",
     shaded: false,
-    floating: false,
+    pressed: false,
     dragLabel: "Move the terminal",
     labels: {
       close: "Close the terminal",
@@ -44,7 +44,7 @@ export const Default: Story = {};
 
 export const Draggable: Story = {
   args: {
-    floating: true,
+    pressed: true,
     dragProps: {
       onPointerDown: () => {},
       onPointerMove: () => {},

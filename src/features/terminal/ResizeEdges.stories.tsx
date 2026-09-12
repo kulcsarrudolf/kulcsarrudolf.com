@@ -11,7 +11,7 @@ const inert = (_direction: Direction): GrabProps => ({
 });
 
 const meta = {
-  title: "Home/Terminal intro/ResizeEdges",
+  title: "Terminal/ResizeEdges",
   component: ResizeEdges,
   parameters: {
     docs: {

@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import ResizeHandle from "./ResizeHandle";
 
 const meta = {
-  title: "Home/Terminal intro/ResizeHandle",
+  title: "Terminal/ResizeHandle",
   component: ResizeHandle,
   parameters: {
     docs: {

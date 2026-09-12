@@ -7,6 +7,7 @@ import ConditionalSpeedInsights from "@/components/layout/SpeedInsights";
 import PageShell from "@/components/layout/PageShell";
 import RootDocument from "@/components/layout/RootDocument";
 import NotFound from "@/components/layout/NotFound";
+import TerminalLauncher from "@/features/terminal/TerminalLauncher";
 import { AUTHOR_NAME, SITE_DESCRIPTION, SITE_NAME, SITE_URL, SOCIAL_PROFILES } from "@/config/site";
 import { siteHead } from "@/lib/seo";
 import { fetchRecentPosts } from "@/server/functions";
@@ -79,6 +80,9 @@ function Shell({ children }: Readonly<{ children: ReactNode }>) {
     <RootDocument>
       <PageShell>{children}</PageShell>
       <Footer />
+      {/* Every page but the home page carries the terminal behind a button in
+          the corner. The home page has it on the page already. */}
+      <TerminalLauncher />
       <ConditionalSpeedInsights />
     </RootDocument>
   );

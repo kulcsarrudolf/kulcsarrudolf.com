@@ -11,7 +11,7 @@ const inert = (): GrabProps => ({
 });
 
 const meta = {
-  title: "Home/Terminal intro/FloatingFrame",
+  title: "Terminal/FloatingFrame",
   component: FloatingFrame,
   parameters: {
     layout: "fullscreen",
