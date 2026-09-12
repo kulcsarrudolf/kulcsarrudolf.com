@@ -43,3 +43,28 @@ export const Default: Story = {
     ),
   },
 };
+
+export const Tight: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "The `tight` gap, for two blocks that belong together. On the home page the terminal and the About Me it introduces sit in one of these, and that stack is one section of the page's own.",
+      },
+    },
+  },
+  args: {
+    gap: "tight",
+    children: (
+      <>
+        <div className="h-24 rounded-xl bg-gray-800" />
+        <div>
+          <Title>About Me</Title>
+          <Paragraph>
+            The block that the one above introduces, a step closer than a new section.
+          </Paragraph>
+        </div>
+      </>
+    ),
+  },
+};

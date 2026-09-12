@@ -22,27 +22,31 @@ export default function HomePageContent({ posts }: HomePageContentProps) {
 
   return (
     <SectionStack>
-      <TerminalIntro />
+      {/* The terminal introduces About Me, so the two sit a step closer than
+          the sections do, as one section of the page. */}
+      <SectionStack gap="tight">
+        <TerminalIntro />
 
-      <div>
-        <Title>{t("home.title")}</Title>
-        <Paragraph>
-          {t("home.paragraph1", {
-            innovatorSparkLink,
-          })}
-        </Paragraph>
+        <div>
+          <Title>{t("home.title")}</Title>
+          <Paragraph>
+            {t("home.paragraph1", {
+              innovatorSparkLink,
+            })}
+          </Paragraph>
 
-        <Paragraph>{t("home.paragraph2")}</Paragraph>
+          <Paragraph>{t("home.paragraph2")}</Paragraph>
 
-        <Paragraph>
-          {t("home.paragraph3", {
-            githubLink: gitHubLink,
-            cvLink,
-          })}
-        </Paragraph>
+          <Paragraph>
+            {t("home.paragraph3", {
+              githubLink: gitHubLink,
+              cvLink,
+            })}
+          </Paragraph>
 
-        <Paragraph>{t("home.paragraph4")}</Paragraph>
-      </div>
+          <Paragraph>{t("home.paragraph4")}</Paragraph>
+        </div>
+      </SectionStack>
 
       {/* No rules between the sections: Let's Talk is a solid band of brand
           blue and separates itself, so a hairline against its edge only reads
