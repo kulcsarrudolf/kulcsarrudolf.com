@@ -17,7 +17,7 @@ const WhereNext = () => {
 
   return (
     <div className="flex flex-wrap items-center gap-x-7 pl-[34px] text-gray-300">
-      <span className="min-h-11 leading-11">{t("home.terminalIntro.whereNext")}</span>
+      <span className="min-h-11 leading-11">{t("terminal.whereNext")}</span>
       <ul className="flex flex-wrap items-center gap-x-5 sm:gap-x-7">
         {DESTINATIONS.map(({ to, label }) => (
           <li key={to}>

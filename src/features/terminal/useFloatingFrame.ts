@@ -12,6 +12,9 @@ export const MIN_WIDTH = 320;
 export const MIN_FLOATING_HEIGHT = 200;
 /** How close to the viewport's edges a floating window may be put. */
 const MARGIN = 8;
+/** How big a window opened from the button in the corner starts out. */
+const OPENING_WIDTH = 720;
+const OPENING_HEIGHT = 420;
 /** How far one arrow key moves an edge. */
 const KEY_STEP = 24;
 
@@ -46,6 +49,17 @@ const viewport = (): Bounds => ({
   minWidth: Math.min(MIN_WIDTH, window.innerWidth - MARGIN * 2),
   minHeight: Math.min(MIN_FLOATING_HEIGHT, window.innerHeight - MARGIN * 2),
 });
+
+/**
+ * Where a window opened from the corner button starts: that size if it fits,
+ * tucked into the bottom right corner it was pressed in.
+ */
+export const openingRect = (): Rect => {
+  const bounds = viewport();
+  const width = Math.min(OPENING_WIDTH, bounds.width - MARGIN * 2);
+  const height = Math.min(OPENING_HEIGHT, bounds.height - MARGIN * 2);
+  return { width, height, x: bounds.width - width - MARGIN, y: bounds.height - height - MARGIN };
+};
 
 const clamp = (value: number, low: number, high: number) =>
   Math.round(Math.min(Math.max(value, low), Math.max(low, high)));
@@ -101,12 +115,17 @@ const resize = (
  * A window floating over the page: where it sits, and the pointer handlers
  * that move and resize it.
  *
- * `lift` takes the rectangle the terminal occupies on the page and floats it
- * from exactly there, so pressing the green button looks like the window
- * coming off the page rather than jumping somewhere else. The title bar drags
- * it; the strips around its edges resize it, each from the edge it is on,
- * down to a floor on both axes. Nothing may leave the viewport, and a window
- * left near an edge is pulled back in when the viewport shrinks under it.
+ * `lift` takes a rectangle and floats the window from exactly there: the one
+ * the terminal occupies on the page, so pressing green looks like the window
+ * coming off the page, or the corner it is opened into from the button. The
+ * title bar drags it; the strips around its edges resize it, each from the
+ * edge it is on, down to a floor on both axes. Nothing may leave the viewport,
+ * and a window left near an edge is pulled back in when the viewport shrinks
+ * under it.
+ *
+ * `zoom` is the other thing a green button does: fill the screen, and fill it
+ * again to come back to the size the window was before, which is why the
+ * rectangle it was zoomed from is kept rather than recomputed.
  */
 export function useFloatingFrame() {
   const [rect, setRect] = useState<Rect | null>(null);
@@ -117,11 +136,34 @@ export function useFloatingFrame() {
     direction?: Direction;
   } | null>(null);
 
-  const lift = useCallback((from: DOMRect) => {
+  // Where the window was before it was zoomed, so the second press gives that
+  // size back. State rather than a ref: the green button reads it to say which
+  // of the two it is about to do.
+  const [zoomedFrom, setZoomedFrom] = useState<Rect | null>(null);
+
+  const lift = useCallback((from: Rect) => {
+    setZoomedFrom(null);
     setRect(place({ x: from.x, y: from.y, width: from.width, height: from.height }, viewport()));
   }, []);
 
-  const drop = useCallback(() => setRect(null), []);
+  const drop = useCallback(() => {
+    setZoomedFrom(null);
+    setRect(null);
+  }, []);
+
+  const zoom = useCallback(() => {
+    const bounds = viewport();
+
+    if (zoomedFrom) {
+      setZoomedFrom(null);
+      setRect(place(zoomedFrom, bounds));
+      return;
+    }
+
+    if (!rect) return;
+    setZoomedFrom(rect);
+    setRect(place({ x: 0, y: 0, width: bounds.width, height: bounds.height }, bounds));
+  }, [rect, zoomedFrom]);
 
   useEffect(() => {
     if (!rect) return;
@@ -138,6 +180,10 @@ export function useFloatingFrame() {
       // the click, since the `preventDefault` below is what stops a pointer
       // gesture turning into mouse events.
       if ((event.target as HTMLElement).closest("button")) return;
+      // A window moved or resized by hand is no longer the one that was
+      // zoomed, so green starts over rather than snapping back to a size
+      // nobody asked for any more.
+      setZoomedFrom(null);
       // Without this the drag selects the text it passes over instead.
       event.preventDefault();
       event.currentTarget.setPointerCapture(event.pointerId);
@@ -204,6 +250,9 @@ export function useFloatingFrame() {
     rect,
     lift,
     drop,
+    zoom,
+    /** True while the window is filling the screen, for the green button. */
+    zoomed: zoomedFrom !== null,
     grabProps,
     /** What the window's bottom strip becomes once the window floats. */
     handleProps: { ...grabProps("s"), onKeyDown },

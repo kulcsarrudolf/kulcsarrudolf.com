@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import TerminalEntry from "./TerminalEntry";
 
 const meta = {
-  title: "Home/Terminal intro/TerminalEntry",
+  title: "Terminal/TerminalEntry",
   component: TerminalEntry,
   parameters: {
     docs: {

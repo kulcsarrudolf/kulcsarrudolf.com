@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import WhereNext from "./WhereNext";
 
 const meta = {
-  title: "Home/Terminal intro/WhereNext",
+  title: "Terminal/WhereNext",
   component: WhereNext,
   parameters: {
     docs: {

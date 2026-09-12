@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { ArrowIcon, TerminalIcon } from "./icons";
 
 const meta = {
-  title: "Home/Terminal intro/Icons",
+  title: "Terminal/Icons",
   parameters: {
     docs: {
       description: {

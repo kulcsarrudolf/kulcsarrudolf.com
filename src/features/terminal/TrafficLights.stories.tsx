@@ -3,13 +3,13 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import TrafficLights from "./TrafficLights";
 
 const meta = {
-  title: "Home/Terminal intro/TrafficLights",
+  title: "Terminal/TrafficLights",
   component: TrafficLights,
   parameters: {
     docs: {
       description: {
         component:
-          "The three dots in the terminal's title bar, which on this window are buttons rather than decoration: red closes it and leaves the button in the page's corner as the way back, amber rolls it up to the bar, and green lifts it over the page as a window that drags and resizes. Hover the group to bring the glyphs up, the way a Mac does.",
+          "The three dots in the terminal's title bar, which on this window are buttons rather than decoration: red closes it and leaves the button in the page's corner as the way back, amber rolls it up to the bar, and green either lifts it over the page it belongs to or fills the screen with it. Hover the group to bring the glyphs up, the way a Mac does.",
       },
     },
   },
@@ -18,7 +18,7 @@ const meta = {
     onShade: () => {},
     onZoom: () => {},
     shaded: false,
-    floating: false,
+    pressed: false,
     labels: {
       close: "Close the terminal",
       shade: "Roll the terminal up",
@@ -52,13 +52,13 @@ export const Shaded: Story = {
   },
 };
 
-export const Floating: Story = {
-  args: { floating: true },
+export const GreenEngaged: Story = {
+  args: { pressed: true },
   parameters: {
     docs: {
       description: {
         story:
-          "Lifted over the page: the green dot points back down, since pressing it sets the window where it came from.",
+          "Whatever green did has been done: the window is over the page it was lifted from, or filling the screen. The dot points back down, since pressing it undoes that.",
       },
     },
   },
