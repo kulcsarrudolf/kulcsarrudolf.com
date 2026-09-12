@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 
-import { type TimeLeft, getTimeLeft } from "@/features/wedding/countdown";
+import {
+  type TimeLeft,
+  getCountdownUnits,
+  getTimeLeft,
+  unitLabel,
+} from "@/features/wedding/countdown";
 import { getNrContent, getNrLanguage } from "@/features/wedding/translations";
 import { useTranslation } from "@/i18n/useTranslation";
 
@@ -38,12 +43,14 @@ const WeddingLine = ({ onStop }: WeddingLineProps) => {
     return () => clearInterval(interval);
   }, []);
 
-  const parts = timeLeft && [
-    [timeLeft.days, content.labels.days],
-    [timeLeft.hours, content.labels.hours],
-    [timeLeft.minutes, content.labels.minutes],
-    [timeLeft.seconds, content.labels.seconds],
-  ];
+  // Only the units that have something left in them, so the line does not
+  // carry an empty "00 hours" through the months of waiting.
+  const parts =
+    timeLeft &&
+    getCountdownUnits(timeLeft).map(
+      ({ unit, value }) =>
+        `${String(value).padStart(2, "0")} ${unitLabel(content.labels[unit], value)}`,
+    );
 
   return (
     <div className="flex flex-col gap-1 pl-[34px] text-gray-300">
@@ -52,11 +59,7 @@ const WeddingLine = ({ onStop }: WeddingLineProps) => {
       </p>
       <p>{content.date}</p>
       {parts ? (
-        <p className="tabular-nums text-blue-300">
-          {parts
-            .map(([value, label]) => `${String(value).padStart(2, "0")} ${label}`)
-            .join("  ·  ")}
-        </p>
+        <p className="tabular-nums text-blue-300">{parts.join("  ·  ")}</p>
       ) : (
         ticked && <p className="text-rose-300">{content.weddingDay}</p>
       )}

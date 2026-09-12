@@ -5,7 +5,7 @@ import "@fontsource/cormorant-garamond/600.css";
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 
-import { type TimeLeft, getTimeLeft } from "./countdown";
+import { type TimeLeft, getTimeLeft, unitLabel } from "./countdown";
 import FloatingHearts from "./FloatingHearts";
 import { NR_DEFAULT_LANGUAGE, getNrContent, type NrLanguage } from "./translations";
 
@@ -116,10 +116,22 @@ const WeddingCountdown = ({ lang = NR_DEFAULT_LANGUAGE }: { lang?: NrLanguage })
           </p>
         ) : (
           <div className="mt-10 grid w-full max-w-2xl grid-cols-4 gap-2 sm:gap-4">
-            <CountdownTile value={timeLeft?.days ?? 0} label={content.labels.days} />
-            <CountdownTile value={timeLeft?.hours ?? 0} label={content.labels.hours} />
-            <CountdownTile value={timeLeft?.minutes ?? 0} label={content.labels.minutes} />
-            <CountdownTile value={timeLeft?.seconds ?? 0} label={content.labels.seconds} />
+            <CountdownTile
+              value={timeLeft?.days ?? 0}
+              label={unitLabel(content.labels.days, timeLeft?.days ?? 0)}
+            />
+            <CountdownTile
+              value={timeLeft?.hours ?? 0}
+              label={unitLabel(content.labels.hours, timeLeft?.hours ?? 0)}
+            />
+            <CountdownTile
+              value={timeLeft?.minutes ?? 0}
+              label={unitLabel(content.labels.minutes, timeLeft?.minutes ?? 0)}
+            />
+            <CountdownTile
+              value={timeLeft?.seconds ?? 0}
+              label={unitLabel(content.labels.seconds, timeLeft?.seconds ?? 0)}
+            />
           </div>
         )}
 
