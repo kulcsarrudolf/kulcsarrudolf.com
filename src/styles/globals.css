@@ -24,6 +24,12 @@
   --color-brand-hover: #365899;
   --color-surface: #e9ebee;
 
+  /* The three dots in the terminal's title bar. macOS's own red, amber and
+     green, so the buttons read as what they are before anyone hovers them. */
+  --color-traffic-close: #ff5f57;
+  --color-traffic-shade: #febc2e;
+  --color-traffic-zoom: #28c840;
+
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
