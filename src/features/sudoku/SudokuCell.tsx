@@ -26,11 +26,11 @@ const SudokuCell = ({
 
   // Background priority: selected > same number > highlighted > default
   if (isSelected) {
-    bgColor = "bg-brand/40";
+    bgColor = "bg-brand/40 dark:bg-brand-on-dark/35";
   } else if (isSameNumber) {
-    bgColor = "bg-brand/25";
+    bgColor = "bg-brand/25 dark:bg-brand-on-dark/20";
   } else if (isHighlighted) {
-    bgColor = "bg-brand/5";
+    bgColor = "bg-brand/5 dark:bg-brand-on-dark/10";
   }
 
   // Text color

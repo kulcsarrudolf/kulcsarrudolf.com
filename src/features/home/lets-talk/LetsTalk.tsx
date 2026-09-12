@@ -52,7 +52,7 @@ const LetsTalk = () => {
   const langSearch = useLangSearch();
 
   return (
-    <div className="rounded-xl bg-brand p-6 shadow-md sm:p-7">
+    <div className="rounded-xl bg-brand p-6 shadow-md sm:p-7 dark:bg-brand-dark">
       <span className="mb-2 block text-[12.5px] font-semibold uppercase tracking-[0.09em] text-white/85">
         {t("home.letsTalk.eyebrow")}
       </span>

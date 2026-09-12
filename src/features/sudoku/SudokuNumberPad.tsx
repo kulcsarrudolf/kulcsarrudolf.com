@@ -36,7 +36,7 @@ const SudokuNumberPad = ({
             isComplete
               ? "bg-green-200 text-green-600 opacity-50 dark:bg-green-900/50 dark:text-green-400"
               : hasSelection
-                ? "bg-brand text-white hover:bg-brand-hover"
+                ? "bg-brand text-white hover:bg-brand-hover dark:bg-brand-dark dark:hover:bg-brand-dark-active"
                 : "bg-gray-300 text-gray-500 dark:bg-fill-dark dark:text-gray-500"
           }`}
         >

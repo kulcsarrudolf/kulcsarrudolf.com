@@ -15,7 +15,8 @@ const BASE =
   "inline-flex h-11 w-11 items-center justify-center rounded-lg border border-transparent transition-colors focus-visible:outline-hidden focus-visible:ring-2";
 
 const TONES = {
-  onBrand: "text-white hover:border-white hover:bg-brand-active focus-visible:ring-white",
+  onBrand:
+    "text-white hover:border-white hover:bg-brand-active focus-visible:ring-white dark:hover:bg-brand-dark-active",
   onSurface:
     "text-brand hover:bg-gray-100 focus-visible:ring-brand dark:text-brand-on-dark dark:hover:bg-fill-dark dark:focus-visible:ring-brand-on-dark",
 };
