@@ -99,12 +99,14 @@ Call `useLangSearch()` from `@/i18n/useLangSearch` and spread the result into a 
 Every component under `src/components/` and `src/features/` has a `*.stories.tsx` next to it, titled after its folder (`UI/Button`, `Layout/Navbar/Brand`, `Blog/PostedOn`), so the Storybook sidebar mirrors the tree.
 A new component file means a new story file in the same commit.
 
-Three files are exempt.
+Two files are exempt for what they render.
 `components/layout/RootDocument` renders `<html>` and `<body>`; Storybook draws every story inside a document of its own, so a second one nested in it shows nothing worth looking at.
 The part that can be looked at is `PageShell`, and that has a story.
 `components/layout/SpeedInsights` renders nothing outside production.
-`features/wedding/LovingAtmosphere` ends itself thirty seconds after it mounts, so a story would show an empty canvas from the thirty-first second on.
-The part that can be looked at is `FloatingHearts`, and that has a story covering both of the tunings it is given.
+
+The easter eggs are exempt for what they are.
+`features/wedding`, `features/sudoku`, `features/easter-egg` and `features/home/terminal-intro/WeddingLine` have no stories: a sidebar entry is a signpost, and the whole point of those is being found by accident.
+`TerminalEntry` has a story for each command `help` lists and none for the two it does not, and a docs paragraph elsewhere that would have named `WelcomeModal` or `SudokuModal` describes the shared piece instead.
 
 ## Commits and branches
 
