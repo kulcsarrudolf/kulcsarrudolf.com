@@ -9,6 +9,8 @@ interface TerminalEntryProps {
   /** What was typed. Empty for a bare Return, which prints only the prompt. */
   command: string;
   result: CommandResult;
+  /** Ends the loving atmosphere. Only the newest wedding entry is given one. */
+  onStopAtmosphere?: () => void;
 }
 
 /** One line of output, indented under the prompt like a real shell's. */
@@ -23,7 +25,7 @@ const Output = ({ children }: { children: React.ReactNode }) => (
  * typed, then whatever it printed. `clear` never reaches here, since it
  * empties the history instead of joining it.
  */
-const TerminalEntry = ({ command, result }: TerminalEntryProps) => {
+const TerminalEntry = ({ command, result, onStopAtmosphere }: TerminalEntryProps) => {
   const { t } = useTranslation();
 
   return (
@@ -40,7 +42,7 @@ const TerminalEntry = ({ command, result }: TerminalEntryProps) => {
         </>
       )}
       {result.kind === "list" && <WhereNext />}
-      {result.kind === "wedding" && <WeddingLine />}
+      {result.kind === "wedding" && <WeddingLine onStop={onStopAtmosphere} />}
       {result.kind === "sudoku" && <Output>{t("home.terminalIntro.sudoku")}</Output>}
       {result.kind === "help" && <Output>{t("home.terminalIntro.help")}</Output>}
       {result.kind === "navigate" && (

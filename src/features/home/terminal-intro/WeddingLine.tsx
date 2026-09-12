@@ -4,12 +4,24 @@ import { type TimeLeft, getTimeLeft } from "@/features/wedding/countdown";
 import { getNrContent, getNrLanguage } from "@/features/wedding/translations";
 import { useTranslation } from "@/i18n/useTranslation";
 
+interface WeddingLineProps {
+  /**
+   * Ends the loving atmosphere. Passed only to the newest wedding line while
+   * that atmosphere is actually running, so an older block further up the
+   * scrollback never shows a control that would do nothing.
+   */
+  onStop?: () => void;
+}
+
 /**
  * What the hidden `nr` command prints: who is getting married, when, and how
  * much of the wait is left, ticking once a second the way the page at /nr
  * does. Nothing here announces the command; it is found by typing it.
+ *
+ * While the hearts are up it prints one more line, the way out of them. It is
+ * a button rather than a note because a phone has no escape key.
  */
-const WeddingLine = () => {
+const WeddingLine = ({ onStop }: WeddingLineProps) => {
   const { lang } = useTranslation();
   const content = getNrContent(getNrLanguage(lang));
 
@@ -47,6 +59,15 @@ const WeddingLine = () => {
         </p>
       ) : (
         ticked && <p className="text-rose-300">{content.weddingDay}</p>
+      )}
+      {onStop && (
+        <button
+          type="button"
+          onClick={onStop}
+          className="mt-1 self-start text-gray-500 underline-offset-4 hover:text-gray-300 hover:underline"
+        >
+          {content.stopAtmosphere}
+        </button>
       )}
     </div>
   );

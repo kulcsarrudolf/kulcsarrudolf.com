@@ -6,6 +6,7 @@ import "@fontsource/cormorant-garamond/600.css";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 
 import { type TimeLeft, getTimeLeft } from "./countdown";
+import FloatingHearts from "./FloatingHearts";
 import { NR_DEFAULT_LANGUAGE, getNrContent, type NrLanguage } from "./translations";
 
 // The fonts are self-hosted through Fontsource; the variables keep the
@@ -14,15 +15,6 @@ const FONT_VARIABLES = {
   "--font-great-vibes": '"Great Vibes"',
   "--font-cormorant": '"Cormorant Garamond"',
 } as CSSProperties;
-
-const FLOATING_HEARTS = [
-  { left: "8%", size: "1.4rem", duration: "11s", delay: "0s" },
-  { left: "22%", size: "1rem", duration: "14s", delay: "3s" },
-  { left: "38%", size: "1.8rem", duration: "12s", delay: "6s" },
-  { left: "55%", size: "1.1rem", duration: "15s", delay: "1s" },
-  { left: "72%", size: "1.5rem", duration: "13s", delay: "4.5s" },
-  { left: "88%", size: "1.2rem", duration: "16s", delay: "7s" },
-];
 
 const CountdownTile = ({ value, label }: { value: number; label: string }) => (
   <div className="flex flex-col items-center justify-center rounded-2xl border border-white/80 bg-white/60 px-1 py-4 shadow-lg shadow-rose-900/5 backdrop-blur-xs sm:px-4 sm:py-6">
@@ -69,33 +61,7 @@ const WeddingCountdown = ({ lang = NR_DEFAULT_LANGUAGE }: { lang?: NrLanguage })
       className="fixed inset-0 z-50 overflow-y-auto bg-linear-to-b from-[#fbf7f1] via-[#f7ece3] to-[#efdcd2]"
       style={FONT_VARIABLES}
     >
-      <style>
-        {`
-          @keyframes nr-float {
-            0% { transform: translateY(105vh) scale(0.9); opacity: 0; }
-            12% { opacity: 0.5; }
-            85% { opacity: 0.35; }
-            100% { transform: translateY(-12vh) scale(1.15); opacity: 0; }
-          }
-        `}
-      </style>
-
-      <div aria-hidden className="pointer-events-none fixed inset-0">
-        {FLOATING_HEARTS.map((heart, index) => (
-          <span
-            key={index}
-            className="absolute text-rose-300/50"
-            style={{
-              left: heart.left,
-              bottom: "-3rem",
-              fontSize: heart.size,
-              animation: `nr-float ${heart.duration} linear ${heart.delay} infinite`,
-            }}
-          >
-            ♥
-          </span>
-        ))}
-      </div>
+      <FloatingHearts />
 
       <div className="relative flex min-h-full flex-col items-center justify-center px-5 py-14 text-center">
         <div className="rounded-full bg-linear-to-br from-[#d9b87f] via-[#f0dfbe] to-[#c09a5e] p-1.5 shadow-xl shadow-rose-900/10">
