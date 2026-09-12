@@ -17,7 +17,8 @@
       "inputLabel": "Írj be egy parancsot",
       "help": "Parancsok: help, ls, ./intro.sh, clear. Írd be, hogy blog, projects vagy contact, és megnyílik az oldal.",
       "notFound": "a parancs nem található: {command}. Írd be, hogy help, és megmutatom, mi működik.",
-      "opening": "{page} megnyitása"
+      "opening": "{page} megnyitása",
+      "resize": "A terminál magassága"
     },
     "title": "Rólam",
     "paragraph1": "2017 óta fejlesztek szoftvert professzionálisan, multinacionális cégeknél, startupoknál és középvállalatoknál. Jelenleg az {innovatorSparkLink} csapatában dolgozom: ötletekből működő termékeket készítek (tervezés, fejlesztés, tesztelés, telepítés és üzemeltetés, elejétől a végéig), és az új technológiákat ott alkalmazom, ahol a legtöbb értéket teremtik a felhasználóknak és az üzletnek.",

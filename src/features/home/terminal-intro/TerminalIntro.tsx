@@ -1,14 +1,20 @@
+import { useEffect } from "react";
+
 import { useTranslation } from "@/i18n/useTranslation";
 
 import Prompt from "./Prompt";
+import ResizeHandle from "./ResizeHandle";
 import TerminalEntry from "./TerminalEntry";
 import { useTerminal } from "./useTerminal";
+import { MAX_HEIGHT, MIN_HEIGHT, useTerminalHeight } from "./useTerminalHeight";
 
 /**
  * The block that opens the home page: a terminal window in which `./intro.sh`
  * has just printed who I am and where to go next, with a prompt underneath
  * that actually takes commands. Return runs the line; `help` lists what
- * works, and a page name opens that page.
+ * works, and a page name opens that page. The body has a floor, so `clear`
+ * leaves a window rather than a strip, and a ceiling past which the history
+ * scrolls; the strip along the bottom drags it taller or shorter.
  *
  * Sits between the navbar and About Me. It is the one dark object on the page,
  * a counterweight to the brand-blue Let's Talk band further down, and it says
@@ -18,6 +24,14 @@ import { useTerminal } from "./useTerminal";
 const TerminalIntro = () => {
   const { t } = useTranslation();
   const { entries, input, inputRef, focusPrompt, onSubmit, inputProps } = useTerminal();
+  const { bodyRef, measured, bodyStyle, handleProps } = useTerminalHeight();
+
+  // Once the history is taller than the window, a new line lands out of
+  // sight, so the body follows it down the way a terminal does.
+  useEffect(() => {
+    const body = bodyRef.current;
+    if (body) body.scrollTop = body.scrollHeight;
+  }, [bodyRef, entries]);
 
   return (
     <section
@@ -38,7 +52,9 @@ const TerminalIntro = () => {
           the keyboard-reachable control, so the div itself needs no key
           handling. */}
       <div
-        className="flex cursor-text flex-col gap-2.5 px-4 pb-4 pt-5 font-mono text-[15px] leading-[1.6] sm:px-6"
+        ref={bodyRef}
+        className="flex cursor-text flex-col gap-2.5 overflow-y-auto overscroll-contain px-4 pb-4 pt-5 font-mono text-[15px] leading-[1.6] [scrollbar-color:var(--color-gray-500)_transparent] [scrollbar-width:thin] sm:px-6"
+        style={bodyStyle}
         onClick={focusPrompt}
       >
         <div className="flex flex-col gap-2.5" aria-live="polite">
@@ -80,6 +96,14 @@ const TerminalIntro = () => {
           </span>
         </form>
       </div>
+
+      <ResizeHandle
+        label={t("home.terminalIntro.resize") as string}
+        value={measured}
+        min={MIN_HEIGHT}
+        max={MAX_HEIGHT}
+        {...handleProps}
+      />
     </section>
   );
 };
