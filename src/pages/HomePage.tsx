@@ -5,6 +5,7 @@ import SectionStack from "@/components/ui/SectionStack";
 import type { BlogPost } from "@/types/blog-post";
 import CurrentFocus from "@/features/home/current-focus/CurrentFocus";
 import LetsTalk from "@/features/home/lets-talk/LetsTalk";
+import TerminalIntro from "@/features/home/terminal-intro/TerminalIntro";
 
 interface HomePageContentProps {
   posts: BlogPost[];
@@ -25,6 +26,8 @@ export default function HomePageContent({ posts }: HomePageContentProps) {
 
   return (
     <SectionStack>
+      <TerminalIntro />
+
       <div>
         <Title>{t("home.title")}</Title>
         <Paragraph>

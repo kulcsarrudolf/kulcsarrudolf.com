@@ -10,6 +10,11 @@
     "openMenu": "Főmenü megnyitása"
   },
   "home": {
+    "terminalIntro": {
+      "intro": "Szia, Rudolf vagyok, Senior Full-Stack AI Engineer Kolozsvárról, Romániából.",
+      "whereNext": "Merre tovább?",
+      "label": "Bemutatkozás"
+    },
     "title": "Rólam",
     "paragraph1": "2017 óta fejlesztek szoftvert professzionálisan, {clujLink} élve, multinacionális cégeknél, startupoknál és középvállalatoknál. Jelenleg az {innovatorSparkLink} csapatában dolgozom: ötletekből működő termékeket készítek (tervezés, fejlesztés, tesztelés, telepítés és üzemeltetés, elejétől a végéig), és az új technológiákat ott alkalmazom, ahol a legtöbb értéket teremtik a felhasználóknak és az üzletnek.",
     "paragraph2": "Folyamatosan igyekszem fejleszteni a képességeimet, és nem habozok, amikor rájövök, hogy még mindig sok mindent kell tanulnom, ezért mindig nyitott vagyok új kihívásokra.",
