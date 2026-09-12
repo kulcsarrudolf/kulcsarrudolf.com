@@ -71,7 +71,6 @@ const TerminalIntro = () => {
     rect,
     grabProps,
     floatingHandleProps,
-    dockedHeight,
     close,
     open,
     toggleShade,
@@ -205,11 +204,10 @@ const TerminalIntro = () => {
       ) : (
         <>
           {/* The dock is where the window lies on the page, and what the green
-              button measures to lift it from exactly there. While it is away
-              the dock holds the height it had, so About Me does not ride up. */}
-          <div ref={dockRef} style={dockedHeight === null ? undefined : { height: dockedHeight }}>
-            {!floating && terminalWindow}
-          </div>
+              button measures to lift it from exactly there. It takes no room
+              once the window is off the page, so nothing is left standing open
+              between the navbar and About Me. */}
+          <div ref={dockRef}>{!floating && terminalWindow}</div>
 
           {rect &&
             createPortal(

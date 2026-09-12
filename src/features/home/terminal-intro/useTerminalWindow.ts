@@ -21,16 +21,14 @@ const restoreCaret = (focus: () => void) => requestAnimationFrame(focus);
  *
  * The green button lifts the window from exactly the rectangle it occupies on
  * the page, which is why the dock element it sits in is measured rather than
- * guessed. That element keeps the height it had while the window is away, so
- * the page behind it does not jump as the window comes and goes.
+ * guessed. What it leaves behind closes up: a window lifted over the page has
+ * left the page, and holding its old height open would leave a hole in it.
  */
 export function useTerminalWindow(onRestoreFocus: () => void) {
   const dockRef = useRef<HTMLDivElement>(null);
 
   const [closed, setClosed] = useState(false);
   const [shaded, setShaded] = useState(false);
-  // The room the window left behind, so the page holds still without it.
-  const [dockedHeight, setDockedHeight] = useState<number | null>(null);
 
   const frame = useFloatingFrame();
   const { rect, lift, drop } = frame;
@@ -48,13 +46,8 @@ export function useTerminalWindow(onRestoreFocus: () => void) {
     const dock = dockRef.current;
     if (!dock) return;
 
-    if (rect) {
-      setDockedHeight(null);
-      drop();
-    } else {
-      setDockedHeight(dock.offsetHeight);
-      lift(dock.getBoundingClientRect());
-    }
+    if (rect) drop();
+    else lift(dock.getBoundingClientRect());
 
     restoreCaret(onRestoreFocus);
   }, [drop, lift, onRestoreFocus, rect]);
@@ -67,8 +60,6 @@ export function useTerminalWindow(onRestoreFocus: () => void) {
     grabProps: frame.grabProps,
     /** What the window's bottom strip does while it floats: both axes. */
     floatingHandleProps: frame.handleProps,
-    /** The height the dock holds open while the window floats above it. */
-    dockedHeight,
     close,
     open,
     toggleShade,
