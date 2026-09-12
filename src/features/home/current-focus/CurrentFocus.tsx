@@ -59,7 +59,7 @@ const CurrentFocus = () => {
           role="group"
           aria-label={String(t("home.currentFocus.title"))}
           tabIndex={isScrollable ? 0 : -1}
-          className="hide-scrollbar relative flex cursor-grab items-stretch gap-4 overflow-x-auto overflow-y-hidden snap-x snap-mandatory active:cursor-grabbing focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand dark:focus-visible:ring-brand-on-dark"
+          className="hide-scrollbar relative flex cursor-grab items-stretch gap-4 overflow-x-auto overflow-y-hidden snap-x snap-mandatory active:cursor-grabbing focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand dark:focus-visible:ring-brand-dark-accent"
           style={{ WebkitOverflowScrolling: "touch" }}
           {...railProps}
         >

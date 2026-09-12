@@ -106,14 +106,15 @@ Every colour class gets a `dark:` partner on the same element, and the light cla
 | `text-gray-800`, `text-gray-900`          | `dark:text-gray-100`                          |
 | `text-gray-700`                           | `dark:text-gray-300`                          |
 | `text-gray-500`, `text-gray-600`          | `dark:text-gray-400`                          |
-| `text-brand` (the brand as text)          | `dark:text-brand-on-dark`                     |
+| `text-brand` (the brand as text)          | `dark:text-brand-dark-accent`                 |
 | `bg-brand` (a brand fill)                 | `dark:bg-brand-dark`                          |
 | `bg-brand-active`, `hover:bg-brand-hover` | `dark:bg-brand-dark-active`                   |
 | `focus-visible:ring-offset-2`             | `dark:focus-visible:ring-offset-surface-dark` |
 | `prose`                                   | `dark:prose-invert`                           |
 
-The four `*-dark` surfaces and the two `brand-dark` fills are declared in the `@theme` block next to `surface`; nothing else is added for dark mode, and Tailwind's own greys carry the text.
+The four `*-dark` surfaces and the three `brand-dark` colours (the fill, its active step, and the accent for the brand as text) are declared in the `@theme` block next to `surface`; nothing else is added for dark mode, and Tailwind's own greys carry the rest of the text.
 `brand` is tuned for a light page and glares on a dark one, so a brand fill (the navbar, the filled buttons, the Let's Talk band) steps down to `brand-dark`; what sits on the fill stays white.
+`brand-on-dark` is the terminal's blue and stays out of `dark:` classes: the terminal is dark in both modes, and changing it would change the light page.
 A bare `<hr>` needs nothing, since the default border colour flips with the theme in `globals.css`.
 Storybook has a Theme toolbar that sets the same class on the story document.
 

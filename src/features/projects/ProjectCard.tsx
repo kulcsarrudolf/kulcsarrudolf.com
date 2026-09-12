@@ -27,11 +27,11 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
     <Link
       to="/projects/$slug"
       params={{ slug: project.slug }}
-      className="group flex h-full flex-col rounded-xl border border-gray-200 bg-white p-5 shadow-xs transition duration-200 hover:-translate-y-0.5 hover:border-brand hover:shadow-lg focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 dark:border-line-dark dark:bg-card-dark dark:hover:border-brand-on-dark dark:focus-visible:ring-brand-on-dark dark:focus-visible:ring-offset-surface-dark"
+      className="group flex h-full flex-col rounded-xl border border-gray-200 bg-white p-5 shadow-xs transition duration-200 hover:-translate-y-0.5 hover:border-brand hover:shadow-lg focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 dark:border-line-dark dark:bg-card-dark dark:hover:border-brand-dark-accent dark:focus-visible:ring-brand-dark-accent dark:focus-visible:ring-offset-surface-dark"
     >
       {/* The body grows so the footer sits on the same line in every card of a row. */}
       <div className="flex-1">
-        <h2 className="text-lg font-semibold leading-snug text-brand group-hover:underline dark:text-brand-on-dark">
+        <h2 className="text-lg font-semibold leading-snug text-brand group-hover:underline dark:text-brand-dark-accent">
           <LanguageBadge lang={project.lang} />
           {project.title}
         </h2>
@@ -45,7 +45,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
             {project.tech.map((tech) => (
               <span
                 key={tech}
-                className="rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-200 transition-colors group-hover:bg-brand/5 group-hover:text-brand group-hover:ring-brand/20 dark:bg-fill-dark dark:text-gray-400 dark:ring-line-dark dark:group-hover:bg-brand-on-dark/10 dark:group-hover:text-brand-on-dark dark:group-hover:ring-brand-on-dark/30"
+                className="rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-200 transition-colors group-hover:bg-brand/5 group-hover:text-brand group-hover:ring-brand/20 dark:bg-fill-dark dark:text-gray-400 dark:ring-line-dark dark:group-hover:bg-brand-dark-accent/10 dark:group-hover:text-brand-dark-accent dark:group-hover:ring-brand-dark-accent/30"
               >
                 {tech}
               </span>
@@ -65,7 +65,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
             />
           ))}
         </span>
-        <span className="flex items-center gap-1.5 text-sm font-medium text-brand dark:text-brand-on-dark">
+        <span className="flex items-center gap-1.5 text-sm font-medium text-brand dark:text-brand-dark-accent">
           {t("projects.viewProject")}
           <FontAwesomeIcon
             icon={faArrowRight}

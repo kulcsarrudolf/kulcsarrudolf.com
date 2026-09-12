@@ -17,7 +17,7 @@ const CloseButton = ({ onClick, label, ref }: CloseButtonProps) => (
     type="button"
     onClick={onClick}
     aria-label={label}
-    className="absolute right-3 top-3 flex h-11 w-11 items-center justify-center rounded-lg text-2xl leading-none text-gray-400 transition-colors hover:text-gray-600 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand dark:text-gray-500 dark:hover:text-gray-300 dark:focus-visible:ring-brand-on-dark"
+    className="absolute right-3 top-3 flex h-11 w-11 items-center justify-center rounded-lg text-2xl leading-none text-gray-400 transition-colors hover:text-gray-600 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand dark:text-gray-500 dark:hover:text-gray-300 dark:focus-visible:ring-brand-dark-accent"
   >
     &times;
   </button>

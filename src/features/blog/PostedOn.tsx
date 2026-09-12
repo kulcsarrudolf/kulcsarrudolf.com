@@ -15,13 +15,13 @@ const PostedOn = ({ date }: PostedOnProps) => {
     <p className="text-sm">
       <FontAwesomeIcon
         icon={faCalendarAlt}
-        className="mr-1 text-sm text-brand dark:text-brand-on-dark"
+        className="mr-1 text-sm text-brand dark:text-brand-dark-accent"
         aria-hidden="true"
       />
       {t("blogPost.postedOn")}:{` `}
       <time
         dateTime={isoDate}
-        className="italic font-bold text-brand dark:text-brand-on-dark"
+        className="italic font-bold text-brand dark:text-brand-dark-accent"
         itemProp="datePublished"
       >
         {date}

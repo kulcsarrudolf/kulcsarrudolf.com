@@ -54,7 +54,7 @@ export default function ContactForm() {
         <Button
           type="submit"
           disabled={isSubmitting}
-          className="w-full focus:outline-hidden focus:ring-2 focus:ring-brand focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed dark:focus:ring-brand-on-dark dark:focus:ring-offset-surface-dark"
+          className="w-full focus:outline-hidden focus:ring-2 focus:ring-brand focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed dark:focus:ring-brand-dark-accent dark:focus:ring-offset-surface-dark"
         >
           {isSubmitting ? t("contact.form.submitting") : t("contact.form.submit")}
         </Button>

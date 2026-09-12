@@ -12,7 +12,7 @@ const Link = ({ href, children }: LinkProps) => {
       href={href}
       target="_blank"
       rel="noreferrer"
-      className="text-brand hover:underline dark:text-brand-on-dark"
+      className="text-brand hover:underline dark:text-brand-dark-accent"
     >
       {children}
       <FontAwesomeIcon

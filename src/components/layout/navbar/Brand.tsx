@@ -44,7 +44,7 @@ const Brand = ({ tone = "onBrand", onNavigate }: BrandProps) => {
           src={logoSrc}
           alt={title}
           ringClassName={
-            tone === "onBrand" ? "border-white" : "border-brand dark:border-brand-on-dark"
+            tone === "onBrand" ? "border-white" : "border-brand dark:border-brand-dark-accent"
           }
           isRevealed={isEggOpen}
           onReveal={openEgg}

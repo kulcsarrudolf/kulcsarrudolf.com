@@ -38,7 +38,7 @@
      the brand's own hue rather than steps of Tailwind's scale, so the page
      never goes pure black and a card still reads as a step above it. Text
      on them uses Tailwind's greys: 200 for copy, 400 for what is muted, 500
-     for what is only decoration; brand as text becomes `brand-on-dark`. */
+     for what is only decoration; brand as text becomes `brand-dark-accent`. */
   --color-surface-dark: #0f131a;
   --color-card-dark: #181d26;
   --color-line-dark: #2c3441;
@@ -52,6 +52,13 @@
      confused with `brand-on-dark`, which is the brand as text. */
   --color-brand-dark: #27467f;
   --color-brand-dark-active: #345a9e;
+
+  /* The brand as text on the dark page: headings, links, badges, the rings
+     and dots drawn in the same blue. A step more saturated than
+     `brand-on-dark` so it pairs with the fill above rather than reading as
+     lavender beside it, and still AAA at 7.4:1 on the page and 6.7:1 on a
+     card. `brand-on-dark` stays the terminal's, which is dark in both modes. */
+  --color-brand-dark-accent: #7aa2f7;
 
   /* The terminal runs on gray-800, and `brand` on that is 2.7:1 — unreadable.
      This is the same hue (220deg) lightened until it clears AAA at 7.4:1, so
