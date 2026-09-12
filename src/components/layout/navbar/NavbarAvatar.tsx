@@ -15,6 +15,12 @@ interface NavbarAvatarProps {
 const DELAY_MS = 1000;
 const ANIMATION_DURATION_MS = 6000;
 
+/**
+ * The hold is kept on timers, not frame callbacks: the ring fills on the CSS
+ * animation clock and a timeout of the same length fires the reveal. Frame
+ * callbacks pause in a covered or embedded page, and driving the fill from
+ * them used to leave the hold stuck part way with nothing ever opening.
+ */
 const NavbarAvatar = ({
   src,
   alt,
@@ -22,51 +28,44 @@ const NavbarAvatar = ({
   isRevealed = false,
   onReveal,
 }: NavbarAvatarProps) => {
-  const [progress, setProgress] = useState(0);
+  const [isFilling, setIsFilling] = useState(false);
 
   const delayTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const frameRef = useRef<number | null>(null);
+  const fillTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   // The avatar sits inside the brand link. Finishing the hold on a touch screen
   // would otherwise fire the link's synthesized click and navigate home behind
   // the modal, so the next click after the egg fires is swallowed.
   const swallowNextClickRef = useRef(false);
 
-  const resetState = useCallback(() => {
+  const clearTimers = useCallback(() => {
     if (delayTimerRef.current) {
       clearTimeout(delayTimerRef.current);
       delayTimerRef.current = null;
     }
-    if (frameRef.current) {
-      cancelAnimationFrame(frameRef.current);
-      frameRef.current = null;
+    if (fillTimerRef.current) {
+      clearTimeout(fillTimerRef.current);
+      fillTimerRef.current = null;
     }
-    setProgress(0);
   }, []);
 
+  const resetState = useCallback(() => {
+    clearTimers();
+    setIsFilling(false);
+  }, [clearTimers]);
+
   const startProgress = useCallback(() => {
-    if (isRevealed || delayTimerRef.current || frameRef.current) return;
+    if (isRevealed || delayTimerRef.current || fillTimerRef.current) return;
 
     delayTimerRef.current = setTimeout(() => {
       delayTimerRef.current = null;
-      const startTime = Date.now();
+      setIsFilling(true);
 
-      const tick = () => {
-        const elapsed = Date.now() - startTime;
-        const next = Math.min((elapsed / ANIMATION_DURATION_MS) * 100, 100);
-        setProgress(next);
-
-        if (next >= 100) {
-          frameRef.current = null;
-          swallowNextClickRef.current = true;
-          setProgress(0);
-          onReveal?.();
-          return;
-        }
-
-        frameRef.current = requestAnimationFrame(tick);
-      };
-
-      frameRef.current = requestAnimationFrame(tick);
+      fillTimerRef.current = setTimeout(() => {
+        fillTimerRef.current = null;
+        swallowNextClickRef.current = true;
+        setIsFilling(false);
+        onReveal?.();
+      }, ANIMATION_DURATION_MS);
     }, DELAY_MS);
   }, [isRevealed, onReveal]);
 
@@ -83,13 +82,7 @@ const NavbarAvatar = ({
     event.stopPropagation();
   }, []);
 
-  useEffect(
-    () => () => {
-      if (delayTimerRef.current) clearTimeout(delayTimerRef.current);
-      if (frameRef.current) cancelAnimationFrame(frameRef.current);
-    },
-    [],
-  );
+  useEffect(() => clearTimers, [clearTimers]);
 
   return (
     <div
@@ -110,7 +103,14 @@ const NavbarAvatar = ({
         className={`h-8 w-8 rounded-full border-2 p-0.5 shadow-md sm:h-9 sm:w-9 ${ringClassName}`}
         alt={alt}
       />
-      {progress > 0 && <CircularProgress progress={progress} size={40} strokeWidth={3} />}
+      {isFilling && (
+        <CircularProgress
+          progress={0}
+          fillDurationMs={ANIMATION_DURATION_MS}
+          size={40}
+          strokeWidth={3}
+        />
+      )}
     </div>
   );
 };
