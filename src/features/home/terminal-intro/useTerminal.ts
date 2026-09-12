@@ -5,6 +5,7 @@ import {
   type KeyboardEvent,
   type MouseEvent,
   useCallback,
+  useEffect,
   useRef,
   useState,
 } from "react";
@@ -52,6 +53,17 @@ export function useTerminal() {
 
   const inputRef = useRef<HTMLInputElement>(null);
   const nextIdRef = useRef(1);
+
+  // A terminal on screen already has the caret in it, so the first thing
+  // typed on the home page lands at the prompt without anyone clicking it
+  // first. Only where there is a real pointer: on a touch screen the same
+  // focus throws the on-screen keyboard up over a page nobody has read yet.
+  // The page must not scroll to the prompt either, since the intro above it
+  // is what a visitor is meant to land on.
+  useEffect(() => {
+    if (!window.matchMedia("(pointer: fine)").matches) return;
+    inputRef.current?.focus({ preventScroll: true });
+  }, []);
 
   const submit = useCallback(() => {
     const result = runCommand(input);

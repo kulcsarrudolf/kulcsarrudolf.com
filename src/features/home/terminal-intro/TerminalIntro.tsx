@@ -20,7 +20,8 @@ import { MAX_HEIGHT, MIN_HEIGHT, useTerminalHeight } from "./useTerminalHeight";
  * one also floats hearts over the whole page for half a minute. The body has a
  * floor, so `clear` leaves a window rather than a strip, and a ceiling past
  * which the history scrolls; the strip along the bottom drags it taller or
- * shorter.
+ * shorter. Where there is a mouse, the caret is already at the prompt on
+ * arrival, so typing works without clicking into it first.
  *
  * Sits between the navbar and About Me. It is the one dark object on the page,
  * a counterweight to the brand-blue Let's Talk band further down, and it says
