@@ -22,7 +22,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "The dialog shell behind the welcome easter egg and the Sudoku game: a white panel over a dimmed backdrop that fades and scales in on mount and back out on dismissal. Clicking the backdrop closes it, clicking the panel does not.",
+          "The dialog shell the site's modals are built on: a white panel over a dimmed backdrop that fades and scales in on mount and back out on dismissal. Clicking the backdrop closes it, clicking the panel does not.",
       },
     },
   },

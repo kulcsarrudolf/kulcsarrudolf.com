@@ -44,29 +44,6 @@ export const Navigate: Story = {
   },
 };
 
-export const Wedding: Story = {
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "One of the two commands `help` does not mention: the countdown to the wedding, printed in the window rather than on a page of its own.",
-      },
-    },
-  },
-  args: { command: "nr", result: { kind: "wedding" } },
-};
-
-export const Sudoku: Story = {
-  parameters: {
-    docs: {
-      description: {
-        story: "The other hidden command. The line prints here and the sudoku opens over the page.",
-      },
-    },
-  },
-  args: { command: "./sudoku.sh", result: { kind: "sudoku" } },
-};
-
 export const NotFound: Story = {
   args: {
     command: "sudo make me a sandwich",

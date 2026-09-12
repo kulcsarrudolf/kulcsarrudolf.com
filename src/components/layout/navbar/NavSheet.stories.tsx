@@ -15,7 +15,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "The mobile menu, using the same full-bleed white panel over a `bg-black/50` backdrop as WelcomeModal and SudokuModal. Escape closes it, tab is trapped inside it, and the page behind it cannot scroll.",
+          "The mobile menu: a full-bleed white panel over a `bg-black/50` backdrop. Escape closes it, tab is trapped inside it, and the page behind it cannot scroll.",
       },
     },
   },
