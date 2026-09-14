@@ -83,6 +83,20 @@ export const JsLine: Story = {
   },
 };
 
+export const RandomQuote: Story = {
+  args: {
+    command: "random-quote",
+    result: {
+      kind: "quote",
+      quote: {
+        id: "3c4d5e6f",
+        quote: "Slowing down is sometimes the best way to speed up.",
+        author: "Mike Vance",
+      },
+    },
+  },
+};
+
 export const Navigate: Story = {
   args: {
     command: "cd blog",
