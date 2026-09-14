@@ -15,7 +15,7 @@ const meta = {
   },
   args: {
     entries: [{ id: 0, command: "./intro.sh", result: { kind: "intro" } }],
-    step: null,
+    prompt: null,
     busy: false,
     atmosphereEntryId: null,
     onStopAtmosphere: () => {},
@@ -70,13 +70,51 @@ export const SendingAMessage: Story = {
       },
       { id: 3, command: "jane@example.com", prompt: "email", result: { kind: "empty" } },
     ],
-    step: "website",
+    prompt: "website",
   },
   parameters: {
     docs: {
       description: {
         story:
           "Halfway through `send-message`: the answers so far sit under their questions, and the prompt asks the next one.",
+      },
+    },
+  },
+};
+
+export const InTheJsConsole: Story = {
+  args: {
+    entries: [
+      { id: 0, command: "js", result: { kind: "jsConsole" } },
+      {
+        id: 1,
+        command: "const langs = ['en', 'hu']",
+        prompt: "js",
+        result: { kind: "js", lines: [{ tone: "result", text: "undefined" }] },
+      },
+      {
+        id: 2,
+        command: "langs.map((l) => l.toUpperCase())",
+        prompt: "js",
+        result: { kind: "js", lines: [{ tone: "result", text: "['EN', 'HU']" }] },
+      },
+      {
+        id: 3,
+        command: "nope()",
+        prompt: "js",
+        result: {
+          kind: "js",
+          lines: [{ tone: "error", text: "Uncaught ReferenceError: nope is not defined" }],
+        },
+      },
+    ],
+    prompt: "js",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "In the `js` console: each line runs in the page, a declaration stays for the next one, and the prompt is the console's until `.exit`.",
       },
     },
   },

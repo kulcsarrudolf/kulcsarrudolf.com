@@ -57,6 +57,32 @@ export const MessageAnswer: Story = {
   },
 };
 
+export const JsConsole: Story = {
+  args: { command: "js", result: { kind: "jsConsole" } },
+};
+
+export const JsLine: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "A line typed at the `js` console: its prompt stands in for the shell's, and what the line logged comes before what it came to.",
+      },
+    },
+  },
+  args: {
+    command: "console.log('hi'); [1, 2, 3].map((n) => n * 2)",
+    prompt: "js",
+    result: {
+      kind: "js",
+      lines: [
+        { tone: "log", text: "hi" },
+        { tone: "result", text: "[2, 4, 6]" },
+      ],
+    },
+  },
+};
+
 export const Navigate: Story = {
   args: {
     command: "cd blog",

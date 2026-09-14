@@ -7,6 +7,7 @@
 import { isValidEmail, normalizeWebsite } from "@/lib/contact";
 
 import type { CommandResult } from "./commands";
+import type { JsLine } from "./jsConsole";
 
 export type Step = "name" | "email" | "website" | "message" | "confirm" | "sending" | "retry";
 
@@ -36,8 +37,11 @@ export type MessageNote =
   /** Answered no to trying again, so the other ways to reach me are named. */
   | { kind: "gaveUp" };
 
-/** What a line in the terminal's history printed: a command's, or the flow's. */
-export type EntryResult = CommandResult | { kind: "message"; note: MessageNote };
+/** What a line in the terminal's history printed: a command's, the flow's, or the `js` console's. */
+export type EntryResult =
+  | CommandResult
+  | { kind: "message"; note: MessageNote }
+  | { kind: "js"; lines: JsLine[] };
 
 export interface Outcome {
   /** Null once the flow is over. */

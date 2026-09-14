@@ -2,15 +2,15 @@ import type { ChangeEvent, FormEvent, KeyboardEvent, MouseEvent, Ref } from "rea
 
 import { useTranslation } from "@/i18n/useTranslation";
 
+import { JS_PROMPT } from "./jsConsole";
 import Prompt from "./Prompt";
-import type { Step } from "./sendMessage";
 import TerminalEntry from "./TerminalEntry";
-import type { TerminalEntry as Entry } from "./useTerminal";
+import type { TerminalEntry as Entry, PromptKind } from "./useTerminal";
 
 interface TerminalBodyProps {
   entries: Entry[];
-  /** The `send-message` question waiting at the prompt, or null for a command. */
-  step: Step | null;
+  /** The `send-message` question or the `js` console at the prompt, or null for a command. */
+  prompt: PromptKind | null;
   /** A message is on its way, so the line cannot be typed into. */
   busy: boolean;
   /** The entry whose wedding block still has hearts over the page, if any. */
@@ -39,7 +39,7 @@ interface TerminalBodyProps {
  */
 const TerminalBody = ({
   entries,
-  step,
+  prompt,
   busy,
   atmosphereEntryId,
   onStopAtmosphere,
@@ -53,7 +53,12 @@ const TerminalBody = ({
   fill,
 }: TerminalBodyProps) => {
   const { t } = useTranslation();
-  const question = step ? (t(`terminal.message.prompt.${step}`) as string) : undefined;
+  const question =
+    prompt === "js"
+      ? JS_PROMPT
+      : prompt
+        ? (t(`terminal.message.prompt.${prompt}`) as string)
+        : undefined;
 
   return (
     // A click anywhere in the window hands focus to the input, which is the

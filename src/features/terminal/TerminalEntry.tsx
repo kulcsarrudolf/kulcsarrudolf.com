@@ -1,16 +1,19 @@
 import { useTranslation } from "@/i18n/useTranslation";
 
+import { JS_PROMPT } from "./jsConsole";
+import JsOutput from "./JsOutput";
 import MessageNote from "./MessageNote";
 import Prompt from "./Prompt";
-import type { EntryResult, Step } from "./sendMessage";
+import type { EntryResult } from "./sendMessage";
+import type { PromptKind } from "./useTerminal";
 import WeddingLine from "./WeddingLine";
 import WhereNext from "./WhereNext";
 
 interface TerminalEntryProps {
   /** What was typed. Empty for a bare Return, which prints only the prompt. */
   command: string;
-  /** The `send-message` question the line answered, shown in place of the prompt. */
-  prompt?: Step;
+  /** The question the line answered, or the `js` console it was typed into, shown in place of the prompt. */
+  prompt?: PromptKind;
   /** Printed by the terminal on its own, so there is no prompt line to echo. */
   silent?: boolean;
   result: EntryResult;
@@ -43,7 +46,13 @@ const TerminalEntry = ({
     <div className="flex flex-col gap-2.5">
       {!silent && (
         <p className="flex gap-2.5">
-          <Prompt label={prompt && (t(`terminal.message.prompt.${prompt}`) as string)} />
+          <Prompt
+            label={
+              prompt === "js"
+                ? JS_PROMPT
+                : prompt && (t(`terminal.message.prompt.${prompt}`) as string)
+            }
+          />
           {command && <span className="break-all text-white">{command}</span>}
         </p>
       )}
@@ -60,6 +69,8 @@ const TerminalEntry = ({
       {result.kind === "help" && <Output>{t("terminal.help")}</Output>}
       {result.kind === "sendMessage" && <Output>{t("terminal.message.start")}</Output>}
       {result.kind === "message" && <MessageNote note={result.note} />}
+      {result.kind === "jsConsole" && <Output>{t("terminal.js")}</Output>}
+      {result.kind === "js" && <JsOutput lines={result.lines} />}
       {result.kind === "navigate" && (
         <Output>{t("terminal.opening", { page: result.destination.label })}</Output>
       )}

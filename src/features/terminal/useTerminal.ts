@@ -15,14 +15,18 @@ import { useLangSearch } from "@/i18n/useLangSearch";
 
 import { runCommand } from "./commands";
 import type { EntryResult, Step } from "./sendMessage";
+import { useJsConsole } from "./useJsConsole";
 import { useSendMessage } from "./useSendMessage";
+
+/** What stands in for the shell's prompt: a `send-message` question, or the `js` console's. */
+export type PromptKind = Step | "js";
 
 export interface TerminalEntry {
   id: number;
   /** What was typed, verbatim. Empty for a bare Return. */
   command: string;
-  /** The `send-message` question the line answered, shown in place of the prompt. */
-  prompt?: Step;
+  /** The question the line answered, or the console it was typed into, shown in place of the prompt. */
+  prompt?: PromptKind;
   /** Printed by the terminal on its own rather than typed, so it has no prompt line. */
   silent?: boolean;
   result: EntryResult;
@@ -46,6 +50,8 @@ const OPENING_ENTRY: TerminalEntry = { id: 0, command: "./intro.sh", result: { k
  * atmosphere over it, which any other command takes back down again.
  * `send-message` asks its questions at the prompt, and while one is open
  * every line is its answer until the message is sent or Ctrl+C ends it.
+ * `js` does the same with the browser console: every line is JavaScript run
+ * in the page until `.exit` or Ctrl+C, and `js <code>` runs a single line.
  */
 export function useTerminal(autoFocus: boolean) {
   const navigate = useNavigate();
@@ -78,6 +84,14 @@ export function useTerminal(autoFocus: boolean) {
     cancel: cancelMessage,
   } = useSendMessage(append);
 
+  const {
+    open: jsOpen,
+    start: startJs,
+    run: runJs,
+    answer: answerJs,
+    cancel: cancelJs,
+  } = useJsConsole(append);
+
   // A terminal on screen already has the caret in it, so the first thing
   // typed on the home page lands at the prompt without anyone clicking it
   // first. Only where there is a real pointer: on a touch screen the same
@@ -101,7 +115,21 @@ export function useTerminal(autoFocus: boolean) {
       return;
     }
 
+    // The console takes the line as JavaScript until it is left.
+    if (jsOpen) {
+      answerJs(input);
+      return;
+    }
+
     const result = runCommand(input);
+
+    // `js <code>` prints what the code came to in place of the command's own
+    // output, so the console appends the line rather than the shell.
+    if (result.kind === "jsEval") {
+      stopAtmosphere();
+      runJs(result.code, input);
+      return;
+    }
 
     // `clear` takes the wedding line away with the rest of the history, so it
     // has to take the hearts too rather than leave them up with no way out.
@@ -125,6 +153,7 @@ export function useTerminal(autoFocus: boolean) {
     }
 
     if (result.kind === "sendMessage") startMessage();
+    if (result.kind === "jsConsole") startJs();
 
     // The sudoku reads the number keys off the window, so the prompt lets go
     // of the caret while the game is up rather than collecting what is typed
@@ -139,12 +168,16 @@ export function useTerminal(autoFocus: boolean) {
     }
   }, [
     append,
+    answerJs,
     answerMessage,
     busy,
     input,
+    jsOpen,
     langSearch,
     navigate,
+    runJs,
     startAtmosphere,
+    startJs,
     startMessage,
     step,
     stopAtmosphere,
@@ -165,11 +198,12 @@ export function useTerminal(autoFocus: boolean) {
   // Ctrl+C is the shell's interrupt while a question is open, unless there is
   // a selection in the line, when it is still the copy it always was.
   const onKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (step && event.ctrlKey && event.key.toLowerCase() === "c") {
+    if ((step || jsOpen) && event.ctrlKey && event.key.toLowerCase() === "c") {
       const { selectionStart, selectionEnd } = event.currentTarget;
       if (selectionStart !== selectionEnd) return;
       event.preventDefault();
-      cancelMessage(input);
+      if (step) cancelMessage(input);
+      else cancelJs(input);
       setInput("");
       return;
     }
@@ -202,8 +236,8 @@ export function useTerminal(autoFocus: boolean) {
     closeSudoku,
     focusPrompt,
     onSubmit,
-    /** The `send-message` question waiting at the prompt, if one is. */
-    step,
+    /** What stands in for the prompt: the open `send-message` question, or the `js` console. */
+    prompt: step ?? (jsOpen ? ("js" as const) : null),
     busy,
     inputProps: {
       value: input,
