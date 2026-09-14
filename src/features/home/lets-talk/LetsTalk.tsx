@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 
 import { buttonClasses } from "@/components/ui/Button";
+import Tooltip from "@/components/ui/Tooltip";
 import { useLangSearch } from "@/i18n/useLangSearch";
 import { useTranslation } from "@/i18n/useTranslation";
 
@@ -71,24 +72,17 @@ const LetsTalk = () => {
       <div className="mt-6 flex flex-col gap-5 border-t border-white/20 pt-5 sm:flex-row sm:items-center sm:gap-6">
         {/* The joke, kept at the end and set a step back from the cases above
             it by smaller type and an icon that stays a shade quieter. Hovering
-            or focusing it swaps in a hint that there is more than one egg; both
-            lines share one grid cell, so the swap never shifts the buttons. */}
-        <p
-          tabIndex={0}
-          className="group flex items-center gap-2.5 rounded text-[13.5px] text-white/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
-        >
-          <span className="shrink-0 text-white/70">
-            <EasterEggIcon />
-          </span>
-          <span className="grid">
-            <span className="col-start-1 row-start-1 transition-opacity duration-200 group-hover:opacity-0 group-focus-visible:opacity-0">
+            or focusing it shows a tooltip hinting there is more than one egg. */}
+        <div className="text-[13.5px] text-white/85">
+          <Tooltip content={t("home.letsTalk.easterEggHint")}>
+            <span className="flex items-center gap-2.5">
+              <span className="shrink-0 text-white/70">
+                <EasterEggIcon />
+              </span>
               {t("home.letsTalk.easterEgg")}
             </span>
-            <span className="col-start-1 row-start-1 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100">
-              {t("home.letsTalk.easterEggHint")}
-            </span>
-          </span>
-        </p>
+          </Tooltip>
+        </div>
 
         <div className="flex flex-col gap-2.5 sm:ml-auto sm:shrink-0 sm:flex-row sm:gap-3">
           <Link
