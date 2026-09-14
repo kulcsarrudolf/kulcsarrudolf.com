@@ -58,6 +58,17 @@ describe("runCommand", () => {
     expect(runCommand("contact").kind).toBe("navigate");
   });
 
+  it("opens the js console for js and node, and runs the rest of a js line as code", () => {
+    expect(runCommand("js")).toEqual({ kind: "jsConsole" });
+    expect(runCommand(" Node ")).toEqual({ kind: "jsConsole" });
+    expect(runCommand("js document.title  ")).toEqual({ kind: "jsEval", code: "document.title" });
+    expect(runCommand("JS [1,  2].map(String)")).toEqual({
+      kind: "jsEval",
+      code: "[1,  2].map(String)",
+    });
+    expect(runCommand("jsx").kind).toBe("notFound");
+  });
+
   it("reports anything else as not found, keeping what was typed", () => {
     expect(runCommand("rm -rf /")).toEqual({ kind: "notFound", command: "rm -rf /" });
     expect(runCommand("cd nowhere")).toEqual({ kind: "notFound", command: "cd nowhere" });

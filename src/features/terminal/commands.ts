@@ -28,6 +28,10 @@ export type CommandResult =
   | { kind: "sudoku" }
   /** `send-message`: the contact form, asked one question at a time. */
   | { kind: "sendMessage" }
+  /** `js`: the browser console at the prompt, until `.exit`. */
+  | { kind: "jsConsole" }
+  /** `js <code>`: one line run in the page, as typed, and the shell straight back. */
+  | { kind: "jsEval"; code: string }
   | { kind: "navigate"; destination: Destination }
   | { kind: "notFound"; command: string };
 
@@ -37,6 +41,8 @@ const HELP = new Set(["help", "?", "--help", "-h", "man"]);
 const CLEAR = new Set(["clear", "cls"]);
 // `mail` is the name a shell would have for it, so it works without being listed.
 const SEND_MESSAGE = new Set(["send-message", "mail"]);
+// `node` is what a developer's fingers type for a REPL, so it opens the same one.
+const JS_CONSOLE = new Set(["js", "node", "javascript"]);
 
 // Two things `help` does not mention, because finding them is the point.
 const WEDDING = new Set([
@@ -70,6 +76,11 @@ export function runCommand(line: string): CommandResult {
   if (CLEAR.has(lower)) return { kind: "clear" };
   if (SUDOKU.has(lower)) return { kind: "sudoku" };
   if (SEND_MESSAGE.has(lower)) return { kind: "sendMessage" };
+  if (JS_CONSOLE.has(lower)) return { kind: "jsConsole" };
+
+  // The code is taken from the line as typed: its case and spacing are the program's.
+  const jsEval = /^\s*js\s+([\s\S]+)$/i.exec(line);
+  if (jsEval) return { kind: "jsEval", code: jsEval[1].trim() };
 
   const prefix = NAVIGATE_PREFIXES.find((candidate) => lower.startsWith(candidate));
   const target = prefix ? lower.slice(prefix.length) : lower;
