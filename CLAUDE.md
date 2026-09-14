@@ -48,6 +48,7 @@ Before writing markup, check whether one of these already covers it:
 | A centred dialog over a dimmed backdrop                                | `components/ui/modal/Modal`                        |
 | A phone-shaped frame around a dialog's content from `md` up            | `components/ui/PhoneFrame`                         |
 | A text link with a leading or trailing arrow                           | `components/ui/ArrowLink`                          |
+| A short note above an element on hover or keyboard focus               | `components/ui/Tooltip`                            |
 | A quotation in a bordered card                                         | `features/quotes/QuoteCard`                        |
 | The `[HU]` marker on Hungarian content                                 | `components/content/LanguageBadge`                 |
 | A labelled form input or textarea                                      | `features/contact/FormField`                       |
