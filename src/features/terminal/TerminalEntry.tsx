@@ -71,6 +71,12 @@ const TerminalEntry = ({
       {result.kind === "message" && <MessageNote note={result.note} />}
       {result.kind === "jsConsole" && <Output>{t("terminal.js")}</Output>}
       {result.kind === "js" && <JsOutput lines={result.lines} />}
+      {result.kind === "quote" && (
+        <>
+          <Output>“{result.quote.quote}”</Output>
+          <Output>— {result.quote.author}</Output>
+        </>
+      )}
       {result.kind === "navigate" && (
         <Output>{t("terminal.opening", { page: result.destination.label })}</Output>
       )}

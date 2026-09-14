@@ -3,6 +3,9 @@
  * should happen, so the component only has to render outcomes.
  */
 
+import quotes from "@/content/quotes";
+import type { Quote } from "@/types/quote";
+
 // The three places the intro points at. The labels are paths rather than
 // copy, so they are the same in every language.
 export const DESTINATIONS = [
@@ -32,6 +35,8 @@ export type CommandResult =
   | { kind: "jsConsole" }
   /** `js <code>`: one line run in the page, as typed, and the shell straight back. */
   | { kind: "jsEval"; code: string }
+  /** `random-quote`: one line from the quotes, picked when it is run. */
+  | { kind: "quote"; quote: Quote }
   | { kind: "navigate"; destination: Destination }
   | { kind: "notFound"; command: string };
 
@@ -43,6 +48,8 @@ const CLEAR = new Set(["clear", "cls"]);
 const SEND_MESSAGE = new Set(["send-message", "mail"]);
 // `node` is what a developer's fingers type for a REPL, so it opens the same one.
 const JS_CONSOLE = new Set(["js", "node", "javascript"]);
+// `fortune` is the Unix program that does the same, so it answers too.
+const QUOTE = new Set(["random-quote", "quote", "fortune"]);
 
 // Two things `help` does not mention, because finding them is the point.
 const WEDDING = new Set([
@@ -62,8 +69,11 @@ const NAVIGATE_PREFIXES = ["cd ", "open ", "cat ", "go "];
 const findDestination = (name: string): Destination | undefined =>
   DESTINATIONS.find(({ to }) => to === `/${name}`);
 
-/** Turns the typed line into what the terminal should do about it. */
-export function runCommand(line: string): CommandResult {
+/**
+ * Turns the typed line into what the terminal should do about it. `random`
+ * picks the quote, so a test can say which one it gets.
+ */
+export function runCommand(line: string, random: () => number = Math.random): CommandResult {
   const command = line.trim().replace(/\s+/g, " ");
 
   if (command === "") return { kind: "empty" };
@@ -77,6 +87,9 @@ export function runCommand(line: string): CommandResult {
   if (SUDOKU.has(lower)) return { kind: "sudoku" };
   if (SEND_MESSAGE.has(lower)) return { kind: "sendMessage" };
   if (JS_CONSOLE.has(lower)) return { kind: "jsConsole" };
+  if (QUOTE.has(lower)) {
+    return { kind: "quote", quote: quotes[Math.floor(random() * quotes.length)] };
+  }
 
   // The code is taken from the line as typed: its case and spacing are the program's.
   const jsEval = /^\s*js\s+([\s\S]+)$/i.exec(line);

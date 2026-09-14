@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
 
+import quotes from "@/content/quotes";
+
 import { runCommand } from "./commands";
 
 describe("runCommand", () => {
@@ -67,6 +69,15 @@ describe("runCommand", () => {
       code: "[1,  2].map(String)",
     });
     expect(runCommand("jsx").kind).toBe("notFound");
+  });
+
+  it("prints a quote from the list for random-quote and its aliases", () => {
+    expect(runCommand("random-quote", () => 0)).toEqual({ kind: "quote", quote: quotes[0] });
+    expect(runCommand(" Fortune ", () => 0.999)).toEqual({
+      kind: "quote",
+      quote: quotes[quotes.length - 1],
+    });
+    expect(runCommand("quote").kind).toBe("quote");
   });
 
   it("reports anything else as not found, keeping what was typed", () => {
