@@ -15,6 +15,7 @@ import { useLangSearch } from "@/i18n/useLangSearch";
 
 import { runCommand } from "./commands";
 import type { EntryResult, Step } from "./sendMessage";
+import { useCommandHistory } from "./useCommandHistory";
 import { useJsConsole } from "./useJsConsole";
 import { useSendMessage } from "./useSendMessage";
 
@@ -52,6 +53,8 @@ const OPENING_ENTRY: TerminalEntry = { id: 0, command: "./intro.sh", result: { k
  * every line is its answer until the message is sent or Ctrl+C ends it.
  * `js` does the same with the browser console: every line is JavaScript run
  * in the page until `.exit` or Ctrl+C, and `js <code>` runs a single line.
+ * The arrow keys walk back through what was typed, kept across visits, except
+ * while a `send-message` question is open, whose answers are never kept.
  */
 export function useTerminal(autoFocus: boolean) {
   const navigate = useNavigate();
@@ -92,6 +95,8 @@ export function useTerminal(autoFocus: boolean) {
     cancel: cancelJs,
   } = useJsConsole(append);
 
+  const { record: recordLine, reset: resetHistory, browse: browseHistory } = useCommandHistory();
+
   // A terminal on screen already has the caret in it, so the first thing
   // typed on the home page lands at the prompt without anyone clicking it
   // first. Only where there is a real pointer: on a touch screen the same
@@ -114,6 +119,8 @@ export function useTerminal(autoFocus: boolean) {
       answerMessage(input);
       return;
     }
+
+    recordLine(input);
 
     // The console takes the line as JavaScript until it is left.
     if (jsOpen) {
@@ -175,6 +182,7 @@ export function useTerminal(autoFocus: boolean) {
     jsOpen,
     langSearch,
     navigate,
+    recordLine,
     runJs,
     startAtmosphere,
     startJs,
@@ -204,7 +212,17 @@ export function useTerminal(autoFocus: boolean) {
       event.preventDefault();
       if (step) cancelMessage(input);
       else cancelJs(input);
+      resetHistory();
       setInput("");
+      return;
+    }
+
+    // Up and down recall earlier lines, and the default is stopped so the
+    // caret does not jump to either end of the line first.
+    if (!step && (event.key === "ArrowUp" || event.key === "ArrowDown")) {
+      event.preventDefault();
+      const recalled = browseHistory(event.key === "ArrowUp" ? "up" : "down", input);
+      if (recalled !== undefined) setInput(recalled);
       return;
     }
 
