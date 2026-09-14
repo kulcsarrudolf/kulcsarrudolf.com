@@ -26,6 +26,8 @@ export type CommandResult =
   | { kind: "wedding" }
   /** The sudoku, opened over the page. */
   | { kind: "sudoku" }
+  /** `send-message`: the contact form, asked one question at a time. */
+  | { kind: "sendMessage" }
   | { kind: "navigate"; destination: Destination }
   | { kind: "notFound"; command: string };
 
@@ -33,6 +35,8 @@ const INTRO = new Set(["./intro.sh", "intro.sh", "intro", "sh intro.sh", "bash i
 const LIST = new Set(["ls", "ls -la", "ls -l", "ll", "dir"]);
 const HELP = new Set(["help", "?", "--help", "-h", "man"]);
 const CLEAR = new Set(["clear", "cls"]);
+// `mail` is the name a shell would have for it, so it works without being listed.
+const SEND_MESSAGE = new Set(["send-message", "mail"]);
 
 // Two things `help` does not mention, because finding them is the point.
 const WEDDING = new Set([
@@ -65,6 +69,7 @@ export function runCommand(line: string): CommandResult {
   if (HELP.has(lower)) return { kind: "help" };
   if (CLEAR.has(lower)) return { kind: "clear" };
   if (SUDOKU.has(lower)) return { kind: "sudoku" };
+  if (SEND_MESSAGE.has(lower)) return { kind: "sendMessage" };
 
   const prefix = NAVIGATE_PREFIXES.find((candidate) => lower.startsWith(candidate));
   const target = prefix ? lower.slice(prefix.length) : lower;

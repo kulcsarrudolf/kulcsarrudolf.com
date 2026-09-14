@@ -71,7 +71,7 @@
     "whereNext": "Where next?",
     "label": "Introduction",
     "inputLabel": "Type a command",
-    "help": "Commands: help, ls, ./intro.sh, clear. Type blog, projects or contact to open a page.",
+    "help": "Commands: help, ls, ./intro.sh, send-message, clear. Type blog, projects or contact to open a page.",
     "notFound": "command not found: {command}. Type help to see what works.",
     "opening": "Opening {page}",
     "sudoku": "Starting sudoku. Good luck.",
@@ -85,7 +85,30 @@
     "move": "Move the terminal",
     "open": "Open the terminal",
     "zoom": "Fill the screen with the terminal",
-    "unzoom": "Give the terminal its size back"
+    "unzoom": "Give the terminal its size back",
+    "message": {
+      "start": "Leave me a message and I'll get back to you. Type cancel or press Ctrl+C to stop.",
+      "prompt": {
+        "name": "name:",
+        "email": "email:",
+        "website": "website (optional):",
+        "message": "message:",
+        "confirm": "send? (y/n):",
+        "sending": "sending…",
+        "retry": "retry? (y/n):"
+      },
+      "invalid": {
+        "name": "✗ A name, please.",
+        "email": "✗ That doesn't look like an email address.",
+        "message": "✗ The message is empty."
+      },
+      "summary": "Ready to send:",
+      "yesNo": "Type y for yes or n for no.",
+      "sent": "✓ Sent. Thanks, I'll get back to you soon.",
+      "failed": "✗ The message could not be sent.",
+      "discarded": "Discarded. Nothing was sent.",
+      "gaveUp": "No worries: the form on the contact page or {email} still reaches me."
+    }
   },
   "blog": {
     "title": "My Blog",

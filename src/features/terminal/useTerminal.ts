@@ -13,14 +13,22 @@ import {
 import { useLovingAtmosphere } from "@/features/wedding/useLovingAtmosphere";
 import { useLangSearch } from "@/i18n/useLangSearch";
 
-import { type CommandResult, runCommand } from "./commands";
+import { runCommand } from "./commands";
+import type { EntryResult, Step } from "./sendMessage";
+import { useSendMessage } from "./useSendMessage";
 
 export interface TerminalEntry {
   id: number;
   /** What was typed, verbatim. Empty for a bare Return. */
   command: string;
-  result: CommandResult;
+  /** The `send-message` question the line answered, shown in place of the prompt. */
+  prompt?: Step;
+  /** Printed by the terminal on its own rather than typed, so it has no prompt line. */
+  silent?: boolean;
+  result: EntryResult;
 }
+
+export type NewEntry = Omit<TerminalEntry, "id">;
 
 // Enough to scroll back through, not enough to grow the page without end.
 const MAX_ENTRIES = 30;
@@ -36,6 +44,8 @@ const OPENING_ENTRY: TerminalEntry = { id: 0, command: "./intro.sh", result: { k
  * One command opens the sudoku over the page, so the window it belongs to
  * is held here alongside the history. The wedding commands put the loving
  * atmosphere over it, which any other command takes back down again.
+ * `send-message` asks its questions at the prompt, and while one is open
+ * every line is its answer until the message is sent or Ctrl+C ends it.
  */
 export function useTerminal(autoFocus: boolean) {
   const navigate = useNavigate();
@@ -54,6 +64,20 @@ export function useTerminal(autoFocus: boolean) {
   const inputRef = useRef<HTMLInputElement>(null);
   const nextIdRef = useRef(1);
 
+  const append = useCallback((entry: NewEntry) => {
+    const id = nextIdRef.current++;
+    setEntries((previous) => [...previous, { id, ...entry }].slice(-MAX_ENTRIES));
+    return id;
+  }, []);
+
+  const {
+    step,
+    busy,
+    start: startMessage,
+    answer: answerMessage,
+    cancel: cancelMessage,
+  } = useSendMessage(append);
+
   // A terminal on screen already has the caret in it, so the first thing
   // typed on the home page lands at the prompt without anyone clicking it
   // first. Only where there is a real pointer: on a touch screen the same
@@ -67,8 +91,17 @@ export function useTerminal(autoFocus: boolean) {
   }, [autoFocus]);
 
   const submit = useCallback(() => {
-    const result = runCommand(input);
+    // The line stays put while a message is on its way, and Return waits.
+    if (busy) return;
     setInput("");
+
+    // An open question takes the line as its answer, whatever it says.
+    if (step) {
+      answerMessage(input);
+      return;
+    }
+
+    const result = runCommand(input);
 
     // `clear` takes the wedding line away with the rest of the history, so it
     // has to take the hearts too rather than leave them up with no way out.
@@ -78,8 +111,7 @@ export function useTerminal(autoFocus: boolean) {
       return;
     }
 
-    const id = nextIdRef.current++;
-    setEntries((previous) => [...previous, { id, command: input, result }].slice(-MAX_ENTRIES));
+    const id = append({ command: input, result });
 
     // A wedding command starts the hearts, or restarts the clock on the ones
     // already flying. Anything else typed at the prompt takes them down, which
@@ -92,6 +124,8 @@ export function useTerminal(autoFocus: boolean) {
       stopAtmosphere();
     }
 
+    if (result.kind === "sendMessage") startMessage();
+
     // The sudoku reads the number keys off the window, so the prompt lets go
     // of the caret while the game is up rather than collecting what is typed
     // into it from behind the dialog.
@@ -103,7 +137,18 @@ export function useTerminal(autoFocus: boolean) {
     if (result.kind === "navigate") {
       navigate({ to: result.destination.to, search: langSearch });
     }
-  }, [input, langSearch, navigate, startAtmosphere, stopAtmosphere]);
+  }, [
+    append,
+    answerMessage,
+    busy,
+    input,
+    langSearch,
+    navigate,
+    startAtmosphere,
+    startMessage,
+    step,
+    stopAtmosphere,
+  ]);
 
   // Closing the sudoku hands the caret back, so the next command can be
   // typed without reaching for the mouse.
@@ -117,7 +162,18 @@ export function useTerminal(autoFocus: boolean) {
   // Return is caught on the key itself, and the default is stopped so the
   // form's implicit submission does not run the line a second time. The form
   // is still there for what never sends a key: a phone keyboard's Go button.
+  // Ctrl+C is the shell's interrupt while a question is open, unless there is
+  // a selection in the line, when it is still the copy it always was.
   const onKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (step && event.ctrlKey && event.key.toLowerCase() === "c") {
+      const { selectionStart, selectionEnd } = event.currentTarget;
+      if (selectionStart !== selectionEnd) return;
+      event.preventDefault();
+      cancelMessage(input);
+      setInput("");
+      return;
+    }
+
     if (event.key !== "Enter" || event.nativeEvent.isComposing) return;
     event.preventDefault();
     submit();
@@ -146,6 +202,9 @@ export function useTerminal(autoFocus: boolean) {
     closeSudoku,
     focusPrompt,
     onSubmit,
+    /** The `send-message` question waiting at the prompt, if one is. */
+    step,
+    busy,
     inputProps: {
       value: input,
       onChange,

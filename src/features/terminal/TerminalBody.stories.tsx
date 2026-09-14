@@ -15,6 +15,8 @@ const meta = {
   },
   args: {
     entries: [{ id: 0, command: "./intro.sh", result: { kind: "intro" } }],
+    step: null,
+    busy: false,
     atmosphereEntryId: null,
     onStopAtmosphere: () => {},
     input: "",
@@ -50,6 +52,31 @@ export const WithHistory: Story = {
     docs: {
       description: {
         story: "A few lines in, with a command that does not exist among them.",
+      },
+    },
+  },
+};
+
+export const SendingAMessage: Story = {
+  args: {
+    entries: [
+      { id: 0, command: "send-message", result: { kind: "sendMessage" } },
+      { id: 1, command: "Jane Doe", prompt: "name", result: { kind: "empty" } },
+      {
+        id: 2,
+        command: "jane@example",
+        prompt: "email",
+        result: { kind: "message", note: { kind: "invalid", field: "email" } },
+      },
+      { id: 3, command: "jane@example.com", prompt: "email", result: { kind: "empty" } },
+    ],
+    step: "website",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Halfway through `send-message`: the answers so far sit under their questions, and the prompt asks the next one.",
       },
     },
   },

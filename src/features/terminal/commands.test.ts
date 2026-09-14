@@ -52,6 +52,12 @@ describe("runCommand", () => {
     expect(runCommand("  sh   sudoku.sh ")).toEqual({ kind: "sudoku" });
   });
 
+  it("starts a message for send-message and mail, while contact still opens the page", () => {
+    expect(runCommand("send-message")).toEqual({ kind: "sendMessage" });
+    expect(runCommand(" MAIL ")).toEqual({ kind: "sendMessage" });
+    expect(runCommand("contact").kind).toBe("navigate");
+  });
+
   it("reports anything else as not found, keeping what was typed", () => {
     expect(runCommand("rm -rf /")).toEqual({ kind: "notFound", command: "rm -rf /" });
     expect(runCommand("cd nowhere")).toEqual({ kind: "notFound", command: "cd nowhere" });

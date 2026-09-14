@@ -3,11 +3,16 @@ import type { ChangeEvent, FormEvent, KeyboardEvent, MouseEvent, Ref } from "rea
 import { useTranslation } from "@/i18n/useTranslation";
 
 import Prompt from "./Prompt";
+import type { Step } from "./sendMessage";
 import TerminalEntry from "./TerminalEntry";
 import type { TerminalEntry as Entry } from "./useTerminal";
 
 interface TerminalBodyProps {
   entries: Entry[];
+  /** The `send-message` question waiting at the prompt, or null for a command. */
+  step: Step | null;
+  /** A message is on its way, so the line cannot be typed into. */
+  busy: boolean;
   /** The entry whose wedding block still has hearts over the page, if any. */
   atmosphereEntryId: number | null;
   onStopAtmosphere: () => void;
@@ -34,6 +39,8 @@ interface TerminalBodyProps {
  */
 const TerminalBody = ({
   entries,
+  step,
+  busy,
   atmosphereEntryId,
   onStopAtmosphere,
   input,
@@ -46,6 +53,7 @@ const TerminalBody = ({
   fill,
 }: TerminalBodyProps) => {
   const { t } = useTranslation();
+  const question = step ? (t(`terminal.message.prompt.${step}`) as string) : undefined;
 
   return (
     // A click anywhere in the window hands focus to the input, which is the
@@ -59,10 +67,12 @@ const TerminalBody = ({
       onClick={onClick}
     >
       <div className="flex flex-col gap-2.5" aria-live="polite">
-        {entries.map(({ id, command, result }) => (
+        {entries.map(({ id, command, prompt, silent, result }) => (
           <TerminalEntry
             key={id}
             command={command}
+            prompt={prompt}
+            silent={silent}
             result={result}
             onStopAtmosphere={id === atmosphereEntryId ? onStopAtmosphere : undefined}
           />
@@ -70,9 +80,11 @@ const TerminalBody = ({
       </div>
 
       <form onSubmit={onSubmit} className="flex min-h-11 items-center gap-2.5">
-        <Prompt />
+        {/* The prompt is hidden from a screen reader, so a question it asks
+            is read out as the input's label instead. */}
+        <Prompt label={question} />
         <label className="sr-only" htmlFor="terminal-input">
-          {t("terminal.inputLabel")}
+          {question ?? t("terminal.inputLabel")}
         </label>
         {/* The block cursor is the only caret: the input's own is hidden and
             the input is sized to its text in `ch`, exact in a mono font, so
@@ -93,6 +105,7 @@ const TerminalBody = ({
             autoCorrect="off"
             spellCheck={false}
             enterKeyHint="enter"
+            readOnly={busy}
             {...inputProps}
           />
           <span

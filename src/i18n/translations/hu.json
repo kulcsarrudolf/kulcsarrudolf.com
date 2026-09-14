@@ -71,7 +71,7 @@
     "whereNext": "Merre tovább?",
     "label": "Bemutatkozás",
     "inputLabel": "Írj be egy parancsot",
-    "help": "Parancsok: help, ls, ./intro.sh, clear. Írd be, hogy blog, projects vagy contact, és megnyílik az oldal.",
+    "help": "Parancsok: help, ls, ./intro.sh, send-message, clear. Írd be, hogy blog, projects vagy contact, és megnyílik az oldal.",
     "notFound": "a parancs nem található: {command}. Írd be, hogy help, és megmutatom, mi működik.",
     "opening": "{page} megnyitása",
     "sudoku": "Sudoku indul. Sok sikert!",
@@ -85,7 +85,30 @@
     "move": "A terminál mozgatása",
     "open": "A terminál megnyitása",
     "zoom": "A terminál teljes képernyőre",
-    "unzoom": "A terminál előző mérete"
+    "unzoom": "A terminál előző mérete",
+    "message": {
+      "start": "Hagyj nekem üzenetet, és jelentkezem. Írd be, hogy cancel, vagy nyomd meg a Ctrl+C-t a megszakításhoz.",
+      "prompt": {
+        "name": "név:",
+        "email": "e-mail:",
+        "website": "weboldal (opcionális):",
+        "message": "üzenet:",
+        "confirm": "elküldjem? (i/n):",
+        "sending": "küldés…",
+        "retry": "újra? (i/n):"
+      },
+      "invalid": {
+        "name": "✗ Kérlek, add meg a neved.",
+        "email": "✗ Ez nem tűnik e-mail-címnek.",
+        "message": "✗ Az üzenet üres."
+      },
+      "summary": "Elküldésre kész:",
+      "yesNo": "Írd be: i (igen) vagy n (nem).",
+      "sent": "✓ Elküldve. Köszönöm, hamarosan jelentkezem.",
+      "failed": "✗ Nem sikerült elküldeni az üzenetet.",
+      "discarded": "Megszakítva, nem küldtem el semmit.",
+      "gaveUp": "Semmi gond: a kapcsolat oldalon lévő űrlap vagy a {email} cím is elér."
+    }
   },
   "blog": {
     "title": "Blog",
