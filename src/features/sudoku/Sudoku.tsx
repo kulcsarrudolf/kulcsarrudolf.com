@@ -9,7 +9,7 @@ interface SudokuProps {
 }
 
 // The two game buttons differ only in colour, so the shape is written once.
-const GAME_BUTTON = "px-4 py-2 text-white rounded-lg font-semibold";
+const GAME_BUTTON = "px-4 py-2 text-white rounded-lg font-semibold whitespace-nowrap";
 
 const formatTime = (seconds: number) => {
   const mins = Math.floor(seconds / 60);
@@ -30,7 +30,7 @@ const Sudoku = ({ onClose }: SudokuProps) => {
   }
 
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="mx-auto flex w-full max-w-[22.5rem] flex-col items-center gap-4">
       <div className="flex items-center justify-between w-full">
         <div className="text-sm text-gray-600 dark:text-gray-400">
           {t("sudoku.mistakes")}:{" "}

@@ -16,17 +16,29 @@ interface ModalProps {
   panelClassName?: string;
   /** Accessible name for the × in the corner. Omit it and there is no ×. */
   closeLabel?: string;
+  /** Keep the white card on a phone only, for a dialog that draws its own frame from `md` up. */
+  frameless?: boolean;
 }
 
 // Full bleed on a phone, a centred card from `md` up.
 const PANEL =
   "relative flex h-full w-full transform flex-col justify-center bg-white shadow-2xl transition-all duration-200 md:mx-4 md:h-auto md:w-auto md:rounded-2xl dark:bg-card-dark dark:ring-1 dark:ring-line-dark";
 
+// Full bleed on a phone, and nothing but the children from `md` up.
+const FRAMELESS_PANEL =
+  "relative flex h-full w-full transform flex-col justify-center transition-all duration-200 max-md:bg-white max-md:shadow-2xl md:mx-4 md:h-auto md:w-auto max-md:dark:bg-card-dark";
+
 /**
  * A dialog over a dimmed backdrop, fading and scaling in on mount and back out
  * on dismissal. Clicking the backdrop closes it; clicking the panel does not.
  */
-const Modal = ({ onClose, children, panelClassName = "p-6", closeLabel }: ModalProps) => {
+const Modal = ({
+  onClose,
+  children,
+  panelClassName = "p-6",
+  closeLabel,
+  frameless = false,
+}: ModalProps) => {
   const { isVisible, close } = useModalTransition(onClose);
 
   return (
@@ -41,7 +53,7 @@ const Modal = ({ onClose, children, panelClassName = "p-6", closeLabel }: ModalP
       <div
         role="dialog"
         aria-modal="true"
-        className={`${PANEL} ${panelClassName} ${isVisible ? "scale-100" : "scale-95"}`}
+        className={`${frameless ? FRAMELESS_PANEL : PANEL} ${panelClassName} ${isVisible ? "scale-100" : "scale-95"}`}
         onClick={(event) => event.stopPropagation()}
       >
         {closeLabel && <CloseButton onClick={close} label={closeLabel} />}
