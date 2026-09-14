@@ -1,15 +1,17 @@
 import type { ReactNode } from "react";
 
-interface SudokuPhoneProps {
+interface PhoneFrameProps {
   children: ReactNode;
 }
 
 /*
- * A Samsung Galaxy S26 drawn to scale, from `md` up; on a real phone the
- * children render as they are and the phone in the hand is the frame.
+ * A Samsung Galaxy S26 drawn to scale around a dialog's content, from `md`
+ * up; on a real phone the children render as they are and the phone in the
+ * hand is the frame. Pair it with a `frameless` Modal.
  *
  * The body is 71.7 x 149.6 mm and the 6.3" 19.5:9 screen is 67.1 x 145.3 mm,
- * so every measurement below is a fraction of the body height (--h):
+ * so every measurement below is a fraction of the body height,
+ * min(52rem, 92dvh):
  * bezels of 2.3 mm at the sides (1.55%) and 2.15 mm top and bottom (1.44%),
  * a 3.3 mm punch hole (2.2%) 3.5 mm from the top edge of the glass (2.3%).
  * Padding is written against the height rather than as a percentage, since
@@ -29,7 +31,7 @@ const CAMERA =
 // The volume rocker and the side key, both on the right edge.
 const KEY = "absolute -right-1 w-1 rounded-r-sm bg-gray-400 max-md:hidden dark:bg-gray-600";
 
-const SudokuPhone = ({ children }: SudokuPhoneProps) => (
+const PhoneFrame = ({ children }: PhoneFrameProps) => (
   <div className={BODY}>
     <span aria-hidden className={`${KEY} top-[22%] h-[14%]`} />
     <span aria-hidden className={`${KEY} top-[40%] h-[8%]`} />
@@ -41,4 +43,4 @@ const SudokuPhone = ({ children }: SudokuPhoneProps) => (
   </div>
 );
 
-export default SudokuPhone;
+export default PhoneFrame;

@@ -46,6 +46,7 @@ Before writing markup, check whether one of these already covers it:
 | ---------------------------------------------------------------------- | -------------------------------------------------- |
 | A filled or outlined button, on a `<button>`, `<a>` or router `<Link>` | `components/ui/Button` (`Button`, `buttonClasses`) |
 | A centred dialog over a dimmed backdrop                                | `components/ui/modal/Modal`                        |
+| A phone-shaped frame around a dialog's content from `md` up            | `components/ui/PhoneFrame`                         |
 | A text link with a leading or trailing arrow                           | `components/ui/ArrowLink`                          |
 | A quotation in a bordered card                                         | `features/quotes/QuoteCard`                        |
 | The `[HU]` marker on Hungarian content                                 | `components/content/LanguageBadge`                 |
