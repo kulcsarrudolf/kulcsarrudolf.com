@@ -38,6 +38,7 @@
         "text": "You saw one of my projects and want to talk about it."
       },
       "easterEgg": "You found the easter egg on this site.",
+      "easterEggHint": "Actually, there are at least two. Have fun finding them.",
       "message": "Send me a message",
       "scheduleCall": "Schedule a call"
     },
