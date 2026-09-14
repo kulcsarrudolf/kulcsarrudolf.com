@@ -37,6 +37,27 @@ export const WithoutCloseButton: Story = {
   args: { closeLabel: undefined },
 };
 
+export const Frameless: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "The white card stays on a phone and drops away from `md` up, for a dialog that draws a frame of its own.",
+      },
+    },
+  },
+  args: {
+    frameless: true,
+    closeLabel: undefined,
+    panelClassName: "p-6 md:p-0",
+    children: (
+      <div className="rounded-3xl bg-gray-900 p-10 text-center text-white shadow-2xl">
+        A frame of its own
+      </div>
+    ),
+  },
+};
+
 export const DismissedFromInside: Story = {
   parameters: {
     docs: {

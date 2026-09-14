@@ -33,12 +33,12 @@ const SudokuBoard = ({
   highlightingFor,
   onSelect,
 }: SudokuBoardProps) => (
-  <div className="grid grid-cols-9 gap-0 border-2 border-gray-800 dark:border-gray-400">
+  <div className="grid w-full grid-cols-9 gap-0 border-2 border-gray-800 dark:border-gray-400">
     {board.map((value, index) => {
       const { isHighlighted, isSameNumber } = highlightingFor(index);
 
       return (
-        <div key={index} className={boxBorders(index)}>
+        <div key={index} className={`aspect-square ${boxBorders(index)}`}>
           <SudokuCell
             value={value}
             isOriginal={originalCells.has(index)}

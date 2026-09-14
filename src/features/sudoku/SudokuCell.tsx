@@ -47,7 +47,7 @@ const SudokuCell = ({
 
   return (
     <button
-      className={`w-8 h-8 sm:w-10 sm:h-10 border border-gray-300 dark:border-line-dark flex items-center justify-center text-sm sm:text-base transition-colors ${bgColor} ${textColor} ${
+      className={`size-full border border-gray-300 dark:border-line-dark flex items-center justify-center text-base transition-colors ${bgColor} ${textColor} ${
         !isRevealed ? "cursor-pointer" : ""
       } ${isShaking ? "animate-shake" : ""}`}
       onClick={onClick}
