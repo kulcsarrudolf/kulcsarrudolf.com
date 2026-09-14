@@ -29,6 +29,8 @@ interface TerminalProps {
  * A terminal window in which `./intro.sh` has just printed who I am and where
  * to go next, with a prompt underneath that actually takes commands. Return
  * runs the line; `help` lists what works, and a page name opens that page.
+ * `send-message` asks for a name, an email, a website and a message at the
+ * prompt, and sends them the way the contact form does.
  * Two commands are missing from that list on purpose: one counts down to the
  * wedding, the other opens the sudoku, and both are there to be found rather
  * than advertised; the wedding one also floats hearts over the whole page for
@@ -62,6 +64,8 @@ const Terminal = ({ launcher = false }: TerminalProps) => {
     closeSudoku,
     focusPrompt,
     onSubmit,
+    step,
+    busy,
     inputProps,
   } = useTerminal(!launcher);
 
@@ -133,6 +137,8 @@ const Terminal = ({ launcher = false }: TerminalProps) => {
         <div className="flex min-h-0 flex-col overflow-hidden" inert={shaded || undefined}>
           <TerminalBody
             entries={entries}
+            step={step}
+            busy={busy}
             atmosphereEntryId={atmosphereEntryId}
             onStopAtmosphere={atmosphere.stop}
             input={input}

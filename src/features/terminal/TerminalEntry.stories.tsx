@@ -37,6 +37,26 @@ export const Help: Story = {
   args: { command: "help", result: { kind: "help" } },
 };
 
+export const SendMessage: Story = {
+  args: { command: "send-message", result: { kind: "sendMessage" } },
+};
+
+export const MessageAnswer: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "A line typed while `send-message` has a question open: the question stands in for the prompt, and a rejected answer says why.",
+      },
+    },
+  },
+  args: {
+    command: "jane@example",
+    prompt: "email",
+    result: { kind: "message", note: { kind: "invalid", field: "email" } },
+  },
+};
+
 export const Navigate: Story = {
   args: {
     command: "cd blog",
