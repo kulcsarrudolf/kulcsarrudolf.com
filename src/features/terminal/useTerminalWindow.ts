@@ -1,7 +1,7 @@
 import { useRouterState } from "@tanstack/react-router";
 import { type RefObject, useCallback, useEffect, useRef, useState } from "react";
 
-import { openingRect, useFloatingFrame } from "./useFloatingFrame";
+import { liftedRect, openingRect, useFloatingFrame } from "./useFloatingFrame";
 
 /**
  * Opening the window and moving it between the page and the portal both build
@@ -21,8 +21,9 @@ const restoreCaret = (focus: () => void) => requestAnimationFrame(focus);
  * the page and is over it, at the size and position the frame keeps.
  *
  * A terminal that belongs to the page it is on starts open, in the flow, and
- * green lifts it off the page from exactly the rectangle it occupies there —
- * which is why the dock element it sits in is measured rather than guessed.
+ * green lifts it off the page from the rectangle it occupies there, a little
+ * narrower and shifted right, so the window visibly comes away — which is why
+ * the dock element it sits in is measured rather than guessed.
  * What it leaves behind closes up: a window lifted over the page has left the
  * page, and holding its old height open would leave a hole in it.
  *
@@ -72,7 +73,7 @@ export function useTerminalWindow(launcher: boolean, onRestoreFocus: () => void)
     if (!dock) return;
 
     if (rect) drop();
-    else lift(dock.getBoundingClientRect());
+    else lift(liftedRect(dock.getBoundingClientRect()));
 
     restoreCaret(onRestoreFocus);
   }, [drop, launcher, lift, onRestoreFocus, rect, zoom]);

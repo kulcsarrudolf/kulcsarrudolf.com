@@ -17,6 +17,10 @@ const OPENING_WIDTH = 720;
 const OPENING_HEIGHT = 420;
 /** How far one arrow key moves an edge. */
 const KEY_STEP = 24;
+/** How much narrower a window lifted off the page is, and how far it shifts. */
+const LIFT_WIDTH_RATIO = 0.8;
+const LIFT_OFFSET_X = 48;
+const LIFT_OFFSET_Y = 24;
 
 export interface Rect {
   x: number;
@@ -59,6 +63,21 @@ export const openingRect = (): Rect => {
   const width = Math.min(OPENING_WIDTH, bounds.width - MARGIN * 2);
   const height = Math.min(OPENING_HEIGHT, bounds.height - MARGIN * 2);
   return { width, height, x: bounds.width - width - MARGIN, y: bounds.height - height - MARGIN };
+};
+
+/**
+ * Where a window lifted off the page starts: narrower than the place it came
+ * from and shifted right and down from it, so pressing green reads as a new
+ * window rather than the same one with a deeper shadow.
+ */
+export const liftedRect = (from: Rect): Rect => {
+  const width = Math.max(MIN_WIDTH, Math.round(from.width * LIFT_WIDTH_RATIO));
+  return {
+    width,
+    height: from.height,
+    x: from.x + (from.width - width) / 2 + LIFT_OFFSET_X,
+    y: from.y + LIFT_OFFSET_Y,
+  };
 };
 
 const clamp = (value: number, low: number, high: number) =>
