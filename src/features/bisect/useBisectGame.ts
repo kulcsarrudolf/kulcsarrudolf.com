@@ -11,9 +11,9 @@ import type { AimSource } from "./useCutGesture";
  *
  * Each shape is cut as often as the player likes, but only the first cut
  * counts, which is the Cutle rule: the rest is practice. `aim` is the line
- * being drawn, `aimedBy` what it is drawn with, and `cut` the last one let go
- * of; drawing a new line takes the old cut away. Moving on from the last shape ends the run, and the summary
- * is what is left.
+ * being drawn or adjusted, `aimedBy` what it is drawn with, and `cut` the
+ * last one cut along; drawing a new line takes the old cut away. Moving on
+ * from the last shape ends the run, and the summary is what is left.
  *
  * The shapes do not have to be taken in the order they were dealt: `pick`
  * brings any of them up. One not played yet takes the next slot of the run;
@@ -41,6 +41,7 @@ export function useBisectGame() {
     if (line) setCut(null);
   }, []);
 
+  /** Cuts the shape along the line, which is what scores it. */
   const release = useCallback(
     (line: Line) => {
       if (!shape) return;
@@ -104,6 +105,8 @@ export function useBisectGame() {
     round: Math.min(index + 1, order.length),
     total: order.length,
     aim,
+    /** There is a line on the board, ready to cut along. */
+    canCut: aim !== null,
     /** What the line is being drawn with, while there is one. */
     aiming: aim ? aimedBy : null,
     cut,

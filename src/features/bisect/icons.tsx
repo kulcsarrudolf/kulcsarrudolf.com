@@ -25,6 +25,17 @@ export const RetryIcon = () => (
   </Icon>
 );
 
+/** A pair of scissors, on the button that makes the cut. */
+export const CutIcon = () => (
+  <Icon>
+    <circle cx="6" cy="6" r="3" />
+    <circle cx="6" cy="18" r="3" />
+    <path d="M20 4L8.1 15.9" />
+    <path d="M14.5 14.5L20 20" />
+    <path d="M8.1 8.1L12 12" />
+  </Icon>
+);
+
 /** An arrow on to the next shape. */
 export const NextIcon = () => (
   <Icon>

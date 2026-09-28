@@ -1,16 +1,19 @@
 import Button from "@/components/ui/Button";
 import { useTranslation } from "@/i18n/useTranslation";
 
-import { FinishIcon, NextIcon, RetryIcon } from "./icons";
+import { CutIcon, FinishIcon, NextIcon, RetryIcon } from "./icons";
 
 interface BisectActionsProps {
-  /** There is a cut on the board to take back. */
+  /** There is a line or a cut on the board to take back. */
   canRetry: boolean;
-  /** The shape's first cut is in, so the run can move on. */
-  canMoveOn: boolean;
+  /** There is a line on the board to cut along. */
+  canCut: boolean;
+  /** The cut is made and its result is showing, so the run can move on. */
+  cutMade: boolean;
   /** No shape is left uncut after this one, so moving on ends the run. */
   last: boolean;
   onRetry: () => void;
+  onCut: () => void;
   onNext: () => void;
 }
 
@@ -29,13 +32,23 @@ const Key = ({ children }: { children: string }) => (
 );
 
 /**
- * The two ways off a cut: take it back and cut the shape again, or move on.
- * Both stay in place from the start, so nothing shifts when the first cut
- * lands; they only light up once there is something for them to do. Each
- * carries the key that does the same. Retry keeps its own width and Next
- * takes the rest of the row, dropping under it only when the row is too narrow.
+ * Retry, and the one button that takes the shape forward: Cut while the line
+ * is still being set, lit once there is one, and Next in its place once the
+ * cut is made and its result is showing. Both stay in place from the start,
+ * so nothing shifts when the cut lands, and the second is the same button
+ * throughout, so the focus stays on it from Cut to Next. Each carries the key
+ * that does the same. Retry keeps its own width and the other takes the rest
+ * of the row, dropping under it only when the row is too narrow.
  */
-const BisectActions = ({ canRetry, canMoveOn, last, onRetry, onNext }: BisectActionsProps) => {
+const BisectActions = ({
+  canRetry,
+  canCut,
+  cutMade,
+  last,
+  onRetry,
+  onCut,
+  onNext,
+}: BisectActionsProps) => {
   const { t } = useTranslation();
 
   return (
@@ -51,16 +64,30 @@ const BisectActions = ({ canRetry, canMoveOn, last, onRetry, onNext }: BisectAct
         {t("bisect.retry")}
         <Key>R</Key>
       </Button>
-      <Button
-        onClick={onNext}
-        disabled={!canMoveOn}
-        aria-keyshortcuts="Space"
-        className={`grow px-4 whitespace-nowrap ${DISABLED}`}
-      >
-        {t(last ? "bisect.finish" : "bisect.next")}
-        {last ? <FinishIcon /> : <NextIcon />}
-        <Key>Space</Key>
-      </Button>
+      {cutMade ? (
+        <Button
+          key="forward"
+          onClick={onNext}
+          aria-keyshortcuts="Space"
+          className="grow px-4 whitespace-nowrap"
+        >
+          {t(last ? "bisect.finish" : "bisect.next")}
+          {last ? <FinishIcon /> : <NextIcon />}
+          <Key>Space</Key>
+        </Button>
+      ) : (
+        <Button
+          key="forward"
+          onClick={onCut}
+          disabled={!canCut}
+          aria-keyshortcuts="Enter"
+          className={`grow px-4 whitespace-nowrap ${DISABLED}`}
+        >
+          <CutIcon />
+          {t("bisect.cut")}
+          <Key>Enter</Key>
+        </Button>
+      )}
     </div>
   );
 };

@@ -177,12 +177,12 @@
     "endGame": "End Game"
   },
   "bisect": {
-    "hint": "Drag a line across the shape to cut it in half.",
+    "hint": "Drag a line across the shape, adjust its ends, then cut.",
     "aiming": {
-      "pointer": "Let go to cut. Drag back to the start to cancel.",
+      "pointer": "Drag either end round the rim to adjust, then press Cut.",
       "keys": "Enter cuts, Esc cancels."
     },
-    "keys": "Keys: ← → turn the line, ↑ ↓ slide it, Enter cuts, Esc cancels. Shift snaps a drag to 15°.",
+    "keys": "Keys: ← → turn the line, ↑ ↓ slide it, Enter cuts, Esc clears it. Shift snaps a drag to 15°.",
     "board": "Board with the shape",
     "practice": "Practice: only the first cut counts.",
     "verdict": {
@@ -191,6 +191,7 @@
       "miss": "Not quite half."
     },
     "retry": "Retry",
+    "cut": "Cut",
     "next": "Next",
     "finish": "See results",
     "summary": {

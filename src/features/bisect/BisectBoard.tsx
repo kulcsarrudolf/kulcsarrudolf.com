@@ -33,7 +33,8 @@ const SIDE_FILL: Record<Side, string> = {
 /**
  * The board: the circle, the shape inside it, and the line across it. While
  * a line is drawn the shape is coloured by side, so the two halves can be
- * weighed by eye; once it is let go the halves part along the cut and each
+ * weighed by eye, and its two ends carry handles to take hold of and slide
+ * round the rim. Once it is cut the halves part along the line and each
  * carries its share. The numbers only come with the cut, as in Cutle.
  *
  * A press is marked where it lands, before there is a line to show for it,
@@ -45,7 +46,7 @@ const BisectBoard = ({ shape, aim, cut, onAim, onCut, label, describedBy }: Bise
   const parted = cut !== null && aim === null;
   const ends = line && chord(line, CENTER, RIM_RADIUS);
 
-  const { svgRef, press, handlers } = useCutGesture({
+  const { svgRef, press, active, grabbing, handlers } = useCutGesture({
     aim,
     lastLine: cut?.line ?? null,
     onAim,
@@ -81,7 +82,7 @@ const BisectBoard = ({ shape, aim, cut, onAim, onCut, label, describedBy }: Bise
       // the rim. Keyboard focus lights the rim instead of ringing the box.
       // A touch on it is the game's alone: no scrolling or zooming the page,
       // no tap flash, and no callout when a finger rests on it.
-      className="group aspect-square w-full cursor-crosshair touch-none select-none outline-hidden [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none]"
+      className={`group aspect-square w-full overflow-visible ${grabbing ? "cursor-grabbing" : active !== null ? "cursor-grab" : "cursor-crosshair"} touch-none select-none outline-hidden [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none]`}
       {...handlers}
     >
       <circle
@@ -124,16 +125,35 @@ const BisectBoard = ({ shape, aim, cut, onAim, onCut, label, describedBy }: Bise
             strokeWidth={1.2}
             strokeDasharray="4 3"
           />
-          {ends.map(([x, y], i) => (
-            <circle
-              key={i}
-              cx={x}
-              cy={y}
-              r={3}
-              className="fill-gray-800 stroke-white"
-              strokeWidth={1.2}
-            />
-          ))}
+          {ends.map(([x, y], i) =>
+            aim ? (
+              // A handle: a halo to aim a finger at, lit while it is held.
+              <g key={i} className="pointer-events-none">
+                <circle
+                  cx={x}
+                  cy={y}
+                  r={active === i ? 11 : 8}
+                  className={`transition-[r] duration-150 motion-reduce:transition-none ${active === i ? "fill-white/30" : "fill-white/15"}`}
+                />
+                <circle
+                  cx={x}
+                  cy={y}
+                  r={4.5}
+                  className="fill-gray-900 stroke-white"
+                  strokeWidth={1.5}
+                />
+              </g>
+            ) : (
+              <circle
+                key={i}
+                cx={x}
+                cy={y}
+                r={3}
+                className="fill-gray-800 stroke-white"
+                strokeWidth={1.2}
+              />
+            ),
+          )}
         </g>
       )}
 
