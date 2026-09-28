@@ -178,7 +178,11 @@
   },
   "bisect": {
     "hint": "Húzz egy vonalat az alakzaton át, és vágd félbe.",
-    "keys": "Billentyűzet: ← → forgatja a vonalat, ↑ ↓ eltolja, az Enter vág.",
+    "aiming": {
+      "pointer": "Engedd el, és vág. Húzd vissza a kezdőpontra, ha mégsem.",
+      "keys": "Az Enter vág, az Esc visszavonja."
+    },
+    "keys": "Billentyűk: ← → forgat, ↑ ↓ eltol, az Enter vág, az Esc visszavon. Húzás közben a Shift 15°-ra igazít.",
     "board": "Tábla, rajta az alakzat",
     "practice": "Gyakorlás: csak az első vágás számít.",
     "verdict": {

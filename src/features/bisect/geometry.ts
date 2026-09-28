@@ -249,6 +249,23 @@ export function aimOf(center: Point, line: Line): { angle: number; offset: numbe
 }
 
 /**
+ * The line turned about its start to the nearest multiple of `step` degrees,
+ * its length kept: what holding Shift does to a line drawn with the mouse.
+ */
+export function snapped(line: Line, step: number): Line {
+  const [fx, fy] = line.from;
+  const dx = line.to[0] - fx;
+  const dy = line.to[1] - fy;
+  const length = Math.hypot(dx, dy);
+  const degrees = (Math.atan2(dy, dx) * 180) / Math.PI;
+  const radians = (Math.round(degrees / step) * step * Math.PI) / 180;
+  return {
+    from: line.from,
+    to: [fx + Math.cos(radians) * length, fy + Math.sin(radians) * length],
+  };
+}
+
+/**
  * A quadrilateral covering everything on one side of the line out to
  * `reach`, for clipping the drawing of that side.
  */

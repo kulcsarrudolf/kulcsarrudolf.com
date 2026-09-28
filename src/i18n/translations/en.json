@@ -178,7 +178,11 @@
   },
   "bisect": {
     "hint": "Drag a line across the shape to cut it in half.",
-    "keys": "Keyboard: ← → turn the line, ↑ ↓ slide it, Enter cuts.",
+    "aiming": {
+      "pointer": "Let go to cut. Drag back to the start to cancel.",
+      "keys": "Enter cuts, Esc cancels."
+    },
+    "keys": "Keys: ← → turn the line, ↑ ↓ slide it, Enter cuts, Esc cancels. Shift snaps a drag to 15°.",
     "board": "Board with the shape",
     "practice": "Practice: only the first cut counts.",
     "verdict": {
