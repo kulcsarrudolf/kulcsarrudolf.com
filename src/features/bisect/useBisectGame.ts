@@ -4,14 +4,15 @@ import { type Cut, cut as cutShape, place, type PlacedShape } from "./board";
 import type { Line } from "./geometry";
 import { shuffle, summarize } from "./score";
 import { SHAPES } from "./shapes";
+import type { AimSource } from "./useCutGesture";
 
 /**
  * A run through every shape, in an order shuffled for each run.
  *
  * Each shape is cut as often as the player likes, but only the first cut
  * counts, which is the Cutle rule: the rest is practice. `aim` is the line
- * being drawn, and `cut` the last one let go of; drawing a new line takes the
- * old cut away. Moving on from the last shape ends the run, and the summary
+ * being drawn, `aimedBy` what it is drawn with, and `cut` the last one let go
+ * of; drawing a new line takes the old cut away. Moving on from the last shape ends the run, and the summary
  * is what is left.
  */
 export function useBisectGame() {
@@ -20,6 +21,7 @@ export function useBisectGame() {
   // The first cut of each shape, in the order they were played.
   const [scores, setScores] = useState<Cut[]>([]);
   const [aim, setAim] = useState<Line | null>(null);
+  const [aimedBy, setAimedBy] = useState<AimSource>("pointer");
   const [cut, setCut] = useState<Cut | null>(null);
 
   const finished = index >= order.length;
@@ -28,8 +30,9 @@ export function useBisectGame() {
     [finished, order, index],
   );
 
-  const aimAt = useCallback((line: Line | null) => {
+  const aimAt = useCallback((line: Line | null, by: AimSource) => {
     setAim(line);
+    setAimedBy(by);
     if (line) setCut(null);
   }, []);
 
@@ -64,6 +67,8 @@ export function useBisectGame() {
     round: Math.min(index + 1, order.length),
     total: order.length,
     aim,
+    /** What the line is being drawn with, while there is one. */
+    aiming: aim ? aimedBy : null,
     cut,
     /** The cut on screen is practice: the shape's first cut has been made. */
     practice: cut !== null && scores[index] !== cut,

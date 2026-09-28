@@ -2,7 +2,7 @@ import { useEffect, useId } from "react";
 
 import { BOARD_SIZE, CENTER, type Cut, formatTenths, type PlacedShape, RIM_RADIUS } from "./board";
 import { chord, halfPlane, type Line, type Side, toPath } from "./geometry";
-import { useCutGesture } from "./useCutGesture";
+import { type AimSource, useCutGesture } from "./useCutGesture";
 
 interface BisectBoardProps {
   shape: PlacedShape;
@@ -10,7 +10,7 @@ interface BisectBoardProps {
   aim: Line | null;
   /** The last cut let go of, drawn with its halves pulled apart. */
   cut: Cut | null;
-  onAim: (line: Line | null) => void;
+  onAim: (line: Line | null, by: AimSource) => void;
   onCut: (line: Line) => void;
   /** Names the board for a screen reader. */
   label: string;
@@ -35,6 +35,9 @@ const SIDE_FILL: Record<Side, string> = {
  * a line is drawn the shape is coloured by side, so the two halves can be
  * weighed by eye; once it is let go the halves part along the cut and each
  * carries its share. The numbers only come with the cut, as in Cutle.
+ *
+ * A press is marked where it lands, before there is a line to show for it,
+ * and the mark is where to drag back to for taking the line back.
  */
 const BisectBoard = ({ shape, aim, cut, onAim, onCut, label, describedBy }: BisectBoardProps) => {
   const id = useId();
@@ -42,7 +45,7 @@ const BisectBoard = ({ shape, aim, cut, onAim, onCut, label, describedBy }: Bise
   const parted = cut !== null && aim === null;
   const ends = line && chord(line, CENTER, RIM_RADIUS);
 
-  const { svgRef, handlers } = useCutGesture({
+  const { svgRef, press, handlers } = useCutGesture({
     aim,
     lastLine: cut?.line ?? null,
     onAim,
@@ -76,7 +79,9 @@ const BisectBoard = ({ shape, aim, cut, onAim, onCut, label, describedBy }: Bise
       // Square rather than round, corners and all: a rounded box only takes
       // presses inside its curve, and a cut is naturally started just outside
       // the rim. Keyboard focus lights the rim instead of ringing the box.
-      className="group aspect-square w-full cursor-crosshair touch-none select-none outline-hidden"
+      // A touch on it is the game's alone: no scrolling or zooming the page,
+      // no tap flash, and no callout when a finger rests on it.
+      className="group aspect-square w-full cursor-crosshair touch-none select-none outline-hidden [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none]"
       {...handlers}
     >
       <circle
@@ -130,6 +135,16 @@ const BisectBoard = ({ shape, aim, cut, onAim, onCut, label, describedBy }: Bise
             />
           ))}
         </g>
+      )}
+
+      {press && (
+        <circle
+          cx={press[0]}
+          cy={press[1]}
+          r={aim ? 2.5 : 4}
+          className="pointer-events-none fill-white/90 stroke-gray-900"
+          strokeWidth={1}
+        />
       )}
 
       {parted &&

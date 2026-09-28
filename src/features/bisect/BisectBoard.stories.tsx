@@ -18,7 +18,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "The board a shape is cut on. Press and drag across it to draw a line, and let go to cut: the halves part along the line and each shows its share. With the board focused, the arrow keys bring a line up, turn it and slide it, and Enter cuts. The first two stories are playable.",
+          "The board a shape is cut on. Press and drag across it to draw a line, and let go to cut: the halves part along the line and each shows its share. Until it is let go the line can be taken back, by dragging back to the mark where the press landed, with a second finger, with the other mouse button or with Escape, and holding Shift snaps it to 15°. With the board focused, the arrow keys bring a line up, turn it and slide it, and Enter cuts. The first two stories are playable.",
       },
     },
   },

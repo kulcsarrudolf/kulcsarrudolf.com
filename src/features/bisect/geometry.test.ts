@@ -10,6 +10,7 @@ import {
   rasterize,
   type Ring,
   signedArea,
+  snapped,
   split,
 } from "./geometry";
 
@@ -118,6 +119,21 @@ describe("lineAt and aimOf", () => {
     const { angle, offset } = aimOf(center, lineAt(center, 30, 12));
     expect(angle).toBeCloseTo(30, 9);
     expect(offset).toBeCloseTo(12, 9);
+  });
+});
+
+describe("snapped", () => {
+  it("turns the line to the nearest step about its start and keeps its length", () => {
+    const line = snapped({ from: [10, 10], to: [30, 12] }, 15);
+    expect(line.from).toEqual([10, 10]);
+    expect(line.to[0]).toBeCloseTo(10 + Math.hypot(20, 2), 9);
+    expect(line.to[1]).toBeCloseTo(10, 9);
+  });
+
+  it("leaves a line already on a step where it is", () => {
+    const line = snapped({ from: [0, 0], to: [-4, 4] }, 15);
+    expect(line.to[0]).toBeCloseTo(-4, 9);
+    expect(line.to[1]).toBeCloseTo(4, 9);
   });
 });
 
