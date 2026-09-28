@@ -524,20 +524,15 @@
   resolved "https://registry.yarnpkg.com/@fontsource-variable/inter/-/inter-5.3.0.tgz#351dd1e02dab63a6cf66d57ec36dcfd10c07f07b"
   integrity sha512-OupL48va4JNofb97w6NYeF9S7W/kHNKM0Er8Dem5nqi4jeOLrVJDoE8tZEpnMJmtkvNbB1EIPPwHcdkF6b1oUA==
 
-"@fontsource/cormorant-garamond@^5.3.0":
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/@fontsource/cormorant-garamond/-/cormorant-garamond-5.3.0.tgz#4d6baee3e9257be403a9fc406f42a8a75356824e"
-  integrity sha512-weuGsCirGVWBWqpt6YUp0yLThTe4G8YO45noq8wxeJCRvEpq5lFrxNMFSTxcyOyV5k5otzJ8guDzYegdYlcLMQ==
-
-"@fontsource/great-vibes@^5.3.0":
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/@fontsource/great-vibes/-/great-vibes-5.3.0.tgz#69fb0749c7ccc6a11c7364d1a9193aee7ba890f5"
-  integrity sha512-1w60cXzXnC9V4y943po8044O1mqRQBiTTK75h7OpZE+1VQtx+KlAAzoIyEE5KNzu05gUpxaCQg7cbL7ITSwegQ==
-
 "@fontsource/inter@^5.3.0":
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/@fontsource/inter/-/inter-5.3.0.tgz#866278dc2357659f8be1755c8b67f29d3697b440"
   integrity sha512-RofMylZmjlJEfELXeNHFWBRcSs75rGU/6bV2S2jfnvv/3rPXPGe0LgUJTklcHZ9lM4OZmAVFhcJPnACfb91A3g==
+
+"@fontsource/windsong@^5.3.0":
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/@fontsource/windsong/-/windsong-5.3.0.tgz#dee47de38f4f5403a93730918079c3653da5138b"
+  integrity sha512-hp9NnGFIFQzMHTId0PIsYoTWqrlPiH3n2GNXUdvwV7D3sczT92zHNJt57o3/8RBxybU+vdHADNnO/iMuEs9BjA==
 
 "@fortawesome/fontawesome-common-types@7.3.1":
   version "7.3.1"
