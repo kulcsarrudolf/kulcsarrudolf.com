@@ -22,6 +22,7 @@ const meta = {
     input: "",
     inputRef: null,
     inputProps: { value: "", onChange: () => {}, onKeyDown: () => {} },
+    completion: { ghost: "", candidates: [], selected: -1, onAccept: () => {}, onPick: () => {} },
     onSubmit: (event) => event.preventDefault(),
     onClick: () => {},
     bodyRef: null,
@@ -115,6 +116,81 @@ export const InTheJsConsole: Story = {
       description: {
         story:
           "In the `js` console: each line runs in the page, a declaration stays for the next one, and the prompt is the console's until `.exit`.",
+      },
+    },
+  },
+};
+
+export const Suggesting: Story = {
+  args: {
+    input: "bis",
+    inputProps: { value: "bis", onChange: () => {}, onKeyDown: () => {} },
+    completion: {
+      ghost: "ect",
+      candidates: [],
+      selected: -1,
+      onAccept: () => {},
+      onPick: () => {},
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Three letters in, with the rest of the command offered after the cursor. Tab would take it.",
+      },
+    },
+  },
+};
+
+export const WalkingTheCandidates: Story = {
+  args: {
+    input: "blog/",
+    inputProps: { value: "blog/", onChange: () => {}, onKeyDown: () => {} },
+    completion: {
+      ghost: "",
+      candidates: [
+        { value: "bisect", source: "command", hint: "bisect" },
+        { value: "blog/", source: "command", hint: "navigate", page: "blog/" },
+        { value: "bisect.sh", source: "command", hint: "bisect" },
+      ],
+      selected: 1,
+      onAccept: () => {},
+      onPick: () => {},
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "After `b` and two presses of Tab: the second candidate is on the line and lit in the row, with what it does underneath.",
+      },
+    },
+  },
+};
+
+export const DidYouMean: Story = {
+  args: {
+    entries: [
+      {
+        id: 0,
+        command: "bsiect",
+        result: { kind: "notFound", command: "bsiect", suggestion: "bisect" },
+      },
+    ],
+    completion: {
+      ghost: "bisect",
+      candidates: [],
+      selected: -1,
+      onAccept: () => {},
+      onPick: () => {},
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "A mistyped command: the line says what it was probably meant to be, and the prompt has it waiting.",
       },
     },
   },

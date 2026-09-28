@@ -132,3 +132,17 @@ export const Empty: Story = {
   },
   args: { command: "", result: { kind: "empty" } },
 };
+
+export const NotFoundWithAGuess: Story = {
+  args: {
+    command: "bsiect",
+    result: { kind: "notFound", command: "bsiect", suggestion: "bisect" },
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "A command a slip away from a real one, which the line offers in its place.",
+      },
+    },
+  },
+};

@@ -82,7 +82,14 @@ const TerminalEntry = ({
         <Output>{t("terminal.opening", { page: result.destination.label })}</Output>
       )}
       {result.kind === "notFound" && (
-        <Output>{t("terminal.notFound", { command: result.command })}</Output>
+        <Output>
+          {result.suggestion
+            ? t("terminal.notFoundSuggest", {
+                command: result.command,
+                suggestion: result.suggestion,
+              })
+            : t("terminal.notFound", { command: result.command })}
+        </Output>
       )}
     </div>
   );
