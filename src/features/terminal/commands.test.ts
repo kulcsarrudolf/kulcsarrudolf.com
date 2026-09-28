@@ -2,7 +2,10 @@ import { describe, expect, it } from "vitest";
 
 import quotes from "@/content/quotes";
 
-import { runCommand } from "./commands";
+import en from "@/i18n/translations/en.json";
+import hu from "@/i18n/translations/hu.json";
+
+import { ALIASES, LISTED, runCommand } from "./commands";
 
 describe("runCommand", () => {
   it("treats a blank line as an empty command", () => {
@@ -90,5 +93,40 @@ describe("runCommand", () => {
   it("reports anything else as not found, keeping what was typed", () => {
     expect(runCommand("rm -rf /")).toEqual({ kind: "notFound", command: "rm -rf /" });
     expect(runCommand("cd nowhere")).toEqual({ kind: "notFound", command: "cd nowhere" });
+  });
+
+  it("offers the command a mistyped line was near", () => {
+    expect(runCommand("bsiect")).toEqual({
+      kind: "notFound",
+      command: "bsiect",
+      suggestion: "bisect",
+    });
+    expect(runCommand("sl")).toMatchObject({ suggestion: "ls" });
+    expect(runCommand("porjects")).toMatchObject({ suggestion: "projects/" });
+    expect(runCommand("cd blgo")).toMatchObject({ suggestion: "cd blog/" });
+  });
+
+  it("never offers what help does not list", () => {
+    expect(runCommand("sudokku")).toEqual({ kind: "notFound", command: "sudokku" });
+    expect(runCommand("nr-weding")).toEqual({ kind: "notFound", command: "nr-weding" });
+  });
+});
+
+describe("LISTED and ALIASES", () => {
+  it("lists what help lists, in both languages", () => {
+    for (const name of LISTED) {
+      expect(en.terminal.help).toContain(name);
+      expect(hu.terminal.help).toContain(name);
+    }
+  });
+
+  it("holds only commands that run, and none of the hidden ones", () => {
+    for (const name of [...LISTED, ...ALIASES]) {
+      expect(["notFound", "wedding", "sudoku", "empty"]).not.toContain(runCommand(name).kind);
+    }
+  });
+
+  it("keeps the two lists apart", () => {
+    expect(ALIASES.filter((name) => LISTED.includes(name))).toEqual([]);
   });
 });

@@ -6,6 +6,8 @@
 import quotes from "@/content/quotes";
 import type { Quote } from "@/types/quote";
 
+import { closest } from "./didYouMean";
+
 // The three places the intro points at. The labels are paths rather than
 // copy, so they are the same in every language.
 export const DESTINATIONS = [
@@ -40,7 +42,8 @@ export type CommandResult =
   /** `random-quote`: one line from the quotes, picked when it is run. */
   | { kind: "quote"; quote: Quote }
   | { kind: "navigate"; destination: Destination }
-  | { kind: "notFound"; command: string };
+  /** Nothing by that name. `suggestion` is the command it was probably meant to be. */
+  | { kind: "notFound"; command: string; suggestion?: string };
 
 const INTRO = new Set(["./intro.sh", "intro.sh", "intro", "sh intro.sh", "bash intro.sh"]);
 const LIST = new Set(["ls", "ls -la", "ls -l", "ll", "dir"]);
@@ -79,10 +82,55 @@ const WEDDING = new Set([
 const SUDOKU = new Set(["sudoku", "./sudoku.sh", "sudoku.sh", "sh sudoku.sh", "bash sudoku.sh"]);
 
 // `blog`, `blog/`, `cd blog`, `open blog/`, `cat blog` all open the page.
-const NAVIGATE_PREFIXES = ["cd ", "open ", "cat ", "go "];
+export const NAVIGATE_PREFIXES = ["cd ", "open ", "cat ", "go "];
+
+/** What `help` lists, in its order: the names the prompt offers first. */
+export const LISTED = [
+  "help",
+  "ls",
+  "./intro.sh",
+  "send-message",
+  "js",
+  "bisect",
+  "random-quote",
+  "quote",
+  "clear",
+];
+
+/**
+ * The other spellings of what `help` lists. The wedding and the sudoku are in
+ * neither list, so the prompt never gives away what is there to be found.
+ */
+export const ALIASES = [
+  ...HELP,
+  ...LIST,
+  ...INTRO,
+  ...SEND_MESSAGE,
+  ...JS_CONSOLE,
+  ...BISECT,
+  ...QUOTE,
+  ...CLEAR,
+].filter((name) => !LISTED.includes(name));
 
 const findDestination = (name: string): Destination | undefined =>
   DESTINATIONS.find(({ to }) => to === `/${name}`);
+
+const PAGES = DESTINATIONS.map(({ to }) => to.slice(1));
+const VOCABULARY = [...LISTED, ...PAGES, ...ALIASES];
+
+/** A page is offered the way the intro spells it, with its slash. */
+const spell = (name: string) => findDestination(name)?.label ?? name;
+
+/** What a line that matched nothing was probably meant to be, if anything is near. */
+function suggest(lower: string, prefix: string | undefined, name: string): string | undefined {
+  if (prefix) {
+    const page = closest(name, PAGES);
+    return page && `${prefix}${spell(page)}`;
+  }
+
+  const word = closest(lower, VOCABULARY);
+  return word && spell(word);
+}
 
 /**
  * Turns the typed line into what the terminal should do about it. `random`
@@ -120,5 +168,6 @@ export function runCommand(line: string, random: () => number = Math.random): Co
   const destination = findDestination(name);
   if (destination) return { kind: "navigate", destination };
 
-  return { kind: "notFound", command };
+  const suggestion = suggest(lower, prefix, name);
+  return suggestion ? { kind: "notFound", command, suggestion } : { kind: "notFound", command };
 }

@@ -15,6 +15,7 @@ import { useLangSearch } from "@/i18n/useLangSearch";
 
 import { runCommand } from "./commands";
 import type { EntryResult, Step } from "./sendMessage";
+import { useAutocomplete } from "./useAutocomplete";
 import { useCommandHistory } from "./useCommandHistory";
 import { useJsConsole } from "./useJsConsole";
 import { useSendMessage } from "./useSendMessage";
@@ -58,6 +59,9 @@ const OPENING_ENTRY: TerminalEntry = { id: 0, command: "./intro.sh", result: { k
  * in the page until `.exit` or Ctrl+C, and `js <code>` runs a single line.
  * The arrow keys walk back through what was typed, kept across visits, except
  * while a `send-message` question is open, whose answers are never kept.
+ * What could finish the line is offered after it, and Tab takes it, at the
+ * shell and in the console but never at a question, whose answer is the
+ * visitor's own.
  */
 export function useTerminal(autoFocus: boolean) {
   const navigate = useNavigate();
@@ -100,6 +104,19 @@ export function useTerminal(autoFocus: boolean) {
 
   const { record: recordLine, reset: resetHistory, browse: browseHistory } = useCommandHistory();
 
+  const completion = useAutocomplete(
+    input,
+    setInput,
+    step || busy ? "off" : jsOpen ? "js" : "shell",
+  );
+  const {
+    typed: typedLine,
+    submitted: submittedLine,
+    leave: leaveLine,
+    accept: acceptSuggestion,
+    pick: pickCandidate,
+  } = completion;
+
   // A terminal on screen already has the caret in it, so the first thing
   // typed on the home page lands at the prompt without anyone clicking it
   // first. Only where there is a real pointer: on a touch screen the same
@@ -119,6 +136,7 @@ export function useTerminal(autoFocus: boolean) {
 
     // An open question takes the line as its answer, whatever it says.
     if (step) {
+      submittedLine();
       answerMessage(input);
       return;
     }
@@ -127,11 +145,14 @@ export function useTerminal(autoFocus: boolean) {
 
     // The console takes the line as JavaScript until it is left.
     if (jsOpen) {
+      submittedLine();
       answerJs(input);
       return;
     }
 
     const result = runCommand(input);
+    // A line that was nearly a command leaves the command waiting at the prompt.
+    submittedLine(result.kind === "notFound" ? result.suggestion : undefined);
 
     // `js <code>` prints what the code came to in place of the command's own
     // output, so the console appends the line rather than the shell.
@@ -193,6 +214,7 @@ export function useTerminal(autoFocus: boolean) {
     startMessage,
     step,
     stopAtmosphere,
+    submittedLine,
   ]);
 
   // Closing a game hands the caret back, so the next command can be typed
@@ -202,7 +224,25 @@ export function useTerminal(autoFocus: boolean) {
     inputRef.current?.focus();
   }, []);
 
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => setInput(event.target.value);
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    typedLine();
+    setInput(event.target.value);
+  };
+
+  // Taken with a tap or a click rather than a key, which a phone does not
+  // have, so the caret goes back to the prompt for the Return that follows.
+  const takeSuggestion = useCallback(() => {
+    acceptSuggestion();
+    inputRef.current?.focus({ preventScroll: true });
+  }, [acceptSuggestion]);
+
+  const takeCandidate = useCallback(
+    (index: number) => {
+      pickCandidate(index);
+      inputRef.current?.focus({ preventScroll: true });
+    },
+    [pickCandidate],
+  );
 
   // Return is caught on the key itself, and the default is stopped so the
   // form's implicit submission does not run the line a second time. The form
@@ -217,16 +257,24 @@ export function useTerminal(autoFocus: boolean) {
       if (step) cancelMessage(input);
       else cancelJs(input);
       resetHistory();
+      leaveLine("");
       setInput("");
       return;
     }
+
+    // Tab, Escape and the right arrow are the suggestion's while there is one.
+    if (completion.onKeyDown(event)) return;
 
     // Up and down recall earlier lines, and the default is stopped so the
     // caret does not jump to either end of the line first.
     if (!step && (event.key === "ArrowUp" || event.key === "ArrowDown")) {
       event.preventDefault();
       const recalled = browseHistory(event.key === "ArrowUp" ? "up" : "down", input);
-      if (recalled !== undefined) setInput(recalled);
+      if (recalled !== undefined) {
+        // A recalled line is whole as it is, so nothing is offered to finish it.
+        leaveLine(recalled);
+        setInput(recalled);
+      }
       return;
     }
 
@@ -262,6 +310,14 @@ export function useTerminal(autoFocus: boolean) {
     /** What stands in for the prompt: the open `send-message` question, or the `js` console. */
     prompt: step ?? (jsOpen ? ("js" as const) : null),
     busy,
+    /** What is on offer to finish the line, and the two ways to take it without a key. */
+    completion: {
+      ghost: completion.ghost,
+      candidates: completion.candidates,
+      selected: completion.selected,
+      onAccept: takeSuggestion,
+      onPick: takeCandidate,
+    },
     inputProps: {
       value: input,
       onChange,

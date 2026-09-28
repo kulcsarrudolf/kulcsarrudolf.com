@@ -2,10 +2,15 @@ import type { ChangeEvent, FormEvent, KeyboardEvent, MouseEvent, Ref } from "rea
 
 import { useTranslation } from "@/i18n/useTranslation";
 
+import type { Candidate } from "./autocomplete";
+import GhostText from "./GhostText";
 import { JS_PROMPT } from "./jsConsole";
 import Prompt from "./Prompt";
+import Suggestions, { optionId } from "./Suggestions";
 import TerminalEntry from "./TerminalEntry";
 import type { TerminalEntry as Entry, PromptKind } from "./useTerminal";
+
+const SUGGESTIONS_ID = "terminal-suggestions";
 
 interface TerminalBodyProps {
   entries: Entry[];
@@ -23,6 +28,14 @@ interface TerminalBodyProps {
     onChange: (event: ChangeEvent<HTMLInputElement>) => void;
     onKeyDown: (event: KeyboardEvent<HTMLInputElement>) => void;
   };
+  /** What is on offer to finish the line: the ghost after it, and the row Tab walks. */
+  completion: {
+    ghost: string;
+    candidates: Candidate[];
+    selected: number;
+    onAccept: () => void;
+    onPick: (index: number) => void;
+  };
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
   onClick: (event: MouseEvent<HTMLElement>) => void;
   /** Set on the scrolling element by the hook that owns the window's height. */
@@ -35,7 +48,9 @@ interface TerminalBodyProps {
 /**
  * Everything under the terminal's title bar: what has been run so far, and
  * the line being typed. It scrolls, and a click anywhere in it hands the
- * caret to the prompt the way a real terminal takes focus.
+ * caret to the prompt the way a real terminal takes focus. What could finish
+ * the line is shown after the cursor, and the candidates Tab walks through
+ * in a row underneath.
  */
 const TerminalBody = ({
   entries,
@@ -46,6 +61,7 @@ const TerminalBody = ({
   input,
   inputRef,
   inputProps,
+  completion,
   onSubmit,
   onClick,
   bodyRef,
@@ -59,6 +75,12 @@ const TerminalBody = ({
       : prompt
         ? (t(`terminal.message.prompt.${prompt}`) as string)
         : undefined;
+
+  const { ghost, candidates, selected, onAccept, onPick } = completion;
+  const open = candidates.length > 0;
+  const picked = open ? candidates[selected] : undefined;
+  // The line as it would stand once the suggestion is taken.
+  const suggested = ghost && `${input.trimStart()}${ghost}`;
 
   return (
     // A click anywhere in the window hands focus to the input, which is the
@@ -111,14 +133,47 @@ const TerminalBody = ({
             spellCheck={false}
             enterKeyHint="enter"
             readOnly={busy}
+            role="combobox"
+            aria-autocomplete="both"
+            aria-expanded={open}
+            aria-controls={open ? SUGGESTIONS_ID : undefined}
+            aria-activedescendant={open ? optionId(SUGGESTIONS_ID, selected) : undefined}
             {...inputProps}
           />
-          <span
-            className="h-[18px] w-[9px] shrink-0 bg-white animate-blink motion-reduce:animate-none"
-            aria-hidden="true"
-          />
+          {/* A suggestion carries the cursor on its first letter, so the
+              line runs on into it without a block's width in between. */}
+          {ghost ? (
+            <GhostText
+              text={ghost}
+              keyName={t("terminal.complete.key") as string}
+              label={t("terminal.complete.take", { value: suggested }) as string}
+              onAccept={onAccept}
+            />
+          ) : (
+            <span
+              className="h-[18px] w-[9px] shrink-0 bg-white animate-blink motion-reduce:animate-none"
+              aria-hidden="true"
+            />
+          )}
+        </span>
+        {/* The ghost is a picture of a suggestion, so it is said as well as shown. */}
+        <span className="sr-only" aria-live="polite">
+          {suggested && (t("terminal.complete.announce", { value: suggested }) as string)}
         </span>
       </form>
+
+      {picked && (
+        <Suggestions
+          id={SUGGESTIONS_ID}
+          label={t("terminal.complete.label") as string}
+          candidates={candidates}
+          selected={selected}
+          description={
+            t(`terminal.complete.hint.${picked.hint}`, { page: picked.page ?? "" }) as string
+          }
+          onPick={onPick}
+        />
+      )}
     </div>
   );
 };

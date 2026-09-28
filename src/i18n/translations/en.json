@@ -75,6 +75,28 @@
     "help": "Commands: help, ls, ./intro.sh, send-message, js, bisect, random-quote, quote, clear. Type blog, projects or contact to open a page.",
     "js": "JavaScript console, running in this page. Type .exit or press Ctrl+C to leave.",
     "notFound": "command not found: {command}. Type help to see what works.",
+    "notFoundSuggest": "command not found: {command}. Did you mean {suggestion}?",
+    "complete": {
+      "key": "tab",
+      "label": "Suggestions",
+      "take": "Take the suggestion: {value}",
+      "announce": "Suggestion: {value}. Press Tab to take it.",
+      "hint": {
+        "help": "what works here",
+        "list": "where to go next",
+        "intro": "who I am, once more",
+        "sendMessage": "leave me a message",
+        "jsConsole": "a JavaScript console, running in this page",
+        "bisect": "a game: cut each shape in half",
+        "quote": "a quote, picked at random",
+        "clear": "empty the window",
+        "navigate": "open {page}",
+        "exit": "back to the shell",
+        "method": "a function",
+        "property": "a property",
+        "history": "from your history"
+      }
+    },
     "opening": "Opening {page}",
     "sudoku": "Starting sudoku. Good luck.",
     "bisect": "Starting bisect: cut each shape perfectly in half.",

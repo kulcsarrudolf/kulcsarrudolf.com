@@ -33,7 +33,9 @@ interface TerminalProps {
  * `send-message` asks for a name, an email, a website and a message at the
  * prompt, and sends them the way the contact form does. `js` turns the prompt
  * into the browser console, running each line in the page, and `bisect` opens
- * a game of cutting shapes in half over it.
+ * a game of cutting shapes in half over it. The prompt offers to finish what
+ * is being typed, from what `help` lists and from the visitor's own history,
+ * and Tab takes the offer.
  * Two commands are missing from that list on purpose: one counts down to the
  * wedding, the other opens the sudoku, and both are there to be found rather
  * than advertised; the wedding one also floats hearts over the whole page for
@@ -69,6 +71,7 @@ const Terminal = ({ launcher = false }: TerminalProps) => {
     onSubmit,
     prompt,
     busy,
+    completion,
     inputProps,
   } = useTerminal(!launcher);
 
@@ -97,9 +100,11 @@ const Terminal = ({ launcher = false }: TerminalProps) => {
   const { attachBody, body, scrollToLatest, measured, bodyStyle, handleProps } =
     useTerminalHeight(floating);
 
-  // A new line, and the body the window was rebuilt with when it floated or
-  // came back, both want the history scrolled to its end.
-  useEffect(scrollToLatest, [scrollToLatest, body, entries]);
+  // A new line, the row of suggestions opening under the prompt, and the body
+  // the window was rebuilt with when it floated or came back, all want the
+  // history scrolled to its end.
+  const suggesting = completion.candidates.length > 0;
+  useEffect(scrollToLatest, [scrollToLatest, body, entries, suggesting]);
 
   const terminalWindow = (
     <section
@@ -147,6 +152,7 @@ const Terminal = ({ launcher = false }: TerminalProps) => {
             input={input}
             inputRef={inputRef}
             inputProps={inputProps}
+            completion={completion}
             onSubmit={onSubmit}
             onClick={focusPrompt}
             bodyRef={attachBody}

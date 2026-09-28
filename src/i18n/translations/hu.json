@@ -75,6 +75,28 @@
     "help": "Parancsok: help, ls, ./intro.sh, send-message, js, bisect, random-quote, quote, clear. Írd be, hogy blog, projects vagy contact, és megnyílik az oldal.",
     "js": "JavaScript-konzol, ezen az oldalon fut. Írd be, hogy .exit, vagy nyomd meg a Ctrl+C-t a kilépéshez.",
     "notFound": "a parancs nem található: {command}. Írd be, hogy help, és megmutatom, mi működik.",
+    "notFoundSuggest": "a parancs nem található: {command}. Erre gondoltál: {suggestion}?",
+    "complete": {
+      "key": "tab",
+      "label": "Javaslatok",
+      "take": "Javaslat elfogadása: {value}",
+      "announce": "Javaslat: {value}. A Tab billentyűvel elfogadhatod.",
+      "hint": {
+        "help": "mi működik itt",
+        "list": "merre tovább",
+        "intro": "ki vagyok, még egyszer",
+        "sendMessage": "hagyj nekem üzenetet",
+        "jsConsole": "JavaScript-konzol, ezen az oldalon fut",
+        "bisect": "játék: vágd félbe az alakzatokat",
+        "quote": "egy véletlenszerű idézet",
+        "clear": "az ablak kiürítése",
+        "navigate": "{page} megnyitása",
+        "exit": "vissza a shellhez",
+        "method": "függvény",
+        "property": "tulajdonság",
+        "history": "az előzményeidből"
+      }
+    },
     "opening": "{page} megnyitása",
     "sudoku": "Sudoku indul. Sok sikert!",
     "bisect": "Indul a bisect: vágd pontosan félbe az alakzatokat.",
