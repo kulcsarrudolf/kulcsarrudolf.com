@@ -1,10 +1,10 @@
 import type { ReactNode } from "react";
 
-/** The frame every bisect icon shares: 18px, stroked in the text colour. */
-const Icon = ({ children }: { children: ReactNode }) => (
+/** The frame every bisect icon shares: 18px unless smaller, stroked in the text colour. */
+const Icon = ({ children, size = 18 }: { children: ReactNode; size?: number }) => (
   <svg
-    width="18"
-    height="18"
+    width={size}
+    height={size}
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
@@ -64,5 +64,23 @@ export const CopyIcon = () => (
 export const CheckIcon = () => (
   <Icon>
     <path d="M5 12l5 5 9-10" />
+  </Icon>
+);
+
+/** Four tiles, on the button that shows every shape. */
+export const GridIcon = () => (
+  <Icon size={14}>
+    <rect x="3" y="3" width="7" height="7" rx="1.5" />
+    <rect x="14" y="3" width="7" height="7" rx="1.5" />
+    <rect x="3" y="14" width="7" height="7" rx="1.5" />
+    <rect x="14" y="14" width="7" height="7" rx="1.5" />
+  </Icon>
+);
+
+/** An arrow back, on the button that leaves the shapes for the board. */
+export const BackIcon = () => (
+  <Icon size={14}>
+    <path d="M19 12H5" />
+    <path d="M11 6l-6 6 6 6" />
   </Icon>
 );

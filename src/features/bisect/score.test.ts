@@ -46,12 +46,12 @@ describe("summarize", () => {
 });
 
 describe("shareText", () => {
-  it("prints the score, the tiles five to a row, and where to play", () => {
+  it("prints the score, the tiles eight to a row, and where to play", () => {
     const scores = [
-      ...Array.from({ length: 5 }, () => result(0, "perfect")),
+      ...Array.from({ length: 8 }, () => result(0, "perfect")),
       result(10, "win"),
       result(90, "miss"),
     ];
-    expect(shareText(scores, 20)).toBe("bisect 6/20\n🟩🟩🟩🟩🟩\n🟨⬛\nkulcsarrudolf.com");
+    expect(shareText(scores, 40)).toBe("bisect 9/40\n🟩🟩🟩🟩🟩🟩🟩🟩\n🟨⬛\nkulcsarrudolf.com");
   });
 });

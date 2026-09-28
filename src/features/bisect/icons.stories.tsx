@@ -1,8 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import { CheckIcon, CopyIcon, CutIcon, FinishIcon, NextIcon, RetryIcon } from "./icons";
+import {
+  BackIcon,
+  CheckIcon,
+  CopyIcon,
+  CutIcon,
+  FinishIcon,
+  GridIcon,
+  NextIcon,
+  RetryIcon,
+} from "./icons";
 
-const ICONS = { RetryIcon, CutIcon, NextIcon, FinishIcon, CopyIcon, CheckIcon };
+const ICONS = { RetryIcon, CutIcon, NextIcon, FinishIcon, CopyIcon, CheckIcon, GridIcon, BackIcon };
 
 const meta = {
   title: "Bisect/Icons",
@@ -10,7 +19,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "The icons on bisect's buttons, 18px and stroked in the colour of the label beside them: going again, making the cut, moving on, the results at the end of a run, and copying them.",
+          "The icons on bisect's buttons, 18px and stroked in the colour of the label beside them: going again, making the cut, moving on, the results at the end of a run, copying them, and opening the shapes and leaving them again.",
       },
     },
   },

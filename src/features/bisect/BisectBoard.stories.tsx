@@ -78,7 +78,7 @@ export const EveryShape: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Pick any of the twenty shapes from the `shape` control and cut it.",
+        story: "Pick any of the forty shapes from the `shape` control and cut it.",
       },
     },
   },

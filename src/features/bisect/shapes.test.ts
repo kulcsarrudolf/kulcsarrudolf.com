@@ -5,8 +5,8 @@ import { lineAt, signedArea } from "./geometry";
 import { SHAPES } from "./shapes";
 
 describe("SHAPES", () => {
-  it("holds twenty shapes under distinct kebab-case names", () => {
-    expect(SHAPES).toHaveLength(20);
+  it("holds forty shapes under distinct kebab-case names", () => {
+    expect(SHAPES).toHaveLength(40);
     const ids = SHAPES.map((shape) => shape.id);
     expect(new Set(ids).size).toBe(ids.length);
     for (const id of ids) expect(id).toMatch(/^[a-z0-9]+(-[a-z0-9]+)*$/);

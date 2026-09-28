@@ -7,6 +7,7 @@ import BisectBoard from "./BisectBoard";
 import BisectGallery from "./BisectGallery";
 import BisectStatus from "./BisectStatus";
 import BisectSummary from "./BisectSummary";
+import { BackIcon, GridIcon } from "./icons";
 import { useBisectGame } from "./useBisectGame";
 
 // Nothing here is for selecting: a drag that starts a little off the board
@@ -16,7 +17,7 @@ const BOARD_AND_ASIDE = `${STACKED} short:grid short:grid-cols-[auto_minmax(0,18
 const ASIDE = "short:col-start-2";
 
 /**
- * The game: twenty developer icons, one at a time, each to be cut into two
+ * The game: forty developer icons and logos, one at a time, each to be cut into two
  * equal halves with a single straight line. Only the first cut of a shape
  * counts and 48:52 or better wins, the rules of Cutle, which this is a
  * terminal-flavoured take on. The window is dark in both themes, like the
@@ -25,7 +26,8 @@ const ASIDE = "short:col-start-2";
  * A line is drawn and adjusted first and cut only when asked, with Enter or
  * the Cut button. Off the board, R takes the line or the cut back to start
  * again and Space moves on once the result is showing, and
- * `ls` opens every shape at once, to choose the one to cut.
+ * the Shapes button beside the file name opens every shape at once, to
+ * choose the one to cut.
  *
  * The board sits between the title and the result while there is room to
  * stack them. On a `short` screen, a phone on its side, it takes the height
@@ -71,10 +73,10 @@ const Bisect = () => {
       onKeyDown={onKeyDown}
       ref={rootRef}
     >
-      <div className={`flex items-baseline justify-between gap-4 pr-12 text-sm ${ASIDE}`}>
+      <div className={`flex min-h-8 items-center gap-3 pr-10 ${ASIDE}`}>
         <h2 className="text-lg font-bold text-white">bisect</h2>
         {!game.finished && (
-          <span className="tabular-nums text-gray-400">
+          <span className="rounded-full bg-white/5 px-2.5 py-0.5 text-xs tabular-nums text-gray-400 ring-1 ring-white/10">
             {game.round}/{game.total} · ✓ {game.summary.wins}
           </span>
         )}
@@ -82,8 +84,8 @@ const Bisect = () => {
 
       {game.shape ? (
         <>
-          <div className={`flex items-baseline justify-between gap-3 text-sm ${ASIDE}`}>
-            <p className="truncate text-gray-400">
+          <div className={`flex items-center justify-between gap-3 text-sm ${ASIDE}`}>
+            <p className="min-w-0 truncate text-gray-400">
               ~/bisect/
               {!browsing && <span className="text-brand-on-dark">{game.shape.id}.svg</span>}
             </p>
@@ -91,10 +93,10 @@ const Bisect = () => {
               type="button"
               onClick={() => setBrowsing((open) => !open)}
               aria-expanded={browsing}
-              className="shrink-0 rounded px-1.5 text-brand-on-dark hover:underline focus-visible:outline-2 focus-visible:outline-brand-on-dark"
+              className="inline-flex shrink-0 items-center gap-1.5 rounded-md border border-white/15 px-2.5 py-1 text-xs font-semibold text-gray-200 transition-colors hover:border-white/30 hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-brand-on-dark"
             >
-              {browsing ? t("bisect.gallery.back") : "ls"}
-              {!browsing && <span className="sr-only"> {t("bisect.gallery.open")}</span>}
+              {browsing ? <BackIcon /> : <GridIcon />}
+              {t(browsing ? "bisect.gallery.back" : "bisect.gallery.open")}
             </button>
           </div>
 

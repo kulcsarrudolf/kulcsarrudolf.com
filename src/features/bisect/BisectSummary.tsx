@@ -52,7 +52,7 @@ const BisectSummary = ({ scores, total, onRestart }: BisectSummaryProps) => {
       </p>
       <p className="text-sm text-gray-300">{t("bisect.summary.wins")}</p>
 
-      <ol className="grid grid-cols-5 gap-1.5" aria-label={t("bisect.summary.tiles") as string}>
+      <ol className="grid grid-cols-8 gap-1.5" aria-label={t("bisect.summary.tiles") as string}>
         {scores.map((cut, i) => (
           <li
             key={i}
