@@ -83,6 +83,17 @@ export const JsLine: Story = {
   },
 };
 
+export const Bisect: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: "`bisect` prints one line and opens the cut-it-in-half game over the page.",
+      },
+    },
+  },
+  args: { command: "bisect", result: { kind: "bisect" } },
+};
+
 export const RandomQuote: Story = {
   args: {
     command: "random-quote",

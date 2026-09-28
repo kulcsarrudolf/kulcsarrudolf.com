@@ -29,6 +29,8 @@ export type CommandResult =
   | { kind: "wedding" }
   /** The sudoku, opened over the page. */
   | { kind: "sudoku" }
+  /** `bisect`: the cut-it-in-half game, opened over the page. */
+  | { kind: "bisect" }
   /** `send-message`: the contact form, asked one question at a time. */
   | { kind: "sendMessage" }
   /** `js`: the browser console at the prompt, until `.exit`. */
@@ -48,6 +50,19 @@ const CLEAR = new Set(["clear", "cls"]);
 const SEND_MESSAGE = new Set(["send-message", "mail"]);
 // `node` is what a developer's fingers type for a REPL, so it opens the same one.
 const JS_CONSOLE = new Set(["js", "node", "javascript"]);
+// `git bisect` halves a range of commits the way the game halves a shape, so
+// it opens the game too, as do the plain-words name and the game it is after.
+const BISECT = new Set([
+  "bisect",
+  "git bisect",
+  "./bisect.sh",
+  "bisect.sh",
+  "sh bisect.sh",
+  "bash bisect.sh",
+  "cut-in-half",
+  "cutinhalf",
+  "cutle",
+]);
 // `fortune` is the Unix program that does the same, so it answers too.
 const QUOTE = new Set(["random-quote", "quote", "fortune"]);
 
@@ -85,6 +100,7 @@ export function runCommand(line: string, random: () => number = Math.random): Co
   if (HELP.has(lower)) return { kind: "help" };
   if (CLEAR.has(lower)) return { kind: "clear" };
   if (SUDOKU.has(lower)) return { kind: "sudoku" };
+  if (BISECT.has(lower)) return { kind: "bisect" };
   if (SEND_MESSAGE.has(lower)) return { kind: "sendMessage" };
   if (JS_CONSOLE.has(lower)) return { kind: "jsConsole" };
   if (QUOTE.has(lower)) {

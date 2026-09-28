@@ -1,6 +1,7 @@
 import { useCallback, useEffect } from "react";
 import { createPortal } from "react-dom";
 
+import BisectModal from "@/features/bisect/BisectModal";
 import SudokuModal from "@/features/sudoku/SudokuModal";
 import LovingAtmosphere from "@/features/wedding/LovingAtmosphere";
 import { useTranslation } from "@/i18n/useTranslation";
@@ -31,7 +32,8 @@ interface TerminalProps {
  * runs the line; `help` lists what works, and a page name opens that page.
  * `send-message` asks for a name, an email, a website and a message at the
  * prompt, and sends them the way the contact form does. `js` turns the prompt
- * into the browser console, running each line in the page.
+ * into the browser console, running each line in the page, and `bisect` opens
+ * a game of cutting shapes in half over it.
  * Two commands are missing from that list on purpose: one counts down to the
  * wedding, the other opens the sudoku, and both are there to be found rather
  * than advertised; the wedding one also floats hearts over the whole page for
@@ -61,8 +63,8 @@ const Terminal = ({ launcher = false }: TerminalProps) => {
     inputRef,
     atmosphere,
     atmosphereEntryId,
-    sudokuOpen,
-    closeSudoku,
+    game,
+    closeGame,
     focusPrompt,
     onSubmit,
     prompt,
@@ -192,7 +194,8 @@ const Terminal = ({ launcher = false }: TerminalProps) => {
         </>
       )}
 
-      {sudokuOpen && <SudokuModal onClose={closeSudoku} />}
+      {game === "sudoku" && <SudokuModal onClose={closeGame} />}
+      {game === "bisect" && <BisectModal onClose={closeGame} />}
 
       {atmosphere.running && (
         <LovingAtmosphere fading={atmosphere.fading} fadeMs={atmosphere.fadeMs} />

@@ -35,6 +35,9 @@ export interface TerminalEntry {
 
 export type NewEntry = Omit<TerminalEntry, "id">;
 
+/** The games a command opens over the page. */
+export type Game = "sudoku" | "bisect";
+
 // Enough to scroll back through, not enough to grow the page without end.
 const MAX_ENTRIES = 30;
 
@@ -46,8 +49,8 @@ const OPENING_ENTRY: TerminalEntry = { id: 0, command: "./intro.sh", result: { k
  * Return runs the line. An empty line still adds a fresh prompt underneath,
  * so the terminal answers the key the way a real one does. `clear` empties
  * the history, and a page name navigates with the visitor's language kept.
- * One command opens the sudoku over the page, so the window it belongs to
- * is held here alongside the history. The wedding commands put the loving
+ * Two commands open a game over the page, sudoku and bisect, so which one
+ * is up is held here alongside the history. The wedding commands put the loving
  * atmosphere over it, which any other command takes back down again.
  * `send-message` asks its questions at the prompt, and while one is open
  * every line is its answer until the message is sent or Ctrl+C ends it.
@@ -62,7 +65,7 @@ export function useTerminal(autoFocus: boolean) {
 
   const [entries, setEntries] = useState<TerminalEntry[]>([OPENING_ENTRY]);
   const [input, setInput] = useState("");
-  const [sudokuOpen, setSudokuOpen] = useState(false);
+  const [game, setGame] = useState<Game | null>(null);
 
   // Which entry printed the atmosphere that is up. Only that one shows the way
   // out of it, so the older wedding blocks in the scrollback stay inert.
@@ -162,11 +165,12 @@ export function useTerminal(autoFocus: boolean) {
     if (result.kind === "sendMessage") startMessage();
     if (result.kind === "jsConsole") startJs();
 
-    // The sudoku reads the number keys off the window, so the prompt lets go
-    // of the caret while the game is up rather than collecting what is typed
-    // into it from behind the dialog.
-    if (result.kind === "sudoku") {
-      setSudokuOpen(true);
+    // The games take the keyboard (the sudoku reads the number keys off the
+    // window, bisect the arrows on its board), so the prompt lets go of the
+    // caret while one is up rather than collecting what is typed into it
+    // from behind the dialog.
+    if (result.kind === "sudoku" || result.kind === "bisect") {
+      setGame(result.kind);
       inputRef.current?.blur();
     }
 
@@ -191,10 +195,10 @@ export function useTerminal(autoFocus: boolean) {
     stopAtmosphere,
   ]);
 
-  // Closing the sudoku hands the caret back, so the next command can be
-  // typed without reaching for the mouse.
-  const closeSudoku = useCallback(() => {
-    setSudokuOpen(false);
+  // Closing a game hands the caret back, so the next command can be typed
+  // without reaching for the mouse.
+  const closeGame = useCallback(() => {
+    setGame(null);
     inputRef.current?.focus();
   }, []);
 
@@ -250,8 +254,9 @@ export function useTerminal(autoFocus: boolean) {
     atmosphere,
     /** Null unless the atmosphere is running, so a finished one shows nothing. */
     atmosphereEntryId: atmosphere.running ? atmosphereEntryId : null,
-    sudokuOpen,
-    closeSudoku,
+    /** The game open over the page, if any. */
+    game,
+    closeGame,
     focusPrompt,
     onSubmit,
     /** What stands in for the prompt: the open `send-message` question, or the `js` console. */

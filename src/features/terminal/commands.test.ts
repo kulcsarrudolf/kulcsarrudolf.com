@@ -54,6 +54,13 @@ describe("runCommand", () => {
     expect(runCommand("  sh   sudoku.sh ")).toEqual({ kind: "sudoku" });
   });
 
+  it("opens bisect for its name, git bisect, its script and the plain-words name", () => {
+    for (const line of ["bisect", " Git   Bisect ", "./bisect.sh", "cut-in-half", "cutle"]) {
+      expect(runCommand(line)).toEqual({ kind: "bisect" });
+    }
+    expect(runCommand("git bisect start").kind).toBe("notFound");
+  });
+
   it("starts a message for send-message and mail, while contact still opens the page", () => {
     expect(runCommand("send-message")).toEqual({ kind: "sendMessage" });
     expect(runCommand(" MAIL ")).toEqual({ kind: "sendMessage" });

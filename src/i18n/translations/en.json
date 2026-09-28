@@ -72,11 +72,12 @@
     "whereNext": "Where next?",
     "label": "Introduction",
     "inputLabel": "Type a command",
-    "help": "Commands: help, ls, ./intro.sh, send-message, js, random-quote, quote, clear. Type blog, projects or contact to open a page.",
+    "help": "Commands: help, ls, ./intro.sh, send-message, js, bisect, random-quote, quote, clear. Type blog, projects or contact to open a page.",
     "js": "JavaScript console, running in this page. Type .exit or press Ctrl+C to leave.",
     "notFound": "command not found: {command}. Type help to see what works.",
     "opening": "Opening {page}",
     "sudoku": "Starting sudoku. Good luck.",
+    "bisect": "Starting bisect: cut each shape perfectly in half.",
     "resize": "Terminal height",
     "resizeWindow": "Terminal width and height",
     "close": "Close the terminal",
@@ -174,5 +175,30 @@
     "clear": "Clear",
     "newGame": "New Game",
     "endGame": "End Game"
+  },
+  "bisect": {
+    "hint": "Drag a line across the shape to cut it in half.",
+    "keys": "Keyboard: ← → turn the line, ↑ ↓ slide it, Enter cuts.",
+    "board": "Board with the shape",
+    "practice": "Practice: only the first cut counts.",
+    "verdict": {
+      "perfect": "Perfect cut!",
+      "win": "Clean cut, that's a win.",
+      "miss": "Not quite half."
+    },
+    "next": "Next shape",
+    "finish": "See results",
+    "summary": {
+      "title": "Run complete",
+      "wins": "cuts of 48:52 or better",
+      "tiles": "Each shape's result, in the order they were cut",
+      "perfect": "Perfect",
+      "average": "Avg. miss",
+      "best": "Closest"
+    },
+    "playAgain": "Play again",
+    "copy": "Copy result",
+    "copied": "Copied",
+    "close": "Close bisect"
   }
 }

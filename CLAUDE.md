@@ -18,22 +18,22 @@ When a file approaches the limit, split it along the seams it already has rather
 
 `src/` is arranged so that a file's folder says what may import it:
 
-| Folder                               | Holds                                                                                                                                      | May import from                                           |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------- |
-| `routes/`                            | One file per URL: loader, `head`, and the page it renders. Convention-bound, stays thin                                                    | anything                                                  |
-| `pages/`                             | What a route renders, composed from features and components. No Tailwind                                                                   | `features`, `components`, `i18n`, `types`, `config`       |
-| `features/`                          | One folder per domain (blog, projects, contact, quotes, home, terminal, sudoku, easter-egg, wedding): its components, hooks, data, stories | `components`, `i18n`, `lib`, `types`, `config`, `content` |
-| `components/`                        | Shared code only: `ui/` (primitives), `layout/` (the shell), `content/` (rendering posts and projects)                                     | `i18n`, `lib`, `types`, `config`                          |
-| `server/`                            | Reading the content and building the plain-text responses. Reached only from `routes/` and `start.ts`                                      | `types`, `config`, `content`                              |
-| `content/`                           | Everything authored: posts, projects, drafts, templates, quotes                                                                            | `types`                                                   |
-| `i18n/`, `lib/`, `types/`, `config/` | Leaves                                                                                                                                     | each other                                                |
+| Folder                               | Holds                                                                                                                                              | May import from                                           |
+| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| `routes/`                            | One file per URL: loader, `head`, and the page it renders. Convention-bound, stays thin                                                            | anything                                                  |
+| `pages/`                             | What a route renders, composed from features and components. No Tailwind                                                                           | `features`, `components`, `i18n`, `types`, `config`       |
+| `features/`                          | One folder per domain (blog, projects, contact, quotes, home, terminal, sudoku, bisect, easter-egg, wedding): its components, hooks, data, stories | `components`, `i18n`, `lib`, `types`, `config`, `content` |
+| `components/`                        | Shared code only: `ui/` (primitives), `layout/` (the shell), `content/` (rendering posts and projects)                                             | `i18n`, `lib`, `types`, `config`                          |
+| `server/`                            | Reading the content and building the plain-text responses. Reached only from `routes/` and `start.ts`                                              | `types`, `config`, `content`                              |
+| `content/`                           | Everything authored: posts, projects, drafts, templates, quotes                                                                                    | `types`                                                   |
+| `i18n/`, `lib/`, `types/`, `config/` | Leaves                                                                                                                                             | each other                                                |
 
 A feature never imports another feature, and a component never imports a feature.
 There are three exceptions, and adding a fourth means writing it down here:
 
 - `components/layout/navbar/Brand` renders `features/easter-egg/WelcomeModal` once the avatar ring fills: the modal has to sit outside the brand link, so the wiring lives there.
 - `features/easter-egg/WelcomeModal` renders a quote from `features/quotes` and opens `features/sudoku`, which is what the modal is for.
-- `features/terminal` reads the wedding date from `features/wedding/countdown`, floats `features/wedding/LovingAtmosphere` over the page, and opens `features/sudoku`, for the two commands `help` does not list.
+- `features/terminal` reads the wedding date from `features/wedding/countdown`, floats `features/wedding/LovingAtmosphere` over the page, and opens `features/sudoku`, for the two commands `help` does not list, and opens `features/bisect` for the `bisect` command, which it does list.
 
 Imports use `./` inside a folder and `@/` everywhere else.
 A component file exports its component as the default; hooks, data and helpers export names only.
