@@ -4,6 +4,18 @@ import { WEDDING_DATE, getCountdownUnits, getTimeLeft, unitLabel } from "./count
 
 const AT = (offset: number) => WEDDING_DATE.getTime() - offset;
 
+describe("WEDDING_DATE", () => {
+  it("is 13:00 in Romania on 28 November 2026", () => {
+    const romanian = new Intl.DateTimeFormat("en-GB", {
+      timeZone: "Europe/Bucharest",
+      dateStyle: "short",
+      timeStyle: "short",
+    }).format(WEDDING_DATE);
+
+    expect(romanian).toBe("28/11/2026, 13:00");
+  });
+});
+
 describe("getTimeLeft", () => {
   it("splits what is left into days, hours, minutes and seconds", () => {
     const offset = ((2 * 24 + 3) * 60 + 4) * 60_000 + 5_000;

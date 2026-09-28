@@ -3,7 +3,9 @@
  * /nr and the terminal's hidden `nr` command count down to the same instant.
  */
 
-export const WEDDING_DATE = new Date(2026, 10, 28, 10, 0, 0);
+// 13:00 in Romania, which is UTC+2 in November, fixed to the instant so a
+// visitor in another time zone counts down to the same moment.
+export const WEDDING_DATE = new Date(Date.UTC(2026, 10, 28, 11, 0, 0));
 
 export interface TimeLeft {
   days: number;

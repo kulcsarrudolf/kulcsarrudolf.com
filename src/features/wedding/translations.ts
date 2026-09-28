@@ -17,6 +17,8 @@ export function getNrLanguage(lang: string | string[] | undefined): NrLanguage {
 interface NrContent {
   /** Used for the document title and the photo alt text. */
   names: string;
+  /** The word between the two names, set on its own line under the photo. */
+  and: string;
   subtitle: string;
   date: string;
   weddingDay: string;
@@ -35,8 +37,9 @@ interface NrContent {
 export const nrTranslations: Record<NrLanguage, NrContent> = {
   hu: {
     names: "Rudolf és Nóra",
+    and: "és",
     subtitle: "menyegző",
-    date: "2026. november 28. · 10:00",
+    date: "2026. november 28. · 13:00",
     weddingDay: "Eljött a nagy nap! ♥",
     labels: {
       days: { one: "nap", other: "nap" },
@@ -44,14 +47,15 @@ export const nrTranslations: Record<NrLanguage, NrContent> = {
       minutes: { one: "perc", other: "perc" },
       seconds: { one: "mp", other: "mp" },
     },
-    quote: "„Megtaláltam azt, akit szeret a lelkem.”",
-    quoteReference: "Énekek éneke 3:4",
+    quote: "„…ha szeretjük egymást, Isten lakik bennünk, és az ő szeretete lett teljessé bennünk.”",
+    quoteReference: "1János 4:12",
     stopAtmosphere: "esc a leállításhoz",
   },
   ro: {
     names: "Rudolf și Nóra",
+    and: "și",
     subtitle: "nuntă",
-    date: "28 noiembrie 2026 · 10:00",
+    date: "28 noiembrie 2026 · 13:00",
     weddingDay: "A sosit ziua cea mare! ♥",
     labels: {
       days: { one: "zi", other: "zile" },
@@ -59,14 +63,16 @@ export const nrTranslations: Record<NrLanguage, NrContent> = {
       minutes: { one: "min", other: "min" },
       seconds: { one: "sec", other: "sec" },
     },
-    quote: "„Am găsit pe cel ce-l iubește sufletul meu.”",
-    quoteReference: "Cântarea Cântărilor 3:4",
+    quote:
+      "„…dacă ne iubim unii pe alții, Dumnezeu rămâne în noi, și dragostea Lui a ajuns desăvârșită în noi.”",
+    quoteReference: "1 Ioan 4:12",
     stopAtmosphere: "esc pentru oprire",
   },
   en: {
     names: "Rudolf and Nóra",
+    and: "and",
     subtitle: "wedding",
-    date: "November 28, 2026 · 10:00",
+    date: "November 28, 2026 · 1:00 PM",
     weddingDay: "The big day is here! ♥",
     labels: {
       days: { one: "day", other: "days" },
@@ -74,8 +80,8 @@ export const nrTranslations: Record<NrLanguage, NrContent> = {
       minutes: { one: "min", other: "min" },
       seconds: { one: "sec", other: "sec" },
     },
-    quote: "“I have found the one whom my soul loves.”",
-    quoteReference: "Song of Songs 3:4",
+    quote: "“…if we love one another, God dwelleth in us, and his love is perfected in us.”",
+    quoteReference: "1 John 4:12",
     stopAtmosphere: "esc to stop",
   },
 };
