@@ -14,6 +14,11 @@ import type { AimSource } from "./useCutGesture";
  * being drawn, `aimedBy` what it is drawn with, and `cut` the last one let go
  * of; drawing a new line takes the old cut away. Moving on from the last shape ends the run, and the summary
  * is what is left.
+ *
+ * The shapes do not have to be taken in the order they were dealt: `pick`
+ * brings any of them up. One not played yet takes the next slot of the run;
+ * one already played comes back with its counting cut on the board, to
+ * practise on, and moving on from it returns to the first shape not played.
  */
 export function useBisectGame() {
   const [order, setOrder] = useState(() => shuffle(SHAPES));
@@ -47,11 +52,43 @@ export function useBisectGame() {
     [index, shape],
   );
 
+  // Every shape before `scores.length` in the order has had its first cut,
+  // so that is where the run carries on from.
   const next = useCallback(() => {
     setAim(null);
     setCut(null);
-    setIndex((previous) => previous + 1);
+    setIndex(scores.length);
+  }, [scores.length]);
+
+  /** Takes the cut off the board, to cut the same shape again. */
+  const retry = useCallback(() => {
+    setAim(null);
+    setCut(null);
   }, []);
+
+  const pick = useCallback(
+    (id: string) => {
+      const at = order.findIndex((shape) => shape.id === id);
+      if (at < 0) return;
+      setAim(null);
+      if (at < scores.length) {
+        setIndex(at);
+        setCut(scores[at]);
+        return;
+      }
+      // The next slot is this one while its shape is still uncut, and the
+      // one after it otherwise.
+      const slot = scores.length;
+      if (at !== slot) {
+        const reordered = order.filter((_, i) => i !== at);
+        reordered.splice(slot, 0, order[at]);
+        setOrder(reordered);
+      }
+      setIndex(slot);
+      setCut(null);
+    },
+    [order, scores],
+  );
 
   const restart = useCallback(() => {
     setOrder(shuffle(SHAPES));
@@ -74,13 +111,26 @@ export function useBisectGame() {
     practice: cut !== null && scores[index] !== cut,
     /** The shape's first cut is in, so the run can move on. */
     scored: scores.length > index,
+    /** No shape is left uncut once this one is. */
+    last: scores.length + (scores.length > index ? 0 : 1) >= order.length,
     /** The first cut of each shape played so far. */
     scores,
+    /** Every shape, in the order they are drawn up, with how its first cut went. */
+    lineup: SHAPES.map((definition) => {
+      const at = order.findIndex((shape) => shape.id === definition.id);
+      return {
+        id: definition.id,
+        verdict: scores[at]?.verdict ?? null,
+        current: at === index,
+      };
+    }),
     summary: summarize(scores),
     finished,
     aimAt,
     release,
     next,
+    retry,
+    pick,
     restart,
   };
 }

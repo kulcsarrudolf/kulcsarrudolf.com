@@ -190,7 +190,8 @@
       "win": "Szép vágás, ez nyert.",
       "miss": "Ez még nem fele-fele."
     },
-    "next": "Következő alakzat",
+    "retry": "Újra",
+    "next": "Tovább",
     "finish": "Eredmények",
     "summary": {
       "title": "Vége a körnek",
@@ -203,6 +204,11 @@
     "playAgain": "Új kör",
     "copy": "Eredmény másolása",
     "copied": "Kimásolva",
-    "close": "A bisect bezárása"
+    "close": "A bisect bezárása",
+    "gallery": {
+      "open": "minden alakzat",
+      "label": "Minden alakzat: válaszd ki, melyiket vágod",
+      "back": "vissza"
+    }
   }
 }

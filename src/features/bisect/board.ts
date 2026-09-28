@@ -12,7 +12,7 @@ export const CENTER: Point = [BOARD_SIZE / 2, BOARD_SIZE / 2];
 /** The circle the cut runs across. */
 export const RIM_RADIUS = 94;
 /** How far from the centre a shape may reach, leaving room inside the rim. */
-const SHAPE_RADIUS = 72;
+export const SHAPE_RADIUS = 72;
 
 /**
  * Shares are counted in tenths of a percent, the precision the player reads

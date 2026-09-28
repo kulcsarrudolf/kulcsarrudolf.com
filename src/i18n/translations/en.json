@@ -190,7 +190,8 @@
       "win": "Clean cut, that's a win.",
       "miss": "Not quite half."
     },
-    "next": "Next shape",
+    "retry": "Retry",
+    "next": "Next",
     "finish": "See results",
     "summary": {
       "title": "Run complete",
@@ -203,6 +204,11 @@
     "playAgain": "Play again",
     "copy": "Copy result",
     "copied": "Copied",
-    "close": "Close bisect"
+    "close": "Close bisect",
+    "gallery": {
+      "open": "all shapes",
+      "label": "All shapes: choose one to cut",
+      "back": "back"
+    }
   }
 }

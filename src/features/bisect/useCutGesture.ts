@@ -174,9 +174,11 @@ export function useCutGesture({ aim, lastLine, onAim, onCut }: CutGestureOptions
     // The keyboard stays out of a line the pointer is drawing.
     if (dragRef.current) return;
 
+    // Without a line, Enter and Space are left to the game around the board.
     if (event.key === "Enter" || event.key === " ") {
+      if (!aim) return;
       event.preventDefault();
-      if (aim) onCut(aim);
+      onCut(aim);
       return;
     }
 
