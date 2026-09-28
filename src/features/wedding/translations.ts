@@ -64,7 +64,7 @@ export const nrTranslations: Record<NrLanguage, NrContent> = {
       seconds: { one: "sec", other: "sec" },
     },
     quote:
-      "„…dacă ne iubim unii pe alții, Dumnezeu rămâne în noi, și dragostea Lui a ajuns desăvârșită în noi.”",
+      "„…dacă ne iubim unii pe alții, Dumnezeu rămâne în noi și dragostea Lui a ajuns desăvârșită în noi.”",
     quoteReference: "1 Ioan 4:12",
     stopAtmosphere: "esc pentru oprire",
   },
@@ -80,8 +80,9 @@ export const nrTranslations: Record<NrLanguage, NrContent> = {
       minutes: { one: "min", other: "min" },
       seconds: { one: "sec", other: "sec" },
     },
-    quote: "“…if we love one another, God dwelleth in us, and his love is perfected in us.”",
-    quoteReference: "1 John 4:12",
+    quote:
+      "“…if we love each other, God lives in us, and his love is brought to full expression in us.”",
+    quoteReference: "1 John 4:12 (NLT)",
     stopAtmosphere: "esc to stop",
   },
 };
