@@ -1,23 +1,25 @@
 /**
- * The second twenty shapes: logos from a developer's toolbox, each boiled
+ * The other twenty-one shapes: logos from a developer's toolbox, each boiled
  * down to one flat silhouette. Letters are cut out of a solid as single
- * strokes, since two holes that overlap would fill each other back in.
+ * strokes, since two holes that overlap would fill each other back in. The
+ * logos that do not survive being redrawn from circles and strokes are traced
+ * from the outlines Font Awesome ships.
  */
 
-import type { Point, Ring } from "./geometry";
+import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import {
-  arc,
-  chain,
-  circle,
-  cubic,
-  ellipse,
-  hole,
-  polygon,
-  rect,
-  ribbon,
-  rotate,
-} from "./shapeKit";
+  faAngular,
+  faGithub,
+  faHtml5,
+  faPostgresql,
+  faSwift,
+  faVuejs,
+} from "@fortawesome/free-brands-svg-icons";
+
+import type { Point, Ring } from "./geometry";
+import { arc, chain, circle, cubic, hole, polygon, rect, ribbon, rotate } from "./shapeKit";
 import type { ShapeDefinition } from "./shapes";
+import { outline } from "./svgPath";
 
 const RADIANS = Math.PI / 180;
 
@@ -71,6 +73,13 @@ const chromeSegment = (start: number): Ring => {
 const block = (x: number, y: number, lift: number): Ring =>
   polygon(at(x, y, x + 22, y + lift, x + 22, y + lift + 26, x, y + 26));
 
+/** A Font Awesome icon's outline, scaled to the 100-high authoring box. */
+const traced = ({ icon: [, height, , , path] }: IconDefinition): Ring[] =>
+  outline([path].flat().join(""), 100 / height);
+
+/** Points drawn on a 24 by 24 grid, brought up to the authoring box. */
+const onGrid = (...xy: number[]): Point[] => at(...xy.map((value) => (value * 100) / 24));
+
 export const LOGO_SHAPES: readonly ShapeDefinition[] = [
   {
     id: "apple",
@@ -97,11 +106,21 @@ export const LOGO_SHAPES: readonly ShapeDefinition[] = [
   },
   {
     id: "vscode",
-    draw: () => [
-      polygon(at(68, 6, 94, 18, 94, 82, 68, 94)),
-      ribbon(at(74, 14, 12, 64), 12),
-      ribbon(at(74, 86, 36, 54), 12),
-    ],
+    draw: () =>
+      rotate(
+        [
+          polygon(
+            chain(
+              onGrid(24, 3.94, 23.15, 2.59, 18.21, 0.21, 16.5, 0.5, 7.05, 9.13, 2.93, 6),
+              onGrid(1.65, 6.06, 0.33, 7.26, 0.33, 8.74, 3.9, 12, 0.33, 15.26, 0.33, 16.74),
+              onGrid(1.65, 17.94, 2.93, 18, 7.05, 14.87, 16.5, 23.5, 18.21, 23.79),
+              onGrid(23.15, 21.41, 24, 20.06),
+            ),
+          ),
+          hole(polygon(onGrid(18, 6.55, 18, 17.45, 10.83, 12))),
+        ],
+        -12,
+      ),
   },
   {
     id: "aws",
@@ -115,15 +134,7 @@ export const LOGO_SHAPES: readonly ShapeDefinition[] = [
       polygon(at(76, 58, 95, 55, 90, 73)),
     ],
   },
-  {
-    id: "postgres",
-    draw: () => [
-      ellipse([52, 38], 28, 26),
-      hole(circle([42, 32], 3.5)),
-      ellipse([78, 46], 14, 22, -15),
-      ribbon(cubic([36, 50], [28, 70], [36, 84], [22, 94]), 12),
-    ],
-  },
+  { id: "postgres", draw: () => traced(faPostgresql) },
   {
     id: "typescript",
     draw: () => [
@@ -140,33 +151,8 @@ export const LOGO_SHAPES: readonly ShapeDefinition[] = [
       hole(letterS([76, 60], 7, 7)),
     ],
   },
-  {
-    id: "html5",
-    draw: () => [
-      polygon(at(10, 8, 90, 8, 83, 86, 50, 96, 17, 86)),
-      hole(ribbon(chain(at(64, 26, 40, 26), arc([48, 60], 13, -135, 150)), 8)),
-    ],
-  },
-  {
-    id: "github",
-    draw: () =>
-      rotate(
-        [
-          circle([50, 50], 46),
-          hole(
-            polygon(
-              chain(
-                at(32, 24, 42, 32, 58, 32, 68, 24, 72, 40),
-                cubic([72, 40], [74, 52], [66, 64], [58, 66]),
-                at(58, 66, 58, 92, 42, 92, 42, 80, 30, 74, 28, 68, 36, 72, 42, 72, 42, 66),
-                cubic([42, 66], [34, 64], [26, 52], [28, 40]),
-              ),
-            ),
-          ),
-        ],
-        8,
-      ),
-  },
+  { id: "html5", draw: () => traced(faHtml5) },
+  { id: "github", draw: () => rotate(traced(faGithub), 8) },
   {
     id: "kubernetes",
     draw: () => {
@@ -278,27 +264,7 @@ export const LOGO_SHAPES: readonly ShapeDefinition[] = [
         14,
       ),
   },
-  {
-    id: "vue",
-    draw: () =>
-      rotate(
-        [
-          polygon(at(4, 12, 22, 12, 50, 60, 78, 12, 96, 12, 50, 92)),
-          polygon(at(27, 12, 38, 12, 50, 32, 62, 12, 73, 12, 50, 52)),
-        ],
-        -10,
-      ),
-  },
-  {
-    id: "angular",
-    draw: () =>
-      rotate(
-        [
-          polygon(at(50, 4, 94, 20, 86, 78, 50, 96, 14, 78, 6, 20)),
-          hole(polygon(at(50, 20, 76, 80, 66, 80, 60, 66, 40, 66, 34, 80, 24, 80))),
-          polygon(at(43, 58, 57, 58, 50, 40)),
-        ],
-        9,
-      ),
-  },
+  { id: "vue", draw: () => rotate(traced(faVuejs), -10) },
+  { id: "angular", draw: () => rotate(traced(faAngular), 9) },
+  { id: "swift", draw: () => traced(faSwift) },
 ];
