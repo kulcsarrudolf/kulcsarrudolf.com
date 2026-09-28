@@ -46,13 +46,13 @@ const TILES: Record<Verdict, string> = { perfect: "🟩", win: "🟨", miss: "�
 
 /**
  * The run as a few lines to paste somewhere: the score, one tile per shape in
- * the order they were cut, and where to play. Five tiles to a row.
+ * the order they were cut, and where to play. Eight tiles to a row.
  */
 export function shareText(scores: readonly Cut[], total: number): string {
   const { wins } = summarize(scores);
   const tiles = scores.map((cut) => TILES[cut.verdict]);
-  const rows = Array.from({ length: Math.ceil(tiles.length / 5) }, (_, i) =>
-    tiles.slice(i * 5, i * 5 + 5).join(""),
+  const rows = Array.from({ length: Math.ceil(tiles.length / 8) }, (_, i) =>
+    tiles.slice(i * 8, i * 8 + 8).join(""),
   );
   const host = SITE_URL.replace(/^https?:\/\//, "");
   return [`bisect ${wins}/${total}`, ...rows, host].join("\n");

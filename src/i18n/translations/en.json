@@ -207,9 +207,9 @@
     "copied": "Copied",
     "close": "Close bisect",
     "gallery": {
-      "open": "all shapes",
+      "open": "Shapes",
       "label": "All shapes: choose one to cut",
-      "back": "back"
+      "back": "Back"
     }
   }
 }

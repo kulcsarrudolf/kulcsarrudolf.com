@@ -62,7 +62,7 @@ const BisectGallery = ({ entries, onPick, onClose }: BisectGalleryProps) => {
 
   return (
     <ul
-      className="grid grid-cols-4 gap-2 sm:grid-cols-5"
+      className="grid grid-cols-5 gap-2 sm:grid-cols-6"
       aria-label={t("bisect.gallery.label") as string}
       onKeyDown={onKeyDown}
     >

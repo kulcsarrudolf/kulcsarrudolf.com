@@ -207,9 +207,9 @@
     "copied": "Kimásolva",
     "close": "A bisect bezárása",
     "gallery": {
-      "open": "minden alakzat",
+      "open": "Alakzatok",
       "label": "Minden alakzat: válaszd ki, melyiket vágod",
-      "back": "vissza"
+      "back": "Vissza"
     }
   }
 }

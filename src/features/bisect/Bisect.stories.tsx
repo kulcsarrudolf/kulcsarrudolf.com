@@ -9,7 +9,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "The whole game, without the dialog around it: twenty developer icons in a shuffled order, each to be cut into two equal halves with one straight line. Only a shape's first cut counts, and 48:52 or better wins. After the last shape comes the summary.",
+          "The whole game, without the dialog around it: forty developer icons and logos in a shuffled order, each to be cut into two equal halves with one straight line. Only a shape's first cut counts, and 48:52 or better wins. After the last shape comes the summary.",
       },
     },
   },

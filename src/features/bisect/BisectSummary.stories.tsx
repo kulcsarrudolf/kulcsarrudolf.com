@@ -25,7 +25,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "The end of a run: how many of the twenty cuts won, one tile per shape (green perfect, amber a win, grey a miss), the perfect count, the average and the closest miss. Copy result puts the tiles on the clipboard, Wordle style.",
+          "The end of a run: how many of the forty cuts won, one tile per shape (green perfect, amber a win, grey a miss), the perfect count, the average and the closest miss. Copy result puts the tiles on the clipboard, Wordle style.",
       },
     },
   },
@@ -47,5 +47,5 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {};
 
 export const Flawless: Story = {
-  args: { scores: Array.from({ length: 20 }, (_, i) => result(i % 4)) },
+  args: { scores: Array.from({ length: 40 }, (_, i) => result(i % 4)) },
 };
