@@ -235,7 +235,7 @@ interface LovingAtmosphereProps {
  *
  * This is the one component here without a story. It ends itself after thirty
  * seconds, so a story would show an empty canvas from the thirty-first second
- * on. The part that can be looked at is `FloatingHearts`, and that has a story.
+ * on.
  */
 const LovingAtmosphere = ({ fading, fadeMs }: LovingAtmosphereProps) => {
   // False for the first paint, so the browser has a transparent frame to fade

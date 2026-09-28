@@ -3,7 +3,6 @@ import "./fonts.css";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 
 import { type TimeLeft, getTimeLeft, unitLabel } from "./countdown";
-import FloatingHearts from "./FloatingHearts";
 import { NR_DEFAULT_LANGUAGE, getNrContent, type NrLanguage } from "./translations";
 import WeddingFlowers from "./WeddingFlowers";
 import WeddingNames from "./WeddingNames";
@@ -61,9 +60,7 @@ const WeddingCountdown = ({ lang = NR_DEFAULT_LANGUAGE }: { lang?: NrLanguage })
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-white" style={FONT_VARIABLES}>
-      <FloatingHearts />
-
-      <div className="relative flex min-h-full flex-col items-center justify-center px-6 pb-36 pt-20 text-center text-[#3c0816] sm:py-24">
+      <div className="relative flex min-h-full flex-col items-center justify-center px-6 py-16 text-center text-[#3c0816] sm:py-24">
         <WeddingFlowers />
 
         <figure className="relative max-w-md sm:max-w-xl">

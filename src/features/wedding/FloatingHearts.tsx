@@ -2,10 +2,8 @@
  * A layer of hearts drifting up the viewport, sitting behind whatever is drawn
  * over it.
  *
- * Two callers, two tunings. The wedding page floats six slow rose hearts over
- * its cream background; the terminal's loving atmosphere floats twenty faster,
- * brighter ones over a red wash. The defaults here are the wedding page's, so
- * it renders exactly what it always rendered.
+ * The terminal's loving atmosphere is the one caller: it passes the hearts,
+ * how far they rise, and whether they hold still for reduced motion.
  */
 import type { CSSProperties } from "react";
 
@@ -28,31 +26,11 @@ export interface Heart {
   className?: string;
 }
 
-/** The wedding page's six, unchanged: straight up, slow, rose. */
-export const WEDDING_HEARTS: Heart[] = [
-  { left: "8%", size: "1.4rem", duration: "11s", delay: "0s", still: "14%" },
-  { left: "22%", size: "1rem", duration: "14s", delay: "3s", still: "62%" },
-  { left: "38%", size: "1.8rem", duration: "12s", delay: "6s", still: "30%" },
-  { left: "55%", size: "1.1rem", duration: "15s", delay: "1s", still: "78%" },
-  { left: "72%", size: "1.5rem", duration: "13s", delay: "4.5s", still: "46%" },
-  { left: "88%", size: "1.2rem", duration: "16s", delay: "7s", still: "86%" },
-];
-
 /** Where a heart's rise begins and ends, as a translation off its anchor. */
 export interface Rise {
   from: string;
   to: string;
 }
-
-/* The wedding page's rise, kept exactly as it shipped.
-   
-   It does not work: the heart is anchored 3rem below the viewport and then
-   translated 105vh further down, so ending 12vh up leaves it back at the
-   bottom edge, and none of the six has ever climbed into view. Correcting it
-   would put six hearts on a live page that has never had them, which is not
-   this change's to decide, so the default preserves the behaviour and the
-   loving atmosphere passes a rise that works. */
-export const WEDDING_RISE: Rise = { from: "105vh", to: "-12vh" };
 
 /** Off the bottom of the screen, up past the top of it. */
 export const FULL_RISE: Rise = { from: "0px", to: "-112vh" };
@@ -106,23 +84,20 @@ const STILL = `
 `;
 
 interface FloatingHeartsProps {
-  hearts?: Heart[];
-  /** How far the hearts travel. Defaults to the wedding page's, bug and all. */
-  rise?: Rise;
+  hearts: Heart[];
+  /** How far the hearts travel. */
+  rise: Rise;
   /** Colour for hearts that name none of their own. */
   heartClassName?: string;
   /** Goes on the layer itself, for a filter over the whole set. */
   className?: string;
-  /**
-   * Hold the hearts still for a visitor who asked for less motion. Off by
-   * default, so the wedding page keeps the behaviour it shipped with.
-   */
+  /** Hold the hearts still for a visitor who asked for less motion. */
   stillWhenReduced?: boolean;
 }
 
 const FloatingHearts = ({
-  hearts = WEDDING_HEARTS,
-  rise = WEDDING_RISE,
+  hearts,
+  rise,
   heartClassName = "text-rose-300/50",
   className = "",
   stillWhenReduced = false,
