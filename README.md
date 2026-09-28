@@ -16,7 +16,7 @@ Blog post images use [zimme-zoom](https://www.npmjs.com/package/zimme-zoom), my 
 - `src/routes/` holds one file per URL.
   A route declares its `loader` (data), `head` (title, meta, canonical, JSON-LD) and the page it renders.
 - `src/pages/` holds what each route renders, composed from the pieces below.
-- `src/features/` holds one folder per domain (blog, projects, contact, quotes, home, sudoku, the navbar easter egg, the wedding countdown) with its components, hooks and data.
+- `src/features/` holds one folder per domain (blog, projects, contact, quotes, home, the terminal, sudoku, bisect, the navbar easter egg, the wedding countdown) with its components, hooks and data.
 - `src/components/` holds only what features share: `ui/` primitives, the `layout/` shell, and `content/` for rendering posts and projects.
 - `src/content/` holds everything authored: the posts, the projects, the drafts and templates, and the quotes.
 - `src/server/content.ts` reads the Markdown at build time with `import.meta.glob`, so the deployed function never touches the filesystem.
@@ -151,7 +151,7 @@ The commit-msg hook runs [commitlint](https://commitlint.js.org) with [commitlin
 
 ### Tests
 
-`yarn test` runs [Vitest](https://vitest.dev) over the `*.test.ts` files next to the modules they cover: the content loader, the markdown, `llms.txt`, sitemap and RSS builders, the `<head>` builder, the preview card renderer, the translation interpolator, the sudoku engine and the branch name rule.
+`yarn test` runs [Vitest](https://vitest.dev) over the `*.test.ts` files next to the modules they cover: the content loader, the markdown, `llms.txt`, sitemap and RSS builders, the `<head>` builder, the preview card renderer, the translation interpolator, the sudoku engine, the bisect geometry and scoring, and the branch name rule.
 It reads `vitest.config.ts`, a config of its own, because the app's Vite config carries the TanStack Start and Nitro plugins.
 `yarn test:watch` keeps it running.
 

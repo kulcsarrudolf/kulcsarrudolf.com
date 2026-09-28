@@ -66,6 +66,7 @@ const TerminalEntry = ({
       {result.kind === "list" && <WhereNext />}
       {result.kind === "wedding" && <WeddingLine onStop={onStopAtmosphere} />}
       {result.kind === "sudoku" && <Output>{t("terminal.sudoku")}</Output>}
+      {result.kind === "bisect" && <Output>{t("terminal.bisect")}</Output>}
       {result.kind === "help" && <Output>{t("terminal.help")}</Output>}
       {result.kind === "sendMessage" && <Output>{t("terminal.message.start")}</Output>}
       {result.kind === "message" && <MessageNote note={result.note} />}
