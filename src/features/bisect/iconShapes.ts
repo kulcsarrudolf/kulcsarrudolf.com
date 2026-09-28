@@ -1,5 +1,5 @@
 /**
- * The first twenty shapes: a developer's everyday things (a prompt, a branch,
+ * The first nineteen shapes: a developer's everyday things (a prompt, a branch,
  * a coffee, a bug) rather than anyone's logo.
  */
 
@@ -333,28 +333,6 @@ export const ICON_SHAPES: readonly ShapeDefinition[] = [
         ],
         10,
       ),
-  },
-  {
-    id: "python",
-    draw: () => [
-      ribbon(
-        chain(
-          cubic([8, 84], [24, 96], [40, 78], [36, 60]),
-          cubic([36, 60], [32, 42], [50, 30], [64, 40]),
-          cubic([64, 40], [74, 48], [80, 34], [78, 24]),
-        ),
-        14,
-      ),
-      ellipse([80, 18], 12, 9, -30),
-      hole(circle([84, 14], 2.2)),
-      ribbon(
-        [
-          [88, 12],
-          [97, 5],
-        ],
-        2.5,
-      ),
-    ],
   },
   {
     id: "sparkles",
