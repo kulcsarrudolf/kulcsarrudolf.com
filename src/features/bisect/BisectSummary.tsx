@@ -4,6 +4,7 @@ import Button from "@/components/ui/Button";
 import { useTranslation } from "@/i18n/useTranslation";
 
 import { type Cut, formatTenths, type Verdict } from "./board";
+import { CheckIcon, CopyIcon, RetryIcon } from "./icons";
 import { shareText, summarize } from "./score";
 
 interface BisectSummaryProps {
@@ -79,8 +80,12 @@ const BisectSummary = ({ scores, total, onRestart }: BisectSummaryProps) => {
       </dl>
 
       <div className="flex flex-wrap justify-center gap-3">
-        <Button onClick={onRestart}>{t("bisect.playAgain")}</Button>
+        <Button onClick={onRestart}>
+          <RetryIcon />
+          {t("bisect.playAgain")}
+        </Button>
         <Button variant="onBrandOutline" onClick={copy}>
+          {copied ? <CheckIcon /> : <CopyIcon />}
           {t(copied ? "bisect.copied" : "bisect.copy")}
         </Button>
       </div>
