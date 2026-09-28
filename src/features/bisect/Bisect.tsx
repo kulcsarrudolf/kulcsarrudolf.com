@@ -22,7 +22,9 @@ const ASIDE = "short:col-start-2";
  * terminal-flavoured take on. The window is dark in both themes, like the
  * terminal it is started from.
  *
- * Off the board, R takes the cut back to cut again and Space moves on, and
+ * A line is drawn and adjusted first and cut only when asked, with Enter or
+ * the Cut button. Off the board, R takes the line or the cut back to start
+ * again and Space moves on once the result is showing, and
  * `ls` opens every shape at once, to choose the one to cut.
  *
  * The board sits between the title and the result while there is room to
@@ -54,10 +56,10 @@ const Bisect = () => {
     if (event.defaultPrevented || !game.shape || browsing) return;
     if (event.ctrlKey || event.metaKey || event.altKey) return;
     if ((event.target as Element).closest("button, a, input, textarea")) return;
-    if (event.key === " " && game.scored) {
+    if (event.key === " " && game.cut) {
       event.preventDefault();
       game.next();
-    } else if (event.key.toLowerCase() === "r" && game.cut) {
+    } else if (event.key.toLowerCase() === "r" && (game.cut || game.aim)) {
       event.preventDefault();
       game.retry();
     }
@@ -118,10 +120,12 @@ const Bisect = () => {
 
               <div className={`flex flex-col items-center gap-3 ${ASIDE}`}>
                 <BisectActions
-                  canRetry={game.cut !== null}
-                  canMoveOn={game.scored}
+                  canRetry={game.cut !== null || game.aim !== null}
+                  canCut={game.canCut}
+                  cutMade={game.cut !== null}
                   last={game.last}
                   onRetry={retry}
+                  onCut={() => game.aim && game.release(game.aim)}
                   onNext={game.next}
                 />
                 <p id={keysId} className="text-center text-xs text-gray-500 pointer-coarse:hidden">

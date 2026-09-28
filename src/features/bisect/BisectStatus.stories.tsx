@@ -43,7 +43,7 @@ export const AimingWithAPointer: Story = {
     docs: {
       description: {
         story:
-          "A finger or the mouse is drawing a line. Only the first cut counts, so the way to take the line back is said while it can still be taken.",
+          "A finger or the mouse has drawn a line. Only the first cut counts, so how to adjust it before cutting is said while it can still change.",
       },
     },
   },

@@ -177,12 +177,12 @@
     "endGame": "Játék vége"
   },
   "bisect": {
-    "hint": "Húzz egy vonalat az alakzaton át, és vágd félbe.",
+    "hint": "Húzz egy vonalat az alakzaton át, igazítsd a végeit, aztán vágd el.",
     "aiming": {
-      "pointer": "Engedd el, és vág. Húzd vissza a kezdőpontra, ha mégsem.",
+      "pointer": "A végeit a perem mentén húzva igazíthatsz, aztán jöhet a Vágás.",
       "keys": "Az Enter vág, az Esc visszavonja."
     },
-    "keys": "Billentyűk: ← → forgat, ↑ ↓ eltol, az Enter vág, az Esc visszavon. Húzás közben a Shift 15°-ra igazít.",
+    "keys": "Billentyűk: ← → forgat, ↑ ↓ eltol, az Enter vág, az Esc törli a vonalat. Húzás közben a Shift 15°-ra igazít.",
     "board": "Tábla, rajta az alakzat",
     "practice": "Gyakorlás: csak az első vágás számít.",
     "verdict": {
@@ -191,6 +191,7 @@
       "miss": "Ez még nem fele-fele."
     },
     "retry": "Újra",
+    "cut": "Vágás",
     "next": "Tovább",
     "finish": "Eredmények",
     "summary": {
