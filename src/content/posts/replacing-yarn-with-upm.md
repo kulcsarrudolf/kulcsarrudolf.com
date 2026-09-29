@@ -3,7 +3,7 @@ title: "Replacing Yarn with upm on This Site"
 subtitle: "What got faster, what did not, and what it cost"
 author: "Kulcsar Rudolf"
 date: "2026-09-30"
-description: "Measured results of moving this site from Yarn 1 to upm: local installs, CI and Vercel builds before and after, and the trade-offs of running a prerelease package manager."
+description: "Moving this site off Yarn 1 to a modern package manager: Yarn 1, Yarn 4 and upm measured on local installs, CI and Vercel builds, and the trade-offs of running a prerelease."
 keywords:
   [
     "upm",
@@ -22,41 +22,21 @@ private: false
 
 ## Why
 
-This site installed its dependencies with Yarn 1, which has been in maintenance mode for years.
-[upm](https://github.com/unjs/upm) is a new package manager from the UnJS team, written in TypeScript, about 250 KB on disk.
-I wanted to know what it changes on a real project, so I measured before and after.
+This site installed its dependencies with Yarn 1, which dates from 2017 and has been in maintenance mode for years.
+I wanted a modern package manager, and I picked [upm](https://github.com/unjs/upm), a new one from the UnJS team, written in TypeScript and about 250 KB on disk.
 
 upm is a prerelease.
 Its README says so, and this post is not advice to move a production project to it.
 
 ## How I measured
 
-Local numbers are from an Apple M1 with 16 GB, macOS 15.3 and Node 24.17, timed with [hyperfine](https://github.com/sharkdp/hyperfine), 10 runs each, with the package caches in a folder of their own.
-Every install is from a lockfile, frozen.
-
-- **Cold**: no `node_modules`, empty cache.
-- **Warm**: no `node_modules`, cache filled.
-- **No-op**: `node_modules` already in place.
+Local numbers are from an Apple M1 with 16 GB, macOS 15.3 and Node 24.17, timed with [hyperfine](https://github.com/sharkdp/hyperfine), 10 runs each, from a frozen lockfile, with the package caches in a folder of their own.
+A cold install starts with no `node_modules` and an empty cache, a warm one with the cache filled, and a no-op with `node_modules` already in place.
+Yarn 4 ran with the `node-modules` linker on a copy of the project from just before the move, and only locally.
 
 CI numbers are the install steps of GitHub Actions runs, and Vercel numbers come from the build logs.
 
-## Local results
-
-| Install | Yarn 1.22.22 | upm 1.2.0 | Change      |
-| ------- | ------------ | --------- | ----------- |
-| Cold    | 21.04 s      | 6.50 s    | 3.2x faster |
-| Warm    | 3.70 s       | 3.88 s    | 5% slower   |
-| No-op   | 422 ms       | 44 ms     | 9.5x faster |
-
-`node_modules` went from 366 MB to 325 MB, and upm hardlinks it to a shared store, so a second project with the same packages adds almost nothing.
-
-The cold install is where the difference is.
-With a filled cache the two are level, and the no-op case matters more than it looks: upm checks the tree before every `upm run`, and at 44 ms that check is free.
-
-## The same test on Yarn 4
-
-Yarn 1 is from 2017, so the fair question is how much of that gain belongs to upm and how much to leaving Yarn 1.
-I ran the same benchmark on Yarn 4.18.1 with the `node-modules` linker, on a copy of the project as it was just before the move.
+## Yarn 1 vs Yarn 4 vs upm
 
 | Install        | Yarn 1.22.22 | Yarn 4.18.1 | upm 1.2.0 |
 | -------------- | ------------ | ----------- | --------- |
@@ -65,34 +45,33 @@ I ran the same benchmark on Yarn 4.18.1 with the `node-modules` linker, on a cop
 | No-op          | 422 ms       | 523 ms      | 44 ms     |
 | `node_modules` | 366 MB       | 343 MB      | 325 MB    |
 
-Nearly all of it belongs to leaving Yarn 1.
-Yarn 4 is a little faster than upm on a cold and on a warm install.
-upm keeps two wins: the no-op check, twelve times faster, and the smaller `node_modules`.
+Most of the gain comes from leaving Yarn 1.
+Yarn 4 cuts the cold install as much as upm does and is a little faster on a warm one.
+upm is ahead on the no-op check, twelve times faster than Yarn 4, and it runs that check before every `upm run`, so at 44 ms it costs nothing.
+Its `node_modules` is also the smallest, and it is hardlinked to a shared store, so a second project with the same packages adds almost nothing.
 
-Yarn 4 also installed the project as it was, with the `resolutions` and the typography plugin in place, and the checks and the build passed on it.
-I measured it locally only, not in CI or on Vercel.
+Yarn 4 installed the project as it was, `resolutions` and all, and the checks and the build passed on it.
 
-## CI results
+## CI
 
-GitHub Actions, `ubuntu-latest`. With Yarn the workflow restored a dependency cache before installing; with upm there is no cache step at all, because a cold install is quicker than the restore was.
+On GitHub Actions (`ubuntu-latest`), Yarn restored a dependency cache before installing.
+upm has no cache step, because a cold install is quicker than the restore was.
 
 | From checkout to installed     | Yarn 1.22.22 | upm 1.2.0  |
 | ------------------------------ | ------------ | ---------- |
 | Restoring the cache            | 19.4 s       | none       |
 | Installing the package manager | in the image | 0 to 3 s   |
 | Installing the dependencies    | 6.5 s        | 2 to 3 s   |
-| Total                          | 25.9 s       | 3 to 8 s   |
 | The whole job                  | 45 s         | 17 to 27 s |
 
-The Yarn column is the mean of eight runs that hit the cache; on a miss the total was 39.5 s.
-The upm column is the range over the runs of the pull request, and GitHub reports step times in whole seconds, so it is coarse.
-Even so, the job takes about half the time it did, and most of what went away is the cache.
+The Yarn column is the mean of eight runs that hit the cache; a miss took 39.5 s to install.
+GitHub reports step times in whole seconds, so the upm column is a range.
+The job takes about half as long, and most of the saving is the cache that is gone.
 
-## Vercel results
+## Vercel
 
-Vercel has no built-in support for upm, so `vercel.json` carries an install command that installs the package manager and then the dependencies.
-
-Vercel restores `node_modules` from its build cache, so what an install costs depends on whether the lockfile changed.
+Vercel has no built-in support for upm, so `vercel.json` has an install command that installs upm and then the dependencies.
+Vercel also restores `node_modules` from its build cache, so the cost of an install depends on whether the lockfile changed.
 
 | Build on `develop`              | Yarn 1.22.19        | upm 1.2.0        |
 | ------------------------------- | ------------------- | ---------------- |
@@ -101,52 +80,32 @@ Vercel restores `node_modules` from its build cache, so what an install costs de
 | Lockfile unchanged: install     | 1.4 s               | 1.1 s            |
 | Lockfile unchanged: whole build | 18 s (median of 10) | 16 s (one build) |
 
-The 6.3 s is the worst case for upm: the first build after the switch, with no cache at all, and 0.9 s of it is installing upm itself.
-The two Yarn builds in the same row had their cache restored and still spent about 30 s fetching and linking, because a changed lockfile makes Yarn 1 redo most of the work.
-
-On an ordinary build, where the lockfile did not change, there is nothing to win.
-The install step was 1.4 s and is 1.1 s, of which 1.0 s is installing upm and 19 ms is upm finding the tree up to date.
-The 16 s build is a single sample inside the range the Yarn builds already covered, so I read it as no change.
+The upm build with a changed lockfile had no cache at all, and Yarn 1 still took about 30 s with its cache restored, because a changed lockfile makes it redo most of the work.
+With an unchanged lockfile nothing changed: 1.0 s of upm's 1.1 s install is installing upm itself.
 
 ## What had to change first
 
-upm could not install the project as it was, for two reasons.
+upm could not install the project as it was.
+It has no overrides, and `package.json` had nine `resolutions` for vulnerable transitive dependencies.
+All of them had become unnecessary by then, so I deleted the block.
 
-**No overrides.**
-`package.json` had nine `resolutions`, added over time to patch vulnerable transitive dependencies.
-upm has no equivalent.
-When I checked, every one of them had become unnecessary: the tree resolved to the pinned version or a newer one without them, so I deleted the block.
-
-**A peer range it could not parse.**
-`@tailwindcss/typography` declares `tailwindcss` as `>=3.0.0 || >=4.0.0 || insiders`, which joins a dist-tag to version ranges.
-npm and Yarn tolerate that, upm 1.2.0 stops with an error, and without overrides there is no way around it.
-I replaced the plugin with about 300 lines of hand-written CSS and checked that the computed style of every element on every post and project page stayed the same, in both themes.
+It also could not parse the peer range `@tailwindcss/typography` declares for `tailwindcss`, `>=3.0.0 || >=4.0.0 || insiders`, which mixes a dist-tag with version ranges.
+npm and Yarn accept it, upm 1.2.0 stops with an error.
+I replaced the plugin with about 300 lines of CSS and checked that the computed styles on every post and project page stayed the same in both themes.
 
 ## What it cost
 
-- **No Dependabot.** It cannot read `upm.lock`, so npm updates are manual, and GitHub raises no security alerts for them.
-- **No overrides.** A vulnerable transitive dependency can only be fixed by updating the package that brings it in.
-- **No lifecycle scripts**, not even the project's own. The git hooks are installed with `upm run prepare` after cloning.
-- **A custom install command on Vercel**, which has no built-in support for upm, so each build installs the package manager first.
-- **Undeclared dependencies break.** Yarn 1 hoists every package to the top of `node_modules`, so a package can import one it never declared and get away with it. upm links only what is declared. After the move the dev server crashed on any request that threw, because Nitro's dev error handler imports `pathe` without listing it, and I had tested the builds but not the dev server. The fix was to add `pathe` to my own `devDependencies`.
+- Dependabot cannot read `upm.lock`, so npm updates are manual and GitHub raises no security alerts for them.
+- Without overrides, a vulnerable transitive dependency can only be fixed by updating the package that brings it in.
+- upm runs no lifecycle scripts, not even the project's own, so the git hooks are installed with `upm run prepare` after cloning.
+- Each Vercel build installs upm before the dependencies.
+- Undeclared dependencies break. Yarn 1 hoists everything to the top of `node_modules`, and upm links only what is declared. After the move the dev server crashed on any request that threw, because Nitro's dev error handler imports `pathe` without listing it. I had tested the builds but not the dev server, and the fix was to add `pathe` to my own `devDependencies`.
 
 ## Verdict
 
-| Where                          | Before | After      |
-| ------------------------------ | ------ | ---------- |
-| Local cold install             | 21.0 s | 6.5 s      |
-| Local warm install             | 3.7 s  | 3.9 s      |
-| Local no-op install            | 422 ms | 44 ms      |
-| CI job                         | 45 s   | 17 to 27 s |
-| Vercel build, lockfile changed | 47 s   | 19 s       |
-| Vercel build, ordinary         | 18 s   | 16 s       |
+Against Yarn 1, upm made cold installs three times faster and CI twice as fast.
+Against Yarn 4 the installs are level, and upm only wins on the no-op check and the size of `node_modules`.
+Yarn 4 would have given me a modern package manager without losing Dependabot or overrides.
 
-The installs that start from nothing got about three times faster, and CI got about twice as fast, mostly by no longer needing a cache.
-The install that runs every day, with a warm cache, did not change, and neither did an ordinary deploy.
-
-That is upm against Yarn 1.
-Against Yarn 4 the installs are level, and what upm adds is a no-op check that costs nothing and a smaller `node_modules`.
-
-Against that stand no Dependabot, no overrides and a package manager that calls itself unstable, none of which Yarn 4 would have cost.
-For a personal site, where trying upm was the point, that is a trade I am happy with.
-For a project with a team and customers I would move to a current Yarn, npm or pnpm first, take the speed, and look at upm again when it is stable.
+For a personal site, where trying upm was part of the point, I am happy with the trade.
+On a project with a team and customers I would move to Yarn 4, npm or pnpm, and come back to upm once it is stable.
