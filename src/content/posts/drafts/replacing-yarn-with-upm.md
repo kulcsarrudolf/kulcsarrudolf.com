@@ -58,7 +58,19 @@ Yarn 1 is from 2017, and part of the cold install gain would come from moving to
 
 ## CI results
 
-TODO
+GitHub Actions, `ubuntu-latest`. With Yarn the workflow restored a dependency cache before installing; with upm there is no cache step at all, because a cold install is quicker than the restore was.
+
+| From checkout to installed     | Yarn 1.22.22 | upm 1.2.0  |
+| ------------------------------ | ------------ | ---------- |
+| Restoring the cache            | 19.4 s       | none       |
+| Installing the package manager | in the image | 0 to 3 s   |
+| Installing the dependencies    | 6.5 s        | 2 to 3 s   |
+| Total                          | 25.9 s       | 3 to 8 s   |
+| The whole job                  | 45 s         | 17 to 27 s |
+
+The Yarn column is the mean of eight runs that hit the cache; on a miss the total was 39.5 s.
+The upm column is the range over the runs of the pull request, and GitHub reports step times in whole seconds, so it is coarse.
+Even so, the job takes about half the time it did, and most of what went away is the cache.
 
 ## Vercel results
 
