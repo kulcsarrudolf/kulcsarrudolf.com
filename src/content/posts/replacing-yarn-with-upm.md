@@ -32,7 +32,7 @@ Its README says so, and this post is not advice to move a production project to 
 ## How I measured
 
 Local numbers are from an Apple M1 with 16 GB, macOS 15.3 and Node 24.17, timed with [hyperfine](https://github.com/sharkdp/hyperfine), 10 runs each, with the package caches in a folder of their own.
-Both sides install from a lockfile with `--frozen-lockfile`.
+Every install is from a lockfile, frozen.
 
 - **Cold**: no `node_modules`, empty cache.
 - **Warm**: no `node_modules`, cache filled.
@@ -53,8 +53,24 @@ CI numbers are the install steps of GitHub Actions runs, and Vercel numbers come
 The cold install is where the difference is.
 With a filled cache the two are level, and the no-op case matters more than it looks: upm checks the tree before every `upm run`, and at 44 ms that check is free.
 
-The baseline matters here.
-Yarn 1 is from 2017, and part of the cold install gain would come from moving to any current package manager.
+## The same test on Yarn 4
+
+Yarn 1 is from 2017, so the fair question is how much of that gain belongs to upm and how much to leaving Yarn 1.
+I ran the same benchmark on Yarn 4.18.1 with the `node-modules` linker, on a copy of the project as it was just before the move.
+
+| Install        | Yarn 1.22.22 | Yarn 4.18.1 | upm 1.2.0 |
+| -------------- | ------------ | ----------- | --------- |
+| Cold           | 21.04 s      | 6.12 s      | 6.50 s    |
+| Warm           | 3.70 s       | 3.50 s      | 3.88 s    |
+| No-op          | 422 ms       | 523 ms      | 44 ms     |
+| `node_modules` | 366 MB       | 343 MB      | 325 MB    |
+
+Nearly all of it belongs to leaving Yarn 1.
+Yarn 4 is a little faster than upm on a cold and on a warm install.
+upm keeps two wins: the no-op check, twelve times faster, and the smaller `node_modules`.
+
+Yarn 4 also installed the project as it was, with the `resolutions` and the typography plugin in place, and the checks and the build passed on it.
+I measured it locally only, not in CI or on Vercel.
 
 ## CI results
 
@@ -128,6 +144,9 @@ I replaced the plugin with about 300 lines of hand-written CSS and checked that 
 The installs that start from nothing got about three times faster, and CI got about twice as fast, mostly by no longer needing a cache.
 The install that runs every day, with a warm cache, did not change, and neither did an ordinary deploy.
 
-Against that stand no Dependabot, no overrides and a package manager that calls itself unstable.
-For a personal site that is a trade I am happy to try.
-For a project with a team and customers I would wait for a stable release, and I would first measure what a move to a current npm or pnpm gives, because part of this gain is simply leaving Yarn 1.
+That is upm against Yarn 1.
+Against Yarn 4 the installs are level, and what upm adds is a no-op check that costs nothing and a smaller `node_modules`.
+
+Against that stand no Dependabot, no overrides and a package manager that calls itself unstable, none of which Yarn 4 would have cost.
+For a personal site, where trying upm was the point, that is a trade I am happy with.
+For a project with a team and customers I would move to a current Yarn, npm or pnpm first, take the speed, and look at upm again when it is stable.
