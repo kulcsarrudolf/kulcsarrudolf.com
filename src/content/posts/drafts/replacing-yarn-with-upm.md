@@ -74,7 +74,19 @@ Even so, the job takes about half the time it did, and most of what went away is
 
 ## Vercel results
 
-TODO
+Vercel has no built-in support for upm, so `vercel.json` carries an install command that installs the package manager and then the dependencies.
+
+Vercel restores `node_modules` from its build cache, so what an install costs depends on whether the lockfile changed.
+
+| Build on `develop`              | Yarn 1.22.19        | upm 1.2.0 |
+| ------------------------------- | ------------------- | --------- |
+| Lockfile changed: install       | about 30 s          | 6.3 s     |
+| Lockfile changed: whole build   | 47 s, 56 s          | 19 s      |
+| Lockfile unchanged: install     | 1.4 s               | TODO      |
+| Lockfile unchanged: whole build | 18 s (median of 10) | TODO      |
+
+The 6.3 s is the worst case for upm: the first build after the switch, with no cache at all, and 0.9 s of it is installing upm itself.
+The two Yarn builds in the same row had their cache restored and still spent about 30 s fetching and linking, because a changed lockfile makes Yarn 1 redo most of the work.
 
 ## What had to change first
 
