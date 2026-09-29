@@ -112,6 +112,7 @@ I replaced the plugin with about 300 lines of hand-written CSS and checked that 
 - **No overrides.** A vulnerable transitive dependency can only be fixed by updating the package that brings it in.
 - **No lifecycle scripts**, not even the project's own. The git hooks are installed with `upm run prepare` after cloning.
 - **A custom install command on Vercel**, which has no built-in support for upm, so each build installs the package manager first.
+- **Undeclared dependencies break.** Yarn 1 hoists every package to the top of `node_modules`, so a package can import one it never declared and get away with it. upm links only what is declared. After the move the dev server crashed on any request that threw, because Nitro's dev error handler imports `pathe` without listing it, and I had tested the builds but not the dev server. The fix was to add `pathe` to my own `devDependencies`.
 
 ## Verdict
 
