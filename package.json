@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "preinstall": "node -e \"if (!process.env.npm_config_user_agent || !process.env.npm_config_user_agent.startsWith('yarn/')) { console.error('This project uses Yarn. Please run: yarn install'); process.exit(1); }\"",
+    "preinstall": "node -e \"if (!(process.env.npm_config_user_agent || '').startsWith('upm/')) { console.error('This project uses upm. Please run: upm install'); process.exit(1); }\"",
     "prepare": "husky",
     "dev": "node scripts/preview-images.ts && vite dev",
     "dev:setup": "node scripts/dev-setup.ts",
@@ -70,5 +70,5 @@
   "engines": {
     "node": "24.x"
   },
-  "packageManager": "yarn@1.22.22"
+  "packageManager": "upm@1.2.0"
 }

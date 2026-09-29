@@ -1,6 +1,6 @@
 // Writes the social preview cards into public/og/: one per post, and the
-// site-wide default every other page falls back to. `yarn dev` and
-// `yarn build` run it first, so the folder exists wherever the site is built
+// site-wide default every other page falls back to. `upm run dev` and
+// `upm run build` run it first, so the folder exists wherever the site is built
 // and never has to be committed.
 
 import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";

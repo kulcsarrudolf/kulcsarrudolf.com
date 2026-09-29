@@ -5,13 +5,20 @@ import { withHostEntries, withoutHostEntries } from "./hosts-file.ts";
 const HOST = "example.local";
 const STOCK =
   "##\n127.0.0.1\tlocalhost\n255.255.255.255\tbroadcasthost\n::1             localhost\n";
+const LEGACY_BLOCK =
+  "\n# kulcsarrudolf.com dev, managed by yarn dev:setup\n127.0.0.1\texample.local\n::1\texample.local\n";
 
 describe("withHostEntries", () => {
   it("appends a marked block with both loopback addresses", () => {
     expect(withHostEntries(STOCK, HOST)).toBe(
       STOCK +
-        "\n# kulcsarrudolf.com dev, managed by yarn dev:setup\n127.0.0.1\texample.local\n::1\texample.local\n",
+        "\n# kulcsarrudolf.com dev, managed by dev:setup\n127.0.0.1\texample.local\n::1\texample.local\n",
     );
+  });
+
+  it("leaves a block written under the yarn marker as it is", () => {
+    const legacy = STOCK + LEGACY_BLOCK;
+    expect(withHostEntries(legacy, HOST)).toBe(legacy);
   });
 
   it("is idempotent", () => {
@@ -34,6 +41,10 @@ describe("withHostEntries", () => {
 describe("withoutHostEntries", () => {
   it("restores the original content", () => {
     expect(withoutHostEntries(withHostEntries(STOCK, HOST), HOST)).toBe(STOCK);
+  });
+
+  it("removes a block written under the yarn marker", () => {
+    expect(withoutHostEntries(STOCK + LEGACY_BLOCK, HOST)).toBe(STOCK);
   });
 
   it("returns the content unchanged when the block is absent", () => {

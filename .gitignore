@@ -22,13 +22,11 @@
 .DS_Store
 *.pem
 
-# local dev certificate, written by `yarn dev:setup`
+# local dev certificate, written by `upm run dev:setup`
 /.certs/
 
 # debug
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
 # local env files
 .env
@@ -49,5 +47,5 @@ yarn-error.log*
 # design canvas scratch
 /.design/
 
-# social preview cards, rendered by `yarn og` before dev and build
+# social preview cards, rendered by `upm run og` before dev and build
 /public/og/

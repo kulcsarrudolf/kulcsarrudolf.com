@@ -136,9 +136,9 @@ function setup(): void {
   updateHosts(withHostEntries);
   console.log(`
 Done. The dev servers now answer on:
-  https://${HOST}        yarn dev, or yarn docker:dev
+  https://${HOST}        upm run dev, or upm run docker:dev
   http://${HOST}         redirects to https
-  https://${HOST}:6006   yarn storybook, or yarn docker:storybook
+  https://${HOST}:6006   upm run storybook, or upm run docker:storybook
 
 Undo with \`${SETUP_COMMAND} --remove\`.`);
 }

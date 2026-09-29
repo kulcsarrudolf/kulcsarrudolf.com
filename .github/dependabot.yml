@@ -1,13 +1,7 @@
 version: 2
 updates:
-  - package-ecosystem: npm
-    directory: /
-    schedule:
-      interval: weekly
-    groups:
-      minor-and-patch:
-        update-types: [minor, patch]
-
+  # No npm block: Dependabot cannot read or write upm.lock, so dependency
+  # updates are made by hand. See "Updating dependencies" in the README.
   - package-ecosystem: github-actions
     directory: /
     schedule:
