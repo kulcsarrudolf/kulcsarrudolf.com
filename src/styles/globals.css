@@ -3,9 +3,7 @@
 
 @import "tailwindcss";
 
-@plugin '@tailwindcss/typography' {
-  target: "modern";
-}
+@import "./prose.css";
 
 /* Dark mode is a class on <html>, not the OS setting: the site opens light
    every time, and the bulb in the navbar is the one way to switch. The class
@@ -165,10 +163,6 @@
 
   * {
     font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  }
-
-  .prose {
-    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif !important;
   }
 }
 

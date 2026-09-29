@@ -18,14 +18,6 @@ const meta = {
       },
     },
   },
-  decorators: [
-    (Story) => (
-      // Same wrapper the post and project routes use.
-      <div className="prose prose-sans container mx-auto max-w-none">
-        <Story />
-      </div>
-    ),
-  ],
 } satisfies Meta<typeof MarkdownBody>;
 
 export default meta;
