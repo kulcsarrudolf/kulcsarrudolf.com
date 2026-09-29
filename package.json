@@ -51,7 +51,6 @@
     "@storybook/addon-docs": "^10.6.0",
     "@storybook/react-vite": "^10.6.0",
     "@tailwindcss/node": "4.3.3",
-    "@tailwindcss/typography": "^0.5.20",
     "@tailwindcss/vite": "4.3.3",
     "@types/node": "^24.2.1",
     "@types/react": "^19.2.17",
