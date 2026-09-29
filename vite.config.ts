@@ -10,7 +10,7 @@ import { HOST, HTTPS_PORT, httpsRedirect, readLocalCerts } from "./scripts/local
 // `?lang=` query, the private-post preview on the dev server and the
 // `Accept: text/markdown` negotiation all keep working in production.
 export default defineConfig(({ command }) => {
-  // The certificate only exists on a machine that ran `yarn dev:setup`, so it
+  // The certificate only exists on a machine that ran `upm run dev:setup`, so it
   // is read for the dev server alone: `vite build` on CI and Vercel never
   // looks for it.
   const serve = command === "serve";
@@ -20,7 +20,7 @@ export default defineConfig(({ command }) => {
       // Every interface, not loopback: macOS lets an unprivileged process bind
       // a port below 1024 only on the wildcard address, so binding ::1:443 is
       // refused with EACCES. The container needs the wildcard anyway for its
-      // published ports. While `yarn dev` runs, the site is therefore reachable
+      // published ports. While `upm run dev` runs, the site is therefore reachable
       // from the local network as well.
       host: true,
       port: HTTPS_PORT,

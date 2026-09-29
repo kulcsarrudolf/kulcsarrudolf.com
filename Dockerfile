@@ -1,36 +1,42 @@
 # syntax=docker/dockerfile:1
 
 # Same tag as Dockerfile.dev, so there is one Node version to bump. It tracks
-# the 24 in .nvmrc and the "24.x" in engines.node, and ships yarn 1.22.22,
-# exactly what packageManager pins.
+# the 24 in .nvmrc and the "24.x" in engines.node.
 ARG NODE_IMAGE=node:24-bookworm-slim
+
+# ---------------------------------------------------------------------------
+# upm: the image ships npm and yarn only, so the package manager is installed
+# here, at the version packageManager pins, for the two stages that use it.
+# ---------------------------------------------------------------------------
+FROM ${NODE_IMAGE} AS upm
+
+WORKDIR /app
+COPY package.json ./
+RUN npm install --global "$(node -p "require('./package.json').packageManager")"
 
 # ---------------------------------------------------------------------------
 # deps: node_modules and nothing else, so a source change reuses this layer.
 # ---------------------------------------------------------------------------
-FROM ${NODE_IMAGE} AS deps
+FROM upm AS deps
 
-# NODE_ENV is deliberately left unset here. yarn 1 reads it, and NODE_ENV=production
-# makes it skip devDependencies, which is where vite, tailwind and the TanStack Start
-# plugin live. The build would then fail as a missing-module error that looks nothing
-# like its cause. HUSKY=0 makes the `prepare` script a no-op, the same way CI does it.
-ENV HUSKY=0 \
-    YARN_CACHE_FOLDER=/yarn-cache
+# NODE_ENV is deliberately left unset here, and the install is a full one:
+# devDependencies are where vite, tailwind and the TanStack Start plugin live, and
+# a build without them fails as a missing-module error that looks nothing like its
+# cause. upm runs no lifecycle scripts, so `prepare` and husky never come into it.
+ENV UPM_STORE=/upm-store
 
-WORKDIR /app
-COPY package.json yarn.lock ./
+COPY upm.lock ./
 
-# yarn 1 gives up early on a slow registry, hence the timeout. The cache mount keeps
-# tarballs across builds, so changing one dependency does not re-download the rest.
-RUN --mount=type=cache,target=/yarn-cache,sharing=locked \
-    yarn install --frozen-lockfile --network-timeout 600000
+# The cache mount keeps the store across builds, so changing one dependency does
+# not re-download the rest. The mount is another filesystem, so upm copies out of
+# it instead of hardlinking, and node_modules stays whole once it is unmounted.
+RUN --mount=type=cache,target=/upm-store,sharing=locked \
+    upm install --frozen-lockfile
 
 # ---------------------------------------------------------------------------
 # build: vite build -> .output/
 # ---------------------------------------------------------------------------
-FROM ${NODE_IMAGE} AS build
-
-ENV HUSKY=0
+FROM upm AS build
 
 # VITE_ values are inlined into the bundle by `vite build`, so they are build
 # arguments rather than runtime environment: setting them on `docker run` does
@@ -57,7 +63,7 @@ COPY . .
 # Nitro has no Vercel environment to detect here, so it picks the node-server preset
 # and writes a standalone .output/ that serves .output/public itself. No reverse
 # proxy is needed in front of it.
-RUN yarn build
+RUN upm run build
 
 # ---------------------------------------------------------------------------
 # runtime: .output/ on a bare Node. No node_modules, no package manager.
@@ -85,6 +91,6 @@ EXPOSE 3000
 HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
     CMD node -e "fetch('http://127.0.0.1:'+(process.env.PORT||3000)+'/').then((r) => process.exit(r.ok ? 0 : 1), () => process.exit(1))"
 
-# The same entry point as `yarn start`. Run with --init (or init: true in compose)
+# The same entry point as `upm run start`. Run with --init (or init: true in compose)
 # so signals reach it and zombies get reaped.
 CMD ["node", ".output/server/index.mjs"]

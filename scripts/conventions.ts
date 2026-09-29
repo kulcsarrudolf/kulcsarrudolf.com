@@ -21,7 +21,7 @@ export const COMMIT_TYPES = [
 ] as const;
 
 // Work never lands on these directly: it arrives through a pull request into
-// `develop`, and `yarn deploy` fast-forwards `master` to it.
+// `develop`, and `upm run deploy` fast-forwards `master` to it.
 const PROTECTED_BRANCHES = ["develop", "master"];
 
 // Dependabot names its own branches, and CI runs this check on its pull
