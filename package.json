@@ -60,6 +60,7 @@
     "lint-staged": "^17.5.0",
     "oxfmt": "^0.67.0",
     "oxlint": "^1.82.0",
+    "pathe": "^2.0.3",
     "satori": "^0.33.4",
     "storybook": "^10.6.0",
     "tailwindcss": "4.3.3",
