@@ -68,17 +68,6 @@
     "vite": "^8.2.2",
     "vitest": "^5.0.0"
   },
-  "resolutions": {
-    "brace-expansion": "^2.1.4",
-    "cross-spawn": "^7.0.6",
-    "flatted": "^3.4.2",
-    "gray-matter/js-yaml": "^3.15.2",
-    "js-yaml": "^4.3.2",
-    "minimatch": "^9.0.7",
-    "picomatch": "^2.3.2",
-    "postcss": "^8.5.18",
-    "yaml": "^2.8.3"
-  },
   "engines": {
     "node": "24.x"
   },
