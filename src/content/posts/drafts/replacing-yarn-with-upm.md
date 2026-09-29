@@ -78,15 +78,19 @@ Vercel has no built-in support for upm, so `vercel.json` carries an install comm
 
 Vercel restores `node_modules` from its build cache, so what an install costs depends on whether the lockfile changed.
 
-| Build on `develop`              | Yarn 1.22.19        | upm 1.2.0 |
-| ------------------------------- | ------------------- | --------- |
-| Lockfile changed: install       | about 30 s          | 6.3 s     |
-| Lockfile changed: whole build   | 47 s, 56 s          | 19 s      |
-| Lockfile unchanged: install     | 1.4 s               | TODO      |
-| Lockfile unchanged: whole build | 18 s (median of 10) | TODO      |
+| Build on `develop`              | Yarn 1.22.19        | upm 1.2.0        |
+| ------------------------------- | ------------------- | ---------------- |
+| Lockfile changed: install       | about 30 s          | 6.3 s            |
+| Lockfile changed: whole build   | 47 s, 56 s          | 19 s             |
+| Lockfile unchanged: install     | 1.4 s               | 1.1 s            |
+| Lockfile unchanged: whole build | 18 s (median of 10) | 16 s (one build) |
 
 The 6.3 s is the worst case for upm: the first build after the switch, with no cache at all, and 0.9 s of it is installing upm itself.
 The two Yarn builds in the same row had their cache restored and still spent about 30 s fetching and linking, because a changed lockfile makes Yarn 1 redo most of the work.
+
+On an ordinary build, where the lockfile did not change, there is nothing to win.
+The install step was 1.4 s and is 1.1 s, of which 1.0 s is installing upm and 19 ms is upm finding the tree up to date.
+The 16 s build is a single sample inside the range the Yarn builds already covered, so I read it as no change.
 
 ## What had to change first
 
@@ -111,4 +115,18 @@ I replaced the plugin with about 300 lines of hand-written CSS and checked that 
 
 ## Verdict
 
-TODO
+| Where                          | Before | After      |
+| ------------------------------ | ------ | ---------- |
+| Local cold install             | 21.0 s | 6.5 s      |
+| Local warm install             | 3.7 s  | 3.9 s      |
+| Local no-op install            | 422 ms | 44 ms      |
+| CI job                         | 45 s   | 17 to 27 s |
+| Vercel build, lockfile changed | 47 s   | 19 s       |
+| Vercel build, ordinary         | 18 s   | 16 s       |
+
+The installs that start from nothing got about three times faster, and CI got about twice as fast, mostly by no longer needing a cache.
+The install that runs every day, with a warm cache, did not change, and neither did an ordinary deploy.
+
+Against that stand no Dependabot, no overrides and a package manager that calls itself unstable.
+For a personal site that is a trade I am happy to try.
+For a project with a team and customers I would wait for a stable release, and I would first measure what a move to a current npm or pnpm gives, because part of this gain is simply leaving Yarn 1.
