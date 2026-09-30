@@ -6,16 +6,16 @@ set -e
 # @tailwindcss/oxide, lightningcss and rolldown.
 #
 # That volume is seeded from the image once, at creation, and then outlives every
-# rebuild. So a upm.lock change would produce a new image whose dependencies the
+# rebuild. So a yarn.lock change would produce a new image whose dependencies the
 # running container never sees, and the symptom is a missing module that survives
-# `docker compose build`. Reconciling here closes that gap: it is a no-op when
-# the volume already matches, and --frozen-lockfile turns a package.json that has
-# drifted from upm.lock into a loud failure rather than a quiet one.
+# `docker compose build`. Reconciling here closes that gap: it is a sub-second
+# no-op when the volume already matches, and --immutable turns a package.json
+# that has drifted from yarn.lock into a loud failure rather than a quiet one.
 #
-# --verify is what makes it a real repair. Without it upm trusts the record of
-# its last install and reports the tree up to date even when it has been half
-# deleted underneath, which is exactly the state a volume ends up in after an
-# interrupted install.
-upm install --frozen-lockfile --verify --prefer-offline
+# It is a real repair, not a check of the lockfile alone: Yarn keeps a record of
+# the tree it laid out in node_modules/.yarn-state.yml, in the volume itself, and
+# puts back whatever has gone missing underneath it, which is exactly the state a
+# volume ends up in after an interrupted install.
+yarn install --immutable
 
 exec "$@"

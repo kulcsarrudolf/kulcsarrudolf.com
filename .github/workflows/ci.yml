@@ -19,17 +19,15 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
+      # `cache: yarn` asks `yarn` where its cache is. The runner's yarn 1 hands
+      # over to the release committed under .yarn/releases, so the answer is
+      # Yarn 4's global cache, and that is what gets restored.
       - uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
+          cache: yarn
 
-      # The version comes from packageManager in package.json, the one place
-      # it is pinned. There is no cache step: a cold install takes less time
-      # than restoring a cache would.
-      - name: Install upm
-        run: npm install --global "$(node -p "require('./package.json').packageManager")"
-
-      - run: upm install --frozen-lockfile
+      - run: yarn install --immutable
       # Squash-merge uses the pull request title as the commit subject, so it
       # has to pass the same check as a local commit message.
       - name: Check pull request title and branch name
@@ -38,12 +36,12 @@ jobs:
           PR_TITLE: ${{ github.event.pull_request.title }}
           HEAD_REF: ${{ github.head_ref }}
         run: |
-          printf '%s\n' "$PR_TITLE" | upm exec commitlint
+          printf '%s\n' "$PR_TITLE" | yarn commitlint
           node scripts/check-branch-name.ts "$HEAD_REF"
 
-      - run: upm run typecheck
-      - run: upm run lint
-      - run: upm run format:check
-      - run: upm run test
-      - run: upm run build
-      - run: upm run build-storybook
+      - run: yarn typecheck
+      - run: yarn lint
+      - run: yarn format:check
+      - run: yarn test
+      - run: yarn build
+      - run: yarn build-storybook

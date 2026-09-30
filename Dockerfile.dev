@@ -1,38 +1,41 @@
 # syntax=docker/dockerfile:1
 
-# Tracks the 24 in .nvmrc and the "24.x" in engines.node.
+# Tracks the 24 in .nvmrc and the "24.x" in engines.node. The tag also ships
+# yarn 1.22, and that is enough: .yarnrc.yml points it at the release committed
+# under .yarn/releases, so no package manager is installed here.
 #
 # Debian rather than Alpine: @tailwindcss/oxide, lightningcss, rolldown and the
 # oxc binaries all publish glibc builds, and those are the ones CI and Vercel
 # exercise, so the container runs what the other two run.
 FROM node:24-bookworm-slim
 
-# upm runs no lifecycle scripts, so `prepare` and husky never come into it. The
-# git hooks belong to the host checkout.
-ENV UPM_STORE=/home/node/.upm/store
+# HUSKY=0 makes the postinstall a no-op. The git hooks belong to the host
+# checkout, and CI installs the same way.
+#
+# Yarn's cache and its install state both go under /home/node/.yarn. The state
+# would otherwise land in /app/.yarn, which at run time is the bind-mounted
+# checkout, where the host's copy describes the host's node_modules.
+ENV HUSKY=0 \
+    YARN_GLOBAL_FOLDER=/home/node/.yarn \
+    YARN_INSTALL_STATE_PATH=/home/node/.yarn/install-state.gz
 
 # Both directories are created and handed to `node` before privileges drop, so
 # the unprivileged user owns node_modules outright. Doing it afterwards with a
 # recursive chown would copy the entire dependency tree into a second layer.
-RUN mkdir -p /app "$UPM_STORE" && chown -R node:node /app /home/node/.upm
-
-WORKDIR /app
-
-# Only the manifests, so this layer survives every source change. The source
-# itself arrives as a bind mount at run time and is never copied in.
-COPY --chown=node:node package.json upm.lock ./
-
-# The image ships npm and yarn only. A global install needs root, so it happens
-# before privileges drop, at the version packageManager pins.
-RUN npm install --global "$(node -p "require('./package.json').packageManager")"
+RUN mkdir -p /app /home/node/.yarn && chown node:node /app /home/node/.yarn
 
 USER node
+WORKDIR /app
 
-# The store is kept in the image rather than in a cache mount: the entrypoint
-# repairs node_modules out of it, and a compose volume seeded from this path is
-# where it finds the files. It costs no space here, since node_modules is
-# hardlinked to it.
-RUN upm install --frozen-lockfile
+# Only the manifests and Yarn itself, so this layer survives every source
+# change. The source arrives as a bind mount at run time and is never copied in.
+COPY --chown=node:node package.json yarn.lock .yarnrc.yml ./
+COPY --chown=node:node .yarn/releases ./.yarn/releases
+
+# The cache is kept in the image rather than in a cache mount: a compose volume
+# seeded from /home/node/.yarn is where the entrypoint's repair install finds
+# the packages and the install state.
+RUN yarn install --immutable
 
 # Copied after the install so editing the script does not invalidate it, and
 # outside /app because the bind mount replaces that directory wholesale.
@@ -47,4 +50,4 @@ ENTRYPOINT ["entrypoint.sh"]
 # vite.config.ts already binds every interface, which the published ports
 # need; --host spells it out so a later change there cannot quietly leave the
 # container unreachable. compose.yaml overrides this for the storybook service.
-CMD ["upm", "run", "dev", "--host", "0.0.0.0"]
+CMD ["yarn", "dev", "--host", "0.0.0.0"]
