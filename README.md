@@ -199,7 +199,7 @@ A published post is listed in the sitemap, `/rss.xml` and `/llms.txt`, and gets 
 Projects also take `order` (position on `/projects`, ascending, default `100`), the optional `github`, `npm` and `website` links, and `relatedPosts` as a list of blog post slugs. Private posts are filtered out of that list, so referencing a draft is safe.
 
 Images go on Cloudinary.
-`upm run upload-image <file>...` uploads them and prints a `<PostImage>` line to paste into the body.
+`yarn upload-image <file>...` uploads them and prints a `<PostImage>` line to paste into the body.
 [docs/uploading-images.md](./docs/uploading-images.md) covers the setup, the options and what to do when an upload fails.
 
 ## Markdown for AI agents

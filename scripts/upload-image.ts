@@ -1,7 +1,7 @@
 // Uploads images to Cloudinary and prints the URL and the <PostImage> line to
 // paste into a post or a project.
 //
-//   upm run upload-image <file>... [--folder <name>] [--id <public id>]
+//   yarn upload-image <file>... [--folder <name>] [--id <public id>]
 //
 // The credentials come from CLOUDINARY_URL, read from the environment or from
 // .env.local. An image whose public id is already taken is left alone rather
@@ -32,7 +32,7 @@ const { values, positionals: files } = parseArgs({
 });
 
 if (files.length === 0) {
-  console.error("Usage: upm run upload-image <file>... [--folder <name>] [--id <public id>]");
+  console.error("Usage: yarn upload-image <file>... [--folder <name>] [--id <public id>]");
   process.exit(1);
 }
 if (values.id && files.length > 1) {

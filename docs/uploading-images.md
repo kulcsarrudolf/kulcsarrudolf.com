@@ -1,7 +1,7 @@
 # Uploading images
 
 Images for posts and projects are hosted on Cloudinary, not in the repo.
-`upm run upload-image` uploads them and prints the line to paste into the Markdown.
+`yarn upload-image` uploads them and prints the line to paste into the Markdown.
 
 ## Setup
 
@@ -22,7 +22,7 @@ The site itself never reads the variable, so it does not need to be set on Verce
 ## Uploading
 
 ```bash
-upm run upload-image ~/Desktop/diagram.png
+yarn upload-image ~/Desktop/diagram.png
 ```
 
 For every file it prints a status line, the image URL, and a `<PostImage>` line:
@@ -45,7 +45,7 @@ The URL carries `q_auto/f_auto`, so Cloudinary picks the quality and serves each
 Several files can go in one run:
 
 ```bash
-upm run upload-image photos/*.jpg
+yarn upload-image photos/*.jpg
 ```
 
 A file that fails is reported and the rest still upload.
