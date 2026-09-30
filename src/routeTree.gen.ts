@@ -23,7 +23,6 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PostsSlugRouteImport } from './routes/posts.$slug'
 import { Route as ProjectsIndexRouteImport } from './routes/projects.index'
 import { Route as ProjectsSlugRouteImport } from './routes/projects.$slug'
-import { Route as ProjectsDiamondRouteImport } from './routes/projects.diamond'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -95,11 +94,6 @@ const ProjectsSlugRoute = ProjectsSlugRouteImport.update({
   path: '/projects/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProjectsDiamondRoute = ProjectsDiamondRouteImport.update({
-  id: '/projects/diamond',
-  path: '/projects/diamond',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -115,7 +109,6 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/posts/$slug': typeof PostsSlugRoute
   '/projects/$slug': typeof ProjectsSlugRoute
-  '/projects/diamond': typeof ProjectsDiamondRoute
   '/projects/': typeof ProjectsIndexRoute
 }
 export interface FileRoutesByTo {
@@ -132,7 +125,6 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/posts/$slug': typeof PostsSlugRoute
   '/projects/$slug': typeof ProjectsSlugRoute
-  '/projects/diamond': typeof ProjectsDiamondRoute
   '/projects': typeof ProjectsIndexRoute
 }
 export interface FileRoutesById {
@@ -150,7 +142,6 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/posts/$slug': typeof PostsSlugRoute
   '/projects/$slug': typeof ProjectsSlugRoute
-  '/projects/diamond': typeof ProjectsDiamondRoute
   '/projects/': typeof ProjectsIndexRoute
 }
 export interface FileRouteTypes {
@@ -169,7 +160,6 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/posts/$slug'
     | '/projects/$slug'
-    | '/projects/diamond'
     | '/projects/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -186,7 +176,6 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/posts/$slug'
     | '/projects/$slug'
-    | '/projects/diamond'
     | '/projects'
   id:
     | '__root__'
@@ -203,7 +192,6 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/posts/$slug'
     | '/projects/$slug'
-    | '/projects/diamond'
     | '/projects/'
   fileRoutesById: FileRoutesById
 }
@@ -221,7 +209,6 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   PostsSlugRoute: typeof PostsSlugRoute
   ProjectsSlugRoute: typeof ProjectsSlugRoute
-  ProjectsDiamondRoute: typeof ProjectsDiamondRoute
   ProjectsIndexRoute: typeof ProjectsIndexRoute
 }
 
@@ -325,13 +312,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/projects/diamond': {
-      id: '/projects/diamond'
-      path: '/projects/diamond'
-      fullPath: '/projects/diamond'
-      preLoaderRoute: typeof ProjectsDiamondRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -349,7 +329,6 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   PostsSlugRoute: PostsSlugRoute,
   ProjectsSlugRoute: ProjectsSlugRoute,
-  ProjectsDiamondRoute: ProjectsDiamondRoute,
   ProjectsIndexRoute: ProjectsIndexRoute,
 }
 export const routeTree = rootRouteImport
