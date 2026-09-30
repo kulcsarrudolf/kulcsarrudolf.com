@@ -28,7 +28,7 @@ export const Default: Story = {};
 export const Diagram: Story = {
   args: {
     variant: "diagram",
-    src: "https://res.cloudinary.com/dialh0kqy/image/upload/q_auto/f_auto/v1790789508/image-1790789468264_b9ohw6.png",
+    src: "/images/projects/diamond-system-diagram.png",
     alt: "A system diagram",
     title: "The viewer shows this as its caption",
   },
