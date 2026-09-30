@@ -36,7 +36,7 @@ Everything runs on AWS.
 
 As tech lead I sat in the weekly calls with the client where new features were designed, on both the technical and the product side, and I reviewed code across the backend, the mobile app and the infrastructure.
 
-<PostImage variant="diagram" src="/images/projects/diamond-system-diagram.png" alt="System diagram: the mobile app and the admin portal talk to the Diamond Detector API, which connects to the AI service, the bulk download Lambda, Stripe, Mailchimp, S3 and MongoDB. The detectors connect to the mobile app over Bluetooth, and the AI detectors over USB." title="System diagram of the diamond detection platform" />
+<PostImage variant="diagram" src="https://res.cloudinary.com/dialh0kqy/image/upload/q_auto/f_auto/v1790791198/diamond-system-diagram.png" alt="System diagram: the mobile app and the admin portal talk to the Diamond Detector API, which connects to the AI service, the bulk download Lambda, Stripe, Mailchimp, S3 and MongoDB. The detectors connect to the mobile app over Bluetooth, and the AI detectors over USB." title="System diagram of the diamond detection platform" />
 
 ## The detectors
 
