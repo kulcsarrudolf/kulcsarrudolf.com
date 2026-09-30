@@ -24,7 +24,7 @@ export const ROOT_CA_FILE = path.join(CERT_DIR, "rootCA.pem");
 // https://127.0.0.1 with certificate validation left on.
 export const CERT_SANS = [HOST, "localhost", "127.0.0.1", "::1"];
 
-export const SETUP_COMMAND = "upm run dev:setup";
+export const SETUP_COMMAND = "yarn dev:setup";
 
 export function readLocalCerts(): { cert: Buffer; key: Buffer } {
   try {

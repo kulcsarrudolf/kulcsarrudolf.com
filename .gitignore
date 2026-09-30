@@ -2,8 +2,11 @@
 
 # dependencies
 /node_modules
-/.pnp
-.pnp.js
+.pnp.*
+
+# yarn: the release under .yarn/releases is committed, the rest is generated
+/.yarn/*
+!/.yarn/releases
 
 # testing
 /coverage
@@ -22,7 +25,7 @@
 .DS_Store
 *.pem
 
-# local dev certificate, written by `upm run dev:setup`
+# local dev certificate, written by `yarn dev:setup`
 /.certs/
 
 # debug
@@ -47,5 +50,5 @@ npm-debug.log*
 # design canvas scratch
 /.design/
 
-# social preview cards, rendered by `upm run og` before dev and build
+# social preview cards, rendered by `yarn og` before dev and build
 /public/og/

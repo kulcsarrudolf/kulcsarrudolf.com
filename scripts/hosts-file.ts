@@ -3,8 +3,9 @@
 // only when something changed.
 
 const MARKER = "# kulcsarrudolf.com dev, managed by dev:setup";
-// What the marker read while the project was on yarn. A machine set up back
-// then still has it in /etc/hosts, so it is recognised and never written.
+// What the marker read before it stopped naming the package manager. A machine
+// set up back then still has it in /etc/hosts, so it is recognised and never
+// written.
 const LEGACY_MARKER = "# kulcsarrudolf.com dev, managed by yarn dev:setup";
 
 function block(host: string, marker = MARKER): string[] {

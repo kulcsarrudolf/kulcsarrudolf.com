@@ -6,7 +6,7 @@ The architecture, scripts and content workflow are documented in [README.md](./R
 ## File size
 
 No file may exceed **500 lines**.
-`upm run lint` enforces this through oxlint's `max-lines` rule, so a file that grows past the limit fails the lint run.
+`yarn lint` enforces this through oxlint's `max-lines` rule, so a file that grows past the limit fails the lint run.
 
 When a file approaches the limit, split it along the seams it already has rather than raising the number:
 
@@ -63,7 +63,7 @@ Before writing markup, check whether one of these already covers it:
 Tailwind classes only appear in files under `src/components/` and `src/features/`.
 Everywhere else (routes, pages, `server`, `lib`, `i18n`) composes components and passes them props, rather than styling markup itself.
 
-`upm run lint` enforces this through `boundary/no-tailwind`, a local rule in [.oxlint/tailwind-boundary.js](./.oxlint/tailwind-boundary.js).
+`yarn lint` enforces this through `boundary/no-tailwind`, a local rule in [.oxlint/tailwind-boundary.js](./.oxlint/tailwind-boundary.js).
 It reads each `className` string literal and asks Tailwind itself, loaded from `globals.css`, whether it knows the classes in it, so `bg-surface`, `nav:hidden` and the project's own `@utility` classes (`hide-scrollbar`, `nav-label`) are all refused and an unknown class passes.
 Inline `style` is refused the same way, so it cannot become the side door out.
 
@@ -146,7 +146,7 @@ The types are `feat`, `fix`, `chore`, `refactor`, `docs`, `test`, `content`, `st
 `content` is the project's own: a change to a post, a project or other authored copy under `src/content/`.
 
 A branch is `<type>/<kebab-case>` with the same types, such as `chore/typescript-7` or `fix/navbar-link-shift`.
-Nothing is committed straight onto `develop` or `master`: work reaches `develop` through a pull request and `master` through `upm run deploy`.
+Nothing is committed straight onto `develop` or `master`: work reaches `develop` through a pull request and `master` through `yarn deploy`.
 
 Both rules are enforced, so a slip is caught rather than remembered.
 The list of types lives once, in [scripts/conventions.ts](./scripts/conventions.ts); [commitlint.config.ts](./commitlint.config.ts) reads it for the `commit-msg` hook and `scripts/check-branch-name.ts` reads it for the `pre-commit` hook.
@@ -156,15 +156,15 @@ So a pull request title follows the commit subject rule too.
 ## Formatting
 
 `oxfmt` owns the formatting, so no discussion of it belongs in review.
-`upm run prepare` installs a pre-commit hook that runs `oxlint --fix` and then `oxfmt` over the staged files and stages what they rewrite, so a commit is formatted whether or not anyone remembered.
+`yarn install` installs a pre-commit hook that runs `oxlint --fix` and then `oxfmt` over the staged files and stages what they rewrite, so a commit is formatted whether or not anyone remembered.
 It then runs `tsc --noEmit` over the whole project.
 An unfixable lint error or a type error stops the commit.
 
-Run `upm run format` by hand when you want the working tree formatted before then, and never hand-format around it.
+Run `yarn format` by hand when you want the working tree formatted before then, and never hand-format around it.
 
 ## Tests
 
-Pure modules (`server/`, `lib/`, `i18n/`, a feature's engine or data helpers) get a `*.test.ts` next to them, run by `upm run test`.
+Pure modules (`server/`, `lib/`, `i18n/`, a feature's engine or data helpers) get a `*.test.ts` next to them, run by `yarn test`.
 Components are covered by their stories, not by unit tests.
 
 ## Checks
@@ -172,5 +172,5 @@ Components are covered by their stories, not by unit tests.
 Run all four before calling a change done:
 
 ```bash
-upm run typecheck && upm run lint && upm run test && upm run build
+yarn typecheck && yarn lint && yarn test && yarn build
 ```

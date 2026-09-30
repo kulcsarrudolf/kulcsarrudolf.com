@@ -33,7 +33,7 @@ services:
       # Masks the host's darwin-arm64 node_modules. Letting it show through
       # would hand Linux the wrong @tailwindcss/oxide and lightningcss binaries.
       - node_modules:/app/node_modules
-      - upm_store:/home/node/.upm/store
+      - yarn_cache:/home/node/.yarn
     healthcheck:
       # Rendering the home page proves more than a static file would: it
       # exercises SSR, so an unhealthy container means something real is broken.
@@ -60,7 +60,7 @@ services:
     init: true
     # The https flags come from the `storybook` script in package.json; this
     # only adds --host, and --no-open because there is no browser in here.
-    command: ["upm", "run", "storybook", "--host", "0.0.0.0", "--no-open"]
+    command: ["yarn", "storybook", "--host", "0.0.0.0", "--no-open"]
     ports:
       - "6006:6006"
     environment:
@@ -69,10 +69,10 @@ services:
     volumes:
       - .:/app
       - node_modules:/app/node_modules
-      - upm_store:/home/node/.upm/store
+      - yarn_cache:/home/node/.yarn
     depends_on:
       dev:
-        # Waiting means the two do not run upm install over the shared
+        # Waiting means the two do not run yarn install over the shared
         # node_modules volume at the same time.
         condition: service_healthy
 
@@ -98,4 +98,4 @@ services:
 
 volumes:
   node_modules:
-  upm_store:
+  yarn_cache:

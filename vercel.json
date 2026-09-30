@@ -1,7 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "tanstack-start",
-  "installCommand": "npm install --global \"$(node -p \"require('./package.json').packageManager\")\" && upm install --frozen-lockfile",
-  "buildCommand": "upm run build",
   "ignoreCommand": "case \"$VERCEL_GIT_COMMIT_REF\" in develop|master) exit 1;; *) exit 0;; esac"
 }
