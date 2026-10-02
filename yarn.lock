@@ -3965,7 +3965,7 @@ __metadata:
     typescript: "npm:^7.0.2"
     vite: "npm:^8.2.2"
     vitest: "npm:^5.0.0"
-    zimme-zoom: "npm:^0.3.0"
+    zimme-zoom: "npm:^0.3.1"
   languageName: unknown
   linkType: soft
 
@@ -5965,13 +5965,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zimme-zoom@npm:^0.3.0":
-  version: 0.3.0
-  resolution: "zimme-zoom@npm:0.3.0"
+"zimme-zoom@npm:^0.3.1":
+  version: 0.3.1
+  resolution: "zimme-zoom@npm:0.3.1"
   peerDependencies:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-  checksum: 10c0/75c465e4429cf0ade30039a318b90c89ffc629758a5de15f89aca572522f99a093f83314221586afc9c802981b55c6e494fabc885a83ee1a1c96dba3adc7e3cb
+  checksum: 10c0/2c35f0c16f855b2f5c9a874d2928b223486a00a994782cb72ecd2cf9d2ecff1aa738bc95f85b4b24b6572105fdf02a9e7e4b428208830712a38141e96af13898
   languageName: node
   linkType: hard
 
