@@ -6,6 +6,17 @@ import { defineConfig } from "vite";
 
 import { HOST, HTTPS_PORT, httpsRedirect, readLocalCerts } from "./scripts/local-dev.ts";
 
+// Sent with every response. The site is never meant to be framed, and nothing
+// it opens in a new tab needs a handle back to it. A full Content-Security-
+// Policy is left out for now: the theme script and the JSON-LD are inline, so
+// one needs nonces threaded through the document first.
+const SECURITY_HEADERS = {
+  "X-Frame-Options": "DENY",
+  "Cross-Origin-Opener-Policy": "same-origin",
+  "X-Content-Type-Options": "nosniff",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
+};
+
 // Every page is server-rendered at request time (no prerendering), so the
 // `?lang=` query, the private-post preview on the dev server and the
 // `Accept: text/markdown` negotiation all keep working in production.
@@ -39,8 +50,10 @@ export default defineConfig(({ command }) => {
       tailwindcss(),
       tanstackStart(),
       // Nitro builds the server for the platform it runs on. On Vercel it
-      // detects the provider automatically and emits the Build Output API.
-      nitro(),
+      // detects the provider automatically and emits the Build Output API,
+      // which is also why the headers live here: Vercel does not apply the
+      // `headers` of vercel.json to a Build Output API deployment.
+      nitro({ routeRules: { "/**": { headers: SECURITY_HEADERS } } }),
       // The React plugin must come after the Start plugin.
       viteReact(),
       httpsRedirect(),
