@@ -42,7 +42,8 @@ const Brand = ({ tone = "onBrand", onNavigate }: BrandProps) => {
       >
         <NavbarAvatar
           src={logoSrc}
-          alt={title}
+          // Decorative: the name is printed right beside it.
+          alt=""
           ringClassName={
             tone === "onBrand" ? "border-white" : "border-brand dark:border-brand-dark-accent"
           }

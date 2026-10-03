@@ -54,7 +54,7 @@ const LetsTalk = () => {
 
   return (
     <div className="rounded-xl bg-brand p-6 shadow-md sm:p-7 dark:bg-brand-dark">
-      <span className="mb-2 block text-[12.5px] font-semibold uppercase tracking-[0.09em] text-white/85">
+      <span className="mb-2 block text-[12.5px] font-semibold uppercase tracking-[0.09em] text-white/90">
         {t("home.letsTalk.eyebrow")}
       </span>
       <h2 className="mb-5 text-2xl font-bold leading-[1.25] text-white sm:text-[30px]">
@@ -73,7 +73,7 @@ const LetsTalk = () => {
         {/* The joke, kept at the end and set a step back from the cases above
             it by smaller type and an icon that stays a shade quieter. Hovering
             or focusing it shows a tooltip hinting there is more than one egg. */}
-        <div className="text-[13.5px] text-white/85">
+        <div className="text-[13.5px] text-white/90">
           <Tooltip content={t("home.letsTalk.easterEggHint")}>
             <span className="flex items-center gap-2.5">
               <span className="shrink-0 text-white/70">

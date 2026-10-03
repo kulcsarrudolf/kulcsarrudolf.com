@@ -17,9 +17,15 @@ interface TrafficLightsProps {
   };
 }
 
-/** Each dot: its colour, and the glyph that appears in it on hover. */
+/**
+ * Each button is a 24px square, the smallest touch target that is comfortable
+ * to hit, with the 12px dot drawn in its middle. Side by side with no gap, the
+ * dots keep a 12px space between them and the targets never overlap.
+ */
+const BUTTON = "group/dot flex h-6 w-6 shrink-0 items-center justify-center outline-hidden";
+/** The dot itself: its colour, and the glyph that appears in it on hover. */
 const DOT =
-  "relative flex h-3 w-3 shrink-0 items-center justify-center rounded-full text-[9px] leading-none font-bold text-black/55 outline-hidden ring-offset-1 ring-offset-gray-700 focus-visible:ring-2 focus-visible:ring-white/70";
+  "flex h-3 w-3 items-center justify-center rounded-full text-[9px] leading-none font-bold text-black/55 ring-offset-1 ring-offset-gray-700 group-focus-visible/dot:ring-2 group-focus-visible/dot:ring-white/70";
 const GLYPH =
   "opacity-0 transition-opacity group-hover/lights:opacity-100 group-focus-within/lights:opacity-100";
 
@@ -44,17 +50,16 @@ const TrafficLights = ({
   // A double-click on the bar rolls the window up; on the dots themselves it
   // would fire twice over whatever the second click already did.
   <div
-    className="group/lights flex items-center gap-2"
+    // Pulled left by the button's own inset, so the first dot still lines up
+    // with the bar's padding.
+    className="group/lights -ml-1.5 flex items-center"
     onDoubleClick={(event) => event.stopPropagation()}
   >
-    <button
-      type="button"
-      onClick={onClose}
-      aria-label={labels.close}
-      className={`${DOT} bg-traffic-close`}
-    >
-      <span className={GLYPH} aria-hidden="true">
-        ✕
+    <button type="button" onClick={onClose} aria-label={labels.close} className={BUTTON}>
+      <span className={`${DOT} bg-traffic-close`}>
+        <span className={GLYPH} aria-hidden="true">
+          ✕
+        </span>
       </span>
     </button>
 
@@ -63,10 +68,12 @@ const TrafficLights = ({
       onClick={onShade}
       aria-label={shaded ? labels.unshade : labels.shade}
       aria-expanded={!shaded}
-      className={`${DOT} bg-traffic-shade`}
+      className={BUTTON}
     >
-      <span className={GLYPH} aria-hidden="true">
-        {shaded ? "+" : "−"}
+      <span className={`${DOT} bg-traffic-shade`}>
+        <span className={GLYPH} aria-hidden="true">
+          {shaded ? "+" : "−"}
+        </span>
       </span>
     </button>
 
@@ -75,10 +82,12 @@ const TrafficLights = ({
       onClick={onZoom}
       aria-label={pressed ? labels.dock : labels.float}
       aria-pressed={pressed}
-      className={`${DOT} bg-traffic-zoom`}
+      className={BUTTON}
     >
-      <span className={GLYPH} aria-hidden="true">
-        {pressed ? "▾" : "▴"}
+      <span className={`${DOT} bg-traffic-zoom`}>
+        <span className={GLYPH} aria-hidden="true">
+          {pressed ? "▾" : "▴"}
+        </span>
       </span>
     </button>
   </div>

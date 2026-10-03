@@ -33,7 +33,9 @@ const CurrentFocus = () => {
   return (
     <div>
       <div className="mb-3 flex min-h-9 items-center justify-between gap-4">
-        <Title mb={0}>{t("home.currentFocus.title")}</Title>
+        <Title as="h2" mb={0}>
+          {t("home.currentFocus.title")}
+        </Title>
 
         <RailControls
           counter={

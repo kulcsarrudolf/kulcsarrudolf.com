@@ -16,7 +16,10 @@ const BlogPostList = ({ title, posts, noOfElements = 0, compact = false }: BlogP
 
   return (
     <div>
-      <Title mb={!compact ? 2 : 1}>{title}</Title>
+      {/* Compact, the list is a section of another page, so it takes an h2. */}
+      <Title as={compact ? "h2" : "h1"} mb={!compact ? 2 : 1}>
+        {title}
+      </Title>
       {safePosts
         .sort((a, b) => {
           const dateA = new Date(a.date).getTime();

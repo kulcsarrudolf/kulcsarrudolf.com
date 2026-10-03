@@ -47,7 +47,7 @@ const SOCIAL_MEDIA: SocialMediaLink[] = [
   },
   {
     title: "GitHub",
-    href: "https://www.github.com/kulcsarrudolf",
+    href: "https://github.com/kulcsarrudolf",
     icon: faGithub,
   },
 ];

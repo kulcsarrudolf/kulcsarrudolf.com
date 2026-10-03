@@ -29,7 +29,7 @@ const TitleBar = ({ path, dragProps, dragLabel, ...lights }: TitleBarProps) => (
     {...dragProps}
   >
     <TrafficLights {...lights} />
-    <span className="ml-2 truncate font-mono text-[13px] text-gray-400">{path}</span>
+    <span className="ml-0.5 truncate font-mono text-[13px] text-gray-300">{path}</span>
   </div>
 );
 

@@ -1,3 +1,4 @@
+import interLatinFont from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import { Outlet, createRootRoute } from "@tanstack/react-router";
 import type { ReactNode } from "react";
@@ -56,7 +57,19 @@ export const Route = createRootRoute({
     const { meta, links } = siteHead(globalsCss);
     return {
       meta,
-      links,
+      // The Latin face of Inter is the only one an English page needs. The
+      // browser otherwise finds it only after parsing the stylesheet, and the
+      // text it swaps in under shifts the layout.
+      links: [
+        {
+          rel: "preload",
+          href: interLatinFont,
+          as: "font",
+          type: "font/woff2",
+          crossOrigin: "anonymous",
+        },
+        ...links,
+      ],
       scripts: [
         {
           type: "application/ld+json",

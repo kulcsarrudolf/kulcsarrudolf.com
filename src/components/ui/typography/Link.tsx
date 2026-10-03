@@ -6,13 +6,15 @@ type LinkProps = {
   children: React.ReactNode;
 };
 
+// Underlined at rest, not only on hover: these links sit inside running text
+// in a grey close to the brand, so colour alone does not set them apart.
 const Link = ({ href, children }: LinkProps) => {
   return (
     <a
       href={href}
       target="_blank"
       rel="noreferrer"
-      className="text-brand hover:underline dark:text-brand-dark-accent"
+      className="text-brand underline decoration-1 underline-offset-2 hover:decoration-2 dark:text-brand-dark-accent"
     >
       {children}
       <FontAwesomeIcon

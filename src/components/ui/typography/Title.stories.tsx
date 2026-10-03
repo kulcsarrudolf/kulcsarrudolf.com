@@ -11,6 +11,7 @@ const meta = {
   argTypes: {
     children: { control: "text" },
     mb: { control: { type: "number", min: 0, max: 4, step: 0.5 } },
+    as: { control: "inline-radio", options: ["h1", "h2"] },
   },
 } satisfies Meta<typeof Title>;
 
@@ -27,4 +28,8 @@ export const CustomMargin: Story = {
       <p>Text below the title, pushed down by the custom margin.</p>
     </>
   ),
+};
+
+export const Section: Story = {
+  args: { as: "h2" },
 };
