@@ -47,7 +47,7 @@ const BlogPostPreview = ({ post, compact = false }: BlogPostPreviewProps) => {
           {post.title}
         </p>
         <p>{post.subtitle}</p>
-        <p className="text-sm text-slate-400 dark:text-gray-400">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           {t("blogPost.postedOn")}: <span className="italic">{post.date}</span> |{" "}
           {t("blogPost.author")}: <span className="italic">{post.author}</span>
         </p>

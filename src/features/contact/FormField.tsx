@@ -30,7 +30,7 @@ const FormField = ({
       {optionalNote ? (
         <>
           {" "}
-          <span className="text-gray-500 font-normal dark:text-gray-400">({optionalNote})</span>
+          <span className="text-gray-600 font-normal dark:text-gray-400">({optionalNote})</span>
         </>
       ) : null}
     </label>
