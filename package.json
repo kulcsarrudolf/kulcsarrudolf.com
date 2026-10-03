@@ -59,7 +59,7 @@
     "@vitejs/plugin-react": "^6.1.1",
     "husky": "^9.1.7",
     "lint-staged": "^17.5.0",
-    "oxfmt": "^0.67.0",
+    "oxfmt": "^0.71.0",
     "oxlint": "^1.82.0",
     "pathe": "^2.0.3",
     "satori": "^0.33.4",
@@ -67,7 +67,7 @@
     "tailwindcss": "4.3.3",
     "typescript": "^7.0.2",
     "vite": "^8.2.2",
-    "vitest": "^5.0.0"
+    "vitest": "^5.0.3"
   },
   "engines": {
     "node": "24.x"
