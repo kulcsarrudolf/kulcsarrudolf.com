@@ -34,7 +34,11 @@ const restoreCaret = (focus: () => void) => requestAnimationFrame(focus);
  * press. It closes itself when the visitor changes page, since a window over
  * a page the visitor has left is a window in the way.
  */
-export function useTerminalWindow(launcher: boolean, onRestoreFocus: () => void) {
+export function useTerminalWindow(
+  launcher: boolean,
+  onRestoreFocus: () => void,
+  openOnMount = false,
+) {
   const dockRef = useRef<HTMLDivElement>(null);
   const pathname = useRouterState({ select: (state) => state.location.pathname });
 
@@ -47,9 +51,12 @@ export function useTerminalWindow(launcher: boolean, onRestoreFocus: () => void)
   const close = useCallback(() => setClosed(true), []);
 
   // Typing a page name at the prompt is the shortest way out of the window,
-  // so the page it opens is not the page it opens behind.
+  // so the page it opens is not the page it opens behind. Only a change of
+  // page counts: the page the window was opened on is not one.
+  const openedOnRef = useRef(pathname);
   useEffect(() => {
-    if (launcher) setClosed(true);
+    if (launcher && pathname !== openedOnRef.current) setClosed(true);
+    openedOnRef.current = pathname;
   }, [launcher, pathname]);
 
   const open = useCallback(() => {
@@ -60,6 +67,15 @@ export function useTerminalWindow(launcher: boolean, onRestoreFocus: () => void)
     if (launcher && !rect) lift(openingRect());
     restoreCaret(onRestoreFocus);
   }, [launcher, lift, onRestoreFocus, rect]);
+
+  // The launcher's window is fetched when its button is first pressed, so the
+  // press that loaded it is the press that opens it.
+  const openedOnMountRef = useRef(false);
+  useEffect(() => {
+    if (!openOnMount || openedOnMountRef.current) return;
+    openedOnMountRef.current = true;
+    open();
+  }, [open, openOnMount]);
 
   const toggleShade = useCallback(() => setShaded((rolled) => !rolled), []);
 

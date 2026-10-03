@@ -1,9 +1,6 @@
-import { useCallback, useEffect } from "react";
+import { Suspense, lazy, useCallback, useEffect } from "react";
 import { createPortal } from "react-dom";
 
-import BisectModal from "@/features/bisect/BisectModal";
-import SudokuModal from "@/features/sudoku/SudokuModal";
-import LovingAtmosphere from "@/features/wedding/LovingAtmosphere";
 import { useTranslation } from "@/i18n/useTranslation";
 
 import FloatingFrame from "./FloatingFrame";
@@ -18,12 +15,21 @@ import { useTerminalWindow } from "./useTerminalWindow";
 
 const PATH = "~/kulcsarrudolf.com";
 
+// The games and the hearts are what a command opens, not what the window is,
+// so each is fetched the first time its command runs rather than with the
+// page. Most visits never type one.
+const SudokuModal = lazy(() => import("@/features/sudoku/SudokuModal"));
+const BisectModal = lazy(() => import("@/features/bisect/BisectModal"));
+const LovingAtmosphere = lazy(() => import("@/features/wedding/LovingAtmosphere"));
+
 interface TerminalProps {
   /**
    * The terminal every page but the home page carries: closed until the
    * button in the corner is pressed, and never part of the page's flow.
    */
   launcher?: boolean;
+  /** Opens the launcher's window as soon as it mounts. */
+  openOnMount?: boolean;
 }
 
 /**
@@ -57,7 +63,7 @@ interface TerminalProps {
  * it is the `launcher`, waiting behind the button in the corner. Everything in
  * it is text, so the copy lives in the translation files with the pages.
  */
-const Terminal = ({ launcher = false }: TerminalProps) => {
+const Terminal = ({ launcher = false, openOnMount = false }: TerminalProps) => {
   const { t } = useTranslation();
   const {
     entries,
@@ -94,7 +100,7 @@ const Terminal = ({ launcher = false }: TerminalProps) => {
     open,
     toggleShade,
     toggleZoom,
-  } = useTerminalWindow(launcher, focusInput);
+  } = useTerminalWindow(launcher, focusInput, openOnMount);
 
   const floating = rect !== null;
   const { attachBody, body, scrollToLatest, measured, bodyStyle, handleProps } =
@@ -200,12 +206,14 @@ const Terminal = ({ launcher = false }: TerminalProps) => {
         </>
       )}
 
-      {game === "sudoku" && <SudokuModal onClose={closeGame} />}
-      {game === "bisect" && <BisectModal onClose={closeGame} />}
+      <Suspense fallback={null}>
+        {game === "sudoku" && <SudokuModal onClose={closeGame} />}
+        {game === "bisect" && <BisectModal onClose={closeGame} />}
 
-      {atmosphere.running && (
-        <LovingAtmosphere fading={atmosphere.fading} fadeMs={atmosphere.fadeMs} />
-      )}
+        {atmosphere.running && (
+          <LovingAtmosphere fading={atmosphere.fading} fadeMs={atmosphere.fadeMs} />
+        )}
+      </Suspense>
     </>
   );
 };
