@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Suspense, lazy, useState } from "react";
 
 import Button from "@/components/ui/Button";
 import CloseButton from "@/components/ui/CloseButton";
@@ -6,9 +6,11 @@ import Modal from "@/components/ui/modal/Modal";
 import PhoneFrame from "@/components/ui/PhoneFrame";
 import getRandomQuote from "@/features/quotes/getRandomQuote";
 import QuoteCard from "@/features/quotes/QuoteCard";
-import SudokuModal from "@/features/sudoku/SudokuModal";
 import { useTranslation } from "@/i18n/useTranslation";
 import type { Quote as QuoteType } from "@/types/quote";
+
+// Only reached through the button below.
+const SudokuModal = lazy(() => import("@/features/sudoku/SudokuModal"));
 
 interface WelcomeModalProps {
   onClose: () => void;
@@ -20,7 +22,11 @@ const WelcomeModal = ({ onClose }: WelcomeModalProps) => {
   const [showSudoku, setShowSudoku] = useState(false);
 
   if (showSudoku) {
-    return <SudokuModal onClose={() => setShowSudoku(false)} />;
+    return (
+      <Suspense fallback={null}>
+        <SudokuModal onClose={() => setShowSudoku(false)} />
+      </Suspense>
+    );
   }
 
   return (

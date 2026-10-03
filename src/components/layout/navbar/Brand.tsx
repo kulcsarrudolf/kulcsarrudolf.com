@@ -1,11 +1,14 @@
 import { Link } from "@tanstack/react-router";
-import { useCallback, useState } from "react";
+import { Suspense, lazy, useCallback, useState } from "react";
 
 import { useLangSearch } from "@/i18n/useLangSearch";
 
 import { NavbarData } from "./data";
 import NavbarAvatar from "./NavbarAvatar";
-import WelcomeModal from "@/features/easter-egg/WelcomeModal";
+
+// Found by holding the avatar for seven seconds, which almost nobody does, so
+// it is fetched when the ring fills rather than with every page.
+const WelcomeModal = lazy(() => import("@/features/easter-egg/WelcomeModal"));
 
 interface BrandProps {
   /** Inside the white menu sheet the name is dark and the ring is blue. */
@@ -59,7 +62,11 @@ const Brand = ({ tone = "onBrand", onNavigate }: BrandProps) => {
         </span>
       </Link>
 
-      {isEggOpen && <WelcomeModal onClose={closeEgg} />}
+      {isEggOpen && (
+        <Suspense fallback={null}>
+          <WelcomeModal onClose={closeEgg} />
+        </Suspense>
+      )}
     </>
   );
 };
