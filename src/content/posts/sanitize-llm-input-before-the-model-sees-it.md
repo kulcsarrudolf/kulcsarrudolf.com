@@ -16,7 +16,7 @@ keywords:
     "typescript",
     "appsec",
   ]
-private: true
+private: false
 ---
 
 ## Introduction
