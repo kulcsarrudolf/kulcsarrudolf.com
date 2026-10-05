@@ -35,7 +35,7 @@ So sanitize the input in code, before the model ever sees it.
 Check untrusted text in code before an LLM reads it.
 Normalize it, reject invisible characters, lookalike letters and fake prompt markup, and give the model no authority over the result.
 
-<PostImage variant="diagram" src="https://res.cloudinary.com/dialh0kqy/image/upload/q_auto/f_auto/v1791189366/blog/sanitize-llm-input.jpg" alt="Test cases for a comment sanitizer: lookalike letters, a zero-width space, fake chat-template markup, a JSON escape, leetspeak and a Hungarian instruction are rejected, while a comment about the film passes to the agent" title="Sanitize before the model sees it" />
+<PostImage variant="diagram" src="https://res.cloudinary.com/dialh0kqy/image/upload/q_auto/f_auto/v1791191683/blog/sanitize-llm-input-v2.jpg" alt="Movie comments run through a sanitizer: comments hiding a Cyrillic letter, a zero-width space, fake chat-template markup, a JSON escape, leetspeak, and a spoiler followed by a Hungarian approval request are rejected, while a comment about the film passes to the agent" title="Sanitize before the model sees it" />
 
 ## An example
 
