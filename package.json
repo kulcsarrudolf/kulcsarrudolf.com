@@ -56,18 +56,18 @@
     "@types/node": "^24.2.1",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.7",
-    "@vitejs/plugin-react": "^6.1.1",
+    "@vitejs/plugin-react": "^6.1.2",
     "husky": "^9.1.7",
     "lint-staged": "^17.5.0",
-    "oxfmt": "^0.67.0",
-    "oxlint": "^1.82.0",
+    "oxfmt": "^0.72.0",
+    "oxlint": "^1.87.0",
     "pathe": "^2.0.3",
-    "satori": "^0.33.4",
+    "satori": "^0.36.0",
     "storybook": "^10.6.0",
     "tailwindcss": "4.3.3",
     "typescript": "^7.0.2",
-    "vite": "^8.2.2",
-    "vitest": "^5.0.0"
+    "vite": "^8.3.3",
+    "vitest": "^5.0.3"
   },
   "engines": {
     "node": "24.x"
