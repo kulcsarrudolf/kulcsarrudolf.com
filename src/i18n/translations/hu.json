@@ -264,6 +264,20 @@
     "match": "Talált: {picture}.",
     "miss": "Nem egyezik: {first} és {second}.",
     "ok": "OK",
+    "perfectRun": {
+      "title": "Tökéletes memória",
+      "intro": "Egy játékos, aki semmit sem felejt el, kiüríti a 4×4-es táblát. A kis kép egy blokkon azt jelenti, hogy már látta.",
+      "new": "Két új kép, nincs egyezés, de most már mindkettőt megjegyezte.",
+      "known": "A párját korábban már látta, így ez biztos találat.",
+      "pair": "Mindkét felét korábban már látta, így ez biztos találat.",
+      "lucky": "Két új blokk, és egyeznek: tiszta szerencse.",
+      "reveal": "Nincs egyezés, de a második blokk párját már látta, így a következő kör biztos találat.",
+      "done": "{pairs} párral ürült ki a tábla. A minimum 8, a tökéletes memória átlaga 12,4.",
+      "play": "Lejátszás",
+      "pause": "Szünet",
+      "replay": "Újra",
+      "dealAgain": "Új osztás"
+    },
     "howTo": {
       "title": "Játékszabály",
       "deal": "A kockák képpel lefelé kerülnek az asztalra.",

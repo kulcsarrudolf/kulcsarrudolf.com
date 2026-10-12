@@ -358,4 +358,12 @@
   .prose :where(.prose > :last-child) {
     margin-bottom: 0;
   }
+
+  /* An embed that draws itself, such as a game board in a post, is marked
+     `not-prose`, and none of the rules above reach it: every property they
+     set falls back to what it would be without this layer. It has to stay
+     last, so it wins over every rule of the same specificity. */
+  .prose :where(.not-prose, .not-prose *) {
+    all: revert-layer;
+  }
 }
