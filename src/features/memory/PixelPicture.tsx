@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { type Picture, PICTURE_SIZE, runsOf } from "./picture";
+import { type Picture, PICTURE_HEIGHT, PICTURE_WIDTH, runsOf } from "./picture";
 
 interface PixelPictureProps {
   picture: Picture;
@@ -9,7 +9,8 @@ interface PixelPictureProps {
 
 /**
  * One of the pictures under the blocks, pixel for pixel. Drawn as an SVG with
- * crisp edges, so it scales to any block size without going soft. It is
+ * crisp edges, so it scales to any block size without going soft, and kept at
+ * its own four by three shape inside whatever box it is given. It is
  * decoration: the block it sits on carries the picture's name.
  */
 const PixelPicture = ({ picture, className = "" }: PixelPictureProps) => {
@@ -17,7 +18,7 @@ const PixelPicture = ({ picture, className = "" }: PixelPictureProps) => {
 
   return (
     <svg
-      viewBox={`0 0 ${PICTURE_SIZE} ${PICTURE_SIZE}`}
+      viewBox={`0 0 ${PICTURE_WIDTH} ${PICTURE_HEIGHT}`}
       shapeRendering="crispEdges"
       aria-hidden="true"
       className={className}

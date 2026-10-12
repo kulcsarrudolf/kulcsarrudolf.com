@@ -18,10 +18,10 @@ interface MemoryBoardProps {
 // there it stands six across and ten down instead. On a `short` screen the
 // width is held to what the height allows, so the bottom row is not cut off.
 const LAYOUT: Record<Skill, string> = {
-  beginner: "grid-cols-4 md:w-72 short:w-[min(18rem,100dvh_-_9rem)]",
-  intermediate: "grid-cols-6 md:w-[26rem] short:w-[min(26rem,100dvh_-_9rem)]",
+  beginner: "grid-cols-4 md:w-72 short:w-[min(18rem,(100dvh_-_9rem)*1.28)]",
+  intermediate: "grid-cols-6 md:w-[26rem] short:w-[min(26rem,(100dvh_-_9rem)*1.28)]",
   expert:
-    "grid-cols-6 sm:grid-cols-10 md:w-[42rem] short:grid-cols-10 short:w-[min(42rem,(100dvh_-_9rem)*1.6)]",
+    "grid-cols-6 sm:grid-cols-10 md:w-[42rem] short:grid-cols-10 short:w-[min(42rem,(100dvh_-_9rem)*2)]",
 };
 
 const STEP: Record<string, (columns: number) => number> = {

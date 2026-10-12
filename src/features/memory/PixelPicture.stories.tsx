@@ -6,12 +6,12 @@ import PixelPicture from "./PixelPicture";
 const meta = {
   title: "Memory/PixelPicture",
   component: PixelPicture,
-  args: { picture: PICTURES[0], className: "size-16" },
+  args: { picture: PICTURES[0], className: "h-12 w-16" },
   parameters: {
     docs: {
       description: {
         component:
-          "One of the pictures under the blocks, sixteen by sixteen pixels in the Windows 3.1 palette, drawn crisp at any size.",
+          "One of the pictures under the blocks, forty-eight by thirty-six pixels in the Windows 3.1 palette, drawn crisp at any size.",
       },
     },
   },
@@ -34,7 +34,7 @@ export const AllPictures: Story = {
           className="flex flex-col items-center gap-1 text-xs text-gray-600 dark:text-gray-400"
         >
           <span className="border border-black bg-white p-1.5">
-            <PixelPicture picture={picture} className="size-12" />
+            <PixelPicture picture={picture} className="h-9 w-12" />
           </span>
           {picture.id}
         </figure>

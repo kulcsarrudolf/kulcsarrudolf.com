@@ -20,7 +20,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "One block of the board: the yellow block face down, the picture on white face up, and an empty square once its pair is found.",
+          "One block of the board: the yellow block face down, the picture on white face up, and an empty space once its pair is found.",
       },
     },
   },

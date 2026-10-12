@@ -20,18 +20,19 @@ interface MemoryBlockProps {
   ref?: Ref<HTMLButtonElement>;
 }
 
-// The 1991 block in the grid's own units: a front face 40 across, and its
-// side showing 5 to the left and 5 below, cut off at 45 degrees at the two
-// corners where it meets the face. The face sits at the top right of the box.
-const SIDE = "5,0 45,0 45,40 40,45 0,45 0,5";
+// The 1991 block in the grid's own units: a front face 40 across and 30 high,
+// four by three like the pictures on it, and its side showing 5 to the left
+// and 5 below, cut off at 45 degrees at the two corners where it meets the
+// face. The face sits at the top right of the box.
+const SIDE = "5,0 45,0 45,30 40,35 0,35 0,5";
 const FACE =
-  "absolute right-0 top-0 h-[calc(40/45*100%)] w-[calc(40/45*100%)] border border-black group-focus-visible:outline-1 group-focus-visible:-outline-offset-4 group-focus-visible:outline-black group-focus-visible:outline-dotted";
+  "absolute right-0 top-0 h-[calc(30/35*100%)] w-[calc(40/45*100%)] border border-black group-focus-visible:outline-1 group-focus-visible:-outline-offset-4 group-focus-visible:outline-black group-focus-visible:outline-dotted";
 
 /** One side of the block as it turns: the side panel and the face, yellow or with the picture. */
 const BlockSide = ({ picture, className = "" }: { picture?: Picture; className?: string }) => (
   <span className={`absolute inset-0 backface-hidden ${className}`}>
     <svg
-      viewBox="0 0 45 45"
+      viewBox="0 0 45 35"
       preserveAspectRatio="none"
       aria-hidden="true"
       className="absolute inset-0 size-full overflow-visible"
@@ -43,15 +44,15 @@ const BlockSide = ({ picture, className = "" }: { picture?: Picture; className?:
       />
       <line
         x1={5}
-        y1={40}
+        y1={30}
         x2={0}
-        y2={45}
+        y2={35}
         vectorEffect="non-scaling-stroke"
         className="stroke-black"
       />
     </svg>
     <span className={`${FACE} ${picture ? "bg-white" : "bg-win-yellow"}`}>
-      {picture && <PixelPicture picture={picture} className="size-full p-[5%]" />}
+      {picture && <PixelPicture picture={picture} className="size-full px-[7.5%] py-[5%]" />}
     </span>
   </span>
 );
@@ -99,7 +100,7 @@ const MemoryBlock = ({
       onClick={onFlip}
       onKeyDown={onKeyDown}
       onFocus={onFocus}
-      className={`group relative aspect-square w-full perspective-[30rem] transition-[scale] duration-400 ease-in focus-visible:outline-hidden motion-reduce:transition-none ${
+      className={`group relative aspect-[9/7] w-full perspective-[30rem] transition-[scale] duration-400 ease-in focus-visible:outline-hidden motion-reduce:transition-none ${
         gone ? "scale-0" : ""
       }`}
     >
