@@ -64,6 +64,12 @@ describe("runCommand", () => {
     expect(runCommand("git bisect start").kind).toBe("notFound");
   });
 
+  it("opens Memory Blocks for its short name, its full name and its script", () => {
+    for (const line of ["memory", "Memory-Blocks", "memoryblocks", "./memory.sh"]) {
+      expect(runCommand(line)).toEqual({ kind: "memory" });
+    }
+  });
+
   it("starts a message for send-message and mail, while contact still opens the page", () => {
     expect(runCommand("send-message")).toEqual({ kind: "sendMessage" });
     expect(runCommand(" MAIL ")).toEqual({ kind: "sendMessage" });

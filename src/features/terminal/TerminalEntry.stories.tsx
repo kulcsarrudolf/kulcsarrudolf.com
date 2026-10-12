@@ -94,6 +94,18 @@ export const Bisect: Story = {
   args: { command: "bisect", result: { kind: "bisect" } },
 };
 
+export const Memory: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "`memory` prints one line and opens Memory Blocks, the 1991 matching game, over the page.",
+      },
+    },
+  },
+  args: { command: "memory", result: { kind: "memory" } },
+};
+
 export const RandomQuote: Story = {
   args: {
     command: "random-quote",

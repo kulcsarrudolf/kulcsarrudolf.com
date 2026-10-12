@@ -24,6 +24,7 @@ describe("completeShell", () => {
       "bash intro.sh",
       "bisect.sh",
       "bash bisect.sh",
+      "bash memory.sh",
     ]);
     expect(values(completeShell("c", []))).toEqual([
       "clear",
