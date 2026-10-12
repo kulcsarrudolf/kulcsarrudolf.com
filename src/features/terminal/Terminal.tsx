@@ -20,6 +20,7 @@ const PATH = "~/kulcsarrudolf.com";
 // page. Most visits never type one.
 const SudokuModal = lazy(() => import("@/features/sudoku/SudokuModal"));
 const BisectModal = lazy(() => import("@/features/bisect/BisectModal"));
+const MemoryBlocksModal = lazy(() => import("@/features/memory/MemoryBlocksModal"));
 const LovingAtmosphere = lazy(() => import("@/features/wedding/LovingAtmosphere"));
 
 interface TerminalProps {
@@ -38,8 +39,9 @@ interface TerminalProps {
  * runs the line; `help` lists what works, and a page name opens that page.
  * `send-message` asks for a name, an email, a website and a message at the
  * prompt, and sends them the way the contact form does. `js` turns the prompt
- * into the browser console, running each line in the page, and `bisect` opens
- * a game of cutting shapes in half over it. The prompt offers to finish what
+ * into the browser console, running each line in the page, `bisect` opens
+ * a game of cutting shapes in half over it, and `memory` the 1991 matching
+ * game Memory Blocks. The prompt offers to finish what
  * is being typed, from what `help` lists and from the visitor's own history,
  * and Tab takes the offer.
  * Two commands are missing from that list on purpose: one counts down to the
@@ -209,6 +211,7 @@ const Terminal = ({ launcher = false, openOnMount = false }: TerminalProps) => {
       <Suspense fallback={null}>
         {game === "sudoku" && <SudokuModal onClose={closeGame} />}
         {game === "bisect" && <BisectModal onClose={closeGame} />}
+        {game === "memory" && <MemoryBlocksModal onClose={closeGame} />}
 
         {atmosphere.running && (
           <LovingAtmosphere fading={atmosphere.fading} fadeMs={atmosphere.fadeMs} />

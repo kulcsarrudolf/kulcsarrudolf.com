@@ -72,7 +72,7 @@
     "whereNext": "Merre tovább?",
     "label": "Bemutatkozás",
     "inputLabel": "Írj be egy parancsot",
-    "help": "Parancsok: help, ls, ./intro.sh, send-message, js, bisect, random-quote, quote, clear. Írd be, hogy blog, projects vagy contact, és megnyílik az oldal.",
+    "help": "Parancsok: help, ls, ./intro.sh, send-message, js, bisect, memory, random-quote, quote, clear. Írd be, hogy blog, projects vagy contact, és megnyílik az oldal.",
     "js": "JavaScript-konzol, ezen az oldalon fut. Írd be, hogy .exit, vagy nyomd meg a Ctrl+C-t a kilépéshez.",
     "notFound": "a parancs nem található: {command}. Írd be, hogy help, és megmutatom, mi működik.",
     "notFoundSuggest": "a parancs nem található: {command}. Erre gondoltál: {suggestion}?",
@@ -88,6 +88,7 @@
         "sendMessage": "hagyj nekem üzenetet",
         "jsConsole": "JavaScript-konzol, ezen az oldalon fut",
         "bisect": "játék: vágd félbe az alakzatokat",
+        "memory": "játék: keresd meg a párokat",
         "quote": "egy véletlenszerű idézet",
         "clear": "az ablak kiürítése",
         "navigate": "{page} megnyitása",
@@ -100,6 +101,7 @@
     "opening": "{page} megnyitása",
     "sudoku": "Sudoku indul. Sok sikert!",
     "bisect": "Indul a bisect: vágd pontosan félbe az alakzatokat.",
+    "memory": "Indul a Memory Blocks: találd meg az összes párt.",
     "resize": "A terminál magassága",
     "resizeWindow": "A terminál szélessége és magassága",
     "close": "A terminál bezárása",
@@ -232,6 +234,96 @@
       "open": "Alakzatok",
       "label": "Minden alakzat: válaszd ki, melyiket vágod",
       "back": "Vissza"
+    }
+  },
+  "memory": {
+    "title": "Memory Blocks",
+    "close": "A Memory Blocks bezárása",
+    "menu": {
+      "game": "Játék",
+      "skill": "Szint",
+      "help": "Súgó",
+      "new": "Új",
+      "scores": "Legjobb eredmények...",
+      "exit": "Kilépés",
+      "howTo": "Játékszabály",
+      "about": "A Memory Blocks névjegye..."
+    },
+    "skill": {
+      "beginner": "Kezdő",
+      "intermediate": "Haladó",
+      "expert": "Mester"
+    },
+    "time": "Idő:",
+    "pairs": "Felfordított párok:",
+    "board": "Kockák",
+    "block": {
+      "down": "{number}. kocka",
+      "up": "{number}. kocka: {picture}"
+    },
+    "match": "Talált: {picture}.",
+    "miss": "Nem egyezik: {first} és {second}.",
+    "ok": "OK",
+    "howTo": {
+      "title": "Játékszabály",
+      "deal": "A kockák képpel lefelé kerülnek az asztalra.",
+      "flip": "Fordíts fel két tetszőleges kockát egy-egy kattintással. Ha a képek egyeznek, mindkettő eltűnik. Ha nem, visszafordulnak, úgyhogy jegyezd meg, hol voltak.",
+      "goal": "Fordíts fel újabb párokat, amíg minden párt meg nem találsz, és ki nem ürül a tábla.",
+      "score": "Két dolgot mérünk: hány másodperc alatt ürül ki a tábla, és hány párt fordítottál fel közben. Szintenként az öt legjobb kerül fel a listára.",
+      "keys": "Billentyűk: a nyilakkal lépsz a kockák között, az Enter vagy a szóköz felfordít egyet, az F2 új játékot oszt."
+    },
+    "about": {
+      "title": "A Memory Blocks névjegye",
+      "version": "1.00-s verzió",
+      "original": "A Symantec Game Pack eredetije nyomán, © 1991 Charles Timmerman.",
+      "port": "Újraépítve a webre, ehhez a terminálhoz."
+    },
+    "won": {
+      "title": "Kiürült a tábla",
+      "result": "{seconds} másodperc alatt ürítetted ki a táblát, {pairs} pár felfordításával.",
+      "record": "Ez felkerül a legjobbak közé! Add meg a neved:",
+      "anonymous": "Névtelen"
+    },
+    "scores": {
+      "title": "Legjobb eredmények: {skill}",
+      "rank": "#",
+      "name": "Név",
+      "time": "Idő",
+      "pairs": "Párok",
+      "empty": "Még nincs eredmény. Ürítsd ki a táblát, és felkerülsz."
+    },
+    "pictures": {
+      "heart": "szív",
+      "star": "csillag",
+      "stop": "STOP tábla",
+      "smiley": "mosolygó arc",
+      "peace": "békejel",
+      "yinyang": "jin és jang",
+      "question": "kérdőjel",
+      "dollar": "dollárjel",
+      "kanji": "a szerencse kínai írásjele",
+      "note": "hangjegy",
+      "sun": "nap",
+      "moon": "hold",
+      "clover": "négylevelű lóhere",
+      "apple": "alma",
+      "tree": "fa",
+      "butterfly": "pillangó",
+      "splash": "paca",
+      "house": "ház",
+      "castle": "vár",
+      "camera": "fényképezőgép",
+      "safe": "széf",
+      "flask": "lombik",
+      "hourglass": "homokóra",
+      "plug": "csatlakozó",
+      "ball": "strandlabda",
+      "checkerboard": "sakktábla",
+      "colours": "színes négyzetek",
+      "diamond": "rombusz",
+      "target": "céltábla",
+      "zigzag": "cikcakk",
+      "chart": "oszlopdiagram"
     }
   }
 }

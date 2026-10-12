@@ -37,7 +37,7 @@ export interface TerminalEntry {
 export type NewEntry = Omit<TerminalEntry, "id">;
 
 /** The games a command opens over the page. */
-export type Game = "sudoku" | "bisect";
+export type Game = "sudoku" | "bisect" | "memory";
 
 // Enough to scroll back through, not enough to grow the page without end.
 const MAX_ENTRIES = 30;
@@ -50,7 +50,7 @@ const OPENING_ENTRY: TerminalEntry = { id: 0, command: "./intro.sh", result: { k
  * Return runs the line. An empty line still adds a fresh prompt underneath,
  * so the terminal answers the key the way a real one does. `clear` empties
  * the history, and a page name navigates with the visitor's language kept.
- * Two commands open a game over the page, sudoku and bisect, so which one
+ * Three commands open a game over the page, sudoku, bisect and memory, so which one
  * is up is held here alongside the history. The wedding commands put the loving
  * atmosphere over it, which any other command takes back down again.
  * `send-message` asks its questions at the prompt, and while one is open
@@ -187,10 +187,10 @@ export function useTerminal(autoFocus: boolean) {
     if (result.kind === "jsConsole") startJs();
 
     // The games take the keyboard (the sudoku reads the number keys off the
-    // window, bisect the arrows on its board), so the prompt lets go of the
+    // window, bisect and memory the arrows on their boards), so the prompt lets go of the
     // caret while one is up rather than collecting what is typed into it
     // from behind the dialog.
-    if (result.kind === "sudoku" || result.kind === "bisect") {
+    if (result.kind === "sudoku" || result.kind === "bisect" || result.kind === "memory") {
       setGame(result.kind);
       inputRef.current?.blur();
     }

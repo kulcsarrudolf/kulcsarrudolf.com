@@ -74,6 +74,17 @@
   --color-traffic-shade: #febc2e;
   --color-traffic-zoom: #28c840;
 
+  /* Memory Blocks, the terminal's `memory`, is a Windows 3.1 window and
+     keeps that system's palette in both themes: the aqua board, the yellow
+     blocks with their ochre sides, the navy title bar, the silver and grey
+     of the window frame and its buttons. */
+  --color-win-aqua: #00ffff;
+  --color-win-yellow: #ffff00;
+  --color-win-ochre: #c0c000;
+  --color-win-navy: #000080;
+  --color-win-silver: #c0c0c0;
+  --color-win-gray: #808080;
+
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 

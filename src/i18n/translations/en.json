@@ -72,7 +72,7 @@
     "whereNext": "Where next?",
     "label": "Introduction",
     "inputLabel": "Type a command",
-    "help": "Commands: help, ls, ./intro.sh, send-message, js, bisect, random-quote, quote, clear. Type blog, projects or contact to open a page.",
+    "help": "Commands: help, ls, ./intro.sh, send-message, js, bisect, memory, random-quote, quote, clear. Type blog, projects or contact to open a page.",
     "js": "JavaScript console, running in this page. Type .exit or press Ctrl+C to leave.",
     "notFound": "command not found: {command}. Type help to see what works.",
     "notFoundSuggest": "command not found: {command}. Did you mean {suggestion}?",
@@ -88,6 +88,7 @@
         "sendMessage": "leave me a message",
         "jsConsole": "a JavaScript console, running in this page",
         "bisect": "a game: cut each shape in half",
+        "memory": "a game: find the matching pairs",
         "quote": "a quote, picked at random",
         "clear": "empty the window",
         "navigate": "open {page}",
@@ -100,6 +101,7 @@
     "opening": "Opening {page}",
     "sudoku": "Starting sudoku. Good luck.",
     "bisect": "Starting bisect: cut each shape perfectly in half.",
+    "memory": "Starting Memory Blocks: find every matching pair.",
     "resize": "Terminal height",
     "resizeWindow": "Terminal width and height",
     "close": "Close the terminal",
@@ -232,6 +234,96 @@
       "open": "Shapes",
       "label": "All shapes: choose one to cut",
       "back": "Back"
+    }
+  },
+  "memory": {
+    "title": "Memory Blocks",
+    "close": "Close Memory Blocks",
+    "menu": {
+      "game": "Game",
+      "skill": "Skill",
+      "help": "Help",
+      "new": "New",
+      "scores": "High Scores...",
+      "exit": "Exit",
+      "howTo": "How to Play",
+      "about": "About Memory Blocks..."
+    },
+    "skill": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "expert": "Expert"
+    },
+    "time": "Time:",
+    "pairs": "Total Pairs Flipped:",
+    "board": "Blocks",
+    "block": {
+      "down": "Block {number}",
+      "up": "Block {number}: {picture}"
+    },
+    "match": "A match: {picture}.",
+    "miss": "No match: {first} and {second}.",
+    "ok": "OK",
+    "howTo": {
+      "title": "How to Play",
+      "deal": "The blocks are dealt with their pictures face down.",
+      "flip": "Flip any two blocks by clicking them. If the pictures match, both disappear. If not, they turn back over, so remember where they were.",
+      "goal": "Keep flipping pairs until every match is found and the board is empty.",
+      "score": "You are scored two ways: by the seconds it takes to clear the board, and by the pairs you flip to do it. The five best of each skill go on the high score list.",
+      "keys": "Keys: the arrows move between the blocks, Enter or Space flips one, and F2 deals a new game."
+    },
+    "about": {
+      "title": "About Memory Blocks",
+      "version": "Version 1.00",
+      "original": "After the original in the Symantec Game Pack, © 1991 Charles Timmerman.",
+      "port": "Rebuilt for the web, for this terminal."
+    },
+    "won": {
+      "title": "Board Cleared",
+      "result": "You cleared the board in {seconds} seconds, flipping {pairs} pairs.",
+      "record": "That's a high score! Enter your name:",
+      "anonymous": "Anonymous"
+    },
+    "scores": {
+      "title": "High Scores: {skill}",
+      "rank": "#",
+      "name": "Name",
+      "time": "Time",
+      "pairs": "Pairs",
+      "empty": "No scores yet. Clear a board to set one."
+    },
+    "pictures": {
+      "heart": "heart",
+      "star": "star",
+      "stop": "stop sign",
+      "smiley": "smiley face",
+      "peace": "peace sign",
+      "yinyang": "yin and yang",
+      "question": "question mark",
+      "dollar": "dollar sign",
+      "kanji": "Chinese character for luck",
+      "note": "musical note",
+      "sun": "sun",
+      "moon": "moon",
+      "clover": "four-leaf clover",
+      "apple": "apple",
+      "tree": "tree",
+      "butterfly": "butterfly",
+      "splash": "splash",
+      "house": "house",
+      "castle": "castle",
+      "camera": "camera",
+      "safe": "safe",
+      "flask": "flask",
+      "hourglass": "hourglass",
+      "plug": "plug",
+      "ball": "beach ball",
+      "checkerboard": "checkerboard",
+      "colours": "colour squares",
+      "diamond": "diamond",
+      "target": "target",
+      "zigzag": "zigzag",
+      "chart": "bar chart"
     }
   }
 }

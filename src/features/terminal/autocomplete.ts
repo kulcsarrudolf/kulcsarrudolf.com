@@ -23,6 +23,7 @@ export type CandidateHint =
   | "sendMessage"
   | "jsConsole"
   | "bisect"
+  | "memory"
   | "quote"
   | "clear"
   | "navigate"
@@ -71,6 +72,7 @@ const HINTS = new Set<string>([
   "sendMessage",
   "jsConsole",
   "bisect",
+  "memory",
   "quote",
   "clear",
 ] satisfies CandidateHint[]);

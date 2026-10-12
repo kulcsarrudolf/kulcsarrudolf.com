@@ -33,6 +33,8 @@ export type CommandResult =
   | { kind: "sudoku" }
   /** `bisect`: the cut-it-in-half game, opened over the page. */
   | { kind: "bisect" }
+  /** `memory`: Memory Blocks, the 1991 matching game, opened over the page. */
+  | { kind: "memory" }
   /** `send-message`: the contact form, asked one question at a time. */
   | { kind: "sendMessage" }
   /** `js`: the browser console at the prompt, until `.exit`. */
@@ -66,6 +68,16 @@ const BISECT = new Set([
   "cutinhalf",
   "cutle",
 ]);
+// The game's own name, run together or not, opens it as well as the short one.
+const MEMORY = new Set([
+  "memory",
+  "memory-blocks",
+  "memoryblocks",
+  "./memory.sh",
+  "memory.sh",
+  "sh memory.sh",
+  "bash memory.sh",
+]);
 // `fortune` is the Unix program that does the same, so it answers too.
 const QUOTE = new Set(["random-quote", "quote", "fortune"]);
 
@@ -92,6 +104,7 @@ export const LISTED = [
   "send-message",
   "js",
   "bisect",
+  "memory",
   "random-quote",
   "quote",
   "clear",
@@ -108,6 +121,7 @@ export const ALIASES = [
   ...SEND_MESSAGE,
   ...JS_CONSOLE,
   ...BISECT,
+  ...MEMORY,
   ...QUOTE,
   ...CLEAR,
 ].filter((name) => !LISTED.includes(name));
@@ -149,6 +163,7 @@ export function runCommand(line: string, random: () => number = Math.random): Co
   if (CLEAR.has(lower)) return { kind: "clear" };
   if (SUDOKU.has(lower)) return { kind: "sudoku" };
   if (BISECT.has(lower)) return { kind: "bisect" };
+  if (MEMORY.has(lower)) return { kind: "memory" };
   if (SEND_MESSAGE.has(lower)) return { kind: "sendMessage" };
   if (JS_CONSOLE.has(lower)) return { kind: "jsConsole" };
   if (QUOTE.has(lower)) {
