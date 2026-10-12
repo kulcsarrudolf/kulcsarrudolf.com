@@ -24,7 +24,11 @@ I wanted more of that, and I still do: building software is what I do every day 
 Every project I have worked on goes back to a five year old in front of those yellow blocks.
 
 So when I remembered the game this year, I rebuilt it here: the window, the menus, the yellow blocks and the original pictures.
-Open the terminal on the [home page](/) and type **memory** to play it.
+Try it yourself:
+
+<PlayMemoryBlocks />
+
+It also lives in the site's terminal: on the [home page](/), or behind the **>\_** button in the corner of any other page, type **memory**.
 
 ## The maths: how few pairs can you flip?
 

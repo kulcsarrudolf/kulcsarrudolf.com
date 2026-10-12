@@ -12,6 +12,7 @@ import type { PostContent } from "@/server/content";
  */
 const EMBEDS: Embeds = {
   PerfectRun: lazy(() => import("@/features/memory/PerfectRun")),
+  PlayMemoryBlocks: lazy(() => import("@/features/memory/PlayMemoryBlocks")),
 };
 
 interface PostPageProps {

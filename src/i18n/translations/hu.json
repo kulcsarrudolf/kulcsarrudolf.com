@@ -264,6 +264,7 @@
     "match": "Talált: {picture}.",
     "miss": "Nem egyezik: {first} és {second}.",
     "ok": "OK",
+    "play": "Memory Blocks indítása",
     "perfectRun": {
       "title": "Tökéletes memória",
       "intro": "Egy játékos, aki semmit sem felejt el, kiüríti a 4×4-es táblát. A kis kép egy blokkon azt jelenti, hogy már látta.",

@@ -264,6 +264,7 @@
     "match": "A match: {picture}.",
     "miss": "No match: {first} and {second}.",
     "ok": "OK",
+    "play": "Play Memory Blocks",
     "perfectRun": {
       "title": "Perfect Memory",
       "intro": "A player who never forgets clears a 4×4 board. A small picture on a block means it has already been seen.",
