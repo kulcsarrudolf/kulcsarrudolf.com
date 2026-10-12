@@ -72,7 +72,11 @@
     "whereNext": "Merre tovább?",
     "label": "Bemutatkozás",
     "inputLabel": "Írj be egy parancsot",
-    "help": "Parancsok: help, ls, ./intro.sh, send-message, js, bisect, memory, random-quote, quote, clear. Írd be, hogy blog, projects vagy contact, és megnyílik az oldal.",
+    "tip": "Új vagy itt? Írd be, hogy {command}, és megmutatom, mit tud ez a terminál.",
+    "help": {
+      "title": "Parancsok:",
+      "pages": "Írd be, hogy blog, projects vagy contact, és megnyílik az oldal."
+    },
     "js": "JavaScript-konzol, ezen az oldalon fut. Írd be, hogy .exit, vagy nyomd meg a Ctrl+C-t a kilépéshez.",
     "notFound": "a parancs nem található: {command}. Írd be, hogy help, és megmutatom, mi működik.",
     "notFoundSuggest": "a parancs nem található: {command}. Erre gondoltál: {suggestion}?",

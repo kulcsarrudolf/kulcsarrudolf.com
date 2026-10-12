@@ -1,5 +1,7 @@
 import { useTranslation } from "@/i18n/useTranslation";
 
+import CommandsTip from "./CommandsTip";
+import HelpList from "./HelpList";
 import { JS_PROMPT } from "./jsConsole";
 import JsOutput from "./JsOutput";
 import MessageNote from "./MessageNote";
@@ -19,6 +21,8 @@ interface TerminalEntryProps {
   result: EntryResult;
   /** Ends the loving atmosphere. Only the newest wedding entry is given one. */
   onStopAtmosphere?: () => void;
+  /** Runs a command clicked in the output. Without it, the tip's command is plain text. */
+  onRunCommand?: (line: string) => void;
 }
 
 /** One line of output, indented under the prompt like a real shell's. */
@@ -39,6 +43,7 @@ const TerminalEntry = ({
   silent = false,
   result,
   onStopAtmosphere,
+  onRunCommand,
 }: TerminalEntryProps) => {
   const { t } = useTranslation();
 
@@ -60,6 +65,7 @@ const TerminalEntry = ({
       {result.kind === "intro" && (
         <>
           <Output>{t("terminal.intro")}</Output>
+          <CommandsTip onRun={onRunCommand && (() => onRunCommand("commands"))} />
           <WhereNext />
         </>
       )}
@@ -68,7 +74,7 @@ const TerminalEntry = ({
       {result.kind === "sudoku" && <Output>{t("terminal.sudoku")}</Output>}
       {result.kind === "bisect" && <Output>{t("terminal.bisect")}</Output>}
       {result.kind === "memory" && <Output>{t("terminal.memory")}</Output>}
-      {result.kind === "help" && <Output>{t("terminal.help")}</Output>}
+      {result.kind === "help" && <HelpList />}
       {result.kind === "sendMessage" && <Output>{t("terminal.message.start")}</Output>}
       {result.kind === "message" && <MessageNote note={result.note} />}
       {result.kind === "jsConsole" && <Output>{t("terminal.js")}</Output>}

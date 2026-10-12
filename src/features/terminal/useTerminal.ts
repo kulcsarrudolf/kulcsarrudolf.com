@@ -13,7 +13,7 @@ import {
 import { useLovingAtmosphere } from "@/features/wedding/useLovingAtmosphere";
 import { useLangSearch } from "@/i18n/useLangSearch";
 
-import { runCommand } from "./commands";
+import { type CommandResult, runCommand } from "./commands";
 import type { EntryResult, Step } from "./sendMessage";
 import { useAutocomplete } from "./useAutocomplete";
 import { useCommandHistory } from "./useCommandHistory";
@@ -129,6 +129,56 @@ export function useTerminal(autoFocus: boolean) {
     inputRef.current?.focus({ preventScroll: true });
   }, [autoFocus]);
 
+  /** What a command line does once it is known to be one: shared by Return and a click. */
+  const execute = useCallback(
+    (line: string, result: CommandResult) => {
+      // `js <code>` prints what the code came to in place of the command's own
+      // output, so the console appends the line rather than the shell.
+      if (result.kind === "jsEval") {
+        stopAtmosphere();
+        runJs(result.code, line);
+        return;
+      }
+
+      // `clear` takes the wedding line away with the rest of the history, so it
+      // has to take the hearts too rather than leave them up with no way out.
+      if (result.kind === "clear") {
+        setEntries([]);
+        stopAtmosphere();
+        return;
+      }
+
+      const id = append({ command: line, result });
+
+      // A wedding command starts the hearts, or restarts the clock on the ones
+      // already flying. Anything else typed at the prompt takes them down, which
+      // is the way out for a visitor with no escape key in reach. A bare Return
+      // is not a command, so it leaves them alone.
+      if (result.kind === "wedding") {
+        setAtmosphereEntryId(id);
+        startAtmosphere();
+      } else if (result.kind !== "empty") {
+        stopAtmosphere();
+      }
+
+      if (result.kind === "sendMessage") startMessage();
+      if (result.kind === "jsConsole") startJs();
+
+      // The games take the keyboard (the sudoku reads the number keys off the
+      // window, bisect and memory the arrows on their boards), so the prompt lets go of the
+      // caret while one is up rather than collecting what is typed into it
+      // from behind the dialog.
+      if (result.kind === "sudoku" || result.kind === "bisect" || result.kind === "memory") {
+        setGame(result.kind);
+        inputRef.current?.blur();
+      }
+
+      if (result.kind === "navigate") {
+        navigate({ to: result.destination.to, search: langSearch });
+      }
+    },
+    [append, langSearch, navigate, runJs, startAtmosphere, startJs, startMessage, stopAtmosphere],
+  );
   const submit = useCallback(() => {
     // The line stays put while a message is on its way, and Return waits.
     if (busy) return;
@@ -153,69 +203,22 @@ export function useTerminal(autoFocus: boolean) {
     const result = runCommand(input);
     // A line that was nearly a command leaves the command waiting at the prompt.
     submittedLine(result.kind === "notFound" ? result.suggestion : undefined);
+    execute(input, result);
+  }, [answerJs, answerMessage, busy, execute, input, jsOpen, recordLine, step, submittedLine]);
 
-    // `js <code>` prints what the code came to in place of the command's own
-    // output, so the console appends the line rather than the shell.
-    if (result.kind === "jsEval") {
-      stopAtmosphere();
-      runJs(result.code, input);
-      return;
-    }
-
-    // `clear` takes the wedding line away with the rest of the history, so it
-    // has to take the hearts too rather than leave them up with no way out.
-    if (result.kind === "clear") {
-      setEntries([]);
-      stopAtmosphere();
-      return;
-    }
-
-    const id = append({ command: input, result });
-
-    // A wedding command starts the hearts, or restarts the clock on the ones
-    // already flying. Anything else typed at the prompt takes them down, which
-    // is the way out for a visitor with no escape key in reach. A bare Return
-    // is not a command, so it leaves them alone.
-    if (result.kind === "wedding") {
-      setAtmosphereEntryId(id);
-      startAtmosphere();
-    } else if (result.kind !== "empty") {
-      stopAtmosphere();
-    }
-
-    if (result.kind === "sendMessage") startMessage();
-    if (result.kind === "jsConsole") startJs();
-
-    // The games take the keyboard (the sudoku reads the number keys off the
-    // window, bisect and memory the arrows on their boards), so the prompt lets go of the
-    // caret while one is up rather than collecting what is typed into it
-    // from behind the dialog.
-    if (result.kind === "sudoku" || result.kind === "bisect" || result.kind === "memory") {
-      setGame(result.kind);
-      inputRef.current?.blur();
-    }
-
-    if (result.kind === "navigate") {
-      navigate({ to: result.destination.to, search: langSearch });
-    }
-  }, [
-    append,
-    answerJs,
-    answerMessage,
-    busy,
-    input,
-    jsOpen,
-    langSearch,
-    navigate,
-    recordLine,
-    runJs,
-    startAtmosphere,
-    startJs,
-    startMessage,
-    step,
-    stopAtmosphere,
-    submittedLine,
-  ]);
+  /**
+   * Runs a command clicked in the output, such as the `commands` the intro
+   * points at, as though it had been typed at an empty prompt. Only the shell
+   * takes one: an open question or console keeps its line as it is.
+   */
+  const runClicked = useCallback(
+    (line: string) => {
+      if (busy || step || jsOpen) return;
+      execute(line, runCommand(line));
+      inputRef.current?.focus({ preventScroll: true });
+    },
+    [busy, execute, jsOpen, step],
+  );
 
   // Closing a game hands the caret back, so the next command can be typed
   // without reaching for the mouse.
@@ -305,6 +308,8 @@ export function useTerminal(autoFocus: boolean) {
     /** The game open over the page, if any. */
     game,
     closeGame,
+    /** Runs a command clicked in the output, or null while the line belongs to a question or the console. */
+    runClicked: busy || step || jsOpen ? null : runClicked,
     focusPrompt,
     onSubmit,
     /** What stands in for the prompt: the open `send-message` question, or the `js` console. */

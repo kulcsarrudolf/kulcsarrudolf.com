@@ -19,6 +19,7 @@ const meta = {
     busy: false,
     atmosphereEntryId: null,
     onStopAtmosphere: () => {},
+    onRunCommand: () => {},
     input: "",
     inputRef: null,
     inputProps: { value: "", onChange: () => {}, onKeyDown: () => {} },

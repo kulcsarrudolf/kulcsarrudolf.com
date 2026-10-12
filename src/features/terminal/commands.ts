@@ -49,7 +49,8 @@ export type CommandResult =
 
 const INTRO = new Set(["./intro.sh", "intro.sh", "intro", "sh intro.sh", "bash intro.sh"]);
 const LIST = new Set(["ls", "ls -la", "ls -l", "ll", "dir"]);
-const HELP = new Set(["help", "?", "--help", "-h", "man"]);
+// `commands` is the word the intro points a newcomer at, so it is listed too.
+const HELP = new Set(["help", "commands", "?", "--help", "-h", "man"]);
 const CLEAR = new Set(["clear", "cls"]);
 // `mail` is the name a shell would have for it, so it works without being listed.
 const SEND_MESSAGE = new Set(["send-message", "mail"]);
@@ -99,6 +100,7 @@ export const NAVIGATE_PREFIXES = ["cd ", "open ", "cat ", "go "];
 /** What `help` lists, in its order: the names the prompt offers first. */
 export const LISTED = [
   "help",
+  "commands",
   "ls",
   "./intro.sh",
   "send-message",
@@ -109,6 +111,39 @@ export const LISTED = [
   "quote",
   "clear",
 ];
+
+/** The kinds `help` describes, one line each. */
+export type HelpKind =
+  | "help"
+  | "list"
+  | "intro"
+  | "sendMessage"
+  | "jsConsole"
+  | "bisect"
+  | "memory"
+  | "quote"
+  | "clear";
+
+export interface HelpLine {
+  /** Every listed name that does the same thing, in `LISTED` order. */
+  names: string[];
+  kind: HelpKind;
+}
+
+/**
+ * What `help` prints: one line per thing the terminal does, with the listed
+ * names that do it side by side, so `help` and `commands` share a line.
+ */
+export function helpLines(): HelpLine[] {
+  const lines: HelpLine[] = [];
+  for (const name of LISTED) {
+    const kind = runCommand(name).kind as HelpKind;
+    const line = lines.find((candidate) => candidate.kind === kind);
+    if (line) line.names.push(name);
+    else lines.push({ names: [name], kind });
+  }
+  return lines;
+}
 
 /**
  * The other spellings of what `help` lists. The wedding and the sudoku are in
