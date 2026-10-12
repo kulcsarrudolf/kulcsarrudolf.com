@@ -27,6 +27,7 @@ describe("completeShell", () => {
       "bash memory.sh",
     ]);
     expect(values(completeShell("c", []))).toEqual([
+      "commands",
       "clear",
       "contact/",
       "cut-in-half",

@@ -5,7 +5,7 @@ import quotes from "@/content/quotes";
 import en from "@/i18n/translations/en.json";
 import hu from "@/i18n/translations/hu.json";
 
-import { ALIASES, LISTED, runCommand } from "./commands";
+import { ALIASES, LISTED, helpLines, runCommand } from "./commands";
 
 describe("runCommand", () => {
   it("treats a blank line as an empty command", () => {
@@ -27,6 +27,7 @@ describe("runCommand", () => {
   it("knows help and clear", () => {
     expect(runCommand("help")).toEqual({ kind: "help" });
     expect(runCommand("?")).toEqual({ kind: "help" });
+    expect(runCommand("commands")).toEqual({ kind: "help" });
     expect(runCommand("clear")).toEqual({ kind: "clear" });
   });
 
@@ -119,11 +120,18 @@ describe("runCommand", () => {
 });
 
 describe("LISTED and ALIASES", () => {
-  it("lists what help lists, in both languages", () => {
-    for (const name of LISTED) {
-      expect(en.terminal.help).toContain(name);
-      expect(hu.terminal.help).toContain(name);
+  it("describes every line help prints, in both languages", () => {
+    const lines = helpLines();
+    expect(lines.flatMap(({ names }) => names)).toEqual(LISTED);
+    for (const { kind } of lines) {
+      expect(en.terminal.complete.hint[kind]).toBeTruthy();
+      expect(hu.terminal.complete.hint[kind]).toBeTruthy();
     }
+  });
+
+  it("puts the names that do the same thing on one line", () => {
+    expect(helpLines()[0]).toEqual({ names: ["help", "commands"], kind: "help" });
+    expect(helpLines()).toContainEqual({ names: ["random-quote", "quote"], kind: "quote" });
   });
 
   it("holds only commands that run, and none of the hidden ones", () => {

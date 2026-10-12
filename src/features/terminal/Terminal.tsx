@@ -75,6 +75,7 @@ const Terminal = ({ launcher = false, openOnMount = false }: TerminalProps) => {
     atmosphereEntryId,
     game,
     closeGame,
+    runClicked,
     focusPrompt,
     onSubmit,
     prompt,
@@ -157,6 +158,7 @@ const Terminal = ({ launcher = false, openOnMount = false }: TerminalProps) => {
             busy={busy}
             atmosphereEntryId={atmosphereEntryId}
             onStopAtmosphere={atmosphere.stop}
+            onRunCommand={runClicked}
             input={input}
             inputRef={inputRef}
             inputProps={inputProps}

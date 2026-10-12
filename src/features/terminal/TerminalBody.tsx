@@ -21,6 +21,8 @@ interface TerminalBodyProps {
   /** The entry whose wedding block still has hearts over the page, if any. */
   atmosphereEntryId: number | null;
   onStopAtmosphere: () => void;
+  /** Runs a command clicked in the output, or null while the line is not the shell's. */
+  onRunCommand: ((line: string) => void) | null;
   input: string;
   inputRef: Ref<HTMLInputElement>;
   inputProps: {
@@ -58,6 +60,7 @@ const TerminalBody = ({
   busy,
   atmosphereEntryId,
   onStopAtmosphere,
+  onRunCommand,
   input,
   inputRef,
   inputProps,
@@ -102,6 +105,7 @@ const TerminalBody = ({
             silent={silent}
             result={result}
             onStopAtmosphere={id === atmosphereEntryId ? onStopAtmosphere : undefined}
+            onRunCommand={onRunCommand ?? undefined}
           />
         ))}
       </div>
