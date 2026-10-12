@@ -1,6 +1,13 @@
 import { ClientOnly } from "@tanstack/react-router";
 import Markdown from "markdown-to-jsx";
-import { Suspense, lazy, type AnchorHTMLAttributes, type ComponentProps } from "react";
+import {
+  Suspense,
+  lazy,
+  useMemo,
+  type AnchorHTMLAttributes,
+  type ComponentProps,
+  type ComponentType,
+} from "react";
 
 // zimme-zoom injects styles into `document` when it is imported, so the image
 // viewer is only loaded in the browser, after hydration.
@@ -24,8 +31,32 @@ const MarkdownLink = ({ href, children, ...rest }: AnchorHTMLAttributes<HTMLAnch
   );
 };
 
+/** The attributes of a tag in markdown, which all arrive as strings. */
+type EmbedProps = Record<string, string>;
+
+/** Components a document may place in its markdown as a tag of the same name. */
+export type Embeds = Record<string, ComponentType<EmbedProps>>;
+
+/**
+ * An embed drawn in the browser only, after hydration, once its code has
+ * loaded: it is usually lazy, and nothing it renders is needed to read the
+ * text around it.
+ */
+const inBrowser = (Embed: ComponentType<EmbedProps>) => {
+  const Wrapped = (props: EmbedProps) => (
+    <ClientOnly fallback={null}>
+      <Suspense fallback={null}>
+        <Embed {...props} />
+      </Suspense>
+    </ClientOnly>
+  );
+  return Wrapped;
+};
+
 type MarkdownBodyProps = {
   content: string;
+  /** What the page lets this document embed, beyond `<PostImage>`. */
+  embeds?: Embeds;
   /** Passed to the wrapper, so a page can mark the body up as microdata. */
   itemProp?: string;
 };
@@ -37,7 +68,18 @@ type MarkdownBodyProps = {
  * The dark palette lives in that stylesheet too, so the code blocks, quotes
  * and tables a post can carry follow the theme without a class of their own.
  */
-const MarkdownBody = ({ content, itemProp }: MarkdownBodyProps) => {
+const MarkdownBody = ({ content, itemProp, embeds }: MarkdownBodyProps) => {
+  const wrapped = useMemo(
+    () =>
+      Object.fromEntries(
+        Object.entries(embeds ?? {}).map(([name, Embed]) => [
+          name,
+          { component: inBrowser(Embed) },
+        ]),
+      ),
+    [embeds],
+  );
+
   return (
     <div className="prose container mx-auto max-w-none" itemProp={itemProp}>
       <Markdown
@@ -49,6 +91,7 @@ const MarkdownBody = ({ content, itemProp }: MarkdownBodyProps) => {
             PostImage: {
               component: PostImage,
             },
+            ...wrapped,
           },
         }}
       >

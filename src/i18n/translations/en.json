@@ -264,6 +264,20 @@
     "match": "A match: {picture}.",
     "miss": "No match: {first} and {second}.",
     "ok": "OK",
+    "perfectRun": {
+      "title": "Perfect Memory",
+      "intro": "A player who never forgets clears a 4×4 board. A small picture on a block means it has already been seen.",
+      "new": "Two new pictures and no match, but both are remembered now.",
+      "known": "Its partner was seen earlier, so this is a sure match.",
+      "pair": "Both halves were seen earlier, so this is a sure match.",
+      "lucky": "Two new blocks that match: pure luck.",
+      "reveal": "No match, but the second block's partner was seen earlier, so the next turn is a sure match.",
+      "done": "Cleared in {pairs} pairs. The minimum is 8, and perfect memory averages 12.4.",
+      "play": "Play",
+      "pause": "Pause",
+      "replay": "Play again",
+      "dealAgain": "Deal again"
+    },
     "howTo": {
       "title": "How to Play",
       "deal": "The blocks are dealt with their pictures face down.",
