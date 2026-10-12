@@ -1,9 +1,9 @@
 ---
-title: "Memory Blocks: My First Game, Rebuilt"
+title: "Memory Blocks: Finding My First Game Again"
 subtitle: "Christmas 1999, a matching game, and the maths of a perfect memory"
 author: "Kulcsar Rudolf"
 date: "2026-10-12"
-description: "The first thing I ever did on a computer was play Memory Blocks, at five years old. I rebuilt it on this site, and worked out how few pairs a perfect memory needs to clear the board."
+description: "The first thing I ever did on a computer was play Memory Blocks, at five years old. Claude helped me find its name and build it on this site, and I worked out how few pairs a perfect memory needs to clear the board."
 keywords: ["memory blocks", "windows 3.1", "retro games", "probability", "game theory", "react"]
 private: false
 ---
@@ -23,7 +23,13 @@ It was the first time a machine did something because I told it to.
 I wanted more of that, and I still do: building software is what I do every day now.
 Every project I have worked on goes back to a five year old in front of those yellow blocks.
 
-So when I remembered the game this year, I rebuilt it here: the window, the menus, the yellow blocks and the original pictures.
+## Finding it again
+
+For years I didn't even know the game's name.
+All I had was the memory: a grey window, an aqua board, yellow blocks with pictures hiding underneath.
+I described it to Claude, and Claude recognised it: Memory Blocks.
+
+Then I asked Claude to build it for me, here on my site: the window, the menus, the yellow blocks and the original pictures.
 Try it yourself:
 
 <PlayMemoryBlocks />
