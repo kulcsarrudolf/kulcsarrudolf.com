@@ -3952,7 +3952,7 @@ __metadata:
     gray-matter: "npm:^4.0.3"
     husky: "npm:^9.1.7"
     lint-staged: "npm:^17.5.0"
-    markdown-to-jsx: "npm:^7.2.1"
+    markdown-to-jsx: "npm:^9.10.3"
     nitro: "npm:3.0.260903-beta"
     oxfmt: "npm:^0.67.0"
     oxlint: "npm:^1.82.0"
@@ -4293,15 +4293,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"markdown-to-jsx@npm:^7.2.1":
-  version: 7.7.17
-  resolution: "markdown-to-jsx@npm:7.7.17"
+"markdown-to-jsx@npm:^9.10.3":
+  version: 9.10.3
+  resolution: "markdown-to-jsx@npm:9.10.3"
   peerDependencies:
-    react: ">= 0.14.0"
+    react: ">= 16.0.0"
+    solid-js: ">=1.0.0"
+    vue: ">=3.0.0"
   peerDependenciesMeta:
     react:
       optional: true
-  checksum: 10c0/581c5ee1b3c79445f9f8369dc2882d0289507e702b2fcf2bc276b163a984cdcca2d8463a609c9bf310a31dcbf10c3210721c42c9173d4f12da675d3b56243736
+    react-native:
+      optional: true
+    solid-js:
+      optional: true
+    vue:
+      optional: true
+  checksum: 10c0/c1d9db8cca16a72b56751e041396f7d475bbd9faa35e9b0f427046c5bc4e123690290d097b48d86ae1361fc5ed123fee568b2053c806dfa5d6e4c09bb35e9474
   languageName: node
   linkType: hard
 
