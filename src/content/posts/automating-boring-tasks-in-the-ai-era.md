@@ -120,7 +120,8 @@ When he started using Claude, he spent two months prompting it almost nonstop, b
 Coding with AI can become a habit that is hard to stop.
 I don't want to sit at the computer at midnight, thinking "just one more prompt".
 That is not healthy at all.
-A good pet project should give me time back, and it should never cost me my sleep.
+A good pet project should give me time back.
+It should never take my sleep, or the time I spend away from the screen with my family and friends.
 
 ## What will I do with the time?
 
