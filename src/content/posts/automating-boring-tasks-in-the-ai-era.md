@@ -51,7 +51,7 @@ So I looked for something I could control from code, and I found [CADCraft](http
 It is a free, open-source CAD app, and it has a command-line tool that can open a drawing and export PDFs.
 With AI writing most of the code, I had a working tool in about 30 minutes.
 
-The tool is called [dwg-sheets-to-pdf](https://github.com/kulcsarrudolf/dwg-sheets-to-pdf), and it is around 650 lines of Python.
+The tool is called [dwg-sheets](https://github.com/kulcsarrudolf/dwg-sheets), and it is around 650 lines of Python.
 It does what I used to do by hand.
 It finds each sheet by its title text, like `PL. NR. A07`, and takes the rectangle around it as the frame.
 It reads the scale from the text inside the frame, like `SCARA 1:200`.
