@@ -15,6 +15,7 @@ keywords:
     "cadcraft",
     "python",
     "side project",
+    "dogfooding",
   ]
 private: false
 ---
@@ -39,6 +40,8 @@ And if you check the famous [xkcd chart](https://xkcd.com/1205/), I was probably
 For a task you do once a month, you don't have much time to spend on automating it.
 There is also [xkcd 1319](https://xkcd.com/1319/), where the script becomes a bigger project than the task it should replace.
 
+## The day I automated it
+
 Then this week my father sent a drawing with more than 60 sheets.
 That is more than an hour of clicking.
 I also didn't have my Windows laptop with me, and all my custom paper sizes were saved on it.
@@ -56,6 +59,8 @@ From the frame and the scale it calculates the page size, so a 270 m wide sheet 
 There are no custom paper sizes to create anymore.
 Later that afternoon I also added a simple web page, so my father can upload a drawing and download the PDFs himself.
 
+## Software for one family
+
 Some parts are made for my father's drawings only.
 The title text, the units and the frame style are fixed by default, and the web page has no settings for them.
 I am thinking about how to make it work for other people's drawings, but for now it works for ours.
@@ -66,6 +71,8 @@ He built a small messaging app only for his family, and it was exactly what they
 Maggie Appleton made a similar point in her talk on [home-cooked software](https://maggieappleton.com/home-cooked-software): AI lets more people build small tools for their own families and communities.
 No CAD company will build a feature for my father's odd paper sizes.
 But I could build it in one afternoon.
+
+## What AI changed
 
 In 2023 Simon Willison wrote that [AI makes him more ambitious with his projects](https://simonwillison.net/2023/Mar/27/ai-enhanced-development/), because ideas that took days now take an hour.
 The xkcd chart is still correct, but the cost of automating dropped a lot.
@@ -89,8 +96,35 @@ But xkcd 1319 is still true.
 A tool that is cheap to build still needs care later.
 If a task is rare, changes every time, or needs real judgement, I still do it by hand.
 
-One question stays with me.
-What will I do with the time I save?
+## Pet projects with impact
+
+This tool is also an example of dogfooding: I built it for my own problem, and I use it every month.
+I like working this way.
+When you use your own tools, you notice what is missing.
+Paul Graham wrote about this in [How to Get Startup Ideas](https://paulgraham.com/startupideas.html).
+Many big ideas started as side projects that looked like toys, built by people who needed them.
+A tool for one family's drawings will probably stay small, but it could also become useful for other engineers.
+
+To be honest, most of my pet projects were abandoned.
+I started them, learned something, and moved on.
+But in the last few years this has changed.
+With more experience, and now with AI, more of my pet projects are used by real people, like this one.
+
+So now I try to measure the impact.
+How much time does it save, and who uses it?
+I don't want to build things only to fill my free time.
+
+There is a risk here too.
+Armin Ronacher wrote about it in [Agent Psychosis: Are We Going Insane?](https://lucumr.pocoo.org/2026/1/18/agent-psychosis/).
+When he started using Claude, he spent two months prompting it almost nonstop, barely slept, and built many tools he never used.
+Coding with AI can become a habit that is hard to stop.
+I don't want to sit at the computer at midnight, thinking "just one more prompt".
+That is not healthy at all.
+A good pet project should give me time back.
+It should never take my sleep, my hobbies, or the time I spend with my family and friends away from the screen.
+
+## What will I do with the time?
+
 One or two hours a month is not much, but over the next ten years it is again more than a hundred hours.
 I don't have a good answer yet.
 More side projects would just mean more time at the screen.
